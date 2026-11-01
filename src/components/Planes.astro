@@ -1,0 +1,112 @@
+---
+// Planes de soporte, solo informativos: precios y contacto por correo, sin cuentas ni cobros.
+import { lang, base, REPO } from '../sitio';
+const l = lang(Astro.currentLocale);
+const es = l === 'es';
+const CORREO = 'soporte@opennccm.com';
+const correo = (asunto: string) => `mailto:${CORREO}?subject=${encodeURIComponent(asunto)}`;
+
+const planes = [
+	{
+		n: es ? 'Comunidad' : 'Community', mes: es ? 'Gratis' : 'Free', anio: es ? 'Gratis' : 'Free',
+		d: es ? 'Para quien se las arregla con la documentación y la ayuda de otros usuarios.' : 'For those who get by with the docs and help from other users.',
+		items: es
+			? ['Foro, documentación y curso en video', 'Reportar errores en GitHub', 'Respuesta cuando la comunidad puede']
+			: ['Forum, documentation and video course', 'Report bugs on GitHub', 'Answers when the community can'],
+		b: es ? 'Ir a la comunidad' : 'Go to the community', h: REPO + '/discussions',
+	},
+	{
+		n: es ? 'Profesional' : 'Professional', rec: true, mes: 'US$149', anio: 'US$1,490',
+		d: es ? 'Para equipos que necesitan una respuesta garantizada.' : 'For teams that need a guaranteed answer.',
+		items: es
+			? ['Todo lo de Comunidad', 'Tickets privados: 5 al mes (ticket extra US$40)', 'Respuesta en menos de 1 día hábil', 'Urgentes en 4 h hábiles', 'Ayuda con la instalación y la migración', 'Hasta 5 personas']
+			: ['Everything in Community', 'Private tickets: 5 a month (extra ticket US$40)', 'Answer within 1 business day', 'Urgent issues within 4 business hours', 'Help with installation and migration', 'Up to 5 people'],
+		b: es ? 'Escríbenos' : 'Contact us', h: correo(es ? 'Plan Profesional de OpenNCCM' : 'OpenNCCM Professional plan'),
+	},
+	{
+		n: es ? 'Empresa' : 'Enterprise', mes: es ? 'desde US$499' : 'from US$499', anio: es ? 'a medida' : 'custom',
+		d: es ? 'Para redes grandes o críticas.' : 'For large or critical networks.',
+		items: es
+			? ['Tickets sin límite', 'Urgentes en horario extendido: 8 a 22 h, lunes a sábado', 'Sesión remota con un técnico', 'Capacitación del equipo']
+			: ['Unlimited tickets', 'Urgent issues in extended hours: 8 am to 10 pm, Monday to Saturday', 'Remote session with an engineer', 'Team training'],
+		b: es ? 'Hablar con nosotros' : 'Talk to us', h: correo(es ? 'Plan Empresa de OpenNCCM' : 'OpenNCCM Enterprise plan'),
+	},
+];
+const servicios = es
+	? [['Instalación asistida', 'US$250', 'Unas 4 h, en remoto'], ['Migración', 'desde US$400', 'Desde otra herramienta o a otro servidor'], ['Hora suelta', 'US$60', 'Pagada por adelantado']]
+	: [['Assisted installation', 'US$250', 'About 4 h, remote'], ['Migration', 'from US$400', 'From another tool or to another server'], ['Single hour', 'US$60', 'Paid in advance']];
+---
+
+<div class="selector not-content" role="group" aria-label={es ? 'Periodo de pago' : 'Billing period'}>
+	<button type="button" data-periodo="mes" aria-pressed="true">{es ? 'Mensual' : 'Monthly'}</button>
+	<button type="button" data-periodo="anio" aria-pressed="false">{es ? 'Anual' : 'Yearly'} <small>{es ? '2 meses gratis' : '2 months free'}</small></button>
+</div>
+
+<div class="planes not-content">
+	{planes.map((p) => (
+		<div class:list={['plan', { rec: p.rec }]}>
+			{p.rec && <span class="etq">{es ? 'Recomendado' : 'Recommended'}</span>}
+			<b class="nombre">{p.n}</b>
+			<p class="precio">
+				<span data-mes>{p.mes}{p.rec && <small>{es ? ' al mes' : ' a month'}</small>}</span>
+				<span data-anio hidden>{p.anio}{p.rec && <small>{es ? ' al año' : ' a year'}</small>}</span>
+			</p>
+			<p class="desc">{p.d}</p>
+			<ul role="list">{p.items.map((i) => <li>{i}</li>)}</ul>
+			<a href={p.h}>{p.b}</a>
+		</div>
+	))}
+</div>
+
+<p class="libre not-content"><b>{es ? 'Sin letra chica:' : 'No fine print:'}</b> {es ? 'pagar el soporte no desbloquea funciones; OpenNCCM es el mismo para todos (GPL-3.0). Precios en dólares (US$), impuestos aparte.' : 'paying for support does not unlock any feature; OpenNCCM is the same for everyone (GPL-3.0). Prices in US dollars (US$), taxes not included.'}</p>
+
+<h2 id={es ? 'servicios-puntuales' : 'one-off-services'}>{es ? 'Servicios puntuales' : 'One-off services'}</h2>
+<p>{es ? 'Con o sin plan.' : 'With or without a plan.'}</p>
+<div class="servicios not-content">
+	{servicios.map(([n, pr, d]) => (
+		<div class="servicio"><b>{n}</b><span class="pr">{pr}</span><span>{d}</span></div>
+	))}
+</div>
+
+<p>{es ? 'Para contratar un plan o un servicio, o si tienes dudas, escríbenos a' : 'To sign up for a plan or a service, or if you have questions, email'} <a href={correo(es ? 'Soporte de OpenNCCM' : 'OpenNCCM support')}>{CORREO}</a>{es ? '. Por ahora la contratación se hace por correo; pronto habrá cuentas y pago en línea.' : '. For now sign-up is done by email; online accounts and payment are coming.'}</p>
+
+<script>
+	document.querySelectorAll<HTMLElement>('.selector').forEach((sel) => {
+		const botones = sel.querySelectorAll<HTMLButtonElement>('button');
+		botones.forEach((b) => b.addEventListener('click', () => {
+			const anio = b.dataset.periodo === 'anio';
+			botones.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+			document.querySelectorAll<HTMLElement>('[data-mes]').forEach((e) => (e.hidden = anio));
+			document.querySelectorAll<HTMLElement>('[data-anio]').forEach((e) => (e.hidden = !anio));
+		}));
+	});
+</script>
+
+<style>
+	.selector { display: inline-flex; gap: 4px; padding: 4px; margin-top: 1rem; border-radius: 12px; border: 1px solid var(--sl-color-hairline); background: var(--sl-color-bg-nav); }
+	.selector button { border: 0; border-radius: 9px; padding: 7px 14px; background: transparent; color: var(--sl-color-gray-2); font: 600 13px var(--sl-font); cursor: pointer; }
+	.selector button[aria-pressed='true'] { background: var(--sl-color-accent-low); color: var(--sl-color-white); }
+	.selector small { color: #22a35a; font-weight: 600; margin-left: 4px; }
+	.planes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 1rem; }
+	.plan { position: relative; display: flex; flex-direction: column; border-radius: 14px; border: 1px solid var(--sl-color-hairline); background: var(--sl-color-bg); padding: 18px; }
+	.plan.rec { border-color: var(--sl-color-accent); }
+	.etq { position: absolute; top: -11px; left: 16px; padding: 2px 9px; border-radius: 99px; background: var(--sl-color-accent); color: #fff; font: 600 11.5px var(--sl-font); }
+	.nombre { font: 700 16px var(--sl-font); color: var(--sl-color-white); }
+	.precio { margin: 6px 0 0; font: 700 26px var(--fuente-titulo); color: var(--sl-color-white); }
+	.precio small { font: 500 13px var(--sl-font); color: var(--sl-color-gray-3); }
+	.desc { margin: 6px 0 0; font-size: 13.5px; color: var(--sl-color-gray-3); line-height: 1.5; }
+	.plan ul { list-style: none; margin: 12px 0 0; padding: 0; flex: 1; }
+	.plan li { margin: 0; padding: 4px 0 4px 20px; position: relative; font-size: 13.5px; color: var(--sl-color-gray-2); }
+	.plan li::before { content: '✓'; position: absolute; left: 0; color: #22a35a; font-weight: 700; }
+	.plan a { align-self: flex-start; display: inline-flex; align-items: center; height: 36px; margin-top: 14px; padding: 0 14px; border-radius: 9px;
+		border: 1px solid var(--sl-color-hairline); color: var(--sl-color-gray-2); font: 600 13.5px var(--sl-font); text-decoration: none; }
+	.plan a:hover { border-color: var(--sl-color-accent); color: var(--sl-color-white); }
+	.plan.rec a { background: var(--sl-color-accent); border-color: var(--sl-color-accent); color: #fff; }
+	.libre { margin-top: 16px; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--sl-color-hairline); background: var(--sl-color-bg-nav); font-size: 13.5px; color: var(--sl-color-gray-3); }
+	.libre b { color: var(--sl-color-white); }
+	.servicios { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 0.75rem; }
+	.servicio { display: flex; flex-direction: column; gap: 2px; border-radius: 12px; border: 1px solid var(--sl-color-hairline); padding: 14px 16px; font-size: 13.5px; color: var(--sl-color-gray-3); }
+	.servicio b { color: var(--sl-color-white); font-size: 14.5px; }
+	.servicio .pr { color: var(--sl-color-text-accent); font-weight: 700; }
+	@media (max-width: 50rem) { .planes, .servicios { grid-template-columns: 1fr; } .planes { gap: 20px; } }
+</style>
