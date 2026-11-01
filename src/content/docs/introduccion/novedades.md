@@ -1,9 +1,23 @@
 ---
 title: "Novedades de la versión"
-description: "Lo nuevo de OpenNCCM 2.16.0 y las versiones anteriores."
+description: "Lo nuevo de OpenNCCM 2.17.0 y las versiones anteriores."
 ---
 
 Las 6 últimas versiones. El historial completo está en [opennccm.com/novedades](https://opennccm.com/novedades.html) y cada versión se descarga desde [GitHub](https://github.com/Gaaraalex/opennccm/releases).
+
+## Versión 2.17.0
+- **Operar › Consola:** al elegir un equipo se vuelve a abrir su consola, y en **Recetas** con «Todas» y «Todos los fabricantes»
+  se ven todas (en la 2.16.0 un fallo de la página dejaba las dos cosas sin funcionar).
+- **Herramientas con parámetros:** detrás de la IP o el nombre se pueden poner las opciones de siempre, de Windows o de Linux:
+  `8.8.8.8 -t` (ping continuo hasta pulsar **Detener**), `-n 10`, `-l 1400 -f`, `-i 0.2`, `--ttl 5`; traceroute `-h 30 -q 3`,
+  `-I` o `-T -p 443`; puerto TCP `host:443 -c 5`; DNS `ejemplo.com MX @1.1.1.1` o `-x 8.8.8.8`. Debajo de la casilla se ven las
+  de cada herramienta. La salida llega a medida que se produce. Solo se aceptan esas opciones (nada se pasa tal cual al
+  sistema). El instalador y `sudo opennccm update` instalan `dnsutils` (dig) para los tipos de registro DNS.
+- **Chat del asistente:** solo nombra equipos que existen en el inventario; la confirmación de una acción lista los equipos con
+  su número («Respaldar 3 equipos»); la barra superior se acomoda con el chat abierto y el chat vacío saluda con sugerencias.
+- **Errores en pocas palabras:** en el Panel («Necesita tu atención») y en el chat, los fallos de conexión y de respaldo salen
+  con un motivo corto y traducido («sin respuesta por SSH», «credencial rechazada», «cambió la clave SSH del equipo», «falta la
+  contraseña enable»…); el mensaje completo sigue en la ficha del equipo.
 
 ## Versión 2.16.0
 - **Chat del asistente en todo el sistema:** el botón «Asistente» de la barra superior (con el logo del proveedor) abre un chat a
@@ -80,15 +94,3 @@ Las 6 últimas versiones. El historial completo está en [opennccm.com/novedades
 - **Ficha con puertos, ajustes de diseño:** resumen en la columna derecha, números fuera del contorno de selección,
   tabla Interfaces en una línea por puerto con 10 a la vista y barra para desplazarse, «Dirección», «Bridge» o «Red»
   según el puerto, frente desplazable en el móvil y cabecera del equipo ordenada en pantallas estrechas.
-
-## Versión 2.12.0
-- **Puertos en la ficha del equipo.** Una franja entre la cabecera y las pestañas dibuja el frente del equipo con cada puerto en
-  su orden físico (RJ45 de cobre, jaula SFP con o sin módulo; dos filas en equipos grandes) y su estado: activo, sin enlace,
-  apagado o sin módulo. Al tocarlo se ven su descripción, velocidad, dirección y vecino. Pestaña nueva **Puertos** con la tabla
-  de interfaces, filtros, «Exportar CSV» y «Lo que dice el respaldo» (la línea de la configuración y la de estado). El estado se
-  lee en la misma conexión del respaldo: MikroTik, Cisco IOS/IOS-XE, ASA/FTD y Juniper; en el resto, apagado o habilitado según
-  la configuración.
-- **Restaurar una copia en otro equipo del mismo modelo.** Desde la versión o el menú «…» de la ficha: en otro equipo de
-  OpenNCCM, en uno nuevo por SSH (IP, usuario y contraseña, que no se guardan) o por cable de consola conectado al PC del
-  administrador (puerto serie desde Chrome o Edge). Primero se valida que el modelo coincide y se muestran los comandos; el
-  equipo de origen y sus copias no se tocan.
