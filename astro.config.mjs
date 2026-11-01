@@ -20,7 +20,7 @@ export default defineConfig({
 			editLink: { baseUrl: 'https://github.com/Gaaraalex/opennccm-docs/edit/main/' },
 			lastUpdated: true,
 			customCss: ['./src/styles/opennccm.css'],
-			expressiveCode: { defaultProps: { wrap: true } },
+			expressiveCode: { defaultProps: { wrap: false } },
 			head: [
 				{ tag: 'link', attrs: { rel: 'preconnect', href: 'https://fonts.googleapis.com' } },
 				{ tag: 'link', attrs: { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: true } },

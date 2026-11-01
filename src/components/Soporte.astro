@@ -33,6 +33,7 @@ const tarjetas = [
 
 <style>
 	.tarjetas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 1.5rem; }
+	:global(.sl-markdown-content) > .tarjetas:first-child { margin-top: 0; }
 	.tarjeta { display: flex; flex-direction: column; border-radius: 14px; border: 1px solid var(--sl-color-hairline); background: var(--sl-color-bg); padding: 16px 18px; }
 	.tarjeta.pago { border-color: var(--sl-color-accent); }
 	.tarjeta b { font: 700 15px var(--sl-font); color: var(--sl-color-white); }

@@ -131,3 +131,16 @@ site-search > button[data-open-modal] span { white-space: nowrap; }
 /* Botón del menú en el móvil: como los demás botones de la barra */
 .sl-menu-button { background: transparent; color: var(--sl-color-gray-2); border: 1px solid var(--sl-color-hairline); border-radius: 9px; box-shadow: none; }
 .sl-menu-button:hover { border-color: var(--sl-color-accent); color: var(--sl-color-white); }
+
+/* «Copiar» de los bloques de código siempre visible (también en el móvil, donde no hay hover) */
+.expressive-code .copy button { opacity: 1 !important; }
+/* Los bloques de código no parten líneas: se desplazan a lo ancho */
+.expressive-code pre.wrap .ec-line .code { white-space: pre !important; overflow-wrap: normal !important; }
+.expressive-code pre { overflow-x: auto; }
+/* Botón de copiar legible en el tema claro */
+:root[data-theme='light'] .expressive-code .copy button { background: #ffffff; border: 1px solid var(--sl-color-hairline); }
+:root[data-theme='light'] .expressive-code .copy button::before { background: #ffffff; }
+:root[data-theme='light'] .expressive-code .copy button::after { background-color: var(--sl-color-gray-2); }
+/* En los bloques de terminal, el botón de copiar va en la barra de arriba para no tapar el código */
+.expressive-code .frame.is-terminal .copy { top: 3px !important; right: 8px !important; }
+.expressive-code .frame.is-terminal .copy button { width: 1.75rem !important; height: 1.75rem !important; }
