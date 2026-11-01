@@ -41,6 +41,8 @@ const modulo = `${l === 'en' ? 'Module' : 'Módulo'} ${mod.m} · ${mod[l]}`;
 		f.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen';
 		f.allowFullscreen = true;
 		caja.replaceChildren(f);
+		// Al reproducir, el video ocupa todo el ancho de la columna (16:9) y los datos de la lección pasan debajo.
+		caja.closest('.curso')?.classList.add('reproduciendo');
 	};
 	document.querySelectorAll<HTMLElement>('.curso').forEach((c) => {
 		const caja = c.querySelector<HTMLElement>('.video')!;
@@ -72,5 +74,7 @@ const modulo = `${l === 'en' ? 'Module' : 'Módulo'} ${mod.m} · ${mod[l]}`;
 	.num { color: var(--sl-color-gray-3); width: 26px; }
 	.todo { display: inline-flex; align-items: center; height: 30px; margin-top: 10px; padding: 0 12px; border-radius: 9px; border: 1px solid var(--sl-color-hairline); color: var(--sl-color-gray-2); font: 500 13px var(--sl-font); text-decoration: none; }
 	.todo:hover { border-color: var(--sl-color-accent); color: var(--sl-color-white); }
+	.curso.reproduciendo { flex-direction: column; }
+	.curso.reproduciendo .video { width: 100%; }
 	@media (max-width: 40rem) { .curso { flex-direction: column; } .video { width: 100%; } }
 </style>
