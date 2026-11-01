@@ -1,9 +1,31 @@
 ---
 title: "Novedades de la versión"
-description: "Lo nuevo de OpenNCCM 2.15.0 y las versiones anteriores."
+description: "Lo nuevo de OpenNCCM 2.16.0 y las versiones anteriores."
 ---
 
 Las 6 últimas versiones. El historial completo está en [opennccm.com/novedades](https://opennccm.com/novedades.html) y cada versión se descarga desde [GitHub](https://github.com/Gaaraalex/opennccm/releases).
+
+## Versión 2.16.0
+- **Chat del asistente en todo el sistema:** el botón «Asistente» de la barra superior (con el logo del proveedor) abre un chat a
+  la derecha en cualquier página. Consulta OpenNCCM con funciones de solo lectura (equipos, respaldos, alarmas, cambios y
+  versiones, cumplimiento, ciclo de vida, búsqueda en configuraciones) y el manual, con el rol y los grupos del usuario y los
+  secretos ocultos. Respuestas cortas, equipos en una línea, como mucho 2 botones y «Más acciones», y la fuente. Las acciones que
+  cambian algo (respaldar, crear una tarea, crear una solicitud de cambio) piden confirmación en el chat. La conversación se
+  guarda por usuario; cada pregunta queda en Auditoría con las funciones usadas.
+- **Recetas:** al menos 10 por fabricante para Cisco IOS, MikroTik RouterOS, Extreme EXOS y Extreme VOSS / Fabric Engine (nombre,
+  usuarios y contraseñas, SSH, HTTPS, SNMP, syslog hacia OpenNCCM, RADIUS, NTP, VLAN, troncales, rutas, guardar…). La consola
+  reconoce VOSS (autocompletado, frecuentes, paginado y comandos que cortan el servicio).
+- **Herramientas de la consola:** ping y traceroute funcionan en el servidor (el servicio tiene permiso para ICMP y se instalan
+  `iputils-ping` y `traceroute` al instalar o actualizar). Si traceroute tarda, se ve lo que alcanzó a responder.
+- **Asistente IA:** logo de cada proveedor en un cuadrito con el color de la marca (Ajustes, consola y barra superior), tarjetas
+  de proveedor de la misma altura; si al guardar no hay ningún rol marcado, quedan administradores y operadores.
+- **Consola:** el aviso verde de cambio sale al salir del modo configuración (tras el «end»), nunca antes del comando; el panel de
+  Operar › Consola tiene una sola fila de botones y cabe en la ventana; textos en singular («1 sesión abierta»).
+- **Grabaciones:** el reproductor muestra lo escrito y lo visto con los colores de la consola y la lista de comandos con su hora;
+  las sesiones vacías se ocultan («Mostrar sesiones vacías»); al arrancar, las sesiones que quedaron «en curso» se cierran.
+- Recetas: los filtros quedan separados del buscador.
+- **Puertos de los Ubiquiti EdgeSwitch X (ES-10X, ES-18X…):** ya se ve qué puertos están activos y cuáles son de fibra. Estos
+  equipos no tienen «show interfaces status»: se lee «show interfaces GigabitEthernet 1-N» (verificado en un ES-18X real).
 
 ## Versión 2.15.0
 - **Consola nueva:** terminal clásica con colores por significado según el sistema (prompt, rutas y comandos, verbos,
@@ -70,7 +92,3 @@ Las 6 últimas versiones. El historial completo está en [opennccm.com/novedades
   OpenNCCM, en uno nuevo por SSH (IP, usuario y contraseña, que no se guardan) o por cable de consola conectado al PC del
   administrador (puerto serie desde Chrome o Edge). Primero se valida que el modelo coincide y se muestran los comandos; el
   equipo de origen y sus copias no se tocan.
-
-## Versión 2.11.1
-- **Mapa de la red: el clic en un equipo vuelve a abrir su panel.** Con un clic de ratón no pasaba nada; ahora se abre
-  el panel con cómo se reconoció, sus enlaces y «Agregar a OpenNCCM» o «Abrir el equipo».

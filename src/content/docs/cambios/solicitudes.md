@@ -1,8 +1,7 @@
 ---
 title: "Solicitudes y aprobación"
+description: "Garantizar que ningún cambio llegue a la red sin revisión, y dejar constancia de quién lo pidió, quién lo aprobó, qué se aplicó y con qué resultado."
 ---
-
-**Para qué sirven:** garantizar que ningún cambio llegue a la red sin revisión, y dejar constancia de quién lo pidió, quién lo aprobó, qué se aplicó y con qué resultado.
 
 ## Cómo usarlo
 

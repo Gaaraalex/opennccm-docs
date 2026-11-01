@@ -1,9 +1,8 @@
 ---
 title: "Tareas programadas"
+description: "Automatizar operaciones periódicas, para todos los equipos o para un grupo."
 curso: ["5.3"]
 ---
-
-**Para qué sirven:** automatizar operaciones periódicas, para todos los equipos o para un grupo.
 
 | Acción | Qué hace |
 | --- | --- |

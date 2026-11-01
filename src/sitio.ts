@@ -31,7 +31,7 @@ export const T = {
 		asistente: 'Ask the OpenNCCM assistant', asistenteSub: 'Copies the page to paste into your server’s assistant',
 		copiada: 'Page copied as Markdown.', copiadaAsistente: 'Page copied. Paste it into your server’s AI assistant (✦ in the top bar).',
 		masOpciones: 'More options', migas: 'Breadcrumbs',
-		curso: 'Video course · OpenNCCM from scratch', leccion: 'Lesson', de30: 'of 30', reproducir: 'Play lesson', verCurso: 'See the full course',
+		curso: 'Video course · OpenNCCM from scratch · in Spanish', leccion: 'Lesson', de30: 'of 30', reproducir: 'Play lesson', verCurso: 'See the full course',
 		actualizado: (v: string, f: string) => `Updated for version ${v} · ${f}`,
 	},
 };

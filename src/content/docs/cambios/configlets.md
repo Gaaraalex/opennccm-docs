@@ -1,9 +1,8 @@
 ---
 title: "Configlets"
+description: "Plantillas de comandos reutilizables para hacer cambios masivos o diagnósticos en muchos equipos a la vez."
 curso: ["5.1"]
 ---
-
-**Para qué sirven:** plantillas de comandos reutilizables para hacer cambios masivos o diagnósticos en muchos equipos a la vez.
 
 | Tipo | Qué hace | Aprobación |
 | --- | --- | --- |

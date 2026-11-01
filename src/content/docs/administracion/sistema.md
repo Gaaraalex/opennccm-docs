@@ -35,4 +35,4 @@ Con **Subir cada versión nueva a Git**, cada respaldo con cambios se sube como 
 
 OpenNCCM es software libre y gratis. Los administradores ven en la barra superior el botón **Apoya OpenNCCM**, y las páginas Sistema y Acerca de muestran una tarjeta con las formas de donar (GitHub Sponsors y Ko-fi). Tras actualizar a una versión nueva, el primer administrador que entra ve una vez un aviso con **Donar** y **Ahora no**. Los enlaces solo se abren si se pulsan, en una pestaña nueva, y no se envía ningún dato del servidor.
 
-El procedimiento completo de copia, restauración en otro servidor, actualización y vuelta atrás está en la **Guía de instalación** (ver [Copias y migrar](/instalacion/migrar/) y [Actualizar](/instalacion/actualizar/)).
+El procedimiento completo de copia, restauración en otro servidor, actualización y vuelta atrás está en [Copias y migrar](/instalacion/migrar/) y [Actualizar y volver atrás](/instalacion/actualizar/).

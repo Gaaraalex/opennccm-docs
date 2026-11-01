@@ -37,7 +37,7 @@ export default defineConfig({
 			},
 			sidebar: [
 				g('Introducción', 'Introduction', [
-					{ link: '/', label: '¿Qué es OpenNCCM?', translations: { en: 'What is OpenNCCM?' } },
+					p('index', '¿Qué es OpenNCCM?', 'What is OpenNCCM?'),
 					p('introduccion/novedades', 'Novedades de la versión', "What's new"),
 				]),
 				g('Instalación', 'Installation', [

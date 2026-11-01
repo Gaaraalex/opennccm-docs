@@ -7,7 +7,7 @@ curso: ["4.1"]
 -   Reconoce los mensajes de cambio de Cisco IOS/IOS-XE/NX-OS/ASA, Juniper, Huawei, H3C, FortiGate, Palo Alto, MikroTik, Aruba/HPE y mensajes genéricos «configuration changed».
 -   Varios avisos del mismo equipo en menos de 60 segundos generan un solo respaldo.
 -   Los cambios aplicados por OpenNCCM (solicitudes aprobadas) abren una **ventana de mantenimiento**: no se consideran intrusiones. La ventana se cierra en cuanto termina el respaldo posterior; cualquier aviso recibido mientras tanto se revisa en cuanto se cierra.
--   Configure el envío de syslog en los equipos según la Guía de instalación (ver [cómo configurarlo en cada fabricante](/primeros-pasos/syslog/#configurar-cada-fabricante)).
+-   Configure el envío de syslog en los equipos (ver [cómo configurarlo en cada fabricante](/primeros-pasos/syslog/#configurar-cada-fabricante)).
 
 ## Configurar cada fabricante
 

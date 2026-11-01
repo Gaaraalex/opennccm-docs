@@ -25,6 +25,6 @@ El valor de `device_type` de cada plataforma está en **Administración → Plat
 
 ## Verificar el primer respaldo
 
-Abra el dispositivo. Si el estado es **ok** verá su modelo, número de serie, versión de firmware y la primera versión de configuración. Si es **error**, el recuadro rojo indica la causa (ver sección 16).
+Abra el dispositivo. Si el estado es **ok** verá su modelo, número de serie, versión de firmware y la primera versión de configuración. Si es **error**, el recuadro rojo indica la causa (ver [Solución de problemas](/instalacion/problemas/)).
 
 ![Lista de dispositivos con su estado.](../../../assets/manual/03-dispositivos.png)
