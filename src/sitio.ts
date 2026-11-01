@@ -6,8 +6,8 @@ export const FECHA = { es: '1 nov 2026', en: 'Nov 1, 2026' };
 
 export const WEB = 'https://opennccm.com';
 export const REPO = 'https://github.com/Gaaraalex/opennccm';
-// Pendiente: el enlace de la lista «OpenNCCM desde cero» en YouTube.
-export const LISTA_YT = 'https://www.youtube.com/watch?v=ZekScxhMQlg';
+// Lista «OpenNCCM desde cero · Curso completo» en YouTube.
+export const LISTA_YT = 'https://www.youtube.com/playlist?list=PLLnVlyYEYVqI';
 
 type Lang = 'es' | 'en';
 export const lang = (l: string | undefined): Lang => (l === 'en' ? 'en' : 'es');
