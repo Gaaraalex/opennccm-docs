@@ -5,7 +5,7 @@ description: Respuestas rápidas sobre OpenNCCM.
 
 ## ¿Es gratis?
 
-Sí. OpenNCCM es software libre con licencia GPL-3.0: se puede usar, estudiar, modificar y compartir sin pagar. El [soporte profesional](/ayuda/soporte/), cuando exista, será un servicio aparte que no limita ninguna función.
+Sí. OpenNCCM es software libre con licencia GPL-3.0: se puede usar, estudiar, modificar y compartir sin pagar. El [soporte profesional](/ayuda/planes/) es un servicio aparte y opcional que no limita ninguna función.
 
 ## ¿Dónde quedan mis configuraciones?
 

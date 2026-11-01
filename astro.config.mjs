@@ -45,6 +45,8 @@ export default defineConfig({
 					p('instalacion/instalar', 'Instalar en Ubuntu', 'Install on Ubuntu'),
 					p('instalacion/actualizar', 'Actualizar y volver atrás', 'Upgrade and roll back'),
 					p('instalacion/migrar', 'Copias y migrar a otro servidor', 'Backups and moving servers'),
+					p('instalacion/mover-servidor', 'Mover a otro servidor', 'Move to another server'),
+					p('instalacion/desde-otra-herramienta', 'Migrar desde otra herramienta', 'Migrate from another tool'),
 					p('instalacion/postgresql', 'PostgreSQL', 'PostgreSQL'),
 					p('instalacion/https-cortafuegos', 'HTTPS y cortafuegos', 'HTTPS and firewall'),
 					p('instalacion/problemas', 'Solución de problemas', 'Troubleshooting'),
