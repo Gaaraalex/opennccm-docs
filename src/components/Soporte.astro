@@ -1,0 +1,51 @@
+---
+// Tarjetas de «Comunidad y soporte».
+import { lang, base, REPO } from '../sitio';
+const l = lang(Astro.currentLocale);
+const es = l === 'es';
+const tarjetas = [
+	{ t: es ? 'Comunidad' : 'Community', p: es ? 'gratis' : 'free',
+		d: es ? 'Preguntas y respuestas en GitHub Discussions. Se lee sin cuenta; para escribir hace falta una cuenta gratuita de GitHub.' : 'Questions and answers on GitHub Discussions. Anyone can read it; posting needs a free GitHub account.',
+		b: es ? 'Ir a la comunidad' : 'Go to the community', h: REPO + '/discussions' },
+	{ t: es ? 'Reportar un error' : 'Report a bug', p: es ? 'gratis' : 'free',
+		d: es ? 'Fallos y sugerencias en GitHub Issues, con la versión y los pasos para repetirlo.' : 'Bugs and suggestions on GitHub Issues, with the version and the steps to reproduce it.',
+		b: es ? 'Reportar en GitHub' : 'Report on GitHub', h: REPO + '/issues' },
+	{ t: es ? 'Soporte profesional' : 'Professional support', p: es ? 'de pago · opcional' : 'paid · optional', pago: true,
+		d: es ? 'Respuesta garantizada por correo, ayuda con la instalación y las migraciones.' : 'Guaranteed email response, help with installation and migrations.',
+		b: es ? 'Ver planes' : 'See plans', h: base(l) + 'ayuda/planes/' },
+];
+---
+
+<div class="tarjetas not-content">
+	{tarjetas.map((c) => (
+		<div class:list={['tarjeta', { pago: c.pago }]}>
+			<b>{c.t}</b>
+			<span class="precio">{c.p}</span>
+			<p>{c.d}</p>
+			<a href={c.h}>{c.b}</a>
+		</div>
+	))}
+</div>
+<div class="libre not-content">
+	<b>{es ? 'El software sigue siendo libre' : 'The software stays free'}</b>
+	<p>{es ? 'OpenNCCM es GPL-3.0 y gratis para todos. El soporte de pago es un servicio aparte: no limita ni cambia ninguna función del sistema.' : 'OpenNCCM is GPL-3.0 and free for everyone. Paid support is a separate service: it does not limit or change any feature of the system.'}</p>
+</div>
+
+<style>
+	.tarjetas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 1.5rem; }
+	.tarjeta { display: flex; flex-direction: column; border-radius: 14px; border: 1px solid var(--sl-color-hairline); background: var(--sl-color-bg); padding: 16px 18px; }
+	.tarjeta.pago { border-color: var(--sl-color-accent); }
+	.tarjeta b { font: 700 15px var(--sl-font); color: var(--sl-color-white); }
+	.precio { font: 600 12px var(--sl-font); color: #22a35a; margin-top: 2px; }
+	.pago .precio { color: var(--sl-color-text-accent); }
+	.tarjeta p { flex: 1; margin: 8px 0 0; font-size: 13.5px; line-height: 1.5; color: var(--sl-color-gray-3); }
+	.tarjeta a { align-self: flex-start; display: inline-flex; align-items: center; height: 34px; margin-top: 12px; padding: 0 12px; border-radius: 9px;
+		border: 1px solid var(--sl-color-hairline); color: var(--sl-color-gray-2); font: 500 13px var(--sl-font); text-decoration: none; }
+	.tarjeta a:hover { border-color: var(--sl-color-accent); color: var(--sl-color-white); }
+	.pago a { background: var(--sl-color-accent); border-color: var(--sl-color-accent); color: #fff; }
+	.pago a:hover { color: #fff; filter: brightness(1.08); }
+	.libre { margin-top: 16px; border-radius: 14px; border: 1px solid var(--sl-color-hairline); background: var(--sl-color-bg-nav); padding: 16px 18px; }
+	.libre b { font: 600 14px var(--sl-font); color: var(--sl-color-white); }
+	.libre p { margin: 4px 0 0; font-size: 13.5px; line-height: 1.55; color: var(--sl-color-gray-3); }
+	@media (max-width: 50rem) { .tarjetas { grid-template-columns: 1fr; } }
+</style>

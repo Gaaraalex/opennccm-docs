@@ -1,0 +1,28 @@
+---
+import { T, lang, VERSION, VERSIONES } from '../sitio';
+const t = T[lang(Astro.currentLocale)];
+---
+
+<details class="version">
+	<summary class="boton">v{VERSION} <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+	<ul role="list">
+		{VERSIONES.map(({ v, actual }) => (
+			<li><a href="./" aria-current={v === VERSION ? 'true' : undefined}><span>v{v}</span>{actual && <small>{t.actual}</small>}</a></li>
+		))}
+	</ul>
+</details>
+
+<style>
+	.version { position: relative; }
+	.boton { list-style: none; display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 11px; border-radius: 9px;
+		border: 1px solid var(--sl-color-hairline); color: var(--sl-color-gray-2); font: 500 13px var(--sl-font); cursor: pointer; }
+	.boton::-webkit-details-marker { display: none; }
+	.boton:hover, .version[open] .boton { border-color: var(--sl-color-accent); color: var(--sl-color-white); }
+	.boton svg { width: 12px; height: 12px; }
+	ul { position: absolute; right: 0; top: 40px; z-index: 20; width: 190px; margin: 0; padding: 6px; list-style: none; border-radius: 12px;
+		border: 1px solid var(--sl-color-hairline); background: var(--sl-color-bg-nav); box-shadow: var(--sl-shadow-md); }
+	a { display: flex; align-items: center; padding: 8px 10px; border-radius: 8px; color: var(--sl-color-gray-2); text-decoration: none; font-size: 13px; }
+	a:hover, a[aria-current] { background: var(--sl-color-accent-low); color: var(--sl-color-white); }
+	a span { flex: 1; }
+	a small { color: var(--sl-color-gray-3); font-size: 11px; }
+</style>

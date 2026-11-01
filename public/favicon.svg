@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Marca «Señal»: grafo de tres nodos en cobalto con el nodo inferior en lima -->
+  <rect width="32" height="32" rx="9" fill="#2347e8"/>
+  <path d="M10 10H22M10 10l6 11.5M22 10l-6 11.5" stroke="#fff" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+  <circle cx="10" cy="10" r="3.6" fill="#fff"/>
+  <circle cx="22" cy="10" r="3.6" fill="#fff"/>
+  <circle cx="16" cy="21.5" r="5" fill="#c6f432"/>
+</svg>

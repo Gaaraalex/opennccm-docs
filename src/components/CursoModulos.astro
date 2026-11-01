@@ -1,0 +1,59 @@
+---
+// Página «Curso en video»: los 10 módulos con sus lecciones; cada una se reproduce en el reproductor de arriba.
+import { T, lang, LECCIONES, MODULOS, LISTA_YT } from '../sitio';
+const l = lang(Astro.currentLocale);
+const t = T[l];
+const yt = l === 'en' ? 'Watch the full playlist on YouTube' : 'Ver la lista completa en YouTube';
+const nota = l === 'en' ? 'The lessons are in Spanish.' : '';
+---
+
+<div class="reproductor" id="reproductor" hidden></div>
+{nota && <p class="nota-idioma">{nota}</p>}
+<div class="modulos not-content">
+	{MODULOS.map((m) => (
+		<section class="modulo">
+			<h3>{m.m} · {m[l]}</h3>
+			<ul role="list">
+				{m.n.map((n) => (
+					<li><button type="button" data-id={LECCIONES[n][1]} data-t={LECCIONES[n][0]}><span class="tri" aria-hidden="true">▶</span><span class="num">{n}</span>{LECCIONES[n][0]}</button></li>
+				))}
+			</ul>
+		</section>
+	))}
+</div>
+<a class="yt not-content" href={LISTA_YT} target="_blank" rel="noopener">{yt}</a>
+<span hidden>{t.curso}</span>
+
+<script>
+	const r = document.getElementById('reproductor')!;
+	document.querySelectorAll<HTMLButtonElement>('.modulo button').forEach((b) =>
+		b.addEventListener('click', () => {
+			const f = document.createElement('iframe');
+			f.src = `https://www.youtube-nocookie.com/embed/${b.dataset.id}?autoplay=1&rel=0`;
+			f.title = b.dataset.t!;
+			f.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen';
+			f.allowFullscreen = true;
+			r.replaceChildren(f);
+			r.hidden = false;
+			r.scrollIntoView({ behavior: 'smooth', block: 'center' });
+		}),
+	);
+</script>
+
+<style>
+	.reproductor { aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; background: #000; margin-top: 1.25rem; }
+	.reproductor :global(iframe) { width: 100%; height: 100%; border: 0; display: block; }
+	.nota-idioma { color: var(--sl-color-gray-3); font-size: 13.5px; }
+	.modulos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 1.25rem; }
+	.modulo { border-radius: 14px; border: 1px solid var(--sl-color-hairline); background: var(--sl-color-bg); padding: 14px 16px; }
+	.modulo h3 { margin: 0; font: 700 14.5px var(--sl-font); color: var(--sl-color-white); }
+	ul { list-style: none; margin: 6px 0 0; padding: 0; }
+	button { display: flex; align-items: center; gap: 8px; width: 100%; padding: 5px 6px; border: 0; border-radius: 8px; background: transparent;
+		color: var(--sl-color-gray-2); font: 500 13.5px var(--sl-font); text-align: left; cursor: pointer; }
+	button:hover { background: var(--sl-color-accent-low); color: var(--sl-color-white); }
+	.tri { color: #ff4d6d; font-size: 11px; }
+	.num { color: var(--sl-color-gray-3); width: 28px; flex: none; }
+	.yt { display: inline-flex; align-items: center; height: 38px; margin-top: 16px; padding: 0 14px; border-radius: 9px; background: #ff0033; color: #fff; font: 600 14px var(--sl-font); text-decoration: none; }
+	.yt:hover { background: #e0002d; color: #fff; }
+	@media (max-width: 40rem) { .modulos { grid-template-columns: 1fr; } }
+</style>

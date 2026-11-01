@@ -1,0 +1,76 @@
+---
+// Tarjeta «Curso en video» de una página: la lección principal se reproduce aquí mismo (youtube-nocookie.com, solo al pulsar).
+import { T, lang, base, LECCIONES, moduloDe } from '../sitio';
+interface Props { lecciones: string[] }
+const [n, ...mas] = Astro.props.lecciones;
+const l = lang(Astro.currentLocale);
+const t = T[l];
+const [titulo, id] = LECCIONES[n];
+const mod = moduloDe(n);
+const modulo = `${l === 'en' ? 'Module' : 'Módulo'} ${mod.m} · ${mod[l]}`;
+---
+
+<div class="curso" data-pagefind-ignore>
+	<div class="video" data-id={id}>
+		<button type="button" class="miniatura" aria-label={`${t.reproducir} ${n}: ${titulo}`}>
+			<span class="etq">{t.leccion.toUpperCase()} {n}</span>
+			<span class="tit">{titulo}</span>
+			<span class="play"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+		</button>
+	</div>
+	<div class="info">
+		<p class="sup">{t.curso}</p>
+		<p class="nom">{titulo}</p>
+		<p class="pos">{t.leccion} {n} {t.de30} · {modulo}</p>
+		{mas.length > 0 && (
+			<ul role="list">
+				{mas.map((m) => (
+					<li><button type="button" class="otra" data-id={LECCIONES[m][1]} data-n={m} data-t={LECCIONES[m][0]}><span class="tri" aria-hidden="true">▶</span><span class="num">{m}</span>{LECCIONES[m][0]}</button></li>
+				))}
+			</ul>
+		)}
+		<a class="todo" href={base(l) + 'ayuda/curso/'}>{t.verCurso}</a>
+	</div>
+</div>
+
+<script>
+	const poner = (caja: HTMLElement, id: string, titulo: string) => {
+		const f = document.createElement('iframe');
+		f.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
+		f.title = titulo;
+		f.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen';
+		f.allowFullscreen = true;
+		caja.replaceChildren(f);
+	};
+	document.querySelectorAll<HTMLElement>('.curso').forEach((c) => {
+		const caja = c.querySelector<HTMLElement>('.video')!;
+		c.querySelector('.miniatura')?.addEventListener('click', () => poner(caja, caja.dataset.id!, c.querySelector('.nom')!.textContent!));
+		c.querySelectorAll<HTMLButtonElement>('.otra').forEach((b) => b.addEventListener('click', () => poner(caja, b.dataset.id!, b.dataset.t!)));
+	});
+</script>
+
+<style>
+	.curso { display: flex; gap: 16px; margin-top: 1.25rem; padding: 12px; border-radius: 14px; border: 1px solid var(--sl-color-hairline); background: var(--sl-color-bg-nav); }
+	.video { flex: none; width: 256px; aspect-ratio: 16 / 9; border-radius: 10px; overflow: hidden; background: #000; }
+	.video :global(iframe) { width: 100%; height: 100%; border: 0; display: block; }
+	.miniatura { position: relative; width: 100%; height: 100%; border: 0; padding: 0; cursor: pointer; background: linear-gradient(135deg, #12306e 0%, #0b1222 70%); }
+	.etq { position: absolute; left: 12px; top: 10px; font: 700 11px var(--sl-font); letter-spacing: .06em; color: #c6f432; }
+	.tit { position: absolute; left: 12px; right: 12px; bottom: 10px; font: 700 15px/1.2 var(--fuente-titulo); color: #fff; text-align: left; }
+	.play { position: absolute; left: 50%; top: 46%; transform: translate(-50%, -50%); width: 48px; height: 34px; border-radius: 10px; background: #ff0033; display: grid; place-items: center; }
+	.play svg { width: 16px; height: 16px; }
+	.miniatura:hover .play { background: #e0002d; }
+	.info { min-width: 0; flex: 1; }
+	.info p { margin: 0; }
+	.sup { font: 600 11.5px var(--sl-font); letter-spacing: .05em; text-transform: uppercase; color: var(--sl-color-gray-3); }
+	.nom { margin-top: 4px !important; font: 700 16px var(--sl-font); color: var(--sl-color-white); }
+	.pos { margin-top: 2px !important; font-size: 13px; color: var(--sl-color-gray-3); }
+	ul { list-style: none; margin: 8px 0 0; padding: 0; }
+	ul li { margin: 0; }
+	.otra { display: flex; align-items: center; gap: 8px; width: 100%; padding: 4px 6px; border: 0; border-radius: 8px; background: transparent; color: var(--sl-color-gray-2); font: 500 13px var(--sl-font); text-align: left; cursor: pointer; }
+	.otra:hover { background: var(--sl-color-accent-low); color: var(--sl-color-white); }
+	.tri { color: #ff4d6d; font-size: 11px; }
+	.num { color: var(--sl-color-gray-3); width: 26px; }
+	.todo { display: inline-flex; align-items: center; height: 30px; margin-top: 10px; padding: 0 12px; border-radius: 9px; border: 1px solid var(--sl-color-hairline); color: var(--sl-color-gray-2); font: 500 13px var(--sl-font); text-decoration: none; }
+	.todo:hover { border-color: var(--sl-color-accent); color: var(--sl-color-white); }
+	@media (max-width: 40rem) { .curso { flex-direction: column; } .video { width: 100%; } }
+</style>

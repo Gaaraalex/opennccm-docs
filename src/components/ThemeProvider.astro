@@ -1,0 +1,12 @@
+---
+// Igual que el de Starlight, pero el tema oscuro es el predeterminado (como opennccm.com).
+---
+
+<script is:inline>
+	window.StarlightThemeProvider = (() => {
+		let stored = null;
+		try { stored = localStorage.getItem('starlight-theme'); } catch {}
+		document.documentElement.dataset.theme = stored === 'light' ? 'light' : 'dark';
+		return { updatePickers() {} };
+	})();
+</script>

@@ -1,0 +1,27 @@
+---
+import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
+import { T, lang, base, WEB, REPO } from '../sitio';
+import VersionSelect from './VersionSelect.astro';
+import IdiomaLink from './IdiomaLink.astro';
+const l = lang(Astro.currentLocale);
+const t = T[l];
+const b = base(l);
+---
+
+<div class="pie-movil">
+	<nav aria-label={l === 'en' ? 'Site' : 'Sitio'}>
+		<a href={l === 'en' ? WEB + '/en/' : WEB + '/'}>{t.web}</a>
+		<a href={b + 'ayuda/soporte/'}>{t.soporte}</a>
+		<a href={b + 'introduccion/novedades/'}>{t.novedades}</a>
+		<a href={REPO}>GitHub</a>
+	</nav>
+	<div class="controles"><VersionSelect /><IdiomaLink /><ThemeSelect /></div>
+</div>
+
+<style>
+	.pie-movil { display: flex; flex-direction: column; gap: 14px; padding-top: 12px; border-top: 1px solid var(--sl-color-hairline); }
+	nav { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+	nav a { color: var(--sl-color-gray-2); font-size: 14px; text-decoration: none; }
+	.controles { display: flex; gap: 8px; }
+	.controles :global(ul) { top: auto; bottom: 40px; left: 0; right: auto; }
+</style>

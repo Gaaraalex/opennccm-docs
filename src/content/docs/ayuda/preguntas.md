@@ -1,0 +1,36 @@
+---
+title: Preguntas frecuentes
+description: Respuestas rápidas sobre OpenNCCM.
+---
+
+## ¿Es gratis?
+
+Sí. OpenNCCM es software libre con licencia GPL-3.0: se puede usar, estudiar, modificar y compartir sin pagar. El [soporte profesional](/ayuda/soporte/), cuando exista, será un servicio aparte que no limita ninguna función.
+
+## ¿Dónde quedan mis configuraciones?
+
+En su propio servidor. OpenNCCM se instala en un Ubuntu suyo y guarda las configuraciones cifradas con AES-256 en su base de datos. Solo sale a internet lo que usted active: consultas de CVE a NVD, avisos por correo, Teams, Slack o Telegram, el proveedor del [asistente IA](/consola/asistente/) o la [copia en Git](/administracion/sistema/).
+
+## ¿Qué sistema necesito?
+
+Ubuntu Server 22.04 o 24.04 LTS de 64 bits, recién instalado. Con 2 vCPU y 4 GB de RAM alcanza para unos 300 equipos. Los detalles están en [Requisitos](/instalacion/requisitos/).
+
+## ¿Qué equipos puede gestionar?
+
+131 plataformas de unos 70 fabricantes, por SSH o Telnet. Cualquier otro equipo con SSH se gestiona con el perfil genérico. Lista completa en [Plataformas soportadas](/referencia/plataformas/).
+
+## ¿Hace falta instalar algo en los equipos?
+
+No. OpenNCCM entra por SSH con un usuario del equipo. Solo conviene configurar el envío de [syslog](/primeros-pasos/syslog/) para detectar los cambios al momento.
+
+## ¿Qué pasa si pierdo la clave de cifrado?
+
+Sin `/etc/opennccm/secret.key` no se pueden leer los respaldos ni las credenciales guardadas. Guárdela aparte junto con las [copias de recuperación](/instalacion/migrar/).
+
+## ¿Cómo actualizo?
+
+Desde **Sistema → Actualizar** o con el aviso de versión nueva. Antes se guarda una copia y, si la versión nueva no responde, vuelve sola a la anterior. Ver [Actualizar y volver atrás](/instalacion/actualizar/).
+
+## ¿Dónde pido ayuda?
+
+En [Comunidad y soporte](/ayuda/soporte/).

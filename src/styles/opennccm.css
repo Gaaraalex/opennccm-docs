@@ -1,0 +1,133 @@
+/* Estilo de opennccm.com sobre Starlight: Outfit en títulos, Inter en el texto, cobalto y lima. */
+
+:root {
+	--sl-font: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+	--sl-font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', Consolas, monospace;
+	--fuente-titulo: 'Outfit', var(--sl-font);
+	--sl-nav-height: 4rem;
+	--sl-content-width: 50rem;
+	--sl-sidebar-width: 17rem;
+	--sl-text-h1: 2rem;
+	--sl-text-h2: 1.375rem;
+	--sl-text-h3: 1.125rem;
+	--sl-text-h4: 1rem;
+}
+
+/* Oscuro (predeterminado) */
+:root,
+::backdrop {
+	--sl-color-accent-low: #12203f;
+	--sl-color-accent: #3b82f6;
+	--sl-color-accent-high: #8fb0ff;
+	--sl-color-white: #ffffff;
+	--sl-color-gray-1: #eef2f9;
+	--sl-color-gray-2: #dbe3f2;
+	--sl-color-gray-3: #93a0b8;
+	--sl-color-gray-4: #5d6a84;
+	--sl-color-gray-5: #1a2440;
+	--sl-color-gray-6: #0d1426;
+	--sl-color-black: #070b14;
+	--sl-color-bg: #070b14;
+	--sl-color-bg-nav: #0b1222;
+	--sl-color-bg-sidebar: #070b14;
+	--sl-color-bg-inline-code: #12203f;
+	--sl-color-hairline-light: #1a2440;
+	--sl-color-hairline: #1a2440;
+	--sl-color-hairline-shade: #05070c;
+	--sl-color-text-accent: #8fb0ff;
+	--marca-lima-texto: #c6f432;
+	--aviso-fondo: #2a2110;
+	--aviso-borde: #4a3a14;
+	--aviso-texto: #f5d78a;
+	--nota-fondo: #0e1b36;
+	--nota-borde: #22407a;
+	--nota-texto: #c9d8ff;
+	--consejo-fondo: #0d2418;
+	--consejo-borde: #1d5a35;
+	--consejo-texto: #b6f0c8;
+}
+
+:root[data-theme='light'],
+[data-theme='light'] ::backdrop {
+	--sl-color-accent-low: #eaf1ff;
+	--sl-color-accent: #2563eb;
+	--sl-color-accent-high: #1d4ed8;
+	--sl-color-white: #0b1222;
+	--sl-color-gray-1: #1b2433;
+	--sl-color-gray-2: #2b3445;
+	--sl-color-gray-3: #5f6b80;
+	--sl-color-gray-4: #8a95a8;
+	--sl-color-gray-5: #e3e7ef;
+	--sl-color-gray-6: #f7f8fb;
+	--sl-color-gray-7: #fbfcfd;
+	--sl-color-black: #ffffff;
+	--sl-color-bg: #ffffff;
+	--sl-color-bg-nav: #f7f8fb;
+	--sl-color-bg-sidebar: #ffffff;
+	--sl-color-bg-inline-code: #eef2fa;
+	--sl-color-hairline-light: #e3e7ef;
+	--sl-color-hairline: #e3e7ef;
+	--sl-color-hairline-shade: #d3d9e4;
+	--sl-color-text-accent: #1d4ed8;
+	--marca-lima-texto: #5f8a00;
+	--aviso-fondo: #fff7e6;
+	--aviso-borde: #f5c76a;
+	--aviso-texto: #6b4100;
+	--nota-fondo: #eef4ff;
+	--nota-borde: #b9cdf7;
+	--nota-texto: #1b3a7a;
+	--consejo-fondo: #ecfaf1;
+	--consejo-borde: #a9dfbd;
+	--consejo-texto: #14532d;
+}
+
+header.header { background: var(--sl-color-bg); border-bottom-color: var(--sl-color-hairline); }
+
+/* Títulos */
+.sl-markdown-content :is(h2, h3, h4) { font-family: var(--fuente-titulo); font-weight: 700; color: var(--sl-color-white); }
+.sl-markdown-content { font-size: 15px; line-height: 1.7; color: var(--sl-color-gray-2); }
+
+/* Menú lateral como en el diseño: grupos en versalitas pequeñas y la página actual en azul suave */
+.sidebar-content .group-label .large { font: 600 11.5px var(--sl-font); letter-spacing: .06em; text-transform: uppercase; color: var(--sl-color-gray-3); }
+.sidebar-content a { font-size: 13.5px; border-radius: 8px; padding: 6px 12px; color: var(--sl-color-gray-2); }
+.sidebar-content a:hover { background: var(--sl-color-accent-low); color: var(--sl-color-white); }
+.sidebar-content a[aria-current='page'],
+.sidebar-content a[aria-current='page']:hover { background: var(--sl-color-accent-low); color: var(--sl-color-text-accent); font-weight: 600; }
+
+/* «En esta página» */
+starlight-toc h2 { font: 600 12px var(--sl-font); color: var(--sl-color-white); }
+starlight-toc a { font-size: 12.5px; color: var(--sl-color-gray-3); border-left: 2px solid var(--sl-color-hairline); padding-inline-start: 12px !important; }
+starlight-toc a[aria-current='true'] { color: var(--sl-color-text-accent); border-left-color: var(--sl-color-accent); }
+
+/* Tablas */
+.sl-markdown-content table { display: table; width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.sl-markdown-content :is(th, td) { padding: 9px 10px; border: 0; border-bottom: 1px solid var(--sl-color-hairline); text-align: left; vertical-align: top; }
+.sl-markdown-content th { background: var(--sl-color-bg-nav); color: var(--sl-color-white); font-weight: 600; }
+@media (max-width: 50rem) { .sl-markdown-content table { display: block; overflow-x: auto; } }
+
+/* Imágenes del manual */
+.sl-markdown-content img { border-radius: 12px; border: 1px solid var(--sl-color-hairline); }
+
+/* Avisos: «Importante» en ámbar, notas en azul, consejos en verde */
+.starlight-aside { border-radius: 12px; border: 1px solid; padding: 14px 16px; }
+.starlight-aside--caution, .starlight-aside--danger { background: var(--aviso-fondo); border-color: var(--aviso-borde); color: var(--aviso-texto); }
+.starlight-aside--note { background: var(--nota-fondo); border-color: var(--nota-borde); color: var(--nota-texto); }
+.starlight-aside--tip { background: var(--consejo-fondo); border-color: var(--consejo-borde); color: var(--consejo-texto); }
+.starlight-aside :is(.starlight-aside__title, .starlight-aside__content, strong, a) { color: inherit; }
+
+/* Anterior / Siguiente como tarjetas */
+.pagination-links a { border-radius: 14px; border-color: var(--sl-color-hairline); background: var(--sl-color-bg); box-shadow: none; }
+.pagination-links a:hover { border-color: var(--sl-color-accent); }
+.pagination-links .link-title { font-size: 14.5px; font-weight: 600; color: var(--sl-color-text-accent); }
+
+/* Buscador: botón ancho con «Ctrl K» */
+site-search > button[data-open-modal] { border-radius: 9px; border-color: var(--sl-color-hairline); background: var(--sl-color-bg); }
+site-search > button[data-open-modal] span { white-space: nowrap; }
+@media (min-width: 50rem) { site-search > button[data-open-modal] { width: 300px; max-width: 100%; } }
+
+/* Capturas de la terminal del instalador: más pequeñas que las de la interfaz */
+.sl-markdown-content img[src*='tui-'] { max-width: 640px; width: 100%; }
+
+/* Botón del menú en el móvil: como los demás botones de la barra */
+.sl-menu-button { background: transparent; color: var(--sl-color-gray-2); border: 1px solid var(--sl-color-hairline); border-radius: 9px; box-shadow: none; }
+.sl-menu-button:hover { border-color: var(--sl-color-accent); color: var(--sl-color-white); }
