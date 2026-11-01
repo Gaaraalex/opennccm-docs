@@ -1,6 +1,6 @@
 ---
-// Planes de soporte, solo informativos: precios y contacto por correo, sin cuentas ni cobros.
-import { lang, base, REPO } from '../sitio';
+// Planes de soporte: precios y enlaces a la comunidad (comunidad.opennccm.com), donde se contratan y se abren los tickets.
+import { comunidad, lang } from '../sitio';
 const l = lang(Astro.currentLocale);
 const es = l === 'es';
 const CORREO = 'soporte@opennccm.com';
@@ -13,7 +13,7 @@ const planes = [
 		items: es
 			? ['Foro, documentación y curso en video', 'Reportar errores en GitHub', 'Respuesta cuando la comunidad puede']
 			: ['Forum, documentation and video course', 'Report bugs on GitHub', 'Answers when the community can'],
-		b: es ? 'Ir a la comunidad' : 'Go to the community', h: REPO + '/discussions',
+		b: es ? 'Ir al foro' : 'Go to the forum', h: comunidad(l, '/foro'),
 	},
 	{
 		n: es ? 'Profesional' : 'Professional', rec: true, mes: 'US$149', anio: 'US$1,490',
@@ -21,7 +21,7 @@ const planes = [
 		items: es
 			? ['Todo lo de Comunidad', 'Tickets privados: 5 al mes (ticket extra US$40)', 'Respuesta en menos de 1 día hábil', 'Urgentes en 4 h hábiles', 'Ayuda con la instalación y la migración', 'Hasta 5 personas']
 			: ['Everything in Community', 'Private tickets: 5 a month (extra ticket US$40)', 'Answer within 1 business day', 'Urgent issues within 4 business hours', 'Help with installation and migration', 'Up to 5 people'],
-		b: es ? 'Escríbenos' : 'Contact us', h: correo(es ? 'Plan Profesional de OpenNCCM' : 'OpenNCCM Professional plan'),
+		b: es ? 'Contratar' : 'Get started', h: comunidad(l, '/soporte'),
 	},
 	{
 		n: es ? 'Empresa' : 'Enterprise', mes: es ? 'desde US$499' : 'from US$499', anio: es ? 'a medida' : 'custom',
@@ -29,7 +29,7 @@ const planes = [
 		items: es
 			? ['Tickets sin límite', 'Urgentes en horario extendido: 8 a 22 h, lunes a sábado', 'Sesión remota con un técnico', 'Capacitación del equipo']
 			: ['Unlimited tickets', 'Urgent issues in extended hours: 8 am to 10 pm, Monday to Saturday', 'Remote session with an engineer', 'Team training'],
-		b: es ? 'Hablar con nosotros' : 'Talk to us', h: correo(es ? 'Plan Empresa de OpenNCCM' : 'OpenNCCM Enterprise plan'),
+		b: es ? 'Hablar con nosotros' : 'Talk to us', h: comunidad(l, '/soporte'),
 	},
 ];
 const servicios = es
@@ -68,7 +68,7 @@ const servicios = es
 	))}
 </div>
 
-<p>{es ? 'Para contratar un plan o un servicio, o si tienes dudas, escríbenos a' : 'To sign up for a plan or a service, or if you have questions, email'} <a href={correo(es ? 'Soporte de OpenNCCM' : 'OpenNCCM support')}>{CORREO}</a>{es ? '. Por ahora la contratación se hace por correo; pronto habrá cuentas y pago en línea.' : '. For now sign-up is done by email; online accounts and payment are coming.'}</p>
+<p>{es ? 'Los planes se contratan y los tickets se abren en la ' : 'Plans are taken and tickets are opened in the '}<a href={comunidad(l, '/soporte')}>{es ? 'comunidad de OpenNCCM' : 'OpenNCCM community'}</a>{es ? ', con una cuenta gratuita. Si tienes dudas, escríbenos a ' : ', with a free account. If you have questions, email '}<a href={correo(es ? 'Soporte de OpenNCCM' : 'OpenNCCM support')}>{CORREO}</a>.</p>
 
 <script>
 	document.querySelectorAll<HTMLElement>('.selector').forEach((sel) => {

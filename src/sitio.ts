@@ -6,6 +6,9 @@ export const FECHA = { es: '1 nov 2026', en: 'Nov 1, 2026' };
 
 export const WEB = 'https://opennccm.com';
 export const REPO = 'https://github.com/Gaaraalex/opennccm';
+// Comunidad: foro, cuentas y soporte de pago. En inglés se pide la interfaz en inglés con ?lang=en.
+export const COMUNIDAD = 'https://comunidad.opennccm.com';
+export const comunidad = (l: 'es' | 'en', ruta: string) => COMUNIDAD + ruta + (l === 'en' ? '?lang=en' : '');
 // Lista «OpenNCCM desde cero · Curso completo» en YouTube.
 export const LISTA_YT = 'https://www.youtube.com/playlist?list=PLLnVlyYEYVqI';
 

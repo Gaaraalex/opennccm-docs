@@ -1,18 +1,18 @@
 ---
 // Tarjetas de «Comunidad y soporte».
-import { lang, base, REPO } from '../sitio';
+import { lang, comunidad, REPO } from '../sitio';
 const l = lang(Astro.currentLocale);
 const es = l === 'es';
 const tarjetas = [
 	{ t: es ? 'Comunidad' : 'Community', p: es ? 'gratis' : 'free',
-		d: es ? 'Preguntas y respuestas en GitHub Discussions. Se lee sin cuenta; para escribir hace falta una cuenta gratuita de GitHub.' : 'Questions and answers on GitHub Discussions. Anyone can read it; posting needs a free GitHub account.',
-		b: es ? 'Ir a la comunidad' : 'Go to the community', h: REPO + '/discussions' },
+		d: es ? 'Preguntas y respuestas en el foro de la comunidad. Se lee sin cuenta; para escribir basta una cuenta gratuita.' : 'Questions and answers in the community forum. Anyone can read it; posting only needs a free account.',
+		b: es ? 'Ir al foro' : 'Go to the forum', h: comunidad(l, '/foro') },
 	{ t: es ? 'Reportar un error' : 'Report a bug', p: es ? 'gratis' : 'free',
 		d: es ? 'Fallos y sugerencias en GitHub Issues, con la versión y los pasos para repetirlo.' : 'Bugs and suggestions on GitHub Issues, with the version and the steps to reproduce it.',
 		b: es ? 'Reportar en GitHub' : 'Report on GitHub', h: REPO + '/issues' },
 	{ t: es ? 'Soporte profesional' : 'Professional support', p: es ? 'de pago · opcional' : 'paid · optional', pago: true,
-		d: es ? 'Respuesta garantizada por correo, ayuda con la instalación y las migraciones.' : 'Guaranteed email response, help with installation and migrations.',
-		b: es ? 'Ver planes' : 'See plans', h: base(l) + 'ayuda/planes/' },
+		d: es ? 'Tickets privados con respuesta garantizada, ayuda con la instalación y las migraciones.' : 'Private tickets with a guaranteed answer, help with installation and migrations.',
+		b: es ? 'Ver planes' : 'See plans', h: comunidad(l, '/soporte') },
 ];
 ---
 
