@@ -1,49 +1,17 @@
-# Starlight Starter Kit: Basics
+# Documentación de OpenNCCM
 
-[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
+Código de [docs.opennccm.com](https://docs.opennccm.com): instalación, uso y referencia de [OpenNCCM](https://github.com/Gaaraalex/opennccm), en español e inglés.
 
-```
-npm create astro@latest -- --template starlight
-```
+Hecho con [Starlight](https://starlight.astro.build) y publicado en GitHub Pages con `.github/workflows/publicar.yml`.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro + Starlight project, you'll see the following folders and files:
-
-```
-.
-├── public/
-├── src/
-│   ├── assets/
-│   ├── content/
-│   │   └── docs/
-│   └── content.config.ts
-├── astro.config.mjs
-├── package.json
-└── tsconfig.json
+```bash
+npm ci
+npm run dev       # vista previa en http://localhost:4321
+npm run build     # trae las novedades de la última versión y genera dist/
 ```
 
-Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
+- Páginas: `src/content/docs/` (español) y `src/content/docs/en/` (inglés).
+- Versión documentada, textos de la interfaz y lecciones del curso: `src/sitio.ts`.
+- «Novedades de la versión» se genera sola desde el CHANGELOG de la última versión publicada (`scripts/novedades.mjs`).
 
-Images can be added to `src/assets/` and embedded in Markdown with a relative link.
-
-Static assets, like favicons, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
+¿Ves un error? Usa «Editar esta página en GitHub» al pie de cada página o abre un aviso en [OpenNCCM](https://github.com/Gaaraalex/opennccm/issues).

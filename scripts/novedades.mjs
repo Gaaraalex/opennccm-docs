@@ -7,7 +7,8 @@ const N = 6;
 
 let md;
 try {
-	const tag = (await (await fetch(API, { headers: { Accept: 'application/vnd.github+json' } })).json()).tag_name;
+	const cab = { Accept: 'application/vnd.github+json', ...(process.env.GITHUB_TOKEN ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` } : {}) };
+	const tag = (await (await fetch(API, { headers: cab })).json()).tag_name;
 	if (!tag) throw new Error('sin versión publicada');
 	const r = await fetch(`https://raw.githubusercontent.com/Gaaraalex/opennccm/${tag}/CHANGELOG.md`);
 	if (!r.ok) throw new Error(r.status);
