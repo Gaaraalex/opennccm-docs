@@ -1,6 +1,10 @@
 ---
 title: "Move OpenNCCM to another server"
 description: "Step by step to take OpenNCCM to a new server with all its history: backup, encryption key, restore and checks."
+resumen:
+  - "Moving OpenNCCM means copying the database and the encryption key: with both, the new server ends up the same as the old one."
+  - "Install the same version or a newer one on the new server, put the original key in place if the backup does not include it, and restore."
+  - "Check devices, backups and passwords before changing the address and shutting down the old server."
 ---
 
 Moving OpenNCCM to another server (new hardware, another virtual machine or a newer Ubuntu release) means **copying the database and the encryption key**. With both, the new server ends up exactly like the old one: devices, configuration history, users, policies and tasks.

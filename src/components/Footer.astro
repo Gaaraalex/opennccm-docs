@@ -1,14 +1,14 @@
 ---
 import EditLink from 'virtual:starlight/components/EditLink';
 import Pagination from 'virtual:starlight/components/Pagination';
-import { T, lang, VERSION, FECHA } from '../sitio';
+import { T, lang, base, VERSION, FECHA, WEB } from '../sitio';
 const l = lang(Astro.currentLocale);
 ---
 
 <footer>
 	<Pagination />
 	<div class="meta">
-		<span>{T[l].actualizado(VERSION, FECHA[l])}</span>
+		<span>{T[l].actualizado(VERSION, FECHA[l])} · <a href={l === 'en' ? WEB + '/en/' : WEB + '/'}>opennccm.com</a> · <a href={base(l) + 'introduccion/novedades/'}>{T[l].novedades}</a> · <a href={l === 'en' ? WEB + '/en/changelog.html' : WEB + '/novedades.html'}>{l === 'en' ? 'Full changelog' : 'Historial completo'}</a></span>
 		<EditLink />
 	</div>
 </footer>

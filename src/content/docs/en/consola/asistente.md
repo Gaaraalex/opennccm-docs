@@ -1,6 +1,10 @@
 ---
 title: "AI assistant"
 description: "An optional assistant using your organization's AI provider."
+resumen:
+  - "Optional: turn it on in Administration → Settings → AI assistant with your organization’s provider and API key."
+  - "Passwords, SNMP communities and VPN and wifi keys are always hidden before sending; you choose which roles use it and how many questions per day."
+  - "It helps in the console, when comparing configurations, in compliance and in a chat on every page; actions that change something ask for confirmation."
 ---
 
 1.  In **Administration → Settings → AI assistant**, turn it on and choose the provider: **Anthropic (Claude)**, **OpenAI**, **Google (Gemini)**, **Mistral** or **OpenAI-compatible** (OpenRouter, Groq, DeepSeek, Azure…, with the service address).

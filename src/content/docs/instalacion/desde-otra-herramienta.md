@@ -1,6 +1,10 @@
 ---
 title: "Migrar desde otra herramienta"
 description: "Cómo pasar a OpenNCCM desde Oxidized, RANCID o SolarWinds NCM: inventario, credenciales, primer respaldo y convivencia."
+resumen:
+  - "Pasar desde Oxidized, RANCID o SolarWinds NCM es, sobre todo, llevar el inventario a un archivo CSV e importarlo."
+  - "Las credenciales, las políticas y las tareas se vuelven a crear; el historial anterior no se migra, así que conserve la herramienta vieja en solo lectura."
+  - "Después de importar, lance el primer respaldo y revise los equipos que fallen."
 ---
 
 Pasar a OpenNCCM desde otra herramienta de respaldos es, sobre todo, **llevar el inventario**: qué equipos hay, su dirección, su plataforma y con qué usuario se entra. OpenNCCM lo importa desde un archivo CSV y, a partir del primer respaldo, empieza su propio historial.

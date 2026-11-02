@@ -1,6 +1,10 @@
 ---
 title: "Migrate from another tool"
 description: "How to move to OpenNCCM from Oxidized, RANCID or SolarWinds NCM: inventory, credentials, first backup and running both side by side."
+resumen:
+  - "Moving from Oxidized, RANCID or SolarWinds NCM is mostly about taking the inventory to a CSV file and importing it."
+  - "Credentials, policies and tasks are created again; the old history is not migrated, so keep the old tool read-only."
+  - "After importing, run the first backup and review the devices that fail."
 ---
 
 Moving to OpenNCCM from another backup tool is mostly about **bringing the inventory**: which devices you have, their address, their platform and which user logs in. OpenNCCM imports it from a CSV file and starts its own history with the first backup.

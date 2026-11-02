@@ -4,7 +4,7 @@ import { T, lang } from '../sitio';
 import CursoVideo from './CursoVideo.astro';
 
 const route = Astro.locals.starlightRoute;
-const { title, description, curso } = route.entry.data as typeof route.entry.data & { curso?: string[] };
+const { title, description, curso, resumen } = route.entry.data as typeof route.entry.data & { curso?: string[]; resumen?: string[] };
 const l = lang(Astro.currentLocale);
 const t = T[l];
 
@@ -37,6 +37,12 @@ const md = (l === 'en' ? '/en' : '') + '/md/' + (route.id.replace(/^en\/?/, '').
 <h1 id={PAGE_TITLE_ID}>{title}</h1>
 {description && <p class="subtitulo">{description}</p>}
 {curso && <CursoVideo lecciones={curso} />}
+{resumen && (
+	<aside class="en-resumen" aria-label={t.enResumen}>
+		<p class="en-resumen-tit">{t.enResumen}</p>
+		<ul>{resumen.map((x) => <li>{x}</li>)}</ul>
+	</aside>
+)}
 
 <script>
 	document.querySelectorAll<HTMLElement>('.copiar').forEach((c) => {

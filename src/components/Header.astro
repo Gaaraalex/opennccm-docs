@@ -2,7 +2,7 @@
 import Search from 'virtual:starlight/components/Search';
 import SiteTitle from 'virtual:starlight/components/SiteTitle';
 import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
-import { T, lang, base, WEB, REPO } from '../sitio';
+import { T, lang, base, WEB, REPO, COMUNIDAD_URL, comunidad } from '../sitio';
 import VersionSelect from './VersionSelect.astro';
 import IdiomaLink from './IdiomaLink.astro';
 
@@ -11,7 +11,6 @@ const t = T[l];
 const b = base(l);
 const ruta = Astro.url.pathname;
 const enSoporte = ruta.includes('/ayuda/soporte');
-const enNovedades = ruta.includes('/introduccion/novedades');
 ---
 
 <div class="cabecera">
@@ -19,9 +18,8 @@ const enNovedades = ruta.includes('/introduccion/novedades');
 		<SiteTitle />
 		<nav class="sitio" aria-label={l === 'en' ? 'Site' : 'Sitio'}>
 			<a href={l === 'en' ? WEB + '/en/' : WEB + '/'}>{t.web}</a>
-			<a href={b} aria-current={!enSoporte && !enNovedades ? 'page' : undefined}>{t.documentacion}</a>
+			<a href={b} aria-current={!enSoporte ? 'page' : undefined}>{t.documentacion}</a>
 			<a href={b + 'ayuda/soporte/'} aria-current={enSoporte ? 'page' : undefined}>{t.soporte}</a>
-			<a href={b + 'introduccion/novedades/'} aria-current={enNovedades ? 'page' : undefined}>{t.novedades}</a>
 		</nav>
 	</div>
 	<div class="buscar print:hidden"><Search /></div>
@@ -32,11 +30,33 @@ const enNovedades = ruta.includes('/introduccion/novedades');
 		<a class="icono" href={REPO} aria-label="GitHub" title="GitHub">
 			<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
 		</a>
+		<details class="occ-apoyo">
+			<summary class="icono" aria-label={t.apoya} title={t.apoya}>
+				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-9-9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c-2 4.6-9 9-9 9z"/></svg>
+			</summary>
+			<div class="occ-apoyo-pop">
+				<p><b>{t.apoya}</b></p>
+				<p class="occ-suave">{t.apoyaTexto}</p>
+				<a href="https://github.com/sponsors/Gaaraalex" target="_blank" rel="noopener noreferrer">GitHub Sponsors ›</a>
+				<a href="https://ko-fi.com/opennccm" target="_blank" rel="noopener noreferrer">{t.kofi} ›</a>
+			</div>
+		</details>
+		<a class="btn-soporte" href={comunidad(l, '/soporte')}>
+			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14v-2a9 9 0 0 1 18 0v2"/><path d="M21 15a2 2 0 0 1-2 2h-1v-6h1a2 2 0 0 1 2 2zM3 15a2 2 0 0 0 2 2h1v-6H5a2 2 0 0 0-2 2z"/></svg>
+			<span>{t.soporteProf}</span>
+		</a>
+		<div class="occ-cuenta" data-occ-cuenta data-comunidad={COMUNIDAD_URL}>
+			<a class="occ-entrar" data-occ-entrar href={comunidad(l, '/cuenta/entrar')}>{t.entrar}</a>
+			<a class="occ-crear" data-occ-crear href={comunidad(l, '/cuenta/crear')}>{t.crear}</a>
+		</div>
 	</div>
+	<span class="occ-avatar-movil" data-occ-avatar-movil></span>
 </div>
+<script is:inline src="/cuenta-opennccm.js" defer></script>
+<script is:inline src="/buscar-sugerencias.js" defer></script>
 
 <style>
-	.cabecera { display: flex; align-items: center; gap: 22px; height: 100%; }
+	.cabecera { display: flex; align-items: center; gap: 18px; height: 100%; }
 	.izq { display: flex; align-items: center; gap: 22px; min-width: 0; }
 	.sitio { display: none; gap: 18px; }
 	.sitio a { color: var(--sl-color-gray-2); font: 500 14px var(--sl-font); text-decoration: none; white-space: nowrap; }
@@ -46,6 +66,11 @@ const enNovedades = ruta.includes('/introduccion/novedades');
 	.icono { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 9px; border: 1px solid var(--sl-color-hairline); color: var(--sl-color-gray-2); }
 	.icono:hover { border-color: var(--sl-color-accent); color: var(--sl-color-white); }
 	.icono svg { width: 16px; height: 16px; }
-	@media (min-width: 50rem) { .der { display: flex; } .buscar { margin-left: 0; flex: 1; justify-content: flex-end; } }
-	@media (min-width: 78rem) { .sitio { display: flex; } }
+	.occ-avatar-movil { display: contents; }
+	@media (min-width: 50rem) {
+		.der { display: flex; }
+		.buscar { margin-left: 0; flex: 1; justify-content: flex-end; }
+		.occ-avatar-movil { display: none; }
+	}
+	@media (min-width: 100rem) { .sitio { display: flex; } }
 </style>
