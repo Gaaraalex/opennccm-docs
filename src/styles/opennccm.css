@@ -144,3 +144,68 @@ site-search > button[data-open-modal] span { white-space: nowrap; }
 /* En los bloques de terminal, el botón de copiar va en la barra de arriba para no tapar el código */
 .expressive-code .frame.is-terminal .copy { top: 3px !important; right: 8px !important; }
 .expressive-code .frame.is-terminal .copy button { width: 1.75rem !important; height: 1.75rem !important; }
+
+/* ---------- Cabecera común (web, documentación y comunidad): Soporte profesional, Apoya y cuenta ---------- */
+.btn-soporte { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 14px; border-radius: 999px; color: #fff !important; font: 600 13.5px var(--sl-font); white-space: nowrap; flex: none; text-decoration: none;
+	background: linear-gradient(110deg, #2563eb, #7c3aed, #0891b2, #2563eb); background-size: 300% 100%;
+	animation: occ-aurora 6s linear infinite; box-shadow: 0 8px 24px -12px #7c3aed; transition: transform .2s cubic-bezier(.2, .8, .2, 1), box-shadow .2s; }
+.btn-soporte svg { width: 16px; height: 16px; flex: none; }
+.btn-soporte:hover { transform: translateY(-1px); box-shadow: 0 10px 30px -8px #7c3aed; animation-play-state: paused; }
+.btn-soporte:focus-visible { outline: 2px solid var(--sl-color-white); outline-offset: 3px; }
+@keyframes occ-aurora { to { background-position: 300% 0; } }
+@media (prefers-reduced-motion: reduce) { .btn-soporte { animation: none; transition: none; } }
+
+.occ-apoyo { position: relative; }
+.occ-apoyo > summary { list-style: none; cursor: pointer; color: #c6f432; }
+:root[data-theme='light'] .occ-apoyo > summary { color: #4d7c0f; }
+.occ-apoyo > summary::-webkit-details-marker { display: none; }
+.occ-apoyo-pop, .occ-lista { position: absolute; right: 0; top: 44px; z-index: 40; display: grid; gap: 4px; padding: 12px; border-radius: 12px; border: 1px solid var(--sl-color-hairline); background: var(--sl-color-bg-nav); box-shadow: 0 16px 30px -12px rgba(0,0,0,.5); }
+.occ-apoyo-pop { width: 280px; }
+.occ-apoyo-pop p { margin: 0 0 4px; font-size: 14px; }
+.occ-apoyo-pop a { font-size: 14px; color: var(--sl-color-text-accent); text-decoration: none; padding: 4px 0; }
+.occ-suave { color: var(--sl-color-gray-3); font-size: 13px !important; }
+
+.occ-cuenta { display: flex; align-items: center; gap: 8px; }
+.occ-entrar, .occ-crear { display: inline-flex; align-items: center; height: 34px; padding: 0 12px; border-radius: 9px; font: 600 13.5px var(--sl-font); text-decoration: none; white-space: nowrap; }
+.occ-entrar { border: 1px solid var(--sl-color-hairline); color: var(--sl-color-white); }
+.occ-entrar:hover { border-color: var(--sl-color-accent); }
+.occ-crear { background: var(--sl-color-accent); color: #fff; }
+.occ-crear:hover { background: var(--sl-color-accent-high); color: #fff; }
+.occ-menu { position: relative; }
+.occ-menu > summary { list-style: none; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.occ-menu > summary::-webkit-details-marker { display: none; }
+.occ-quien { font: 600 14px var(--sl-font); color: var(--sl-color-white); white-space: nowrap; }
+.occ-flecha { color: var(--sl-color-gray-3); }
+.occ-plan { padding: 2px 8px; border-radius: 999px; background: rgba(198, 244, 50, .15); color: #c6f432; font: 600 11.5px var(--sl-font); }
+:root[data-theme='light'] .occ-plan { color: #3f6212; background: #ecfccb; }
+.occ-avatar { display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--sl-color-accent); color: #fff; font: 700 12.5px var(--sl-font); }
+.occ-num { display: inline-block; min-width: 18px; height: 18px; margin-left: 6px; padding: 0 5px; border-radius: 9px; background: #fbbf24; color: #1a1205; font: 700 11px/18px var(--sl-font); text-align: center; vertical-align: 1px; }
+.occ-lista { min-width: 240px; }
+.occ-lista a, .occ-lista button { display: block; padding: 8px 10px; border-radius: 8px; color: var(--sl-color-gray-1); font: 500 14px var(--sl-font); text-decoration: none; text-align: left; background: none; border: 0; width: 100%; cursor: pointer; }
+.occ-lista a:hover, .occ-lista button:hover { background: var(--sl-color-gray-6); color: var(--sl-color-white); }
+.occ-lista form { margin: 4px 0 0; padding-top: 4px; border-top: 1px solid var(--sl-color-hairline); }
+.occ-yo { margin: 0 0 4px; padding: 2px 10px 8px; border-bottom: 1px solid var(--sl-color-hairline); display: grid; }
+.occ-yo small { color: var(--sl-color-gray-3); font-size: 12px; }
+.occ-nota { display: block; color: #fbbf24; font-size: 12px; }
+/* Móvil: con sesión, el avatar va junto al ☰ (sin el texto «Mi cuenta»). */
+@media (max-width: 50rem) {
+	[data-occ-avatar-movil] .occ-quien, [data-occ-avatar-movil] .occ-plan { display: none; }
+	[data-occ-avatar-movil] .occ-menu { margin-right: 4px; }
+	[data-occ-avatar-movil] .occ-lista { right: -48px; max-width: calc(100vw - 32px); }
+}
+
+/* «En resumen» debajo del video */
+.en-resumen { margin: 1.25rem 0 0; padding: 14px 18px; border-radius: 12px; border: 1px solid var(--sl-color-hairline); border-left: 3px solid var(--sl-color-accent); background: var(--sl-color-bg-nav); }
+.en-resumen-tit { margin: 0 0 6px; font: 700 11.5px var(--sl-font); letter-spacing: .08em; text-transform: uppercase; color: var(--sl-color-text-accent); }
+.en-resumen ul { margin: 0; padding-left: 1.1rem; display: grid; gap: 4px; }
+.en-resumen li { font-size: 14.5px; line-height: 1.5; color: var(--sl-color-gray-1); }
+
+/* Búsqueda sin resultados: sugerencias y «Preguntar en el foro» */
+.occ-sin-resultados { margin-top: 1rem; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--sl-color-hairline); background: var(--sl-color-bg-nav); }
+.occ-sr-tit { margin: 0 0 6px; font-weight: 600; color: var(--sl-color-white); }
+.occ-sin-resultados ul { margin: 0 0 10px; padding-left: 1.1rem; }
+.occ-sin-resultados a { color: var(--sl-color-text-accent); }
+.occ-sr-foro { margin: 0; color: var(--sl-color-gray-2); }
+.occ-sin-resultados ul + .occ-sr-foro { padding-top: 10px; border-top: 1px solid var(--sl-color-hairline); }
+/* Entre 1600 y 1920 px la cabecera lleva también los enlaces del sitio: buscador más angosto. */
+@media (min-width: 100rem) and (max-width: 120rem) { site-search > button[data-open-modal] { width: auto; } site-search > button[data-open-modal] kbd { display: none; } }

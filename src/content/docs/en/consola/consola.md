@@ -2,6 +2,10 @@
 title: "Console"
 description: "The SSH console in the browser and the console center."
 curso: ["5.2"]
+resumen:
+  - "SSH console in the browser from Devices, the device page or Operate → Console, with suggestions, history and meaningful colors."
+  - "It protects service: it warns before commands that cut it, respects read-only mode and forbidden commands, and backs up the device when it detects a change."
+  - "The Console center gathers parallel sessions, commands on several devices, step-by-step recipes, recordings and tools (ping, traceroute, TCP, DNS)."
 ---
 
 ## Device console

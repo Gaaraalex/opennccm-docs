@@ -1,6 +1,6 @@
 ---
 import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
-import { T, lang, base, WEB, REPO } from '../sitio';
+import { T, lang, base, WEB, REPO, comunidad } from '../sitio';
 import VersionSelect from './VersionSelect.astro';
 import IdiomaLink from './IdiomaLink.astro';
 const l = lang(Astro.currentLocale);
@@ -9,17 +9,30 @@ const b = base(l);
 ---
 
 <div class="pie-movil">
+	<a class="btn-soporte ancho" href={comunidad(l, '/soporte')}>
+		<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14v-2a9 9 0 0 1 18 0v2"/><path d="M21 15a2 2 0 0 1-2 2h-1v-6h1a2 2 0 0 1 2 2zM3 15a2 2 0 0 0 2 2h1v-6H5a2 2 0 0 0-2 2z"/></svg>
+		<span>{t.soporteProf}</span>
+	</a>
+	<div class="cuenta-movil" data-occ-cuenta-movil>
+		<a class="occ-entrar" data-occ-entrar href={comunidad(l, '/cuenta/entrar')}>{t.entrar}</a>
+		<a class="occ-crear" data-occ-crear href={comunidad(l, '/cuenta/crear')}>{t.crear}</a>
+	</div>
 	<nav aria-label={l === 'en' ? 'Site' : 'Sitio'}>
 		<a href={l === 'en' ? WEB + '/en/' : WEB + '/'}>{t.web}</a>
 		<a href={b + 'ayuda/soporte/'}>{t.soporte}</a>
 		<a href={b + 'introduccion/novedades/'}>{t.novedades}</a>
 		<a href={REPO}>GitHub</a>
+		<a href="https://github.com/sponsors/Gaaraalex" target="_blank" rel="noopener noreferrer">♥ {t.apoya}</a>
 	</nav>
 	<div class="controles"><VersionSelect /><IdiomaLink /><ThemeSelect /></div>
 </div>
 
 <style>
 	.pie-movil { display: flex; flex-direction: column; gap: 14px; padding-top: 12px; border-top: 1px solid var(--sl-color-hairline); }
+	.ancho { justify-content: center; width: 100%; }
+	.cuenta-movil { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+	.cuenta-movil[hidden] { display: none; }
+	.cuenta-movil a { justify-content: center; }
 	nav { display: flex; flex-wrap: wrap; gap: 8px 16px; }
 	nav a { color: var(--sl-color-gray-2); font-size: 14px; text-decoration: none; }
 	.controles { display: flex; gap: 8px; }

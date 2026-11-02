@@ -11,6 +11,8 @@ export const collections = {
 			extend: z.object({
 				// Lecciones del curso en video de este tema: la primera es la principal.
 				curso: z.array(z.string()).optional(),
+				// «En resumen»: tres puntos que se muestran debajo del video.
+				resumen: z.array(z.string()).max(3).optional(),
 			}),
 		}),
 	}),

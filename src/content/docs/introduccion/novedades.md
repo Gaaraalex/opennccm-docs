@@ -1,6 +1,10 @@
 ---
 title: "Novedades de la versión"
 description: "Lo nuevo de OpenNCCM 2.18.0 y las versiones anteriores."
+resumen:
+  - "2.18.0 trae la base de conocimiento: cada caso resuelto queda escrito y «Falta documentar» se llena sola con las alarmas críticas y las reversiones."
+  - "sudo opennccm restore en un servidor nuevo usa la clave de la copia (y avisa si no la trae); también funciona con PostgreSQL."
+  - "Nuevo botón «Soporte profesional» en la barra superior, que el administrador puede ocultar en Ajustes › Organización."
 ---
 
 Las 6 últimas versiones. El historial completo está en [opennccm.com/novedades](https://opennccm.com/novedades.html) y cada versión se descarga desde [GitHub](https://github.com/Gaaraalex/opennccm/releases).

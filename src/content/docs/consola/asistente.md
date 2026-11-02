@@ -1,6 +1,10 @@
 ---
 title: "Asistente IA"
 description: "Un asistente opcional con el proveedor de IA de su organización."
+resumen:
+  - "Opcional: se activa en Administración → Ajustes → Asistente IA con el proveedor y la clave de API de su organización."
+  - "Antes de enviar se ocultan siempre contraseñas, comunidades SNMP y claves de VPN y wifi; usted elige qué roles lo usan y cuántas preguntas por día."
+  - "Ayuda en la consola, en la comparación de configuraciones, en cumplimiento y en un chat en todas las páginas; las acciones que cambian algo piden confirmación."
 ---
 
 1.  En **Administración → Ajustes → Asistente IA**, actívelo y elija el proveedor: **Anthropic (Claude)**, **OpenAI**, **Google (Gemini)**, **Mistral** o **Compatible con OpenAI** (OpenRouter, Groq, DeepSeek, Azure…, con la dirección del servicio).

@@ -2,6 +2,10 @@
 title: "Consola"
 description: "La consola SSH en el navegador y el centro de consola."
 curso: ["5.2"]
+resumen:
+  - "Consola SSH en el navegador desde Dispositivos, la página del equipo u Operar → Consola, con sugerencias, historial y colores por significado."
+  - "Protege el servicio: avisa antes de comandos que lo cortan, respeta el modo solo lectura y los comandos prohibidos, y respalda el equipo si detecta un cambio."
+  - "El Centro de consola reúne sesiones en paralelo, comandos en varios equipos, recetas paso a paso, grabaciones y herramientas (ping, traceroute, TCP, DNS)."
 ---
 
 ## Consola del equipo

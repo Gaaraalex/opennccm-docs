@@ -8,7 +8,9 @@ export const WEB = 'https://opennccm.com';
 export const REPO = 'https://github.com/Gaaraalex/opennccm';
 // Comunidad: foro, cuentas y soporte de pago. En inglés se pide la interfaz en inglés con ?lang=en.
 export const COMUNIDAD = 'https://comunidad.opennccm.com';
-export const comunidad = (l: 'es' | 'en', ruta: string) => COMUNIDAD + ruta + (l === 'en' ? '?lang=en' : '');
+// En local (vista previa con la comunidad en http://localhost:8787) se cambia con PUBLIC_COMUNIDAD.
+export const COMUNIDAD_URL: string = import.meta.env.PUBLIC_COMUNIDAD || COMUNIDAD;
+export const comunidad = (l: 'es' | 'en', ruta: string) => COMUNIDAD_URL + ruta + (l === 'en' ? '?lang=en' : '');
 // Lista «OpenNCCM desde cero · Curso completo» en YouTube.
 export const LISTA_YT = 'https://www.youtube.com/playlist?list=PLLnVlyYEYVqI';
 
@@ -24,6 +26,9 @@ export const T = {
 		asistente: 'Preguntar al asistente de OpenNCCM', asistenteSub: 'Copia la página para pegarla en el asistente de su servidor',
 		copiada: 'Página copiada en Markdown.', copiadaAsistente: 'Página copiada. Péguela en el asistente IA de su servidor (✦ en la barra superior).',
 		masOpciones: 'Más opciones', migas: 'Ruta',
+		enResumen: 'En resumen',
+		soporteProf: 'Soporte profesional', entrar: 'Entrar', crear: 'Crear cuenta', apoya: 'Apoya OpenNCCM', kofi: 'Invitar un café (Ko-fi)',
+		apoyaTexto: 'OpenNCCM es libre y gratis. Tu aporte paga horas de desarrollo y pruebas con equipos reales.',
 		curso: 'Curso en video · OpenNCCM desde cero', leccion: 'Lección', de30: 'de 30', reproducir: 'Reproducir la lección', verCurso: 'Ver el curso completo',
 		actualizado: (v: string, f: string) => `Actualizado con la versión ${v} · ${f}`,
 	},
@@ -34,6 +39,9 @@ export const T = {
 		asistente: 'Ask the OpenNCCM assistant', asistenteSub: 'Copies the page to paste into your server’s assistant',
 		copiada: 'Page copied as Markdown.', copiadaAsistente: 'Page copied. Paste it into your server’s AI assistant (✦ in the top bar).',
 		masOpciones: 'More options', migas: 'Breadcrumbs',
+		enResumen: 'In short',
+		soporteProf: 'Professional support', entrar: 'Sign in', crear: 'Create account', apoya: 'Support OpenNCCM', kofi: 'Buy a coffee (Ko-fi)',
+		apoyaTexto: 'OpenNCCM is free software. Your support pays for development hours and testing with real devices.',
 		curso: 'Video course · OpenNCCM from scratch · in Spanish', leccion: 'Lesson', de30: 'of 30', reproducir: 'Play lesson', verCurso: 'See the full course',
 		actualizado: (v: string, f: string) => `Updated for version ${v} · ${f}`,
 	},

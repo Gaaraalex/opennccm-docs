@@ -9,11 +9,12 @@ export async function paginasMarkdown(en: boolean) {
 	return docs.map((e) => {
 		const id = e.id.replace(/^en\/?/, '').replace(/^index$/, '');
 		const url = `${SITIO}${en ? '/en' : ''}/${id ? id + '/' : ''}`;
-		const { title, description, curso } = e.data as typeof e.data & { curso?: string[] };
+		const { title, description, curso, resumen } = e.data as typeof e.data & { curso?: string[]; resumen?: string[] };
 		const partes = [`# ${title}`];
 		if (description) partes.push(description);
 		partes.push(`${en ? 'Source' : 'Fuente'}: ${url}`);
 		if (curso) partes.push(`Video: ${curso.map((n) => `${n} ${LECCIONES[n][0]} (https://youtu.be/${LECCIONES[n][1]})`).join(' · ')}`);
+		if (resumen) partes.push(`**${en ? 'In short' : 'En resumen'}:**\n\n` + resumen.map((x) => `- ${x}`).join('\n'));
 		// Las imágenes del manual no sirven fuera del sitio: se dejan solo con su texto.
 		const cuerpo = (e.body || '').replace(/!\[([^\]]*)\]\([^)]+\)/g, (m, alt) => (alt ? `*[${en ? 'Image' : 'Imagen'}: ${alt}]*` : ''));
 		// Enlaces internos completos, para que sirvan pegados en otro sitio.

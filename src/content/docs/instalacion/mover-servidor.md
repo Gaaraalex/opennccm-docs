@@ -1,6 +1,10 @@
 ---
 title: "Mover OpenNCCM a otro servidor"
 description: "Paso a paso para llevar OpenNCCM a un servidor nuevo con todo su historial: copia, clave de cifrado, restauración y comprobación."
+resumen:
+  - "Mover OpenNCCM es copiar la base de datos y la clave de cifrado: con las dos, el servidor nuevo queda igual que el viejo."
+  - "Instale en el nuevo la misma versión o una más nueva, ponga la clave original si la copia no la trae y restaure."
+  - "Compruebe equipos, respaldos y contraseñas antes de cambiar la dirección y apagar el servidor viejo."
 ---
 
 Mover OpenNCCM a otro servidor (otro hardware, otra máquina virtual o una versión nueva de Ubuntu) es **copiar la base de datos y la clave de cifrado**. Con las dos, el servidor nuevo queda igual que el viejo: equipos, historial de configuraciones, usuarios, políticas y tareas.

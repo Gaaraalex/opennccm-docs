@@ -1,6 +1,10 @@
 ---
 title: "What's new"
 description: "What's new in OpenNCCM 2.18.0 and earlier versions."
+resumen:
+  - "2.18.0 brings the knowledge base: every solved case is written down and “To document” fills itself with critical alarms and rollbacks."
+  - "sudo opennccm restore on a new server uses the key in the backup (and warns when it is missing); it also works with PostgreSQL."
+  - "New “Professional support” button in the top bar, which the administrator can hide in Settings › Organization."
 ---
 
 The latest 6 versions. The release notes are written in Spanish; the full history is at [opennccm.com/en/changelog](https://opennccm.com/en/changelog.html) and every version can be downloaded from [GitHub](https://github.com/Gaaraalex/opennccm/releases).
