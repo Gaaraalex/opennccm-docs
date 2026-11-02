@@ -8,6 +8,8 @@ resumen:
   - "El Centro de consola reúne sesiones en paralelo, comandos en varios equipos, recetas paso a paso, grabaciones y herramientas (ping, traceroute, TCP, DNS)."
 ---
 
+<p class="captura-tema"><img class="tema-oscuro" src="/capturas/oscuro/consola.png" alt="Consola de un equipo Cisco con la salida en colores y los comandos frecuentes" width="1600" height="1000" loading="lazy" /><img class="tema-claro" src="/capturas/claro/consola.png" alt="Consola de un equipo Cisco con la salida en colores y los comandos frecuentes" width="1600" height="1000" loading="lazy" /></p>
+
 ## Consola del equipo
 
 1.  En **Dispositivos**, pulse el icono de consola de la fila del equipo, o el botón **Consola** en su página; también desde **Operar → Consola**. Arriba se ve «Consola · nombre» con la IP, el modelo y el sistema.

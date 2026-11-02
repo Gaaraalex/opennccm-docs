@@ -7,6 +7,8 @@ resumen:
   - "Después de importar, lance el primer respaldo y revise los equipos que fallen."
 ---
 
+<p class="captura-tema"><img class="tema-oscuro" src="/capturas/oscuro/dispositivos.png" alt="Lista de dispositivos después de importar el inventario" width="1600" height="1000" loading="lazy" /><img class="tema-claro" src="/capturas/claro/dispositivos.png" alt="Lista de dispositivos después de importar el inventario" width="1600" height="1000" loading="lazy" /></p>
+
 Pasar a OpenNCCM desde otra herramienta de respaldos es, sobre todo, **llevar el inventario**: qué equipos hay, su dirección, su plataforma y con qué usuario se entra. OpenNCCM lo importa desde un archivo CSV y, a partir del primer respaldo, empieza su propio historial.
 
 :::note[Qué se migra y qué no]

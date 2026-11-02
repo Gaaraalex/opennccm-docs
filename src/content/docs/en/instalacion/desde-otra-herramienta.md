@@ -7,6 +7,8 @@ resumen:
   - "After importing, run the first backup and review the devices that fail."
 ---
 
+<p class="captura-tema"><img class="tema-oscuro" src="/capturas/oscuro/dispositivos.png" alt="Device list after importing the inventory" width="1600" height="1000" loading="lazy" /><img class="tema-claro" src="/capturas/claro/dispositivos.png" alt="Device list after importing the inventory" width="1600" height="1000" loading="lazy" /></p>
+
 Moving to OpenNCCM from another backup tool is mostly about **bringing the inventory**: which devices you have, their address, their platform and which user logs in. OpenNCCM imports it from a CSV file and starts its own history with the first backup.
 
 :::note[What moves and what doesn't]

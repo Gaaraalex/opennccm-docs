@@ -7,6 +7,8 @@ resumen:
   - "Check devices, backups and passwords before changing the address and shutting down the old server."
 ---
 
+<p class="captura-tema"><img class="tema-oscuro" src="/capturas/oscuro/versiones.png" alt="Version history of a device, kept when moving the server" width="1600" height="1000" loading="lazy" /><img class="tema-claro" src="/capturas/claro/versiones.png" alt="Version history of a device, kept when moving the server" width="1600" height="1000" loading="lazy" /></p>
+
 Moving OpenNCCM to another server (new hardware, another virtual machine or a newer Ubuntu release) means **copying the database and the encryption key**. With both, the new server ends up exactly like the old one: devices, configuration history, users, policies and tasks.
 
 :::caution[The key is everything]

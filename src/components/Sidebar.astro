@@ -25,4 +25,6 @@ const t = T[l];
 	.cuenta-movil { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 	.cuenta-movil[hidden] { display: none; }
 	.cuenta-movil a { justify-content: center; }
+	/* Solo en el móvil: el display de arriba ganaría a la clase md:sl-hidden de Starlight. */
+	@media (min-width: 50rem) { .arriba-movil { display: none; } }
 </style>

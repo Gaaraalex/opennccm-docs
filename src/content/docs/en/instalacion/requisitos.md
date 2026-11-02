@@ -4,6 +4,8 @@ description: "What you need before installing OpenNCCM."
 curso: ["0.2"]
 ---
 
+<p class="captura-tema"><img class="tema-oscuro" src="/capturas/oscuro/panel.png" alt="OpenNCCM dashboard with 13 sample devices" width="1600" height="1000" loading="lazy" /><img class="tema-claro" src="/capturas/claro/panel.png" alt="OpenNCCM dashboard with 13 sample devices" width="1600" height="1000" loading="lazy" /></p>
+
 ## Server
 
 | Network size | CPU | RAM | Disk | Database |

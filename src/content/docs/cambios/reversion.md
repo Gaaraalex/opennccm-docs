@@ -8,6 +8,8 @@ resumen:
   - "La reversión automática deshace al instante los cambios no autorizados; actívela solo donde todo cambio deba pasar por OpenNCCM."
 ---
 
+<p class="captura-tema"><img class="tema-oscuro" src="/capturas/oscuro/diff.png" alt="Comparación de dos versiones de una configuración, lado a lado" width="1600" height="1000" loading="lazy" /><img class="tema-claro" src="/capturas/claro/diff.png" alt="Comparación de dos versiones de una configuración, lado a lado" width="1600" height="1000" loading="lazy" /></p>
+
 ## Cómo funciona
 
 OpenNCCM compara la configuración actual con la versión destino y genera los comandos necesarios según la sintaxis del fabricante:

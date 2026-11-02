@@ -4,6 +4,8 @@ description: "Qué necesita antes de instalar OpenNCCM."
 curso: ["0.2"]
 ---
 
+<p class="captura-tema"><img class="tema-oscuro" src="/capturas/oscuro/panel.png" alt="Panel de OpenNCCM con 13 equipos de ejemplo" width="1600" height="1000" loading="lazy" /><img class="tema-claro" src="/capturas/claro/panel.png" alt="Panel de OpenNCCM con 13 equipos de ejemplo" width="1600" height="1000" loading="lazy" /></p>
+
 ## Servidor
 
 | Tamaño de la red | CPU | RAM | Disco | Base de datos |

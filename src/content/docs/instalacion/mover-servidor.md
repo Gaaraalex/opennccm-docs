@@ -7,6 +7,8 @@ resumen:
   - "Compruebe equipos, respaldos y contraseñas antes de cambiar la dirección y apagar el servidor viejo."
 ---
 
+<p class="captura-tema"><img class="tema-oscuro" src="/capturas/oscuro/versiones.png" alt="Historial de versiones de un equipo, que se conserva al mover el servidor" width="1600" height="1000" loading="lazy" /><img class="tema-claro" src="/capturas/claro/versiones.png" alt="Historial de versiones de un equipo, que se conserva al mover el servidor" width="1600" height="1000" loading="lazy" /></p>
+
 Mover OpenNCCM a otro servidor (otro hardware, otra máquina virtual o una versión nueva de Ubuntu) es **copiar la base de datos y la clave de cifrado**. Con las dos, el servidor nuevo queda igual que el viejo: equipos, historial de configuraciones, usuarios, políticas y tareas.
 
 :::caution[La clave lo es todo]
