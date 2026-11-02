@@ -78,6 +78,7 @@ export default defineConfig({
 				]),
 				g('Observar', 'Monitor', [
 					p('observar/alarmas', 'Alarmas y notificaciones', 'Alarms and notifications'),
+					p('observar/base-de-conocimiento', 'Base de conocimiento', 'Knowledge base'),
 					p('observar/analisis', 'Análisis, IP y mapa de red', 'Analytics, IP and network map'),
 					p('observar/informes', 'Informes', 'Reports'),
 				]),

@@ -36,9 +36,11 @@ scp /var/lib/opennccm/system-backups/opennccm-*.tar.gz /root/secret.key admin@SE
 
 Siga [Instalar en Ubuntu](/instalacion/instalar/) con la **misma base de datos** que el viejo (SQLite o PostgreSQL). No hace falta crear equipos ni usuarios: la restauración los trae.
 
-## 3. Ponga la clave original
+## 3. Ponga la clave original (solo si la copia no la incluye)
 
-El instalador crea una clave nueva. Reemplácela por la del servidor viejo:
+**Desde la versión 2.18**, si la copia incluye la clave (`--with-key`) no hace falta este paso: la restauración reemplaza la clave que creó el instalador y guarda la anterior como `/etc/opennccm/secret.key.antes-de-restaurar-FECHA`. Pase al paso 4.
+
+Si la copia **no** incluye la clave (o el servidor tiene una versión anterior a la 2.18), reemplace la clave que creó el instalador por la del servidor viejo:
 
 ```bash
 sudo systemctl stop opennccm
@@ -46,21 +48,22 @@ sudo mv /etc/opennccm/secret.key /etc/opennccm/secret.key.nueva-sin-usar
 sudo install -m 600 -o root -g root /tmp/secret.key /etc/opennccm/secret.key
 ```
 
-:::note
-Hágalo también si la copia incluye la clave (`--with-key`): la restauración solo la escribe cuando el servidor **no tiene** ninguna, y el instalador ya creó una.
-:::
+Copiar la clave antes de restaurar sigue funcionando también con una copia `--with-key`.
 
 ## 4. Restaure
 
-**Con SQLite** (la opción por defecto):
+El mismo comando sirve **con SQLite y con PostgreSQL** (con PostgreSQL usa `pg_restore` desde la versión 2.18):
 
 ```bash
 sudo opennccm restore /tmp/opennccm-AAAAMMDD-HHMMSS.tar.gz
 ```
 
-El comando detiene el servicio, guarda aparte la base vacía del servidor nuevo, restaura la copia y vuelve a iniciarlo. Si la copia está cifrada (`.enc`), pide su contraseña.
+El comando detiene el servicio, guarda aparte la base vacía del servidor nuevo, restaura la copia y vuelve a iniciarlo. Si la copia está cifrada (`.enc`), pide su contraseña. Si la copia no trae la clave y la del servidor no descifra los datos restaurados, lo avisa, indica que hay que copiar el `secret.key` original y termina con error en lugar de decir «Restaurado.».
 
-**Con PostgreSQL**, la restauración se hace con `pg_restore`:
+La copia tiene que ser de la **misma base de datos** que el servidor: una copia de SQLite en un servidor con PostgreSQL (o al revés) se rechaza con el motivo.
+
+:::note[Versiones anteriores a la 2.18]
+Con PostgreSQL, restaure a mano con `pg_restore`:
 
 ```bash
 mkdir /tmp/copia && tar -xzf /tmp/opennccm-AAAAMMDD-HHMMSS.tar.gz -C /tmp/copia
@@ -68,6 +71,7 @@ sudo systemctl stop opennccm
 sudo -u postgres pg_restore --clean --if-exists -d opennccm /tmp/copia/opennccm.pgdump
 sudo systemctl start opennccm
 ```
+:::
 
 ## 5. Compruebe
 
@@ -86,8 +90,9 @@ sudo systemctl start opennccm
 
 | Síntoma | Causa y solución |
 | --- | --- |
-| Las configuraciones salen ilegibles o con error al abrirlas | El servidor tiene otra clave. Repita el paso 3 con el `secret.key` original y reinicie: `sudo systemctl restart opennccm`. |
-| «La restauración automática solo admite SQLite» | La base es PostgreSQL: use el procedimiento con `pg_restore`. |
+| La restauración avisa de que la clave no descifra los datos, o las configuraciones salen ilegibles | El servidor tiene otra clave. Repita el paso 3 con el `secret.key` original y vuelva a restaurar (o reinicie: `sudo systemctl restart opennccm`). |
+| La restauración rechaza la copia por ser de otra base de datos | La copia es de SQLite y el servidor usa PostgreSQL (o al revés): instale el servidor nuevo con la misma base de datos que el viejo. |
+| «La restauración automática solo admite SQLite» | Versión anterior a la 2.18 con PostgreSQL: actualice a la 2.18 o use el procedimiento manual con `pg_restore`. |
 | «Esta copia está cifrada: hace falta su contraseña» | La copia es `.enc`: escriba la contraseña que se usó al crearla. |
 | Los equipos no respaldan desde el servidor nuevo | ACL o cortafuegos que aún permiten solo la IP vieja. |
 | Algo no cuadra y quiere volver atrás | La base vacía anterior queda junto a la restaurada (`opennccm.db.antes-de-restaurar-…`), y el servidor viejo sigue intacto. |

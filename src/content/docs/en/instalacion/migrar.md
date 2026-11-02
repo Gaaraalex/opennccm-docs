@@ -27,14 +27,14 @@ sudo opennccm backup --with-key   # includes secret.key: protect the file
 ## Restore (on the same server or a new one)
 
 1.  On a new server, install OpenNCCM first (see [Install on Ubuntu](/en/instalacion/instalar/)).
-2.  If the backup does not include the key, copy the original `secret.key` to `/etc/opennccm/secret.key`.
+2.  If the backup does not include the key, copy the original `secret.key` to `/etc/opennccm/secret.key`. If it does (`--with-key`), you don't need to: the restore replaces the server's key.
 3.  Restore:
 
 ```bash
 sudo opennccm restore /path/opennccm-YYYYMMDD-HHMMSS.tar.gz
 ```
 
-The command stops the service, restores and starts it again.
+The command stops the service, restores and starts it again. If the backup includes the key, it replaces the server's key (the one the installer created is kept as `secret.key.antes-de-restaurar-DATE`). If it doesn't and the server's key can't decrypt the restored data, it tells you to copy the original `secret.key` instead of saying "Restored.". With PostgreSQL it restores with `pg_restore`; the backup must come from the same database (SQLite or PostgreSQL) as the server.
 
 :::caution[The key is essential]
 Without the right `secret.key` the backed-up configurations and passwords cannot be decrypted. Keep it somewhere safe, separate from the backups (for example, in your team's password manager).
