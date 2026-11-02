@@ -7,6 +7,8 @@ resumen:
   - "It helps in the console, when comparing configurations, in compliance and in a chat on every page; actions that change something ask for confirmation."
 ---
 
+<p class="captura-tema"><img class="tema-oscuro" src="/capturas/oscuro/asistente.png" alt="Assistant chat open next to the dashboard, with the question “Which devices need attention today?” and its answer" width="1600" height="1000" loading="lazy" /><img class="tema-claro" src="/capturas/claro/asistente.png" alt="Assistant chat open next to the dashboard, with the question “Which devices need attention today?” and its answer" width="1600" height="1000" loading="lazy" /><small class="captura-nota">Sample answer, from a simulated provider on a sample network.</small></p>
+
 1.  In **Administration → Settings → AI assistant**, turn it on and choose the provider: **Anthropic (Claude)**, **OpenAI**, **Google (Gemini)**, **Mistral** or **OpenAI-compatible** (OpenRouter, Groq, DeepSeek, Azure…, with the service address).
 2.  Enter the **API key** (stored encrypted, one per provider), click **Load from account** to see the models, choose one and click **Test connection** (it shows the response time).
 3.  Review privacy: what you ask and the device context go to the provider. **Before sending, passwords, SNMP communities and VPN and Wi-Fi keys are always masked** (the preview shows how a backup is sent). You can include or leave out the device's backup and the last 200 lines of the console.

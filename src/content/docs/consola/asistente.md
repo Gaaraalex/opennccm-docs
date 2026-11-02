@@ -7,6 +7,8 @@ resumen:
   - "Ayuda en la consola, en la comparación de configuraciones, en cumplimiento y en un chat en todas las páginas; las acciones que cambian algo piden confirmación."
 ---
 
+<p class="captura-tema"><img class="tema-oscuro" src="/capturas/oscuro/asistente.png" alt="Chat del asistente abierto junto al Panel, con la pregunta «¿Qué equipos necesitan atención hoy?» y su respuesta" width="1600" height="1000" loading="lazy" /><img class="tema-claro" src="/capturas/claro/asistente.png" alt="Chat del asistente abierto junto al Panel, con la pregunta «¿Qué equipos necesitan atención hoy?» y su respuesta" width="1600" height="1000" loading="lazy" /><small class="captura-nota">Respuesta de ejemplo, con un proveedor simulado y una red de ejemplo.</small></p>
+
 1.  En **Administración → Ajustes → Asistente IA**, actívelo y elija el proveedor: **Anthropic (Claude)**, **OpenAI**, **Google (Gemini)**, **Mistral** o **Compatible con OpenAI** (OpenRouter, Groq, DeepSeek, Azure…, con la dirección del servicio).
 2.  Escriba la **clave de API** (se guarda cifrada, una por proveedor), pulse **Cargar de la cuenta** para ver los modelos, elija uno y pulse **Probar conexión** (muestra el tiempo de respuesta).
 3.  Revise la privacidad: lo que se pregunta y el contexto del equipo salen al proveedor. **Antes de enviar se ocultan siempre** contraseñas, comunidades SNMP y claves de VPN y wifi (la vista previa muestra cómo se envía un respaldo). Puede incluir o no el respaldo del equipo y las últimas 200 líneas de la consola.
