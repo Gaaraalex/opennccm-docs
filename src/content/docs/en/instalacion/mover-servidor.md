@@ -36,9 +36,11 @@ scp /var/lib/opennccm/system-backups/opennccm-*.tar.gz /root/secret.key admin@NE
 
 Follow [Install on Ubuntu](/en/instalacion/instalar/) with the **same database** as the old server (SQLite or PostgreSQL). There's no need to create devices or users: the restore brings them.
 
-## 3. Put the original key in place
+## 3. Put the original key in place (only if the backup doesn't include it)
 
-The installer creates a new key. Replace it with the old server's key:
+**Since version 2.18**, if the backup includes the key (`--with-key`) you can skip this step: the restore replaces the key the installer created and keeps the previous one as `/etc/opennccm/secret.key.antes-de-restaurar-DATE`. Go to step 4.
+
+If the backup does **not** include the key (or the server runs a version older than 2.18), replace the key the installer created with the old server's key:
 
 ```bash
 sudo systemctl stop opennccm
@@ -46,21 +48,22 @@ sudo mv /etc/opennccm/secret.key /etc/opennccm/secret.key.new-unused
 sudo install -m 600 -o root -g root /tmp/secret.key /etc/opennccm/secret.key
 ```
 
-:::note
-Do this even if the backup includes the key (`--with-key`): the restore only writes it when the server has **no** key, and the installer already created one.
-:::
+Copying the key before restoring still works with a `--with-key` backup too.
 
 ## 4. Restore
 
-**With SQLite** (the default):
+The same command works **with SQLite and with PostgreSQL** (with PostgreSQL it uses `pg_restore` since version 2.18):
 
 ```bash
 sudo opennccm restore /tmp/opennccm-YYYYMMDD-HHMMSS.tar.gz
 ```
 
-The command stops the service, sets the new server's empty database aside, restores the backup and starts the service again. If the backup is encrypted (`.enc`), it asks for its password.
+The command stops the service, sets the new server's empty database aside, restores the backup and starts the service again. If the backup is encrypted (`.enc`), it asks for its password. If the backup has no key and the server's key can't decrypt the restored data, it says so, tells you to copy the original `secret.key`, and ends with an error instead of "Restored.".
 
-**With PostgreSQL**, restore with `pg_restore`:
+The backup must come from the **same database** as the server: a SQLite backup on a PostgreSQL server (or the other way round) is rejected with the reason.
+
+:::note[Versions older than 2.18]
+With PostgreSQL, restore by hand with `pg_restore`:
 
 ```bash
 mkdir /tmp/backup && tar -xzf /tmp/opennccm-YYYYMMDD-HHMMSS.tar.gz -C /tmp/backup
@@ -68,6 +71,7 @@ sudo systemctl stop opennccm
 sudo -u postgres pg_restore --clean --if-exists -d opennccm /tmp/backup/opennccm.pgdump
 sudo systemctl start opennccm
 ```
+:::
 
 ## 5. Check
 
@@ -86,8 +90,9 @@ sudo systemctl start opennccm
 
 | Symptom | Cause and fix |
 | --- | --- |
-| Configurations look garbled or fail to open | The server has a different key. Repeat step 3 with the original `secret.key` and restart: `sudo systemctl restart opennccm`. |
-| "Automatic restore only supports SQLite" | The database is PostgreSQL: use the `pg_restore` procedure. |
+| The restore warns that the key doesn't decrypt the data, or configurations look garbled | The server has a different key. Repeat step 3 with the original `secret.key` and restore again (or restart: `sudo systemctl restart opennccm`). |
+| The restore rejects the backup because it's from another database | The backup is SQLite and the server uses PostgreSQL (or the other way round): install the new server with the same database as the old one. |
+| "Automatic restore only supports SQLite" | A version older than 2.18 with PostgreSQL: upgrade to 2.18 or use the manual `pg_restore` procedure. |
 | "This backup is encrypted: its password is required" | The backup is `.enc`: type the password used when it was created. |
 | Devices don't back up from the new server | ACLs or firewalls that still allow only the old IP. |
 | Something is off and you want to go back | The previous empty database is kept next to the restored one (`opennccm.db.antes-de-restaurar-…`), and the old server is untouched. |

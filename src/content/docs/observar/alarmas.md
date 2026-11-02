@@ -14,6 +14,8 @@ Todo lo relevante genera un **evento** con severidad por color:
 
 **Alarmas** se abre en **Sin reconocer** (o **Todas**), con chips por severidad y su recuento. Cada alarma muestra el equipo y hace cuánto ocurrió (el detalle completo aparece al pasar el ratón), con **Abrir equipo** y **Reconocer**; también se pueden reconocer todas (con **Deshacer** en el aviso). Las de severidad igual o mayor a la configurada en Ajustes se envían por correo, webhook (Teams, Slack…) y/o Telegram.
 
+Si la regla «Al cerrar una alarma crítica» de la [base de conocimiento](/observar/base-de-conocimiento/) está activa (lo está por omisión), una alarma **crítica** no se cierra con **Reconocer**: se abre **Cerrar alarma crítica**, donde se elige **Cerrar y documentar** o **Cerrar y enlazar** (a un caso que ya existe). «Reconocer todas» deja abiertas las críticas.
+
 ![Alarmas y eventos.](../../../assets/manual/21-alarmas.png)
 
 ## Configurar las notificaciones

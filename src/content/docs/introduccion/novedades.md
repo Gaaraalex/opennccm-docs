@@ -1,9 +1,28 @@
 ---
 title: "Novedades de la versión"
-description: "Lo nuevo de OpenNCCM 2.17.0 y las versiones anteriores."
+description: "Lo nuevo de OpenNCCM 2.18.0 y las versiones anteriores."
 ---
 
 Las 6 últimas versiones. El historial completo está en [opennccm.com/novedades](https://opennccm.com/novedades.html) y cada versión se descarga desde [GitHub](https://github.com/Gaaraalex/opennccm/releases).
+
+## Versión 2.18.0
+- **Botón «Soporte profesional»** en la barra superior, a la izquierda de «Apoya OpenNCCM»: un enlace a la página de soporte de pago
+  (en otra pestaña) con una animación suave que se detiene si el sistema pide reducir el movimiento. No cambia ninguna función;
+  el administrador lo oculta para todos en **Ajustes › Organización**.
+- **Base de conocimiento (Equipo › Base de conocimiento):** cada caso resuelto queda escrito con síntoma, causa, pasos con sus
+  comandos («Copiar» sin la clave oculta y «Abrir en consola», que lo deja escrito sin ejecutarlo), comprobación y prevención.
+  «Falta documentar» se llena sola con las alarmas críticas cerradas y los cambios revertidos (y, si se activa, las sesiones de
+  consola de más de 15 min); una alarma crítica ya no se cierra sin caso o enlace a uno existente. Los operadores envían a
+  revisión y el administrador aprueba o pide cambios; «Proponer cambio» en casos ajenos, versiones, comentarios, «Me sirvió»,
+  «Convertir en configlet», asistente IA para proponer causa y comprobación, casos parecidos y resumen por correo los lunes.
+  Solo para administradores y operadores (solo lectura, si el administrador lo activa); las contraseñas, claves y comunidades
+  SNMP se ocultan al guardar y cada lectura y edición queda en Auditoría.
+- **Restaurar en un servidor nuevo:** `sudo opennccm restore` con una copia que incluye la clave reemplaza la que creó el
+  instalador (la anterior queda como `secret.key.antes-de-restaurar-FECHA`); antes se quedaba con la del instalador y las
+  configuraciones y contraseñas no se podían leer. Si la copia no trae la clave y la del servidor no descifra los datos
+  restaurados, el comando lo avisa y dice qué hacer en lugar de terminar con «Restaurado.».
+- **Restaurar con PostgreSQL:** `sudo opennccm restore` también funciona con PostgreSQL (`pg_restore`); una copia de otra base
+  de datos (SQLite en un servidor con PostgreSQL o al revés) se rechaza con el motivo.
 
 ## Versión 2.17.0
 - **Operar › Consola:** al elegir un equipo se vuelve a abrir su consola, y en **Recetas** con «Todas» y «Todos los fabricantes»
@@ -78,19 +97,3 @@ Las 6 últimas versiones. El historial completo está en [opennccm.com/novedades
   modelo se toma de la cabecera de la configuración.
 - **Ficha con puertos:** los números y rótulos quedan a 12 px del contorno del puerto elegido; en el móvil, la tabla
   Interfaces va en dos renglones por puerto y la ruta muestra solo «‹ Dispositivos».
-
-## Versión 2.13.0
-- **Puertos en todas las plataformas.** El estado de los puertos se lee con la orden de cada fabricante: Ubiquiti
-  EdgeSwitch y UniFi (FastPath), Huawei, H3C/Comware, HPE ProCurve/Aruba OS-Switch, Aruba AOS-CX, Cisco IOS/IOS-XE,
-  NX-OS, ASA/FTD y WLC, Arista, Dell, TP-Link y demás switches con CLI tipo Cisco, Juniper, Extreme EXOS, Nokia SR OS,
-  EdgeRouter/USG/VyOS, FortiGate, Palo Alto, Check Point, Linux (también airOS, airFiber y UniFi AP) y pfSense/OPNsense.
-  Si el equipo no responde a ninguna, los puertos salen de la configuración (apagado o habilitado).
-- **Frente fiel al modelo.** Una fila en routers y switches pequeños (hEX, RB4011 con su separación, US-8, firewalls de
-  escritorio) y dos filas en los grandes, en bloques como en el equipo (CRS326 de 4 en 4 con los SFP+ abajo; UniFi,
-  EdgeSwitch y Cisco de 6 en 6 con los SFP de dos en dos). Los SFP sin tipo se reconocen por el modelo (ES-24: 25 y 26).
-- **Parte de atrás: fuentes y ventiladores.** Botón «Atrás» en la franja de puertos: fuentes de alimentación y
-  ventiladores en verde si funcionan y en rojo si fallan o están sin corriente; aviso en la franja si alguno falla.
-  Se lee en el respaldo (MikroTik, Cisco, Juniper, Huawei, HPE, Aruba, Arista, FastPath, Extreme y FortiGate).
-- **Ficha con puertos, ajustes de diseño:** resumen en la columna derecha, números fuera del contorno de selección,
-  tabla Interfaces en una línea por puerto con 10 a la vista y barra para desplazarse, «Dirección», «Bridge» o «Red»
-  según el puerto, frente desplazable en el móvil y cabecera del equipo ordenada en pantallas estrechas.
