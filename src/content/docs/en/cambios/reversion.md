@@ -8,6 +8,8 @@ resumen:
   - "Automatic rollback instantly undoes unauthorized changes; turn it on only where every change must go through OpenNCCM."
 ---
 
+<p class="captura-tema"><img class="tema-oscuro" src="/capturas/oscuro/diff.png" alt="Side-by-side comparison of two configuration versions" width="1600" height="1000" loading="lazy" /><img class="tema-claro" src="/capturas/claro/diff.png" alt="Side-by-side comparison of two configuration versions" width="1600" height="1000" loading="lazy" /></p>
+
 ## How it works
 
 OpenNCCM compares the current configuration with the target version and generates the commands needed in the vendor's syntax:

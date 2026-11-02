@@ -209,3 +209,9 @@ site-search > button[data-open-modal] span { white-space: nowrap; }
 .occ-sin-resultados ul + .occ-sr-foro { padding-top: 10px; border-top: 1px solid var(--sl-color-hairline); }
 /* Entre 1600 y 1920 px la cabecera lleva también los enlaces del sitio: buscador más angosto. */
 @media (min-width: 100rem) and (max-width: 120rem) { site-search > button[data-open-modal] { width: auto; } site-search > button[data-open-modal] kbd { display: none; } }
+
+/* Capturas del sistema con el tema azul: la clara o la oscura según el tema de la documentación */
+.captura-tema img { width: 100%; height: auto; }
+.captura-tema .tema-claro { display: none; }
+:root[data-theme='light'] .captura-tema .tema-claro { display: block; }
+:root[data-theme='light'] .captura-tema .tema-oscuro { display: none; }

@@ -16,7 +16,7 @@ export async function paginasMarkdown(en: boolean) {
 		if (curso) partes.push(`Video: ${curso.map((n) => `${n} ${LECCIONES[n][0]} (https://youtu.be/${LECCIONES[n][1]})`).join(' · ')}`);
 		if (resumen) partes.push(`**${en ? 'In short' : 'En resumen'}:**\n\n` + resumen.map((x) => `- ${x}`).join('\n'));
 		// Las imágenes del manual no sirven fuera del sitio: se dejan solo con su texto.
-		const cuerpo = (e.body || '').replace(/!\[([^\]]*)\]\([^)]+\)/g, (m, alt) => (alt ? `*[${en ? 'Image' : 'Imagen'}: ${alt}]*` : ''));
+		const cuerpo = (e.body || '').replace(/<p class="captura-tema">[\s\S]*?<\/p>\s*/g, '').replace(/!\[([^\]]*)\]\([^)]+\)/g, (m, alt) => (alt ? `*[${en ? 'Image' : 'Imagen'}: ${alt}]*` : ''));
 		// Enlaces internos completos, para que sirvan pegados en otro sitio.
 		partes.push(cuerpo.trim().replace(/\]\(\//g,`](${SITIO}/`));
 		return { params: { slug: id || 'inicio' }, props: { texto: partes.join('\n\n') + '\n' } };

@@ -8,6 +8,8 @@ resumen:
   - "The Console center gathers parallel sessions, commands on several devices, step-by-step recipes, recordings and tools (ping, traceroute, TCP, DNS)."
 ---
 
+<p class="captura-tema"><img class="tema-oscuro" src="/capturas/oscuro/consola.png" alt="Console on a Cisco device with colored output and frequent commands" width="1600" height="1000" loading="lazy" /><img class="tema-claro" src="/capturas/claro/consola.png" alt="Console on a Cisco device with colored output and frequent commands" width="1600" height="1000" loading="lazy" /></p>
+
 ## Device console
 
 1.  In **Devices**, click the console icon on the device's row, or the **Console** button on its page; also from **Operate → Console**. At the top you see "Console · name" with the IP, model and system.

@@ -4,6 +4,8 @@ description: "Real-time change detection."
 curso: ["4.1"]
 ---
 
+<p class="captura-tema"><img class="tema-oscuro" src="/capturas/oscuro/alarmas.png" alt="Alarms with a configuration change detected through syslog" width="1600" height="1000" loading="lazy" /><img class="tema-claro" src="/capturas/claro/alarmas.png" alt="Alarms with a configuration change detected through syslog" width="1600" height="1000" loading="lazy" /></p>
+
 -   It recognizes change messages from Cisco IOS/IOS-XE/NX-OS/ASA, Juniper, Huawei, H3C, FortiGate, Palo Alto, MikroTik, Aruba/HPE and generic "configuration changed" messages.
 -   Several notices from the same device within 60 seconds trigger a single backup.
 -   Changes applied by OpenNCCM (approved requests) open a **maintenance window**: they are not treated as intrusions. The window closes as soon as the following backup finishes; any notice received meanwhile is reviewed when it closes.
