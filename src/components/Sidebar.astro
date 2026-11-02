@@ -1,0 +1,28 @@
+---
+// Menú lateral de Starlight con, arriba y solo en el móvil (☰), «Soporte profesional» y Entrar / Crear cuenta:
+// al final del menú (MobileMenuFooter) quedaban fuera de la vista.
+import Default from '@astrojs/starlight/components/Sidebar.astro';
+import { T, lang, comunidad } from '../sitio';
+const l = lang(Astro.currentLocale);
+const t = T[l];
+---
+
+<div class="arriba-movil md:sl-hidden">
+	<a class="btn-soporte ancho" href={comunidad(l, '/soporte')}>
+		<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14v-2a9 9 0 0 1 18 0v2"/><path d="M21 15a2 2 0 0 1-2 2h-1v-6h1a2 2 0 0 1 2 2zM3 15a2 2 0 0 0 2 2h1v-6H5a2 2 0 0 0-2 2z"/></svg>
+		<span>{t.soporteProf}</span>
+	</a>
+	<div class="cuenta-movil" data-occ-cuenta-movil>
+		<a class="occ-entrar" data-occ-entrar href={comunidad(l, '/cuenta/entrar')}>{t.entrar}</a>
+		<a class="occ-crear" data-occ-crear href={comunidad(l, '/cuenta/crear')}>{t.crear}</a>
+	</div>
+</div>
+<Default><slot /></Default>
+
+<style>
+	.arriba-movil { display: grid; gap: 10px; padding-bottom: 14px; margin-bottom: 8px; border-bottom: 1px solid var(--sl-color-hairline); }
+	.ancho { justify-content: center; width: 100%; }
+	.cuenta-movil { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+	.cuenta-movil[hidden] { display: none; }
+	.cuenta-movil a { justify-content: center; }
+</style>

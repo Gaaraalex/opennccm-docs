@@ -34,6 +34,7 @@ export default defineConfig({
 				PageTitle: './src/components/PageTitle.astro',
 				Footer: './src/components/Footer.astro',
 				MobileMenuFooter: './src/components/MobileMenuFooter.astro',
+				Sidebar: './src/components/Sidebar.astro',
 			},
 			sidebar: [
 				g('Introducción', 'Introduction', [
