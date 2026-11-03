@@ -12,6 +12,8 @@ curso: ["4.2","4.1"]
 4.  Si el perfil lo admite, respalda también la configuración de arranque y compara ambas (conflicto startup/running).
 5.  Actualiza el inventario (modelo, serie, versión), compara con la línea base y ejecuta la auditoría de cumplimiento.
 
+**Equipo reemplazado.** Si el número de serie que lee el respaldo no es el que estaba guardado, es otro aparato con la misma dirección (un RMA o un cambio de equipo). OpenNCCM avisa «Equipo reemplazado» con las dos series, lo deja en Auditoría y toma la serie nueva. Si la configuración cambió, la versión nueva queda etiquetada «equipo nuevo · serie …» y el aviso de cambio aclara que la diferencia es contra el aparato anterior. Al equipo nuevo no se le aplica sola la [reversión automática](/cambios/reversion/): revise usted si hay que restaurarle la configuración del anterior.
+
 Cada versión registra su **origen**: `manual` (botón), `scheduled` (tarea), `syslog` (detectado en tiempo real) o `push` (aplicado por OpenNCCM).
 
 ## Ver una versión

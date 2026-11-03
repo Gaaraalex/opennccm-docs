@@ -16,7 +16,7 @@ resumen:
 
 | Dónde aparece | Qué hace |
 | --- | --- |
-| Consola | Panel **Asistente de red** con el proveedor y el modelo, el contexto (equipo, sistema, respaldo, salida de la consola, secretos ocultos) y preguntas sugeridas. Cada comando de la respuesta lleva su riesgo (**solo lectura**, **cambia la configuración**, **corta el servicio**) y los botones **Copiar**, **Insertar** y, si es un cambio, **Enviar como solicitud de cambio**. Indica la fuente (el respaldo del equipo o la referencia del fabricante). |
+| Consola | Panel **Asistente de red** con el proveedor y el modelo, el contexto (equipo, sistema, respaldo, salida de la consola, secretos ocultos) y preguntas sugeridas. Cada comando de la respuesta lleva su riesgo (**solo lectura**, **cambia la configuración**, **corta el servicio**) y los botones **Copiar**, **Insertar** y, si es un cambio, **Enviar como solicitud de cambio**. Indica la fuente (el respaldo del equipo o la referencia del fabricante). El asistente sabe con qué equipo trabaja (plataforma, modelo, versión de firmware y la lista de comandos de ese equipo) y responde solo con comandos de esa plataforma y esa versión; las preguntas sugeridas también dependen del equipo (por ejemplo, túneles VPN y políticas en los cortafuegos). |
 | Barra superior | Botón **Asistente** (con el logo del proveedor) en todas las páginas: abre el chat a la derecha, sin salir de la página (ver abajo). |
 | Comparar configuraciones | **✦ Explicar este cambio**. |
 | Cumplimiento | **✦ ¿Cómo lo corrijo?** en cada regla con infracciones. |

@@ -1,13 +1,40 @@
 ---
 title: "Novedades de la versión"
-description: "Lo nuevo de OpenNCCM 2.21.0 y las versiones anteriores."
+description: "Lo nuevo de OpenNCCM 2.22.0 y las versiones anteriores."
 resumen:
-  - "2.21.0 deja lista la imagen .fxi de WatchGuard: la clave es de 8 a 15 caracteres, el máximo que admite Fireware. Probado en un Firebox T40 real."
-  - "La feature key se guarda con su detalle: modelo, vencimiento y cada función con su fecha."
-  - "La imagen .fxi no trae el sistema operativo (pesa alrededor de 1 MB), y las luces Mode y Status del T40 se ven como en el equipo."
+  - "2.22.0 permite ver las credenciales de los equipos a quien lo autorice un administrador, con verificación en dos pasos y la contraseña cada vez."
+  - "Avisa de las licencias por vencer (feature key de WatchGuard) y cuando un equipo se reemplaza por otro con la misma dirección."
+  - "La consola y el asistente IA sugieren los comandos de cada equipo, según su modelo y su versión de firmware."
 ---
 
 Las 6 últimas versiones. El historial completo está en [opennccm.com/novedades](https://opennccm.com/novedades.html) y cada versión se descarga desde [GitHub](https://github.com/Gaaraalex/opennccm/releases).
+
+## Versión 2.22.0
+- **Feature key de WatchGuard lista para restaurar:** OpenNCCM guarda la feature key tal como se pega en el Firebox
+  para restaurarla (Serial Number, License ID, Name, Model, Version, una línea Feature por función, Expiration y Signature). La
+  firma no sale por la CLI, así que entra un momento a la Web UI del Firebox con la misma credencial, la lee y cierra la sesión.
+  Si la Web UI no responde lo reintenta pasada una hora, y si rechaza el ingreso, al día siguiente, para no insistir con la
+  contraseña; el aviso sale una sola vez por motivo. Lee los campos aunque otra versión de Fireware cambie un poco la página.
+- **Ver las credenciales de los equipos:** En Ajustes › Seguridad y acceso se elige quién puede verlas: nadie (de
+  fábrica), solo los administradores o también los operadores. Hace falta tener activa la verificación en dos pasos, y cada vez
+  que se pulsa «Ver» se confirma con el usuario y la contraseña propios (las cuentas de Microsoft, con el código de su app). Se
+  muestran el usuario, la contraseña y el enable con botón Copiar y se ocultan a los 60 segundos. Cada vista y cada intento fallido
+  quedan en la Auditoría, y 5 intentos fallidos bloquean la cuenta 15 minutos.
+- **Aviso de licencias por vencer:** La ficha de un WatchGuard muestra cuándo vence cada servicio de su feature key
+  (antivirus, IPS, LiveSecurity…), en ámbar si faltan 60 días o menos y en rojo si ya venció. OpenNCCM avisa a los 60, 30 y 7 días
+  y al vencer, una sola vez por fecha. Cuando algo está por vencer relee la feature key una vez al día para ver la renovación, sin
+  entrar a la Web UI si sigue siendo la misma. El informe nuevo «Licencias por vencer» lista lo de todos los equipos.
+- **Aviso de equipo reemplazado:** Si el número de serie que lee el respaldo cambia, es otro aparato con la misma
+  dirección (un RMA o un cambio de equipo). OpenNCCM avisa con las dos series, lo deja en la Auditoría, etiqueta la versión nueva
+  «equipo nuevo» y no le aplica sola la reversión automática con la configuración del aparato anterior.
+- **Comandos de la consola según el equipo:** Las sugerencias y los comandos frecuentes de la consola (en la ficha y en
+  Operar › Consola) ya no son genéricos: cada tipo de equipo que admite OpenNCCM tiene los suyos, ajustados a su modelo y su
+  versión de firmware. Por ejemplo, WatchGuard sugiere los de Fireware y, desde la 12.4, SD-WAN; RouterOS 7 y 6 sugieren lo de
+  cada versión, y PoE, Wi-Fi o stack aparecen solo en los modelos que los tienen. El historial se guarda por tipo de equipo, y
+  las consultas de cada equipo se pueden usar en modo solo lectura aunque no empiecen por «show».
+- **El asistente IA recomienda comandos de ese equipo:** El asistente recibe la plataforma, el modelo, la versión de
+  firmware y la lista de comandos del equipo con que se trabaja, y responde solo con comandos de esa plataforma y esa versión.
+  Sus preguntas sugeridas también cambian según el equipo.
 
 ## Versión 2.21.0
 - **Clave de la imagen .fxi:** Fireware solo acepta claves de 8 a 15 caracteres, y «Generar» creaba 24, así que la
@@ -120,31 +147,3 @@ Las 6 últimas versiones. El historial completo está en [opennccm.com/novedades
 - **Errores en pocas palabras:** Los fallos de conexión y de respaldo se explican con un motivo corto y traducido. En
   el Panel («Necesita tu atención») y en el chat salen como «sin respuesta por SSH», «credencial rechazada», «cambió la clave SSH
   del equipo», «falta la contraseña enable»…; el mensaje completo sigue en la ficha del equipo.
-
-## Versión 2.16.0
-- **Chat del asistente en todo el sistema:** Un chat con el asistente IA se abre desde cualquier página para preguntar
-  por la red y pedir acciones, que siempre se confirman antes. El botón «Asistente» de la barra superior (con el logo del
-  proveedor) abre el chat a la derecha. Consulta OpenNCCM con funciones de solo lectura (equipos, respaldos, alarmas, cambios y
-  versiones, cumplimiento, ciclo de vida, búsqueda en configuraciones) y el manual, con el rol y los grupos del usuario y los
-  secretos ocultos. Respuestas cortas, equipos en una línea, como mucho 2 botones y «Más acciones», y la fuente. Las acciones que
-  cambian algo (respaldar, crear una tarea, crear una solicitud de cambio) piden confirmación en el chat. La conversación se
-  guarda por usuario; cada pregunta queda en Auditoría con las funciones usadas.
-- **Recetas:** La consola trae al menos 10 recetas paso a paso por fabricante para Cisco IOS, MikroTik RouterOS,
-  Extreme EXOS y Extreme VOSS / Fabric Engine. Cubren nombre, usuarios y contraseñas, SSH, HTTPS, SNMP, syslog hacia OpenNCCM,
-  RADIUS, NTP, VLAN, troncales, rutas, guardar… La consola reconoce VOSS (autocompletado, frecuentes, paginado y comandos que
-  cortan el servicio).
-- **Herramientas de la consola:** Ping y traceroute ya funcionan desde el servidor. El servicio tiene permiso para
-  ICMP y se instalan `iputils-ping` y `traceroute` al instalar o actualizar. Si traceroute tarda, se ve lo que alcanzó a
-  responder.
-- **Asistente IA:** Cada proveedor de IA se reconoce por su logo, en un cuadrito con el color de su marca. Se ve en
-  Ajustes, en la consola y en la barra superior, y las tarjetas de proveedor tienen la misma altura; si al guardar no hay ningún
-  rol marcado, quedan administradores y operadores.
-- **Consola:** El aviso verde de cambio sale en el momento correcto y el panel de la consola cabe en la ventana. El
-  aviso sale al salir del modo configuración (tras el «end»), nunca antes del comando; el panel de Operar › Consola tiene una
-  sola fila de botones; textos en singular («1 sesión abierta»).
-- **Grabaciones:** El reproductor muestra la sesión grabada con los colores de la consola y la lista de comandos con su
-  hora. Las sesiones vacías se ocultan («Mostrar sesiones vacías»); al arrancar, las sesiones que quedaron «en curso» se cierran.
-- **Filtros de recetas:** Los filtros de las recetas quedan separados del buscador.
-- **Puertos de los Ubiquiti EdgeSwitch X:** Los EdgeSwitch X (ES-10X, ES-18X…) ya muestran qué puertos están
-  activos y cuáles son de fibra. Estos equipos no tienen «show interfaces status»: se lee «show interfaces GigabitEthernet 1-N»
-  (verificado en un ES-18X real).

@@ -12,6 +12,8 @@ curso: ["4.2","4.1"]
 4.  If the profile supports it, it also backs up the startup configuration and compares both (startup/running conflict).
 5.  It updates the inventory (model, serial, version), compares with the baseline and runs the compliance audit.
 
+**Device replaced.** If the serial number the backup reads is not the stored one, it is another unit at the same address (an RMA or a device swap). OpenNCCM raises "Device replaced" with both serials, records it in Audit and takes the new serial. If the configuration changed, the new version is tagged "new device · serial …" and the change notice explains that the difference is against the previous unit. [Automatic rollback](/en/cambios/reversion/) is not applied to the new device on its own: check whether it needs the previous unit's configuration restored.
+
 Each version records its **source**: `manual` (button), `scheduled` (task), `syslog` (detected in real time) or `push` (applied by OpenNCCM).
 
 ## View a version

@@ -14,6 +14,7 @@ Cada informe es una tarjeta con **Ver** (en pantalla, con el periodo de 7, 30, 9
 | Fuera de línea base | Equipos con línea base y si se desviaron |
 | Fin de vida (EOL/EOS) | Fechas y estado de cada equipo |
 | Vulnerabilidades | CVE por equipo |
+| Licencias por vencer | Servicios de la licencia de cada equipo (hoy, la feature key de WatchGuard) que vencen en los próximos 90 días o ya vencieron, lo más urgente primero |
 | Solicitudes de cambio | Quién pidió, quién aprobó y el resultado |
 | Auditoría de usuarios | Inicios de sesión y acciones (solo administradores) |
 
