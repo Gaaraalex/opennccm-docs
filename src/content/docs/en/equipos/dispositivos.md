@@ -79,6 +79,7 @@ The configuration only says whether a port is disabled; the link is read in the 
 | Juniper · Extreme EXOS · Nokia SR OS | `show interfaces terse` · `show ports no-refresh` · `show port` |
 | EdgeRouter, USG, VyOS | `show interfaces` (S/L column) |
 | FortiGate · Palo Alto · Check Point | `get system interface physical` · `show interface all` · `show interfaces all` |
+| WatchGuard Fireware | `show status-report` (only the "Physical Interfaces Link Status" section; Device Monitor is enough) |
 | Linux, Ubuntu, airOS, airFiber, UniFi AP · pfSense, OPNsense | `/sys/class/net` · `ifconfig -a` |
 
 If the device answers none of them, the ports come from the configuration in gray (disabled or enabled) with the notice "no link status".
@@ -87,9 +88,33 @@ If the device answers none of them, the ports come from the configuration in gra
 
 The strip's **Back** button shows the device's **power supplies** and **fans**: in green those working (supply with power, fan spinning) and in red those failing or without power; with a dashed border, those not installed. So you can see at a glance whether a device with two supplies has both connected. If one fails, the strip also warns from the front ("No power or failed: PSU 2", "Fan stopped: Fan 3") and the Back button gets a red dot. It is read in the backup with each vendor's command: MikroTik `/system health print`, Cisco `show environment all`, Juniper `show chassis environment`, Huawei `display power` and `display fan`, HPE `show system fans/power-supply`, Aruba AOS-CX and Arista `show environment …`, FastPath `show environment`, Extreme `show fans/power` and FortiGate `execute sensor list`. Devices that do not report it over SSH (for example small fanless routers) say so in the Back view.
 
-On devices with their ports at the back, such as the **WatchGuard Firebox T40**, the device page opens on **Back** and shows the device as it is: serial console, the two USB ports, the ports with their labels (0/WAN, 1/LAN, 2, 3, 4-PoE), Reset, the power switch and the power input. **Front** shows its lights (Failover, each port's lights, Status, Mode, Attn and power); clicking a port's lights selects it. On WatchGuard the ports come from the configuration (interface name, whether it is enabled and its IP or the VLANs that pass through it), without link status.
+On devices with their ports at the back, such as the **WatchGuard Firebox T40**, the device page opens on **Back** and shows the device as it is: serial console, the two USB ports, the ports with their labels (0/WAN, 1/LAN, 2, 3, 4-PoE), Reset, the power switch and the power input. **Front** shows its lights (Failover, each port's lights, Status, Mode, Attn and power); clicking a port's lights selects it. On WatchGuard the interface name, whether it is enabled and its IP or the VLANs that pass through the port come from the configuration; the link and speed come from `show status-report`. At the back, a port with link shows in green; at the front its speed light comes on: the 1000 one in yellow and the 10/100 one in green, as on the device.
 
 ![Compliance tab: rules grouped by policy, with "Fix N".](../../../../assets/manual/05c-dispositivo-cumplimiento.png)
+
+## WatchGuard: configuration (XML) and full image (.fxi)
+
+A Firebox's device page has the **Backups** tab with WatchGuard's two kinds of backup:
+
+| | Configuration (XML) | Full image (.fxi) |
+| --- | --- | --- |
+| **What it stores** | Policies, interfaces, VLANs, NAT, VPN, aliases, users and settings | All of the above, plus the certificates with their private keys, the feature key, the passwords and that Firebox's own information |
+| **What it does not store** | The feature key (OpenNCCM stores it separately), the certificates with their keys, the device's own passwords and Fireware OS | — |
+| **When** | On every backup; it changes nothing on the Firebox | Weekly, daily (at 03:00) or manually only |
+| **Credential** | A read-only one (Device Monitor) is enough | Administrator (Device Administrator) |
+| **Use it to** | See what changed, audit compliance and move the configuration to another Firebox (a replacement or another model) with Policy Manager | Recover the same Firebox after a failure, a factory reset or an upgrade that went wrong. It does not work for another device: WatchGuard treats it as unique to each Firebox |
+
+When setting up the image you choose the administrator credential, the **encryption key** (8 to 32 characters; without it the image cannot be restored), the address the Firebox uses to reach OpenNCCM (detected automatically) and how many images to keep; the latest ones are kept. **Test connection** asks the Firebox to upload its configuration to the receiver, without creating any image.
+
+Fireware only delivers the image by uploading it over FTP. For that, OpenNCCM opens a **temporary FTP receiver** only while the backup runs (port 2121 and passive ports 50000–50010, configurable): it accepts only the Firebox's IP, with a one-time user and password, and closes when it receives the file or after 5 minutes. If the server uses `ufw`, it opens those ports for the Firebox only and closes them when done (if the service stopped, the rule removes itself after 6 minutes). On the Firebox it runs `backup image`, `export image … to ftp://…` and `delete backup`: no copy is left on the device.
+
+:::caution[Another firewall in the way]
+If there is a firewall between the Firebox and OpenNCCM, allow port 2121 and passive ports 50000–50010 (TCP) from the Firebox to the server.
+:::
+
+If the image fails, the screen shows the Firebox's exact message and what to check (firewall, address, Firebox policy or a credential without permission). If it fails twice in a row the **".fxi image not created"** alarm opens; the XML backup is not affected.
+
+Each file downloads in its own format (`DEVICE_v48.xml`, `DEVICE_img-12.fxi`), never as a .zip; **Download .xml and .fxi** gets both. The key never goes inside a file: only administrators see it, in **How to restore**, and [Audit](/en/administracion/auditoria/) records who viewed it. To restore the image: Fireware Web UI › **System › Backup and Restore Image**, import the .fxi and enter its key.
 
 ## Device web interface
 
