@@ -14,6 +14,7 @@ Los ajustes están en **Administración → Ajustes**, separados en secciones qu
 | Exigir verificación en dos pasos a los administradores | Un administrador sin ella solo puede entrar a «Mi cuenta» hasta activarla. |
 | Idioma predeterminado | Español o inglés para quien no eligió idioma y cuyo navegador no pide uno disponible. |
 | Consola SSH web | Quién puede abrirla y si entra con la credencial del equipo (ver capítulo 4). |
+| Quién puede ver las credenciales de los equipos | Nadie (por omisión), solo administradores, o administradores y operadores. Además hace falta la verificación en dos pasos y confirmar con usuario y contraseña cada vez (ver [Credenciales](/primeros-pasos/credenciales/)). |
 
 ## Inicio de sesión con Active Directory y Microsoft Entra ID
 

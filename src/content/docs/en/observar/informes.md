@@ -14,6 +14,7 @@ Each report is a card with **View** (on screen, with a period of 7, 30, 90 days 
 | Off baseline | Devices with a baseline and whether they drifted |
 | End of life (EOL/EOS) | Dates and status of each device |
 | Vulnerabilities | CVEs per device |
+| Licenses about to expire | Each device's license services (today, the WatchGuard feature key) that expire in the next 90 days or already expired, most urgent first |
 | Change requests | Who asked, who approved and the result |
 | User audit | Sign-ins and actions (administrators only) |
 

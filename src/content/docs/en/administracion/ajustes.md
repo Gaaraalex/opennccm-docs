@@ -14,6 +14,7 @@ Settings are in **Administration → Settings**, split into sections chosen on t
 | Require two-step verification for administrators | An administrator without it can only reach "My account" until they turn it on. |
 | Default language | Spanish or English for anyone who has not chosen a language and whose browser does not ask for an available one. |
 | Web SSH console | Who can open it and whether it signs in with the device's credential (see [Console](/en/consola/consola/)). |
+| Who can view device credentials | Nobody (the default), administrators only, or administrators and operators. Two-step verification and confirming with username and password each time are also required (see [Credentials](/en/primeros-pasos/credenciales/)). |
 
 ## Sign-in with Active Directory and Microsoft Entra ID
 

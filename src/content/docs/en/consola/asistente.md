@@ -16,7 +16,7 @@ resumen:
 
 | Where it appears | What it does |
 | --- | --- |
-| Console | **Network assistant** panel with the provider and model, the context (device, system, backup, console output, masked secrets) and suggested questions. Each command in the answer shows its risk (**read-only**, **changes the configuration**, **cuts service**) and the buttons **Copy**, **Insert** and, if it is a change, **Send as change request**. It states the source (the device's backup or the vendor reference). |
+| Console | **Network assistant** panel with the provider and model, the context (device, system, backup, console output, masked secrets) and suggested questions. Each command in the answer shows its risk (**read-only**, **changes the configuration**, **cuts service**) and the buttons **Copy**, **Insert** and, if it is a change, **Send as change request**. It states the source (the device's backup or the vendor reference). The assistant knows which device it is working with (platform, model, firmware version and that device's command list) and answers only with commands for that platform and version; the suggested questions also depend on the device (for example, VPN tunnels and policies on firewalls). |
 | Top bar | **Assistant** button (with the provider's logo) on every page: it opens the chat on the right, without leaving the page (see below). |
 | Compare configurations | **✦ Explain this change**. |
 | Compliance | **✦ How do I fix it?** on each rule with violations. |
