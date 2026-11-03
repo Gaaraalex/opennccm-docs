@@ -79,6 +79,7 @@ La configuración solo dice si un puerto está apagado; el enlace se lee en la m
 | Juniper · Extreme EXOS · Nokia SR OS | `show interfaces terse` · `show ports no-refresh` · `show port` |
 | EdgeRouter, USG, VyOS | `show interfaces` (columna S/L) |
 | FortiGate · Palo Alto · Check Point | `get system interface physical` · `show interface all` · `show interfaces all` |
+| WatchGuard Fireware | `show status-report` (solo la sección «Physical Interfaces Link Status»; basta Device Monitor) |
 | Linux, Ubuntu, airOS, airFiber, UniFi AP · pfSense, OPNsense | `/sys/class/net` · `ifconfig -a` |
 
 Si el equipo no responde a ninguna, los puertos salen de la configuración en gris (apagado o habilitado) con el aviso «sin estado de enlace».
@@ -87,9 +88,33 @@ Si el equipo no responde a ninguna, los puertos salen de la configuración en gr
 
 El botón **Atrás** de la franja muestra las **fuentes de alimentación** y los **ventiladores** del equipo: en verde los que funcionan (fuente con corriente, ventilador girando) y en rojo los que fallan o están sin corriente; con borde discontinuo, los que no están instalados. Así se ve de un vistazo si un equipo con dos fuentes tiene las dos conectadas. Si alguna falla, la franja lo avisa también desde el frente («Sin corriente o con fallo: PSU 2», «Ventilador parado: Fan 3») y el botón Atrás lleva un punto rojo. Se lee en el respaldo con la orden de cada fabricante: MikroTik `/system health print`, Cisco `show environment all`, Juniper `show chassis environment`, Huawei `display power` y `display fan`, HPE `show system fans/power-supply`, Aruba AOS-CX y Arista `show environment …`, FastPath `show environment`, Extreme `show fans/power` y FortiGate `execute sensor list`. Los equipos que no informan de ello por SSH (por ejemplo, los routers pequeños sin ventiladores) lo indican en la vista Atrás.
 
-En los equipos que tienen los puertos detrás, como el **WatchGuard Firebox T40**, la ficha se abre por **Atrás** y muestra el equipo como es: consola serie, los dos USB, los puertos con su rótulo (0/WAN, 1/LAN, 2, 3, 4-PoE), Reset, el interruptor y la entrada de corriente. **Frente** muestra sus luces (Failover, las de cada puerto, Status, Mode, Attn y encendido); pulsar las luces de un puerto lo elige. En WatchGuard los puertos salen de la configuración (nombre de la interfaz, si está habilitada y su IP o las VLAN que pasan por él), sin estado de enlace.
+En los equipos que tienen los puertos detrás, como el **WatchGuard Firebox T40**, la ficha se abre por **Atrás** y muestra el equipo como es: consola serie, los dos USB, los puertos con su rótulo (0/WAN, 1/LAN, 2, 3, 4-PoE), Reset, el interruptor y la entrada de corriente. **Frente** muestra sus luces (Failover, las de cada puerto, Status, Mode, Attn y encendido); pulsar las luces de un puerto lo elige. En WatchGuard el nombre de la interfaz, si está habilitada y su IP o las VLAN que pasan por el puerto salen de la configuración; el enlace y la velocidad, de `show status-report`. Atrás, el puerto con enlace sale en verde; delante se enciende la luz de su velocidad: la de 1000 en amarillo y la de 10/100 en verde, como en el equipo.
 
 ![Pestaña Cumplimiento: reglas agrupadas por política, con «Corregir N».](../../../assets/manual/05c-dispositivo-cumplimiento.png)
+
+## WatchGuard: configuración (XML) e imagen completa (.fxi)
+
+La ficha de un Firebox tiene la pestaña **Respaldos** con los dos tipos de respaldo de WatchGuard:
+
+| | Configuración (XML) | Imagen completa (.fxi) |
+| --- | --- | --- |
+| **Qué guarda** | Políticas, interfaces, VLAN, NAT, VPN, alias, usuarios y ajustes | Todo lo anterior, más los certificados con sus claves privadas, la feature key, las contraseñas y la información propia de ese Firebox |
+| **Qué no guarda** | La feature key (OpenNCCM la guarda aparte), los certificados con sus claves, las contraseñas propias del equipo y el Fireware OS | — |
+| **Cuándo** | En cada respaldo; no cambia nada en el Firebox | Semanal, diaria (a las 03:00) o solo a mano |
+| **Credencial** | Basta una de solo lectura (Device Monitor) | De administrador (Device Administrator) |
+| **Úsela para** | Ver qué cambió, auditar el cumplimiento y llevar la configuración a otro Firebox (de reemplazo o de otro modelo) con Policy Manager | Recuperar el mismo Firebox tras un fallo, un restablecimiento de fábrica o una actualización que salió mal. No sirve para otro equipo: WatchGuard la considera única de cada Firebox |
+
+Al configurar la imagen se elige la credencial de administrador, la **clave de cifrado** (8 a 32 caracteres; sin ella no se puede restaurar), la dirección por la que el Firebox llega a OpenNCCM (se detecta sola) y cuántas imágenes guardar; se conservan las últimas. **Probar conexión** pide al Firebox que suba su configuración al receptor, sin crear ninguna imagen.
+
+Fireware solo entrega la imagen subiéndola por FTP. Para eso OpenNCCM abre un **receptor FTP temporal** solo mientras dura el respaldo (puerto 2121 y pasivos 50000–50010, configurables): acepta únicamente la IP del Firebox, con usuario y contraseña de un solo uso, y se cierra al recibir el archivo o a los 5 minutos. Si el servidor usa `ufw`, abre esos puertos solo para el Firebox y los cierra al terminar (si el servicio se detuviera, la regla se quita sola a los 6 minutos). En el Firebox se ejecuta `backup image`, `export image … to ftp://…` y `delete backup`: no queda ninguna copia en el equipo.
+
+:::caution[Otro cortafuegos en el camino]
+Si hay un cortafuegos entre el Firebox y OpenNCCM, permita el puerto 2121 y los pasivos 50000–50010 (TCP) desde el Firebox hacia el servidor.
+:::
+
+Si la imagen falla, la pantalla muestra el mensaje exacto del Firebox y qué revisar (cortafuegos, dirección, política del Firebox o credencial sin permiso). Si falla dos veces seguidas se abre la alarma **«Imagen .fxi sin crear»**; el respaldo XML no se ve afectado.
+
+Cada archivo se descarga en su formato (`EQUIPO_v48.xml`, `EQUIPO_img-12.fxi`), nunca en .zip; **Descargar .xml y .fxi** baja los dos. La clave no va dentro de ningún archivo: solo los administradores la ven, en **Cómo restaurar**, y queda en [Auditoría](/administracion/auditoria/) quién la vio. Para restaurar la imagen: Fireware Web UI › **Sistema › Backup and Restore Image**, importar el .fxi y escribir su clave.
 
 ## Interfaz web del equipo
 

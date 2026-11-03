@@ -44,3 +44,5 @@ sudo ufw status
 :::tip[Más seguro]
 Limite el syslog y la web a sus redes de gestión, por ejemplo: `sudo ufw allow from 10.0.0.0/8 to any port 514 proto udp`.
 :::
+
+La [imagen completa de WatchGuard (.fxi)](/equipos/dispositivos/#watchguard-configuración-xml-e-imagen-completa-fxi) llega por un receptor FTP temporal (puerto 2121 y pasivos 50000–50010, TCP). Con `ufw`, OpenNCCM abre esos puertos solo para el Firebox mientras dura el respaldo y los cierra al terminar; si hay otro cortafuegos entre el Firebox y el servidor, permítalos desde el Firebox.
