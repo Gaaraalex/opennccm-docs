@@ -29,7 +29,7 @@ En MikroTik, airOS, airFiber y EdgeRouter, OpenNCCM **respalda el equipo antes**
 
 ## Actualizaciones disponibles
 
-OpenNCCM comprueba una vez al día si hay una versión más nueva del firmware de cada equipo, y lo que mejora. La pestaña **Actualizaciones disponibles** de **Firmware y ciclo de vida** lista todos los equipos (primero los que tienen versión nueva); cada equipo muestra la etiqueta **Firmware X disponible** y, en su pestaña Firmware, la sección **Actualizaciones de firmware**. Cuando aparece una versión nueva se registra un aviso en Alarmas, una sola vez por versión.
+OpenNCCM comprueba una vez al día si hay una versión más nueva del firmware de cada equipo, y lo que mejora. La pestaña **Actualizaciones disponibles** de **Firmware y ciclo de vida** lista todos los equipos (primero los que tienen versión nueva); cada equipo muestra la etiqueta **Firmware X disponible** y, en su pestaña Firmware, la sección **Actualizaciones de firmware**. Cuando aparece una versión nueva se registra un aviso en Alarmas, una sola vez por versión. Un equipo nuevo se comprueba en cuanto hace su primer respaldo, sin esperar a la comprobación diaria, y la tarjeta **Actualizar firmware** muestra la versión disponible también en los equipos que OpenNCCM no puede actualizar.
 
 | Equipos | De dónde sale la versión | Descarga |
 | --- | --- | --- |

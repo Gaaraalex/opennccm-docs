@@ -87,6 +87,8 @@ If the device answers none of them, the ports come from the configuration in gra
 
 The strip's **Back** button shows the device's **power supplies** and **fans**: in green those working (supply with power, fan spinning) and in red those failing or without power; with a dashed border, those not installed. So you can see at a glance whether a device with two supplies has both connected. If one fails, the strip also warns from the front ("No power or failed: PSU 2", "Fan stopped: Fan 3") and the Back button gets a red dot. It is read in the backup with each vendor's command: MikroTik `/system health print`, Cisco `show environment all`, Juniper `show chassis environment`, Huawei `display power` and `display fan`, HPE `show system fans/power-supply`, Aruba AOS-CX and Arista `show environment …`, FastPath `show environment`, Extreme `show fans/power` and FortiGate `execute sensor list`. Devices that do not report it over SSH (for example small fanless routers) say so in the Back view.
 
+On devices with their ports at the back, such as the **WatchGuard Firebox T40**, the device page opens on **Back** and shows the device as it is: serial console, the two USB ports, the ports with their labels (0/WAN, 1/LAN, 2, 3, 4-PoE), Reset, the power switch and the power input. **Front** shows its lights (Failover, each port's lights, Status, Mode, Attn and power); clicking a port's lights selects it. On WatchGuard the ports come from the configuration (interface name, whether it is enabled and its IP or the VLANs that pass through it), without link status.
+
 ![Compliance tab: rules grouped by policy, with "Fix N".](../../../../assets/manual/05c-dispositivo-cumplimiento.png)
 
 ## Device web interface

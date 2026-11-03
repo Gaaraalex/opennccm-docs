@@ -1,15 +1,47 @@
 ---
 title: "What's new"
-description: "What's new in OpenNCCM 2.18.0 and earlier versions."
+description: "What's new in OpenNCCM 2.19.0 and earlier versions."
 resumen:
-  - "2.18.0 brings the knowledge base: every solved case is written down and “To document” fills itself with critical alarms and rollbacks."
-  - "sudo opennccm restore on a new server uses the key in the backup (and warns when it is missing); it also works with PostgreSQL."
-  - "New “Professional support” button in the top bar, which the administrator can hide in Settings › Organization."
+  - "2.19.0 fully backs up WatchGuard Fireware: the configuration in XML, the feature key stored once and the device page with its ports at the back."
+  - "New “WatchGuard Fireware · Basic security” compliance pack with 10 rules, loaded automatically on upgrade."
+  - "The device page with huge configurations opens again in under a second, and a device error is no longer saved as a version."
 ---
 
 The latest 6 versions. The release notes are written in Spanish; the full history is at [opennccm.com/en/changelog](https://opennccm.com/en/changelog.html) and every version can be downloaded from [GitHub](https://github.com/Gaaraalex/opennccm/releases).
 
 <div lang="es">
+
+## Versión 2.19.0
+- **WatchGuard Fireware:** Los firewalls WatchGuard se respaldan completos y su ficha muestra los puertos. El respaldo
+  usa `export config to console` (Fireware no tiene `show running-config`; probado en un Firebox T40 con 12.8.1 y un usuario de
+  solo lectura Device Monitor). Los puertos salen de la configuración: nombre de la interfaz, si está habilitada y su IP o las
+  VLAN que pasan por él.
+- **Feature key de WatchGuard:** Al agregar un WatchGuard se guarda su feature key una sola vez, cifrada, y se descarga
+  desde la ficha del equipo. Si el equipo no la da en el primer respaldo, se intenta en el siguiente; la descarga queda en
+  Auditoría.
+- **Frente y parte de atrás del Firebox T40:** La ficha dibuja el T40 como es, con los puertos detrás y las luces
+  delante. Atrás: consola serie, dos USB, 0/WAN, 1/LAN, 2, 3 y 4-PoE, Reset, interruptor y entrada de 54 V DC; frente: Failover,
+  las luces de cada puerto, Status, Mode, Attn y encendido. La ficha se abre por detrás.
+- **Cumplimiento para WatchGuard:** Un paquete nuevo de 10 reglas revisa la seguridad básica de los Firebox. Web UI y
+  administración no abiertas a Internet, bloqueo de cuentas, sesión inactiva ≤ 15 min, SNMP sin comunidades por defecto y v3, NTP,
+  envío de logs, bloqueo de paquetes falsificados y aviso antes del inicio de sesión. Se carga solo al actualizar.
+- **Respaldos con error:** Un mensaje de error del equipo ya no se guarda como si fuera una versión de la
+  configuración. Antes solo se miraba la primera línea, y Fireware pone el error en la segunda («^» y «% Invalid input…»).
+- **Ficha lenta con configuraciones enormes:** La ficha de un equipo con una configuración de decenas de miles de
+  líneas vuelve a abrir en menos de un segundo. La comparación aparta lo igual antes de comparar (de 26 s a 0,1 s con 40.000
+  líneas) y dibuja como mucho 2.000 filas, con la descarga del .diff completo.
+- **Pestañas de página:** Al abrir la ficha de un equipo ya no se ven un momento el Historial y la Comparación dentro
+  de Resumen.
+- **Firmware de un equipo nuevo:** La versión de firmware disponible aparece en cuanto se agrega un equipo, sin esperar
+  a la comprobación diaria. La tarjeta «Actualizar firmware» la muestra también en los equipos que OpenNCCM no puede actualizar.
+- **Análisis en inglés y en español:** El origen de los cambios hechos desde la consola sale como «Consola» («Console»)
+  y no como «console».
+- **Novedades con su tipo:** Cada punto de las novedades lleva su tipo (Nuevo, Mejora, Arreglo o Seguridad) como una
+  etiqueta de color. La ventana tiene la cabecera y el pie fijos, con «Cerrar» siempre a la vista, y se cierra también con un clic
+  fuera.
+- **Teléfono:** «Soporte profesional» está también al final del menú lateral y el saludo del Panel ya no se monta
+  sobre los botones. La insignia de la base de conocimiento es ámbar en todas las páginas.
+- **Inglés:** El grupo «Equipo» del menú (las personas) se traduce «Team» y no «Device».
 
 ## Versión 2.18.0
 - **Botón «Soporte profesional»** en la barra superior, a la izquierda de «Apoya OpenNCCM»: un enlace a la página de soporte de pago
@@ -95,13 +127,5 @@ The latest 6 versions. The release notes are written in Spanish; the full histor
   de 24 V y «sin ventiladores». La ficha guarda lo que respondió el equipo al leer los puertos (pestaña Puertos, solo
   administradores) para corregir las plataformas que no den el estado de enlace.
 - Aprobar o rechazar un cambio usa la misma comprobación en la web y en la API.
-
-## Versión 2.13.1
-- **Puertos de los EdgeSwitch con chip Realtek (por ejemplo ES-18X, puertos «gi1»…).** No salían: se probaba solo la orden
-  de los EdgeSwitch clásicos. Ahora se lee también «show interfaces status» y, si el equipo no da la tabla, los puertos
-  salen de la configuración sea cual sea su estilo. El firmware es el real (1.11.1) y no la versión del cargador, y el
-  modelo se toma de la cabecera de la configuración.
-- **Ficha con puertos:** los números y rótulos quedan a 12 px del contorno del puerto elegido; en el móvil, la tabla
-  Interfaces va en dos renglones por puerto y la ruta muestra solo «‹ Dispositivos».
 
 </div>

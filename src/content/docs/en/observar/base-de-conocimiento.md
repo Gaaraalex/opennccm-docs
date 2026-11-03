@@ -3,7 +3,7 @@ title: "Knowledge base"
 description: "Every case solved on the network is written down: symptom, cause, steps with their commands, check and prevention."
 ---
 
-Since version 2.18, the **knowledge base** keeps every case solved on the network: the symptom, the cause, the step-by-step fix with its commands, how to check it worked and what to do so it doesn't happen again. It's in the side menu as **Knowledge base**; the amber badge counts what's still to document.
+Since version 2.18, the **knowledge base** keeps every case solved on the network: the symptom, the cause, the step-by-step fix with its commands, how to check it worked and what to do so it doesn't happen again. It's in the side menu under **Team › Knowledge base**; the amber badge counts what's still to document.
 
 ## Who can see it
 
