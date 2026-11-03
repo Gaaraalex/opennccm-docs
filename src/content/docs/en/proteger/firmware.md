@@ -29,7 +29,7 @@ On MikroTik, airOS, airFiber and EdgeRouter, OpenNCCM **backs up the device firs
 
 ## Available updates
 
-Once a day OpenNCCM checks whether there is a newer firmware version for each device, and what it improves. The **Available updates** tab in **Firmware and lifecycle** lists all devices (those with a new version first); each device shows the tag **Firmware X available** and, in its Firmware tab, the **Firmware updates** section. When a new version appears a notice is recorded in Alarms, once per version.
+Once a day OpenNCCM checks whether there is a newer firmware version for each device, and what it improves. The **Available updates** tab in **Firmware and lifecycle** lists all devices (those with a new version first); each device shows the tag **Firmware X available** and, in its Firmware tab, the **Firmware updates** section. When a new version appears a notice is recorded in Alarms, once per version. A new device is checked as soon as it makes its first backup, without waiting for the daily check, and the **Update firmware** card shows the available version also on devices that OpenNCCM cannot update.
 
 | Devices | Where the version comes from | Download |
 | --- | --- | --- |

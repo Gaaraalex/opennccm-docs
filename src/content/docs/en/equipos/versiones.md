@@ -30,7 +30,7 @@ In Settings you can limit how many versions are kept per device. Tagged versions
 
 ### How to use it
 
-1.  In the device's **Versions** tab, click two versions on the timeline (the older one becomes A and the other B): the comparison appears beside it, in **side-by-side** or **unified** view.
+1.  In the device's **Versions** tab, click two versions on the timeline (the older one becomes A and the other B): the comparison appears beside it, in **side-by-side** or **unified** view. With huge configurations it draws at most 2,000 rows and offers the full `.diff` for download.
 2.  **Compare configurations** (from Search configs or the device's ⋯ menu) compares versions of different devices and lets you change the context (0, 3, 10 lines or the whole file) and swap A and B.
 
 At the top, **What changed** sums up the differences in words (for example "in 'interface Gi0/1', 'shutdown' was added"). The **side-by-side** view shows version A on the left and B on the right, with line numbers: in red what was removed or modified, in green what was added or modified. The **unified** view shows the classic diff format. The **n** and **p** keys jump to the next or previous change, and the thin bar on the right marks where all of them are.
