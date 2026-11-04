@@ -1,13 +1,33 @@
 ---
 title: "Novedades de la versión"
-description: "Lo nuevo de OpenNCCM 2.23.0 y las versiones anteriores."
+description: "Lo nuevo de OpenNCCM 2.24.0 y las versiones anteriores."
 resumen:
-  - "2.23.0 lleva el asistente IA a todo el sistema: consulta vulnerabilidades, la base de conocimiento, configlets y tareas, y prepara configlets, scripts, casos, tareas y migraciones."
-  - "Cada usuario puede elegir su modelo de IA en el chat o en la consola, sin cambiar el de los demás."
-  - "El asistente solo habla de la red, y su panel en la consola deja más espacio a las respuestas."
+  - "2.24.0 dice qué se cae antes de reiniciar un equipo o apagar puertos, con el mapa LLDP/CDP, y actualiza el firmware de varios equipos en el orden que menos corta."
+  - "Informes nuevos: puertos sin uso (con su apagado como solicitud de cambio) y el documento de la red en PDF o Word."
+  - "Operar › Consola tiene lo mismo que la consola de la ficha en cada sesión."
 ---
 
 Las 6 últimas versiones. El historial completo está en [opennccm.com/novedades](https://opennccm.com/novedades.html) y cada versión se descarga desde [GitHub](https://github.com/Gaaraalex/opennccm/releases).
+
+## Versión 2.24.0
+- **¿Qué se cae si toco este equipo?:** Cuando una solicitud de cambio reinicia equipos o apaga puertos, OpenNCCM
+  calcula con el mapa de la red (LLDP/CDP) qué queda sin servicio: en rojo lo que queda aislado, en ámbar los routers y
+  sucursales que se cortan y en verde lo que sigue por otro camino, con una frase como «Si reinicias CORE-01 quedan aislados 3
+  equipos». «Aprobar» espera a que se marque «Leí el impacto», el impacto queda en Auditoría y la solicitud se puede dejar
+  para una hora (la ventana de mantenimiento). Dice también lo que no sabe: los equipos que no informan vecinos.
+- **Firmware de varios equipos en el orden que menos corta:** Con reinicio, primero se actualizan los que no aíslan
+  a nadie y, de a uno, los que sí; nunca dos que juntos dejan más sin servicio. El mismo análisis aparece en la ficha, en las
+  tareas que reinician y en el mapa («¿Qué se cae?»).
+- **Puertos sin uso:** Informe nuevo con los puertos de acceso de cada switch sin enlace hace más de 30, 60 o 90
+  días, cuántos quedan libres y qué switches están casi llenos. Excluye uplinks, troncales, 802.1X y excepciones, y prepara el
+  apagado de los elegidos como solicitud de cambio, con la sintaxis de cada fabricante. El historial se empieza a anotar con
+  esta versión: hasta tener los días pedidos, el informe dice desde cuándo hay datos.
+- **Documento de la red:** Un PDF o un Word (.docx) por sitio, grupo o toda la red con inventario, mapa, VLAN e IP,
+  enlaces, cumplimiento y vulnerabilidades y el último respaldo de cada equipo, con portada, logo del cliente y la opción de
+  ocultar las IP públicas. Nunca lleva contraseñas ni claves. Avisa si la red cambió desde que se generó.
+- **Operar › Consola como la consola de la ficha:** Cada sesión tiene A−/A+, «Ampliar» en la ventana, abrir en una
+  ventana aparte y pantalla completa; el botón «Asistente» lleva el logo del proveedor y la cabecera del asistente se oculta
+  desde ella misma con «Ocultar». Además, el configlet que prepara el asistente ya aplica a sus tipos de equipo.
 
 ## Versión 2.23.0
 - **Panel del asistente más amplio:** En la consola, las preguntas sugeridas ya no se salen del panel, se pliegan
@@ -124,25 +144,3 @@ Las 6 últimas versiones. El historial completo está en [opennccm.com/novedades
 - **Teléfono:** «Soporte profesional» está también al final del menú lateral y el saludo del Panel ya no se monta
   sobre los botones. La insignia de la base de conocimiento es ámbar en todas las páginas.
 - **Inglés:** El grupo «Equipo» del menú (las personas) se traduce «Team» y no «Device».
-
-## Versión 2.18.0
-- **Botón «Soporte profesional»:** Un botón nuevo en la barra superior lleva a la página de soporte de pago. Está a la
-  izquierda de «Apoya OpenNCCM», se abre en otra pestaña y tiene una animación suave que se detiene si el sistema pide reducir
-  el movimiento. No cambia ninguna función; el administrador lo oculta para todos en **Ajustes › Organización**.
-- **Base de conocimiento:** Cada problema resuelto queda escrito como un caso, para que el equipo lo encuentre y lo
-  resuelva igual la próxima vez. Está en Equipo › Base de conocimiento; cada caso tiene síntoma, causa, pasos con sus comandos
-  («Copiar» sin la clave oculta y «Abrir en consola», que lo deja escrito sin ejecutarlo), comprobación y prevención.
-  «Falta documentar» se llena sola con las alarmas críticas cerradas y los cambios revertidos (y, si se activa, las sesiones de
-  consola de más de 15 min); una alarma crítica ya no se cierra sin caso o enlace a uno existente. Los operadores envían a
-  revisión y el administrador aprueba o pide cambios; «Proponer cambio» en casos ajenos, versiones, comentarios, «Me sirvió»,
-  «Convertir en configlet», asistente IA para proponer causa y comprobación, casos parecidos y resumen por correo los lunes.
-  Solo para administradores y operadores (solo lectura, si el administrador lo activa); las contraseñas, claves y comunidades
-  SNMP se ocultan al guardar y cada lectura y edición queda en Auditoría.
-- **Restaurar en un servidor nuevo:** Una copia del sistema restaurada en un servidor nuevo ya se lee completa,
-  porque se usa la clave que viene en la copia. `sudo opennccm restore` con una copia que incluye la clave reemplaza la que creó
-  el instalador (la anterior queda como `secret.key.antes-de-restaurar-FECHA`); antes se quedaba con la del instalador y las
-  configuraciones y contraseñas no se podían leer. Si la copia no trae la clave y la del servidor no descifra los datos
-  restaurados, el comando lo avisa y dice qué hacer en lugar de terminar con «Restaurado.».
-- **Restaurar con PostgreSQL:** Las copias del sistema también se pueden restaurar en servidores que usan PostgreSQL.
-  `sudo opennccm restore` usa `pg_restore`; una copia de otra base de datos (SQLite en un servidor con PostgreSQL o al revés) se
-  rechaza con el motivo.
