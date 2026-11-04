@@ -1,15 +1,31 @@
 ---
 title: "What's new"
-description: "What's new in OpenNCCM 2.22.0 and earlier versions."
+description: "What's new in OpenNCCM 2.23.0 and earlier versions."
 resumen:
-  - "2.22.0 lets the people an administrator allows view device credentials, with two-step verification and their password each time."
-  - "It warns about licenses about to expire (WatchGuard feature key) and when a device is replaced by another one at the same address."
-  - "The console and the AI assistant suggest each device’s own commands, by model and firmware version."
+  - "2.23.0 takes the AI assistant across the whole system: it queries vulnerabilities, the knowledge base, configlets and tasks, and prepares configlets, scripts, cases, tasks and migrations."
+  - "Each user can choose their own AI model in the chat or the console, without changing anyone else’s."
+  - "The assistant only talks about the network, and its console panel leaves more room for answers."
 ---
 
 The latest 6 versions. The release notes are written in Spanish; the full history is at [opennccm.com/en/changelog](https://opennccm.com/en/changelog.html) and every version can be downloaded from [GitHub](https://github.com/Gaaraalex/opennccm/releases).
 
 <div lang="es">
+
+## Versión 2.23.0
+- **Panel del asistente más amplio:** En la consola, las preguntas sugeridas ya no se salen del panel, se pliegan
+  solas al preguntar y se vuelven a abrir con «✦ Preguntas sugeridas». El botón ⓘ oculta la parte de arriba (proveedor,
+  contexto y aviso) para dejar más espacio a las respuestas, y la pregunta se escribe al fondo del panel.
+- **Elegir el modelo de IA:** En Ajustes › Asistente IA el modelo se elige en un desplegable con los de la cuenta
+  del proveedor. Cada usuario puede cambiarlo a su gusto desde el chat de la barra superior o desde el panel de la consola,
+  sin cambiar el de los demás.
+- **El asistente solo habla de la red:** Responde sobre redes y seguridad, los equipos que OpenNCCM admite y
+  administra y el uso de OpenNCCM. A una pregunta ajena contesta en una frase que solo ayuda con la red.
+- **Asistente en Operar › Consola:** Cada sesión abierta tiene su botón «✦ Asistente», como la consola de la
+  ficha del equipo.
+- **El asistente ayuda en todo el sistema:** El chat consulta las vulnerabilidades, la Base de conocimiento, los
+  configlets, las tareas programadas y los tipos de equipo admitidos. Prepara configlets y scripts, borradores de casos de
+  la Base de conocimiento, tareas, correcciones de vulnerabilidades como solicitud de cambio y migraciones desde otro
+  sistema (el CSV para importar equipos). Todo se hace solo cuando el usuario confirma.
 
 ## Versión 2.22.0
 - **Feature key de WatchGuard lista para restaurar:** OpenNCCM guarda la feature key tal como se pega en el Firebox
@@ -132,22 +148,5 @@ The latest 6 versions. The release notes are written in Spanish; the full histor
 - **Restaurar con PostgreSQL:** Las copias del sistema también se pueden restaurar en servidores que usan PostgreSQL.
   `sudo opennccm restore` usa `pg_restore`; una copia de otra base de datos (SQLite en un servidor con PostgreSQL o al revés) se
   rechaza con el motivo.
-
-## Versión 2.17.0
-- **Operar › Consola:** Elegir un equipo vuelve a abrir su consola y las recetas se ven todas otra vez. En la 2.16.0
-  un fallo de la página dejaba las dos cosas sin funcionar; ahora en **Recetas**, con «Todas» y «Todos los fabricantes», se ven
-  todas.
-- **Herramientas con parámetros:** Ping, traceroute, puerto TCP y DNS aceptan las opciones de siempre, de Windows o de
-  Linux. Detrás de la IP o el nombre: `8.8.8.8 -t` (ping continuo hasta pulsar **Detener**), `-n 10`, `-l 1400 -f`, `-i 0.2`,
-  `--ttl 5`; traceroute `-h 30 -q 3`, `-I` o `-T -p 443`; puerto TCP `host:443 -c 5`; DNS `ejemplo.com MX @1.1.1.1` o
-  `-x 8.8.8.8`. Debajo de la casilla se ven las de cada herramienta. La salida llega a medida que se produce. Solo se aceptan
-  esas opciones (nada se pasa tal cual al sistema). El instalador y `sudo opennccm update` instalan `dnsutils` (dig) para los
-  tipos de registro DNS.
-- **Chat del asistente:** El asistente solo nombra equipos que existen y dice cuántos equipos toca una acción antes de
-  hacerla. La confirmación lista los equipos con su número («Respaldar 3 equipos»); la barra superior se acomoda con el chat
-  abierto y el chat vacío saluda con sugerencias.
-- **Errores en pocas palabras:** Los fallos de conexión y de respaldo se explican con un motivo corto y traducido. En
-  el Panel («Necesita tu atención») y en el chat salen como «sin respuesta por SSH», «credencial rechazada», «cambió la clave SSH
-  del equipo», «falta la contraseña enable»…; el mensaje completo sigue en la ficha del equipo.
 
 </div>
