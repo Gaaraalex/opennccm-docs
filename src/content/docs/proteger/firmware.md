@@ -25,6 +25,8 @@ En MikroTik, airOS, airFiber y EdgeRouter, OpenNCCM **respalda el equipo antes**
 3.  Un administrador revisa los pasos previstos y aprueba. El resultado muestra si el archivo ya existía, si se transfirió y si el MD5 coincidió.
 4.  Tras el reinicio, OpenNCCM vuelve a respaldar el equipo a los 15 minutos para actualizar la versión en el inventario.
 
+**Varios equipos con reinicio:** la solicitud muestra el orden sugerido (primero los que no aíslan a nadie, juntos; después, de a uno, los que sí) y se ejecuta en ese orden, esperando que termine cada paso. Nunca reinicia a la vez dos equipos que juntos dejan sin servicio más que cada uno por separado, y avisa cuáles son. Ver el [análisis de impacto](/cambios/solicitudes/#análisis-de-impacto-qué-se-cae-si-toco-este-equipo).
+
 ![Firmware y ciclo de vida: pestaña Imágenes.](../../../assets/manual/17-firmware.png)
 
 ## Actualizaciones disponibles

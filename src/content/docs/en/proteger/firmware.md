@@ -25,6 +25,8 @@ On MikroTik, airOS, airFiber and EdgeRouter, OpenNCCM **backs up the device firs
 3.  An administrator reviews the planned steps and approves. The result shows whether the file already existed, whether it was transferred and whether the MD5 matched.
 4.  After the reboot, OpenNCCM backs up the device again 15 minutes later to update the version in the inventory.
 
+**Several devices with reboot:** the request shows the suggested order (first those that isolate nobody, together; then, one at a time, those that do) and runs in that order, waiting for each step to finish. It never reboots at the same time two devices that together leave more without service than each one separately, and it says which ones. See the [impact analysis](/en/cambios/solicitudes/#impact-analysis-what-goes-down-if-i-touch-this-device).
+
 ![Firmware and lifecycle: Images tab.](../../../../assets/manual/17-firmware.png)
 
 ## Available updates
