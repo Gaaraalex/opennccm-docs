@@ -31,6 +31,14 @@ El pie muestra el estado, cómo entró (con la credencial del equipo o con usuar
 | Iniciar sesión automáticamente (Ajustes → Seguridad y acceso) | Entra con la credencial asignada al equipo, sin pedir usuario ni contraseña; en Cisco, EdgeSwitch y similares también entra al modo privilegiado. Desactivado por omisión. |
 | Quién puede abrirla y cómo (Operar → Consola → Acceso) | Ver «Centro de consola». |
 
+## Comandos favoritos
+
+Sobre la terminal (en la ficha y en **Operar → Consola**) está la barra **★ Favoritos** con los comandos guardados para ese tipo de equipo (Cisco IOS / IOS-XE, MikroTik RouterOS, WatchGuard…) y los de **Todos los equipos**. Un clic escribe el comando y lo envía.
+
+-   Si el comando cambia la configuración (copy, conf, write, set y sus equivalentes), se escribe pero no se envía, aunque el favorito diga «Enviar»: se confirma con **Enter**.
+-   **☆ Guardar como favorito**, junto al indicador, guarda el último comando con un nombre. Sin favoritos para un tipo, se pueden agregar los sugeridos.
+-   **Administrar favoritos** (arriba en Operar → Consola, o **Editar** en la barra) abre la ventana **Comandos favoritos**: una pestaña por tipo de equipo, arrastrar para cambiar el orden, editar, quitar (con «Deshacer»), elegir **Enviar** o **Solo escribir** y, para los administradores, **Compartir con todo el equipo**. Los propios los ve solo quien los guardó.
+
 ## Centro de consola (Operar → Consola)
 
 | Sección | Qué hace |

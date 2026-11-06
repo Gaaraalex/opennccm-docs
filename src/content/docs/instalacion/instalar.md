@@ -27,7 +27,7 @@ Antes de preguntar nada, el instalador verifica que el servidor sea Ubuntu 22.04
 
 ### Actualizaciones de Ubuntu
 
-Recomendado en servidores nuevos: ejecuta `apt update` y `apt full-upgrade`. En cualquier caso, el instalador instala solo los paquetes que falten (git, Python 3, nginx, whiptail, openssl, etc.).
+Recomendado en servidores nuevos: ejecuta `apt update` y `apt full-upgrade`. En cualquier caso, el instalador instala solo los paquetes que falten (git, Python 3, nginx, whiptail, openssl, ieee-data para el fabricante de cada MAC, etc.).
 
 ![¿Actualizar Ubuntu?](../../../assets/manual/tui-03-actualizar-ubuntu.png)
 

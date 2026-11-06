@@ -27,7 +27,7 @@ Before asking anything, the installer checks that the server runs 64-bit Ubuntu 
 
 ### Ubuntu updates
 
-Recommended on new servers: it runs `apt update` and `apt full-upgrade`. Either way, the installer only installs the packages that are missing (git, Python 3, nginx, whiptail, openssl, etc.).
+Recommended on new servers: it runs `apt update` and `apt full-upgrade`. Either way, the installer only installs the packages that are missing (git, Python 3, nginx, whiptail, openssl, ieee-data for the vendor of each MAC, etc.).
 
 ![Update Ubuntu?](../../../../assets/manual/tui-03-actualizar-ubuntu.png)
 

@@ -19,7 +19,7 @@ OpenNCCM mantiene un historial completo y cifrado de la configuración de cada e
 
 La barra lateral agrupa las páginas por tarea: **Operar** (Cambios, Configlets, Tareas), **Proteger** (Cumplimiento, Vulnerabilidades, Firmware y ciclo de vida), **Observar** (Alarmas, Análisis, Informes) y **Administrar** (usuarios, credenciales, grupos, plataformas, auditoría, sistema y ajustes, en pestañas). Los números junto a Cambios y Alarmas indican lo pendiente. El botón del encabezado de la barra la pliega para dejar solo los iconos.
 
-Con **Ctrl K** (o el buscador de la barra superior) se abre una paleta para ir a cualquier página, abrir un equipo por nombre, IP, modelo o serie, lanzar acciones o buscar un texto en todas las configuraciones. Los avisos de cada acción aparecen abajo a la derecha; cuando la acción se puede deshacer (por ejemplo, reconocer alarmas) el aviso trae el botón **Deshacer**.
+Con **Ctrl K** (o el buscador de la barra superior) se abre una paleta para ir a cualquier página, abrir un equipo por nombre, IP, modelo o serie, [encontrar dónde está conectada una MAC o una IP](/equipos/buscar-mac-ip/), lanzar acciones o buscar un texto en todas las configuraciones. Los avisos de cada acción aparecen abajo a la derecha; cuando la acción se puede deshacer (por ejemplo, reconocer alarmas) el aviso trae el botón **Deshacer**.
 
 ![Panel principal con la barra lateral.](../../../assets/manual/02-panel.png)
 

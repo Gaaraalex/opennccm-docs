@@ -14,7 +14,9 @@ Everything relevant generates an **event** with a color-coded severity:
 
 **Alarms** opens on **Unacknowledged** (or **All**), with chips per severity and their count. Each alarm shows the device and how long ago it happened (the full detail appears on hover), with **Open device** and **Acknowledge**; you can also acknowledge them all (with **Undo** in the notice). Those with a severity equal to or above the one set in Settings are sent by email, webhook (Teams, Slack…) and/or Telegram.
 
-If the “When closing a critical alarm” rule of the [knowledge base](/en/observar/base-de-conocimiento/) is on (it is by default), a **critical** alarm isn’t closed with **Acknowledge**: **Close critical alarm** opens, where you choose **Close and document** or **Close and link** (to an existing case). “Acknowledge all” leaves critical alarms open.
+If the “When closing a critical alarm” rule of the [knowledge base](/en/observar/base-de-conocimiento/) is on (it is by default), a **critical** alarm isn’t closed with **Acknowledge**: **Close critical alarm** opens, where you choose **Close and document** or **Close and link** (to an existing case). With the [new or lost neighbor alert](/en/observar/analisis/#new-or-lost-neighbor-alert) on, the **Neighbors** filter shows only those alarms.
+
+“Acknowledge all” leaves critical alarms open. Critical CVE alarms (“Firmware vulnerability”) are the exception: they are a state that is resolved by upgrading the firmware and their record is in [Vulnerabilities](/en/proteger/vulnerabilidades/), so they are acknowledged without a case, also with “Acknowledge all”. “Acknowledge all” answers right away even with hundreds of alarms, and **Undo** works with thousands.
 
 ![Alarms and events.](../../../../assets/manual/21-alarmas.png)
 
