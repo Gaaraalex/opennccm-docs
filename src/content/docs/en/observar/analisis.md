@@ -21,7 +21,7 @@ Hovering over a bar or cell shows its exact value. Device and policy names are l
 
 ## Network map
 
-**Network map** (sidebar) draws the devices and the links between them, with the port at each end. Links come from the **LLDP or CDP** neighbors each device announces, read on every backup with a read-only command (for example `show cdp neighbors detail` on Cisco or `/ip neighbor print` on MikroTik). Supported on Cisco, Arista, Juniper, Huawei, HP/Aruba, Dell, Ruckus, Allied, MikroTik, EdgeSwitch, UniFi Switch and EXOS, if LLDP or CDP is enabled.
+**Network map** (sidebar) draws the devices and the links between them, with the port at each end. Links come from the **LLDP or CDP** neighbors each device announces, read on every backup with a read-only command (for example `show cdp neighbors detail` on Cisco or `/ip neighbor print` on MikroTik). Supported on Cisco, Arista, Juniper, Huawei, HP/Aruba, Dell, Ruckus, Allied, MikroTik, EdgeSwitch, UniFi Switch, EXOS and VOSS / Fabric Engine (`show lldp neighbor`), if LLDP or CDP is enabled.
 
 -   Each device has three layers: the **ring** gives its status, the **icon** in the center what it is (router, switch, antenna, firewall or unknown) and the **badge** in the corner its vendor (OpenNCCM's own marks, not the brands' logos). The type comes from the model or platform and, if they say nothing, from the capabilities it announces over LLDP or CDP. The **Vendor** chips at the top highlight those of one brand, and each device's panel explains **how it was recognized**. Ports are only shown on the links of the selected device.
 -   Devices are colored by their latest backup. **Neighbors not in OpenNCCM** have a dashed border: clicking them, **Add to OpenNCCM** opens the add form with their name and IP.
@@ -32,4 +32,38 @@ Hovering over a bar or cell shows its exact value. Device and policy names are l
 -   Selecting a device shows the **ports** of its links next to each end; with more than 8 links, only the neighbor's (its own are in the panel's *Links* list). Hovering over a link shows both. The panel takes its own space on the right (at the bottom on narrow screens) and the map moves so the device and its neighbors are visible.
 -   **Isolated networks** (devices with no known links between them) are placed together, in rows; the **Network** selector shows just one.
 -   You can filter by group, search and drag devices. To move around: drag the background, use the wheel or the + and − buttons to zoom, "See the whole map" and "Full screen". Below, the list of links.
+-   **RoMON (MikroTik, off by default):** with **Also find MikroTik devices through RoMON** in **Settings › Network map**, the backup of each MikroTik with RoMON enabled also runs `/tool romon discover duration=10 proplist=address,hops,path,identity,version,board` (RouterOS 7 and 6) and the map shows the MikroTik devices it reaches, even if they are several hops away or have no IP address. RoMON does not say which port they connect through: they are joined to the previous hop of the path with a **dotted line** ("Through RoMON (no port)"), unless there is already an LLDP/CDP link between the two. They do not count for the [impact analysis](/en/cambios/solicitudes/) or for [Unused ports](/en/observar/informes/#unused-ports). They take their IP from MNDP/LLDP neighbors or from the ARP tables, if any of them knows it. It adds about 10 seconds to each MikroTik backup.
 -   It is turned off in **Settings › Network map** (then backups do not read neighbors).
+
+### Layout: how to arrange the devices
+
+The **Layout** menu on the map bar chooses how the devices are placed:
+
+| Layout | How they end up |
+| --- | --- |
+| Free | They arrange themselves by their links (the usual one). |
+| Stepped ↓ · Stepped → | From the central device downwards (or to the right), one hop per row. |
+| Radial | The central one in the middle and one ring per hop. |
+| By site | One box per site or network; each device's site is changed from its panel. |
+| By role | Columns: core, routers, switches, wireless and others. |
+| Circular | All in a circle. |
+| Collapsible tree | Opens and closes each branch from the central one. |
+| On a floor plan | Each device in its real place on a floor plan or map uploaded by an administrator ("Upload plan"). |
+| My layout | The one saved by dragging devices: **Save** keeps it just for you or, for administrators, for the whole team; "Back to automatic" discards it. |
+
+In those that start from a central device you choose which one (by default, the one with the most links). With "Remember this layout next time" the map opens the same way again.
+
+### Nodes
+
+A node groups the devices of one place (a branch, a tower, a building). They are created in **Administration › Nodes** or when creating or editing a device, with the **Node** field (like credentials: pick one from the list or "+ Create new node…"). On the map, the **Node** filter shows only the devices assigned to that node; "All" shows them all again.
+
+## New or lost neighbor alert
+
+With **Warn when neighbors change** (**Settings › Network map**, off by default) OpenNCCM creates an [alarm](/en/observar/alarmas/) when a device appears that was not there before or one that was there stops being seen. It uses the LLDP, CDP, MNDP and RoMON readings the map already takes on each backup: it adds no queries to the devices.
+
+-   Each device's first reading, and everything seen when the alert is turned on, is taken as known: it creates no alarms.
+-   **New neighbor:** it warns on the first reading where it appears (Warning level by default). **Lost neighbor:** it only warns if it is missing in 2 readings in a row (changed in Settings), so a few-second outage does not trigger it (High level by default). If it is seen again, the alarm closes on its own and stays in the history with the outage duration.
+-   In **Alarms**, the **Neighbors** filter shows only these. **View detail** opens the neighbor's card: port (with its VLAN and description), the name it announces, what it says it is, MAC with its vendor, IP and what was on that port before. From there: **It is known, don't warn again**, **View on map** and **Prepare port "shutdown"**, which creates a [change request](/en/cambios/solicitudes/) (nothing is shut down without approval). For a lost neighbor you see when it was last seen, in how many readings it was missing, the port status and what depends on it.
+-   On the map, **Highlight neighbor changes** (on) marks new ones with an amber border and the "NEW" label, and draws lost ones in dashed red, with an ✕ on their link. A device that is in OpenNCCM is not painted whole as new or lost: the lost link is drawn separately, on its port. The **Neighbor changes · last 24 h** panel lists the new, the lost and those that came back. The highlight goes away when the alarm is acknowledged or after 24 h.
+-   **Don't warn for:** IP phones and access points (from what they announce over LLDP), ports with 802.1X and devices at the chosen locations. **Known neighbors** lists those that don't warn when they appear; removing one that is still connected makes it warn as new on the next reading.
+-   The alarms go out through the same channels as the others (email, webhook and Telegram).

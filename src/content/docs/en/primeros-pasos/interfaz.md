@@ -19,7 +19,7 @@ OpenNCCM keeps a complete, encrypted history of every network device's configura
 
 The sidebar groups the pages by task: **Operate** (Changes, Configlets, Tasks), **Protect** (Compliance, Vulnerabilities, Firmware and lifecycle), **Monitor** (Alarms, Analytics, Reports) and **Administer** (users, credentials, groups, platforms, audit log, system and settings, in tabs). The numbers next to Changes and Alarms show what is pending. The button at the top of the sidebar collapses it to icons only.
 
-**Ctrl K** (or the search box in the top bar) opens a palette to go to any page, open a device by name, IP, model or serial, run actions or search for text in every configuration. Notices for each action appear at the bottom right; when the action can be undone (for example, acknowledging alarms) the notice has an **Undo** button.
+**Ctrl K** (or the search box in the top bar) opens a palette to go to any page, open a device by name, IP, model or serial, [find where a MAC or an IP is connected](/en/equipos/buscar-mac-ip/), run actions or search for text in every configuration. Notices for each action appear at the bottom right; when the action can be undone (for example, acknowledging alarms) the notice has an **Undo** button.
 
 ![Main dashboard with the sidebar.](../../../../assets/manual/02-panel.png)
 

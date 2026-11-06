@@ -66,7 +66,9 @@ export default defineConfig({
 					p('equipos/dispositivos', 'Dispositivos y ficha', 'Devices and device page'),
 					p('equipos/versiones', 'Versiones y comparación', 'Versions and diff'),
 					p('equipos/linea-base', 'Línea base', 'Baseline'),
+					p('equipos/referencia', 'Configuración de referencia', 'Reference configuration'),
 					p('equipos/buscar', 'Buscar en las configuraciones', 'Search configurations'),
+					p('equipos/buscar-mac-ip', 'Buscar una MAC o una IP', 'Find a MAC or an IP'),
 				]),
 				g('Cambios', 'Changes', [
 					p('cambios/configlets', 'Configlets', 'Configlets'),

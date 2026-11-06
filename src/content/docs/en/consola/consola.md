@@ -31,6 +31,14 @@ The footer shows the status, how it signed in (with the device's credential or w
 | Sign in automatically (Settings → Security and access) | Signs in with the credential assigned to the device, without asking for a user or password; on Cisco, EdgeSwitch and similar it also enters privileged mode. Off by default. |
 | Who can open it and how (Operate → Console → Access) | See "Console center". |
 
+## Favorite commands
+
+Above the terminal (on the device page and in **Operate → Console**) is the **★ Favorites** bar with the commands saved for that device type (Cisco IOS / IOS-XE, MikroTik RouterOS, WatchGuard…) and those for **All devices**. One click types the command and sends it.
+
+-   If the command changes the configuration (copy, conf, write, set and their equivalents), it is typed but not sent, even if the favorite says "Send": confirm it with **Enter**.
+-   **☆ Save as favorite**, next to the prompt, saves the last command with a name. With no favorites for a type, the suggested ones can be added.
+-   **Manage favorites** (at the top of Operate → Console, or **Edit** on the bar) opens the **Favorite commands** window: one tab per device type, drag to reorder, edit, remove (with "Undo"), choose **Send** or **Type only** and, for administrators, **Share with the whole team**. Your own are seen only by you.
+
 ## Console center (Operate → Console)
 
 | Section | What it does |

@@ -14,7 +14,9 @@ Todo lo relevante genera un **evento** con severidad por color:
 
 **Alarmas** se abre en **Sin reconocer** (o **Todas**), con chips por severidad y su recuento. Cada alarma muestra el equipo y hace cuánto ocurrió (el detalle completo aparece al pasar el ratón), con **Abrir equipo** y **Reconocer**; también se pueden reconocer todas (con **Deshacer** en el aviso). Las de severidad igual o mayor a la configurada en Ajustes se envían por correo, webhook (Teams, Slack…) y/o Telegram.
 
-Si la regla «Al cerrar una alarma crítica» de la [base de conocimiento](/observar/base-de-conocimiento/) está activa (lo está por omisión), una alarma **crítica** no se cierra con **Reconocer**: se abre **Cerrar alarma crítica**, donde se elige **Cerrar y documentar** o **Cerrar y enlazar** (a un caso que ya existe). «Reconocer todas» deja abiertas las críticas.
+Si la regla «Al cerrar una alarma crítica» de la [base de conocimiento](/observar/base-de-conocimiento/) está activa (lo está por omisión), una alarma **crítica** no se cierra con **Reconocer**: se abre **Cerrar alarma crítica**, donde se elige **Cerrar y documentar** o **Cerrar y enlazar** (a un caso que ya existe). Con el [aviso de vecino nuevo o perdido](/observar/analisis/#aviso-de-vecino-nuevo-o-perdido) activado, el filtro **Vecinos** muestra solo esas alarmas.
+
+«Reconocer todas» deja abiertas las críticas. Las alarmas críticas de CVE («Vulnerabilidad de firmware») son la excepción: son un estado que se resuelve al actualizar el firmware y su registro está en [Vulnerabilidades](/proteger/vulnerabilidades/), así que se reconocen sin caso, también con «Reconocer todas». «Reconocer todas» responde enseguida aunque haya cientos de alarmas, y **Deshacer** funciona con miles.
 
 ![Alarmas y eventos.](../../../assets/manual/21-alarmas.png)
 
