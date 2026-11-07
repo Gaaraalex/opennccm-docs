@@ -51,11 +51,11 @@ The **Layout** menu on the map bar chooses how the devices are placed:
 | On a floor plan | Each device in its real place on a floor plan or map uploaded by an administrator ("Upload plan"). |
 | My layout | The one saved by dragging devices: **Save** keeps it just for you or, for administrators, for the whole team; "Back to automatic" discards it. |
 
-In those that start from a central device you choose which one (by default, the one with the most links). With "Remember this layout next time" the map opens the same way again.
+In those that start from a central device you choose which one (by default, the one with the most links). With "Remember this layout next time" the map opens the same way again. Each layout uses the whole frame and "Fit to screen" never leaves names below 11 px: if they do not fit, the map stays larger and you move it; no line crosses the names. **By site** puts the central device in the middle, **By role** splits long columns and the **collapsible tree** frames the branch that opens. Below the map, the strip says which layout is chosen and how it works; the legend folds away with **Legend**. "Below the name" shows the IP, the MAC, the brand or nothing. In "On a floor plan", the "No location" tray scrolls with the wheel or with "+N more".
 
 ### Nodes
 
-A node groups the devices of one place (a branch, a tower, a building). They are created in **Administration › Nodes** or when creating or editing a device, with the **Node** field (like credentials: pick one from the list or "+ Create new node…"). On the map, the **Node** filter shows only the devices assigned to that node; "All" shows them all again.
+A node groups the devices of one place (a branch, a tower, a building). They are created in **Administration › Nodes** or when creating or editing a device, with the **Node** field (like credentials: pick one from the list or "+ Create new node…"), or in bulk from [Devices](/en/equipos/dispositivos/) with **Assign to node**. On the map, the **Node** filter shows that node's devices and, dimmed, the neighbors in other nodes ("in another node: …"); "All" shows them all again. In the list of nodes, **Edit** and **Delete** are in view, "N devices" opens Devices filtered by that node and a node without devices says so.
 
 ## New or lost neighbor alert
 

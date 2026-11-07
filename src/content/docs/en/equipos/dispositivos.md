@@ -8,10 +8,10 @@ curso: ["3.2","3.3","3.4"]
 
 ## How to use it
 
--   **Search and filter:** by name, IP, model, serial, version or location; by group; and by status (ok, error, pending, startup ≠ running, off baseline).
+-   **Search and filter:** by name, IP, model, serial, version or location; by group, [node](/en/observar/analisis/#nodes) and brand; and by status (ok, error, pending, startup ≠ running, off baseline). Each device carries its brand logo (also on the device page, the map, the console and Ctrl K); the **BRAND** row shows how many there are of each and filters with one tap.
 -   **Back up all:** starts a background backup of every device (or of the filtered group).
 -   **Row actions:** hovering a row shows back up, console and the device's web interface.
--   **Bulk actions:** select several rows and use the bottom bar to back them up, audit them or move them to a group.
+-   **Bulk actions:** select several rows and use the bottom bar to back them up, audit them, move them to a group or assign them to a node (**Assign to node**, administrators).
 -   **\+ Add** (admin): **Add a device** opens the form in a side panel; **Import CSV** opens the bulk import; **Import from Zabbix** brings in the Zabbix hosts.
 
 ## Import from CSV
@@ -40,6 +40,8 @@ SSH credentials are not in Zabbix. If you do not choose one for all, the devices
 | Vendor / operating system | Platform profile (131 options grouped by vendor). It defines the commands used. |
 | Protocol and port | SSH (22) or Telnet (23). Telnet only on platforms that support it. |
 | Credential and group | User/password profile and the device's group. You can create a new group right here with "…or create a new group". They are also managed in **Devices → Groups**. |
+| Node | The device's place (tower, branch, data center). Pick it from the list or with "+ Create new node…". See [Nodes](/en/observar/analisis/#nodes). |
+| Type on the map | (Administrators) Router, switch, antenna / AP or firewall, if the map puts it in the wrong column. **Automatic** works it out from the model; MikroTik antennas (RB911, SXT, LHG…) and a MikroTik with an active wlan or wifi count as wireless. |
 | Does it have a web interface? | **Yes** (default) shows the device's **Web interface** button; you can give its address if it is not `https://IP/`. **No** hides the button for devices without an admin page (many access switches, Linux servers…). It can be changed later in **Edit**. |
 | Custom backup command | Optional: replaces the profile's command (useful with the "Generic SSH" profile or versions with a different syntax). |
 | Enabled | If unticked, the device is left out of scheduled tasks and bulk backups. |

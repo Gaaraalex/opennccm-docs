@@ -8,10 +8,10 @@ curso: ["3.2","3.3","3.4"]
 
 ## Cómo usarlo
 
--   **Buscar y filtrar:** por nombre, IP, modelo, serie, versión o ubicación; por grupo; y por estado (ok, error, pendiente, startup ≠ running, fuera de línea base).
+-   **Buscar y filtrar:** por nombre, IP, modelo, serie, versión o ubicación; por grupo, [nodo](/observar/analisis/#nodos) y marca; y por estado (ok, error, pendiente, startup ≠ running, fuera de línea base). Cada equipo lleva el logo de su marca (también en la ficha, el mapa, la consola y Ctrl K); la fila **MARCA** muestra cuántos hay de cada una y filtra con un toque.
 -   **Respaldar todos:** lanza en segundo plano el respaldo de todos los equipos (o del grupo filtrado).
 -   **Acciones de la fila:** al pasar el ratón aparecen respaldar, consola e interfaz web del equipo.
--   **Acciones masivas:** marque varias filas y use la barra inferior para respaldarlas, auditarlas o moverlas a un grupo.
+-   **Acciones masivas:** marque varias filas y use la barra inferior para respaldarlas, auditarlas, moverlas a un grupo o asignarlas a un nodo (**Asignar al nodo**, administradores).
 -   **\+ Agregar** (admin): **Agregar un equipo** abre el formulario de alta en un panel lateral; **Importar CSV** abre la importación masiva; **Importar desde Zabbix** trae los hosts de Zabbix.
 
 ## Importar desde CSV
@@ -40,6 +40,8 @@ Las credenciales SSH no están en Zabbix. Si no elige una para todos, los equipo
 | Fabricante / sistema operativo | Perfil de la plataforma (131 opciones agrupadas por fabricante). Define los comandos que se usan. |
 | Protocolo y puerto | SSH (22) o Telnet (23). Telnet solo en plataformas que lo admiten. |
 | Credencial y grupo | Perfil de usuario/contraseña y grupo del equipo. Puede crear un grupo nuevo desde aquí mismo con «…o crear un grupo nuevo». También se administran en **Dispositivos → Grupos**. |
+| Nodo | Lugar del equipo (torre, sucursal, centro de datos). Se elige de la lista o con «+ Crear nodo nuevo…». Ver [Nodos](/observar/analisis/#nodos). |
+| Tipo en el mapa | (Administradores) Router, switch, antena / AP o firewall, si el mapa lo pone en la columna equivocada. **Automático** lo deduce del modelo; las antenas MikroTik (RB911, SXT, LHG…) y un MikroTik con una wlan o wifi activa cuentan como inalámbricos. |
 | ¿Tiene interfaz web? | **Sí** (por omisión) muestra el botón **Interfaz web** del equipo; se puede indicar su dirección si no es `https://IP/`. **No** oculta el botón para los equipos sin página de administración (muchos switches de acceso, servidores Linux…). Se puede cambiar después en **Editar**. |
 | Comando de respaldo personalizado | Opcional: sustituye al comando del perfil (útil con el perfil «Genérico SSH» o versiones con otra sintaxis). |
 | Habilitado | Si se desmarca, el equipo no entra en tareas programadas ni respaldos masivos. |
