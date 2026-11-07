@@ -51,11 +51,11 @@ El menú **Distribución** de la barra del mapa elige cómo se colocan los equip
 | Sobre un plano | Cada equipo en su lugar real sobre un plano o mapa que sube un administrador («Subir plano»). |
 | Mi distribución | La que se guardó arrastrando equipos: **Guardar** la deja solo para uno o, los administradores, para todo el equipo; «Volver a la automática» la descarta. |
 
-En las que parten de un equipo central se elige cuál (por defecto, el que tiene más enlaces). Con «Recordar esta distribución la próxima vez» el mapa vuelve a abrirse igual.
+En las que parten de un equipo central se elige cuál (por defecto, el que tiene más enlaces). Con «Recordar esta distribución la próxima vez» el mapa vuelve a abrirse igual. Cada distribución usa todo el recuadro y «Ajustar a la pantalla» nunca deja los nombres por debajo de 11 px: si no caben, el mapa queda más grande y se mueve; ninguna línea cruza los nombres. **Por sitio** pone el equipo central al medio, **Por función** parte las columnas largas y el **árbol plegable** encuadra la rama que se abre. Debajo del mapa, la franja dice qué distribución está elegida y cómo funciona; la leyenda se pliega con **Leyenda**. «Debajo del nombre» muestra la IP, la MAC, la marca o nada. En «Sobre un plano», la bandeja «Sin ubicación» baja con la rueda o con «+N más».
 
 ### Nodos
 
-Un nodo agrupa los equipos de un mismo lugar (una sucursal, una torre, un edificio). Se crean en **Administración › Nodos** o al crear o editar un equipo, con el campo **Nodo** (como las credenciales: se elige uno de la lista o «+ Crear nodo nuevo…»). Sobre el mapa, el filtro **Nodo** muestra solo los equipos asignados a ese nodo; «Todos» los vuelve a mostrar.
+Un nodo agrupa los equipos de un mismo lugar (una sucursal, una torre, un edificio). Se crean en **Administración › Nodos** o al crear o editar un equipo, con el campo **Nodo** (como las credenciales: se elige uno de la lista o «+ Crear nodo nuevo…»), o en bloque desde [Dispositivos](/equipos/dispositivos/) con **Asignar al nodo**. Sobre el mapa, el filtro **Nodo** muestra los equipos de ese nodo y, atenuados, los vecinos de otros nodos («en otro nodo: …»); «Todos» los vuelve a mostrar. En la lista de nodos, **Editar** y **Borrar** están a la vista, «N equipos» abre Dispositivos filtrado por ese nodo y un nodo sin equipos lo avisa.
 
 ## Aviso de vecino nuevo o perdido
 
