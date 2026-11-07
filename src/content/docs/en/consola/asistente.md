@@ -34,6 +34,6 @@ The **Assistant** button in the top bar opens a chat on the right on any page. A
 -   **Migrations:** from another system (RANCID, Oxidized, a spreadsheet…) it translates the device types to OpenNCCM's and builds the CSV for [Devices → Import](/en/instalacion/desde-otra-herramienta/).
 -   **How to use OpenNCCM:** it searches this manual ("How do I schedule a daily backup?").
 -   **Simple answers:** one or two sentences, devices on one line each (colored dot, name and reason), at most 2 buttons with the rest under **More actions**, and the source in gray.
--   **Actions:** the buttons take you to the right page or prepare an action. If it changes something (back up, create a task, a change request, a configlet or a draft case), a card appears with **Cancel** and **Confirm**; it only happens when you confirm and with the user's permissions. Change requests go through approval as usual.
+-   **Actions:** the buttons take you to the right page or prepare an action. If it changes something (back up, create a task, a change request, a configlet or a draft case), a card appears with **Cancel** and **Confirm**; it only happens when you confirm and with the user's permissions. Change requests go through approval as usual. If the answer proposes a change, the notice "Review the commands before using them in production" appears below it.
 
 Every question is recorded in the Audit log with the functions it used and the provider.

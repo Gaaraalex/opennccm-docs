@@ -9,6 +9,12 @@ curso: ["5.1"]
 | **config** | Entra en modo configuración, aplica los comandos y guarda la configuración (o hace *commit* en Junos, IOS-XR, PAN-OS, VyOS…). | Sí: crea una solicitud de cambio. |
 | **exec** | Ejecuta comandos de consulta (`show`, `display`…) y muestra la salida de cada equipo. | No: es inmediato. |
 
+La página tiene tres columnas, como las [Recetas](/consola/consola/). A la izquierda, **Para tus equipos** (lo que se abre: solo lo que puede ejecutar) y las plataformas de su inventario; las que no tienen configlets quedan atenuadas al final y, al elegirlas, ofrecen **Nuevo configlet para…** y **Ver sus recetas**. Debajo, atenuadas, las plataformas que no están en su inventario. En el medio, los **configlets** (cambian la configuración) y los **scripts** (solo consulta), cada uno con su plataforma en palabras y cuántos equipos suyos lo pueden ejecutar; los que no aplican a sus equipos quedan plegados al final. A la derecha, el elegido: **Sirve para**, **Sello**, **Usado**, el aviso con el [foro](https://comunidad.opennccm.com/foro) y GitHub, los comandos con las variables resaltadas y **Ejecutar**, **Editar** y **Duplicar**. El buscador mira el nombre y los comandos.
+
+:::caution[Revise los configlets antes de usarlos en producción]
+Como las recetas, un configlet probado completo en un equipo lleva el sello **Verificada** con la versión del sistema; solo un administrador lo pone o lo quita, y queda en Auditoría. Los de ejemplo salen «Sin verificar».
+:::
+
 ![Lista de configlets (se incluyen ejemplos para cambiar contraseñas, VLAN, NTP, syslog y diagnósticos).](../../../assets/manual/10-configlets.png)
 
 ## Variables
@@ -31,9 +37,9 @@ Variables del equipo: `device.name`, `device.host`, `device.model`, `device.os_v
 ## Ejecutar
 
 1.  Pulse **Ejecutar** en la tarjeta del configlet: se abre un panel lateral.
-2.  Complete las variables detectadas: hay un campo por cada una, y la **vista previa de comandos** se actualiza al escribir.
-3.  Elija los equipos compatibles: uno a uno, todos, ninguno o un grupo completo.
-4.  Para **config**: pulse **Crear solicitud de cambio** y espere la aprobación. Para **exec**: verá la salida al instante.
+2.  Complete las variables detectadas: hay un campo por cada una, y la **vista previa de comandos** muestra los comandos con sus valores al escribir. Una variable sin valor se ve en ámbar y no se puede enviar.
+3.  Elija los equipos compatibles (todos vienen marcados, con su versión del sistema): uno a uno, todos, ninguno o un grupo.
+4.  Para **config**: marque «Revisé los comandos y entiendo que OpenNCCM no los probó en todas las plataformas…» (si el configlet está verificado y un equipo tiene otra versión, se avisa), pulse **Crear solicitud de cambio** y espere la aprobación. Para **exec**: verá la salida al instante.
 
 ![Ejecución: variables y selección de equipos.](../../../assets/manual/11-configlet-ejecutar.png)
 

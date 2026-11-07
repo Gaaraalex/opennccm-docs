@@ -1,15 +1,36 @@
 ---
 title: "What's new"
-description: "What's new in OpenNCCM 2.29.0 and earlier versions."
+description: "What's new in OpenNCCM 2.30.0 and earlier versions."
 resumen:
-  - "2.29.0 adds ZTE devices: ZXA10 OLTs (C300, C320, C350, C220), TITAN OLTs (C600 to C680) and ZXR10 switches and routers."
-  - "It ships 422 recipes, at least 10 for 95 of the 133 device types, and a “Verified” badge on those tested end to end."
-  - "airMAX, airFiber, UniFi APs, the USG and the EdgeSwitch X show their available firmware and CVEs; airOS downloads as system.cfg."
+  - "2.30.0 ships 758 recipes: every device type with a command line (131 of 133) has at least 10."
+  - "Recipes and Configlets are laid out in three columns, by device or by task, and ask you to review the commands before creating the request."
+  - "After a firmware upgrade, OpenNCCM waits for the device to come back and confirms whether it is on the new version."
 ---
 
 The latest 6 versions. The release notes are written in Spanish; the full history is at [opennccm.com/en/changelog](https://opennccm.com/en/changelog.html) and every version can be downloaded from [GitHub](https://github.com/Gaaraalex/opennccm/releases).
 
 <div lang="es">
+
+## Versión 2.30.0
+- **Recetas para todos los equipos:** 758 recetas, con al menos 10 para cada tipo de equipo con línea de comandos (131 de
+  133), entre ellos Sophos, Cisco SD-WAN, Brocade FC, Ciena, Calix, Ericsson, Nokia ISAM, D-Link, Hirschmann, Yamaha, Eltex,
+  Teldat, AudioCodes, ScreenOS, Hillstone, WatchGuard y Prisma SD-WAN.
+- **Recetas por equipo y por tarea:** La pestaña Recetas tiene tres columnas: tus plataformas y todas las marcas, sus
+  recetas agrupadas por categoría y el detalle. «Por tarea» muestra en qué plataformas hay receta para lo que quieres hacer, y la
+  búsqueda agrupa por plataforma y dice dónde está la palabra.
+- **Configlets y scripts en columnas:** Primero lo que puedes ejecutar en tus equipos, con la plataforma en palabras,
+  el sello «Verificada», el aviso con el foro y GitHub y la casilla obligatoria antes de crear la solicitud.
+- **Vista previa de «Ejecutar» un configlet:** Mostraba trozos de código en lugar de los comandos; ahora muestra los
+  valores escritos y no deja enviar con una variable vacía.
+- **Aviso al aplicar comandos:** Las correcciones de Cumplimiento, Multi-equipo y el asistente IA llevan el aviso
+  «Revisa los comandos antes de usarlos en producción», y las correcciones y Multi-equipo piden marcar la casilla antes de crear
+  la solicitud. «Corregir N» deja elegir qué correcciones aplicar.
+- **Comprobar ahora lee la versión del equipo:** En la pestaña Firmware, «Comprobar ahora» le pregunta al equipo su
+  versión instalada antes de buscar la nueva, sin tener que respaldarlo.
+- **Comprobación después de actualizar el firmware:** Cuando el equipo vuelve, OpenNCCM lee su versión y avisa si quedó
+  en la nueva; si no, guarda en Eventos y en la solicitud el final del registro del equipo con el motivo.
+- **Serie de los Ubiquiti:** Los airMAX, airFiber y AP UniFi muestran su número de serie (la MAC, como hace Ubiquiti), y
+  se reconoce la serie escrita como «S/N».
 
 ## Versión 2.29.0
 - **Equipos ZTE:** OLT ZXA10 C300, C320, C350 y C220, OLT TITAN C600, C610, C620, C650 y C680, y switches y routers
@@ -105,25 +126,5 @@ The latest 6 versions. The release notes are written in Spanish; the full histor
 - **Impacto y puertos más claros:** La frase dice «quedan aislados 3 equipos y otros 2 de otras ubicaciones pierden la
   conexión», «Aprobar» se ve claramente desactivado hasta marcar «Leí el impacto», Puertos sin uso nunca muestra más días de
   los que hay datos y los textos usan el singular cuando es uno.
-
-## Versión 2.24.0
-- **¿Qué se cae si toco este equipo?:** Cuando una solicitud de cambio reinicia equipos o apaga puertos, OpenNCCM
-  calcula con el mapa de la red (LLDP/CDP) qué queda sin servicio: en rojo lo que queda aislado, en ámbar los routers y
-  sucursales que se cortan y en verde lo que sigue por otro camino, con una frase como «Si reinicias CORE-01 quedan aislados 3
-  equipos». «Aprobar» espera a que se marque «Leí el impacto», el impacto queda en Auditoría y la solicitud se puede dejar
-  para una hora (la ventana de mantenimiento). Dice también lo que no sabe: los equipos que no informan vecinos.
-- **Firmware de varios equipos en el orden que menos corta:** Con reinicio, primero se actualizan los que no aíslan
-  a nadie y, de a uno, los que sí; nunca dos que juntos dejan más sin servicio. El mismo análisis aparece en la ficha, en las
-  tareas que reinician y en el mapa («¿Qué se cae?»).
-- **Puertos sin uso:** Informe nuevo con los puertos de acceso de cada switch sin enlace hace más de 30, 60 o 90
-  días, cuántos quedan libres y qué switches están casi llenos. Excluye uplinks, troncales, 802.1X y excepciones, y prepara el
-  apagado de los elegidos como solicitud de cambio, con la sintaxis de cada fabricante. El historial se empieza a anotar con
-  esta versión: hasta tener los días pedidos, el informe dice desde cuándo hay datos.
-- **Documento de la red:** Un PDF o un Word (.docx) por sitio, grupo o toda la red con inventario, mapa, VLAN e IP,
-  enlaces, cumplimiento y vulnerabilidades y el último respaldo de cada equipo, con portada, logo del cliente y la opción de
-  ocultar las IP públicas. Nunca lleva contraseñas ni claves. Avisa si la red cambió desde que se generó.
-- **Operar › Consola como la consola de la ficha:** Cada sesión tiene A−/A+, «Ampliar» en la ventana, abrir en una
-  ventana aparte y pantalla completa; el botón «Asistente» lleva el logo del proveedor y la cabecera del asistente se oculta
-  desde ella misma con «Ocultar». Además, el configlet que prepara el asistente ya aplica a sus tipos de equipo.
 
 </div>
