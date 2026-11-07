@@ -9,6 +9,12 @@ curso: ["5.1"]
 | **config** | Enters configuration mode, applies the commands and saves the configuration (or *commits* on Junos, IOS-XR, PAN-OS, VyOS…). | Yes: it creates a change request. |
 | **exec** | Runs query commands (`show`, `display`…) and shows each device's output. | No: it is immediate. |
 
+The page has three columns, like [Recipes](/en/consola/consola/). On the left, **For your devices** (what opens: only what you can run) and the platforms in your inventory; those without configlets are dimmed at the end and, when chosen, offer **New configlet for…** and **See its recipes**. Below, dimmed, the platforms that are not in your inventory. In the middle, the **configlets** (they change the configuration) and the **scripts** (queries only), each with its platform in words and how many of your devices can run it; those that do not apply to your devices are folded at the end. On the right, the chosen one: **Used for**, **Badge**, **Used**, the notice with the [forum](https://comunidad.opennccm.com/foro) and GitHub, the commands with the variables highlighted and **Run**, **Edit** and **Duplicate**. The search looks at the name and the commands.
+
+:::caution[Review configlets before using them in production]
+Like recipes, a configlet tested end to end on a device carries the **Verified** badge with the system version; only an administrator adds or removes it, and it is logged in Audit. The examples come out as "Not verified".
+:::
+
 ![Configlet list (examples are included for changing passwords, VLANs, NTP, syslog and diagnostics).](../../../../assets/manual/10-configlets.png)
 
 ## Variables
@@ -31,9 +37,9 @@ Device variables: `device.name`, `device.host`, `device.model`, `device.os_versi
 ## Run
 
 1.  Click **Run** on the configlet's card: a side panel opens.
-2.  Fill in the detected variables: there is one field for each, and the **command preview** updates as you type.
-3.  Choose the compatible devices: one by one, all, none or a whole group.
-4.  For **config**: click **Create change request** and wait for approval. For **exec**: you see the output right away.
+2.  Fill in the detected variables: there is one field for each, and the **command preview** shows the commands with their values as you type. A variable without a value shows in amber and cannot be sent.
+3.  Choose the compatible devices (all come ticked, with their system version): one by one, all, none or a group.
+4.  For **config**: tick "I reviewed the commands and understand that OpenNCCM did not test them on every platform…" (if the configlet is verified and a device runs another version, you are warned), click **Create change request** and wait for approval. For **exec**: you see the output right away.
 
 ![Running: variables and device selection.](../../../../assets/manual/11-configlet-ejecutar.png)
 

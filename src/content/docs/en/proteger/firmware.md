@@ -23,7 +23,7 @@ On MikroTik, airOS, airFiber and EdgeRouter, OpenNCCM **backs up the device firs
 1.  (admin) **Firmware and lifecycle → Images → Upload image**: drag the file, enter the version and which device\_type it is for. The table shows the MD5, size and compatible devices.
 2.  **Upgrade devices** tab (or **Use** on the image): choose the image; compatible devices with a different version are ticked automatically. If appropriate, tick **Reboot each device when done** and click **Create upgrade request**. You can also do it from each device's page.
 3.  An administrator reviews the planned steps and approves. The result shows whether the file already existed, whether it was transferred and whether the MD5 matched.
-4.  After the reboot, OpenNCCM backs up the device again 15 minutes later to update the version in the inventory.
+4.  Then OpenNCCM checks the version: it waits for the device to come back from the reboot (up to 20 minutes), asks it for its version, backs it up and looks for updates again. Events and the change request say "now on version X"; if it is still on the old one, it warns "the upgrade was not applied" with the end of the device's log, which usually gives the reason. If it does not respond again, it says so too.
 
 **Several devices with reboot:** the request shows the suggested order (first those that isolate nobody, together; then, one at a time, those that do) and runs in that order, waiting for each step to finish. It never reboots at the same time two devices that together leave more without service than each one separately, and it says which ones. See the [impact analysis](/en/cambios/solicitudes/#impact-analysis-what-goes-down-if-i-touch-this-device).
 
@@ -43,7 +43,7 @@ Once a day OpenNCCM checks whether there is a newer firmware version for each de
 -   **What it improves**: how many CVEs of the installed version no longer affect the new one (with the critical and high ones), the vendor's release notes when published and the link to them.
 -   **Download to the library** (administrators, MikroTik and Ubiquiti): downloads the file from the official site, checks the SHA-256 sum the vendor publishes and saves it in Images. If the sum does not match, the file is discarded. It is then installed like any image: request, approval and prior backup.
 -   For vendors that require an account, OpenNCCM tells you about the new version and what it improves; the file is downloaded from the vendor's portal and uploaded with **Upload image**.
--   **Check now** (on the device page) and **Check all now** do it right away, in the background. An administrator can turn off the daily check with **Check daily**. Only the MikroTik, Ubiquiti and NVD sites are queried, without sending any device data.
+-   **Check now** (on the device page) first asks the device for its installed version (query commands only, no backup) and then looks for the new one; **Check all now** uses the version from the last backup. Both run in the background. An administrator can turn off the daily check with **Check daily**. Only the MikroTik, Ubiquiti and NVD sites are queried, without sending any device data.
 
 The NVD version is the most recent one NVD knows about, not an official announcement: confirm it with the vendor. If NVD knows no version equal to or newer than the installed one, OpenNCCM says it cannot tell whether a newer one exists.
 

@@ -23,7 +23,7 @@ En MikroTik, airOS, airFiber y EdgeRouter, OpenNCCM **respalda el equipo antes**
 1.  (admin) **Firmware y ciclo de vida → Imágenes → Cargar imagen**: arrastre el archivo, indique la versión y para qué device\_type es. La tabla muestra el MD5, el tamaño y los equipos compatibles.
 2.  Pestaña **Actualizar equipos** (o **Usar** en la imagen): elija la imagen; se marcan solos los equipos compatibles que tienen otra versión. Si corresponde, marque **Reiniciar cada equipo al terminar** y pulse **Crear solicitud de actualización**. También puede hacerlo desde la ficha de cada equipo.
 3.  Un administrador revisa los pasos previstos y aprueba. El resultado muestra si el archivo ya existía, si se transfirió y si el MD5 coincidió.
-4.  Tras el reinicio, OpenNCCM vuelve a respaldar el equipo a los 15 minutos para actualizar la versión en el inventario.
+4.  Después, OpenNCCM comprueba la versión: espera a que el equipo vuelva del reinicio (hasta 20 minutos), le pregunta su versión, lo respalda y vuelve a buscar actualizaciones. En Eventos y en la solicitud de cambio dice «quedó en la versión X»; si sigue en la anterior, avisa «la actualización no se aplicó» con el final del registro del equipo, que suele decir el motivo. Si no vuelve a responder, también lo avisa.
 
 **Varios equipos con reinicio:** la solicitud muestra el orden sugerido (primero los que no aíslan a nadie, juntos; después, de a uno, los que sí) y se ejecuta en ese orden, esperando que termine cada paso. Nunca reinicia a la vez dos equipos que juntos dejan sin servicio más que cada uno por separado, y avisa cuáles son. Ver el [análisis de impacto](/cambios/solicitudes/#análisis-de-impacto-qué-se-cae-si-toco-este-equipo).
 
@@ -43,7 +43,7 @@ OpenNCCM comprueba una vez al día si hay una versión más nueva del firmware d
 -   **Qué mejora**: cuántos CVE de la versión instalada ya no afectan a la nueva (con los críticos y altos), las novedades del fabricante cuando las publica y el enlace a sus notas de la versión.
 -   **Descargar a la biblioteca** (administradores, MikroTik y Ubiquiti): baja el archivo del sitio oficial, comprueba la suma SHA-256 que publica el fabricante y lo guarda en Imágenes. Si la suma no coincide, el archivo se descarta. Después se instala como cualquier imagen: solicitud, aprobación y respaldo previo.
 -   Para los fabricantes que piden cuenta, OpenNCCM avisa de la versión nueva y lo que mejora; el archivo se descarga del portal del fabricante y se sube con **Cargar imagen**.
--   **Comprobar ahora** (en la ficha del equipo) y **Comprobar todos ahora** lo hacen al momento, en segundo plano. Un administrador puede desactivar la comprobación diaria con **Comprobar a diario**. Solo se consultan los sitios de MikroTik, Ubiquiti y NVD, sin enviar datos de los equipos.
+-   **Comprobar ahora** (en la ficha del equipo) primero le pregunta al equipo su versión instalada (solo comandos de consulta, sin respaldar) y después busca la versión nueva; **Comprobar todos ahora** usa la versión del último respaldo. Ambos corren en segundo plano. Un administrador puede desactivar la comprobación diaria con **Comprobar a diario**. Solo se consultan los sitios de MikroTik, Ubiquiti y NVD, sin enviar datos de los equipos.
 
 La versión de NVD es la más reciente que NVD conoce, no un anuncio oficial: confírmela con el fabricante. Si NVD no conoce ninguna versión igual o posterior a la instalada, OpenNCCM indica que no puede saber si hay una más nueva.
 

@@ -34,6 +34,6 @@ El botón **Asistente** de la barra superior abre un chat a la derecha en cualqu
 -   **Migraciones:** desde otro sistema (RANCID, Oxidized, una planilla…) traduce los tipos de equipo a los de OpenNCCM y arma el CSV para [Equipos → Importar](/instalacion/desde-otra-herramienta/).
 -   **Cómo usar OpenNCCM:** busca en este manual («¿Cómo programo un respaldo diario?»).
 -   **Respuestas simples:** una o dos frases, los equipos en una línea cada uno (punto de color, nombre y motivo), como mucho 2 botones y el resto en **Más acciones**, y la fuente en gris.
--   **Acciones:** los botones llevan a la página que corresponde o preparan una acción. Si cambia algo (respaldar, crear una tarea, una solicitud de cambio, un configlet o un borrador de caso), aparece una tarjeta con **Cancelar** y **Confirmar**; se hace solo al confirmar y con los permisos del usuario. Las solicitudes de cambio pasan por aprobación como siempre.
+-   **Acciones:** los botones llevan a la página que corresponde o preparan una acción. Si cambia algo (respaldar, crear una tarea, una solicitud de cambio, un configlet o un borrador de caso), aparece una tarjeta con **Cancelar** y **Confirmar**; se hace solo al confirmar y con los permisos del usuario. Las solicitudes de cambio pasan por aprobación como siempre. Si la respuesta propone un cambio, debajo aparece el aviso «Revisa los comandos antes de usarlos en producción».
 
 Cada pregunta queda en Auditoría con las funciones que usó y el proveedor.
