@@ -17,7 +17,7 @@ Ubuntu Server 22.04 o 24.04 LTS de 64 bits, recién instalado. Con 2 vCPU y 4 GB
 
 ## ¿Qué equipos puede gestionar?
 
-131 plataformas de unos 70 fabricantes, por SSH o Telnet. Cualquier otro equipo con SSH se gestiona con el perfil genérico. Lista completa en [Plataformas soportadas](/referencia/plataformas/).
+133 plataformas de unos 70 fabricantes, por SSH o Telnet. Cualquier otro equipo con SSH se gestiona con el perfil genérico. Lista completa en [Plataformas soportadas](/referencia/plataformas/).
 
 ## ¿Hace falta instalar algo en los equipos?
 

@@ -37,7 +37,7 @@ SSH credentials are not in Zabbix. If you do not choose one for all, the devices
 | --- | --- |
 | Name | Unique identifier (for example the hostname). |
 | IP / hostname | Management address. It must be the same one the device sends syslog from. |
-| Vendor / operating system | Platform profile (131 options grouped by vendor). It defines the commands used. |
+| Vendor / operating system | Platform profile (133 options grouped by vendor). It defines the commands used. |
 | Protocol and port | SSH (22) or Telnet (23). Telnet only on platforms that support it. |
 | Credential and group | User/password profile and the device's group. You can create a new group right here with "…or create a new group". They are also managed in **Devices → Groups**. |
 | Node | The device's place (tower, branch, data center). Pick it from the list or with "+ Create new node…". See [Nodes](/en/observar/analisis/#nodes). |

@@ -37,7 +37,7 @@ Las credenciales SSH no están en Zabbix. Si no elige una para todos, los equipo
 | --- | --- |
 | Nombre | Identificador único (por ejemplo el hostname). |
 | IP / hostname | Dirección de gestión. Debe ser la misma desde la que el equipo envía syslog. |
-| Fabricante / sistema operativo | Perfil de la plataforma (131 opciones agrupadas por fabricante). Define los comandos que se usan. |
+| Fabricante / sistema operativo | Perfil de la plataforma (133 opciones agrupadas por fabricante). Define los comandos que se usan. |
 | Protocolo y puerto | SSH (22) o Telnet (23). Telnet solo en plataformas que lo admiten. |
 | Credencial y grupo | Perfil de usuario/contraseña y grupo del equipo. Puede crear un grupo nuevo desde aquí mismo con «…o crear un grupo nuevo». También se administran en **Dispositivos → Grupos**. |
 | Nodo | Lugar del equipo (torre, sucursal, centro de datos). Se elige de la lista o con «+ Crear nodo nuevo…». Ver [Nodos](/observar/analisis/#nodos). |

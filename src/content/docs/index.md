@@ -4,7 +4,7 @@ description: "Respaldos, cambios y cumplimiento de su red, en su propio servidor
 curso: ["0.1"]
 ---
 
-OpenNCCM respalda, versiona, compara y audita la configuración de switches, routers y firewalls de unos 70 fabricantes (131 plataformas). Detecta los cambios en tiempo real, controla quién cambia qué y vuelve atrás cuando algo sale mal.
+OpenNCCM respalda, versiona, compara y audita la configuración de switches, routers y firewalls de unos 70 fabricantes (133 plataformas). Detecta los cambios en tiempo real, controla quién cambia qué y vuelve atrás cuando algo sale mal.
 
 Es software libre (licencia GPL-3.0) y gratuito: se instala en un servidor suyo y las configuraciones no salen de su red.
 
