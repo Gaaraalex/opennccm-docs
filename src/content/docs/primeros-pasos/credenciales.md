@@ -21,7 +21,7 @@ En la misma página cree los **grupos** de dispositivos (sede, función o client
 -   Se muestran el usuario, la contraseña y el *enable*, con botón **Copiar**, y se ocultan a los 60 segundos.
 -   Cada vista y cada intento fallido quedan en [Auditoría](/administracion/auditoria/). Los intentos fallidos cuentan para el bloqueo de la cuenta igual que en el inicio de sesión, y al bloquearse se cierran sus sesiones. Un operador solo ve las de los equipos de sus grupos, y los lectores nunca. Con un token de API no se pueden ver.
 
-**Grupos** (pestaña **Administración → Grupos**): agrupan equipos (sede, rol, cliente) para filtrar, programar tareas, aplicar políticas y restringir usuarios. La tabla muestra cuántos equipos tiene cada uno, con **Ver equipos**; se crean con el campo del pie. Se llega aquí también con el botón **Grupos** de la página Dispositivos, y un grupo se puede crear al editar un equipo. Para asignar un equipo a un grupo: ábralo y pulse **asignar grupo** (o **Editar**). Al eliminar un grupo, sus equipos quedan sin grupo.
+**Grupos** (pestaña **Administración → Grupos**): agrupan equipos (sede, rol, cliente) para filtrar, programar tareas, aplicar políticas y restringir usuarios. La tabla muestra cuántos equipos tiene cada uno, con **Ver equipos**; se crean con **Crear grupo**, siempre arriba, que abre un panel a la derecha como en Credenciales; cada fila tiene **Editar** y **Borrar**. Se llega aquí también con el botón **Grupos** de la página Dispositivos, y un grupo se puede crear al editar un equipo. Para asignar un equipo a un grupo: ábralo y pulse **asignar grupo** (o **Editar**). Al eliminar un grupo, sus equipos quedan sin grupo.
 
 ![Credenciales con su estado.](../../../assets/manual/25-credenciales.png)
 

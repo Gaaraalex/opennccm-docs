@@ -4,7 +4,7 @@ description: "Backups, changes and compliance for your network, on your own serv
 curso: ["0.1"]
 ---
 
-OpenNCCM backs up, versions, compares and audits the configuration of switches, routers and firewalls from about 70 vendors (131 platforms). It detects changes in real time, controls who changes what and rolls back when something goes wrong.
+OpenNCCM backs up, versions, compares and audits the configuration of switches, routers and firewalls from about 70 vendors (133 platforms). It detects changes in real time, controls who changes what and rolls back when something goes wrong.
 
 It is free and open-source software (GPL-3.0 license): you install it on your own server and configurations never leave your network.
 

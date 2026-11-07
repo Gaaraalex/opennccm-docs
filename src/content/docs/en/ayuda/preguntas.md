@@ -17,7 +17,7 @@ Ubuntu Server 22.04 or 24.04 LTS, 64-bit, freshly installed. 2 vCPUs and 4 GB of
 
 ## Which devices can it manage?
 
-131 platforms from about 70 vendors, over SSH or Telnet. Any other device with SSH can be managed with the generic profile. Full list in [Supported platforms](/en/referencia/plataformas/).
+133 platforms from about 70 vendors, over SSH or Telnet. Any other device with SSH can be managed with the generic profile. Full list in [Supported platforms](/en/referencia/plataformas/).
 
 ## Do I need to install anything on the devices?
 

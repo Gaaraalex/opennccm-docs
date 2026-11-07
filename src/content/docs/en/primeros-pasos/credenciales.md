@@ -21,7 +21,7 @@ On the same page create the device **groups** (site, role or customer). Groups a
 -   The username, password and *enable* are shown with a **Copy** button and hidden after 60 seconds.
 -   Each view and each failed attempt is recorded in [Audit](/en/administracion/auditoria/). Failed attempts count toward account lockout just as at sign-in, and when the account locks its sessions are closed. An operator only sees those of the devices in their groups, and readers never do. They cannot be viewed with an API token.
 
-**Groups** (**Administration → Groups** tab): group devices (site, role, customer) to filter, schedule tasks, apply policies and restrict users. The table shows how many devices each one has, with **See devices**; they are created with the field at the bottom. You also get here from the **Groups** button on the Devices page, and a group can be created while editing a device. To assign a device to a group: open it and click **assign group** (or **Edit**). When a group is deleted, its devices are left without a group.
+**Groups** (**Administration → Groups** tab): group devices (site, role, customer) to filter, schedule tasks, apply policies and restrict users. The table shows how many devices each one has, with **See devices**; they are created with **Create group**, always at the top, which opens a panel on the right as in Credentials; each row has **Edit** and **Delete**. You also get here from the **Groups** button on the Devices page, and a group can be created while editing a device. To assign a device to a group: open it and click **assign group** (or **Edit**). When a group is deleted, its devices are left without a group.
 
 ![Credentials with their status.](../../../../assets/manual/25-credenciales.png)
 

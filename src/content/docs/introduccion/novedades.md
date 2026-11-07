@@ -1,13 +1,34 @@
 ---
 title: "Novedades de la versión"
-description: "Lo nuevo de OpenNCCM 2.28.0 y las versiones anteriores."
+description: "Lo nuevo de OpenNCCM 2.29.0 y las versiones anteriores."
 resumen:
-  - "2.28.0 pone el logo de su marca a cada equipo (73 marcas) en todas las pantallas, con un filtro «Marca» en Dispositivos."
-  - "Las distribuciones del mapa se leen mejor: usan todo el mapa, los nombres no bajan de 11 px y una franja explica cada una."
-  - "Los nodos se asignan en bloque desde Dispositivos, y el tipo de cada equipo en el mapa se puede corregir a mano."
+  - "2.29.0 suma los equipos ZTE: OLT ZXA10 (C300, C320, C350, C220), OLT TITAN (C600 a C680) y switches y routers ZXR10."
+  - "Trae 422 recetas, con al menos 10 para 95 de los 133 tipos de equipo, y el sello «Verificada» en las que se probaron completas."
+  - "airMAX, airFiber, los AP UniFi, el USG y el EdgeSwitch X muestran su firmware disponible y sus CVE; airOS se descarga como system.cfg."
 ---
 
 Las 6 últimas versiones. El historial completo está en [opennccm.com/novedades](https://opennccm.com/novedades.html) y cada versión se descarga desde [GitHub](https://github.com/Gaaraalex/opennccm/releases).
+
+## Versión 2.29.0
+- **Equipos ZTE:** OLT ZXA10 C300, C320, C350 y C220, OLT TITAN C600, C610, C620, C650 y C680, y switches y routers
+  ZXR10 (ZXROS), con respaldo, versión, modelo y serie.
+- **Recetas para casi todos los equipos:** 422 recetas, con al menos 10 para 95 de los 133 tipos de equipo: Ubiquiti,
+  ZTE, Huawei, H3C/HPE Comware, Juniper, Arista, Cisco NX-OS, IOS-XR y ASA, FortiGate, PAN-OS, Aruba, Dell, Nokia, F5, Citrix,
+  pfSense, OPNsense, Linux y los equipos con CLI tipo Cisco, entre otros.
+- **Sello «Verificada» en las recetas:** Las recetas probadas completas llevan el sello con la versión del sistema en
+  la que se probaron, por ejemplo «Verificada · VOSS 9.3.0.0»; las demás dicen «Sin verificar». Hay un filtro «Solo
+  verificadas» y un administrador puede poner o quitar el sello.
+- **Aviso en las recetas:** Arriba de la lista, un aviso pide revisar cada receta antes de usarla en producción, porque
+  OpenNCCM no tiene todas las plataformas para probarlas. Al aplicar una receta hay que confirmar que se revisaron los comandos, se
+  avisa si el equipo tiene otra versión que la del sello, y cada receta se puede reportar en el foro o en GitHub.
+- **Firmware y CVE de Ubiquiti:** airMAX, airFiber, los AP UniFi, el USG y el EdgeSwitch X muestran el firmware
+  disponible y sus vulnerabilidades. La búsqueda de CVE usa además el modelo del equipo y cubre 70 tipos de equipo.
+- **Copia de airOS como system.cfg:** En airMAX, airFiber y los AP UniFi, la copia de seguridad se descarga como
+  system.cfg, lista para restaurar en el equipo.
+- **Grupos y Nodos con panel lateral:** «Crear grupo» y «Crear nodo» están siempre arriba y abren un panel a la
+  derecha, como en Credenciales; cada fila tiene Editar y Borrar.
+- **Cambios de vecinos del mapa:** El panel ya no se abre cada vez que se entra al mapa; solo cuando hay cambios
+  nuevos, y se puede abrir con el botón «Cambios de vecinos».
 
 ## Versión 2.28.0
 - **Logos de marca:** Cada equipo muestra el logo de su marca (73 marcas, los 131 tipos de equipo) en Dispositivos, la
@@ -102,19 +123,3 @@ Las 6 últimas versiones. El historial completo está en [opennccm.com/novedades
 - **Operar › Consola como la consola de la ficha:** Cada sesión tiene A−/A+, «Ampliar» en la ventana, abrir en una
   ventana aparte y pantalla completa; el botón «Asistente» lleva el logo del proveedor y la cabecera del asistente se oculta
   desde ella misma con «Ocultar». Además, el configlet que prepara el asistente ya aplica a sus tipos de equipo.
-
-## Versión 2.23.0
-- **Panel del asistente más amplio:** En la consola, las preguntas sugeridas ya no se salen del panel, se pliegan
-  solas al preguntar y se vuelven a abrir con «✦ Preguntas sugeridas». El botón ⓘ oculta la parte de arriba (proveedor,
-  contexto y aviso) para dejar más espacio a las respuestas, y la pregunta se escribe al fondo del panel.
-- **Elegir el modelo de IA:** En Ajustes › Asistente IA el modelo se elige en un desplegable con los de la cuenta
-  del proveedor. Cada usuario puede cambiarlo a su gusto desde el chat de la barra superior o desde el panel de la consola,
-  sin cambiar el de los demás.
-- **El asistente solo habla de la red:** Responde sobre redes y seguridad, los equipos que OpenNCCM admite y
-  administra y el uso de OpenNCCM. A una pregunta ajena contesta en una frase que solo ayuda con la red.
-- **Asistente en Operar › Consola:** Cada sesión abierta tiene su botón «✦ Asistente», como la consola de la
-  ficha del equipo.
-- **El asistente ayuda en todo el sistema:** El chat consulta las vulnerabilidades, la Base de conocimiento, los
-  configlets, las tareas programadas y los tipos de equipo admitidos. Prepara configlets y scripts, borradores de casos de
-  la Base de conocimiento, tareas, correcciones de vulnerabilidades como solicitud de cambio y migraciones desde otro
-  sistema (el CSV para importar equipos). Todo se hace solo cuando el usuario confirma.

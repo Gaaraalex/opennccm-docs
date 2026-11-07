@@ -36,7 +36,7 @@ Once a day OpenNCCM checks whether there is a newer firmware version for each de
 | Devices | Where the version comes from | Download |
 | --- | --- | --- |
 | MikroTik RouterOS | MikroTik's official site (stable and long-term), with its release notes | Yes, the file for the device's architecture |
-| Ubiquiti EdgeSwitch, EdgeRouter, UniFi Switch | Ubiquiti's official catalog, per model | Yes |
+| Ubiquiti EdgeSwitch, EdgeRouter, UniFi Switch, airMAX (airOS), airFiber, UniFi APs and USG | Ubiquiti's official catalog, per model | Yes |
 | Ubuntu Server and Debian | Official release table (distro-info-data): the newest LTS or stable release and the end-of-support date of the installed one | No: upgrade on the server itself (`do-release-upgrade`) |
 | Cisco, Fortinet, Juniper, Palo Alto, Arista, WatchGuard and others with CPE | NVD's (NIST) version dictionary: the newest in its branch and the most recent overall | No: the vendor requires an account |
 
