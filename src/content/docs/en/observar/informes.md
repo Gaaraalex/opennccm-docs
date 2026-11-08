@@ -17,6 +17,7 @@ Each report is a card with **View** (on screen, with a period of 7, 30, 90 days 
 | Licenses about to expire | Each device's license services (today, the WatchGuard feature key) that expire in the next 90 days or already expired, most urgent first |
 | Unused ports | Switch access ports without link for more than 30, 60 or 90 days ([see below](#unused-ports)) |
 | Network document | PDF or Word with what OpenNCCM knows about the network ([see below](#network-document)) |
+| Map devices | The devices seen on the map (LLDP/CDP/MNDP and RoMON neighbors) checked against Devices: which ones are already added and backed up and which are not ([see below](#map-devices)) |
 | Change requests | Who asked, who approved and the result |
 | User audit | Sign-ins and actions (administrators only) |
 
@@ -25,6 +26,10 @@ CSV column headers stay in Spanish so integrations keep working.
 ![Report list.](../../../../assets/manual/23-informes.png)
 
 ![Inventory report on screen.](../../../../assets/manual/24-informe-inventario.png)
+
+## Map devices
+
+**Reports → Map devices** tells you, for each device that appears on the [network map](/en/observar/analisis/), whether it is **not added**, **added and backed up**, **added with the last backup failed** or **added with no backup yet**, and from which device and port it is seen. It shows no IP or MAC: for the missing ones, type the IP on the page and use **Add** (it opens the new-device form with the name and IP), or download the **fillable PDF**, which has a field to type each one's IP on the PC (or print it and write it by hand).
 
 ## Unused ports
 
