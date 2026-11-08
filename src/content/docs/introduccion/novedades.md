@@ -1,13 +1,28 @@
 ---
 title: "Novedades de la versión"
-description: "Lo nuevo de OpenNCCM 2.31.0 y las versiones anteriores."
+description: "Lo nuevo de OpenNCCM 2.32.0 y las versiones anteriores."
 resumen:
-  - "2.31.0 deja buscar un texto o una IP dentro de una versión, con las líneas resaltadas y saltos con Intro."
-  - "«Respaldar todos» ya no termina en «Internal Server Error», y la entrada por SSH reintenta los fallos pasajeros."
-  - "Arreglos para MikroTik RouterOS 6 y 7 y Extreme EXOS, con 25 recetas y 8 correcciones verificadas en el laboratorio."
+  - "2.32.0 muestra el progreso de «Respaldar todos»: porcentaje, correctos, con error y en cola, con Cancelar y Reintentar los que fallaron."
+  - "Se acabaron los errores falsos de SSH con muchos respaldos a la vez, y los fallos pasajeros se reintentan solos."
+  - "El informe nuevo «Equipos del mapa» dice qué equipos del mapa faltan en Dispositivos, con un PDF para escribir sus IP."
 ---
 
 Las 6 últimas versiones. El historial completo está en [opennccm.com/novedades](https://opennccm.com/novedades.html) y cada versión se descarga desde [GitHub](https://github.com/Gaaraalex/opennccm/releases).
+
+## Versión 2.32.0
+- **Errores falsos de SSH:** Equipos en línea quedaban con error («QueuePool limit of size 5 overflow 10 reached») y
+  había que respaldarlos a mano: con muchos respaldos a la vez OpenNCCM se quedaba sin conexiones a su base. Ahora cada respaldo
+  la suelta mientras habla con el equipo, y la página de Dispositivos ya no se queda en negro durante «Respaldar todos».
+- **Respaldar todos con su progreso:** Un panel con el porcentaje, la barra, los correctos, con error, en curso y en
+  cola, y cada fila de la lista que se actualiza sola con su paso. Se puede salir de la página, cancelar y, al terminar,
+  reintentar solo los que fallaron.
+- **Los respaldos que fallan se comprueban solos:** Si la falla fue pasajera (sesión cortada con el puerto respondiendo,
+  base ocupada) se reintenta; si el equipo no responde o rechaza la contraseña, se avisa con lo que se comprobó.
+- **Informe «Equipos del mapa»:** Los equipos del mapa de la red cruzados con Dispositivos: cuáles ya están agregados y
+  respaldados y cuáles no, sin IP ni MAC, con dónde escribir la IP de los que faltan (en la página o en un PDF para llenar).
+- **El aviso completo en todos lados:** Recetas, Configlets, Cumplimiento, Multi-equipo, la ficha y el asistente
+  muestran el aviso entero con el Foro, GitHub y la casilla, y cada aceptación queda en Auditoría.
+- **Configlets:** Las plataformas sin equipos ya no se ven apagadas: se ven igual que en Recetas.
 
 ## Versión 2.31.0
 - **Respaldar todos sin «Internal Server Error»:** Con varios respaldos a la vez, uno podía terminar en error
@@ -111,23 +126,3 @@ Las 6 últimas versiones. El historial completo está en [opennccm.com/novedades
   búsqueda de MAC reconoce los puertos «Port-1/2».
 - **Equipos del mapa marcados como perdidos:** Un equipo de OpenNCCM ya no se pinta entero como nuevo o perdido: el enlace
   perdido se dibuja aparte, en su puerto.
-
-## Versión 2.26.0
-- **Buscar una MAC o una IP:** Escribe una MAC o una IP en el buscador de la barra superior y OpenNCCM dice en qué switch
-  y en qué puerto está conectado, con su VLAN, la descripción del puerto, cuándo se vio y el camino. Las tablas MAC y ARP se
-  leen en cada respaldo y queda un historial para «Visto por última vez»; «Leer las tablas ahora» las vuelve a leer.
-- **Aviso de vecino nuevo o perdido:** Una alarma cuando aparece un equipo que antes no estaba o deja de verse uno que sí
-  estaba (LLDP, CDP, MNDP y RoMON), con su ficha, «Es conocido» y «Preparar shutdown del puerto». El perdido avisa recién tras 2
-  lecturas y la alarma se cierra sola si vuelve. El mapa resalta los cambios de las últimas 24 h. Se activa en Ajustes › Mapa de
-  la red.
-- **Configuración de referencia por modelo:** Elige el equipo bien configurado y compara contra él a los demás del
-  mismo modelo, por sección (AAA, SNMP, NTP, VLAN…), sin nombre, IP de gestión, descripciones ni claves. Se pueden ignorar
-  líneas y preparar una solicitud de cambio para igualarlos, que siempre pasa por aprobación.
-- **Comandos favoritos en la consola:** Una barra sobre la terminal con tus comandos de verificación por tipo de equipo;
-  un clic los escribe y envía. Los que cambian la configuración se escriben sin enviar. Se ordenan, editan y, los
-  administradores, comparten con todo el equipo.
-- **RoMON en redes reales:** El mapa no encontraba los MikroTik por RoMON en RouterOS 7 (la salida real trae la marca
-  «A», el camino en varias líneas y la identidad solo con «proplist»). Ahora salen todos, también en RouterOS 6.
-- **La «ñ» de los nombres MikroTik:** Los nombres como «Cabañas» ya no salen como «CabaF1as», ni en el mapa ni por
-  RoMON.
-- **«Compartir» en Operar › Consola:** Es un ícono, igual que en la consola de la ficha del equipo.

@@ -17,12 +17,17 @@ Cada informe es una tarjeta con **Ver** (en pantalla, con el periodo de 7, 30, 9
 | Licencias por vencer | Servicios de la licencia de cada equipo (hoy, la feature key de WatchGuard) que vencen en los próximos 90 días o ya vencieron, lo más urgente primero |
 | Puertos sin uso | Puertos de acceso de los switches sin enlace hace más de 30, 60 o 90 días ([ver abajo](#puertos-sin-uso)) |
 | Documento de la red | PDF o Word con lo que OpenNCCM sabe de la red ([ver abajo](#documento-de-la-red)) |
+| Equipos del mapa | Los equipos que se ven en el mapa (vecinos LLDP/CDP/MNDP y RoMON) cruzados con Dispositivos: cuáles ya están agregados y respaldados y cuáles no ([ver abajo](#equipos-del-mapa)) |
 | Solicitudes de cambio | Quién pidió, quién aprobó y el resultado |
 | Auditoría de usuarios | Inicios de sesión y acciones (solo administradores) |
 
 ![Lista de informes.](../../../assets/manual/23-informes.png)
 
 ![Informe de inventario en pantalla.](../../../assets/manual/24-informe-inventario.png)
+
+## Equipos del mapa
+
+**Informes → Equipos del mapa** dice, de cada equipo que aparece en el [mapa de la red](/observar/analisis/), si **no está agregado**, si está **agregado y respaldado**, **agregado con el último respaldo fallido** o **agregado sin respaldo todavía**, y desde qué equipo y puerto se ve. No muestra IP ni MAC: para los que faltan, escriba la IP en la página y use **Agregar** (abre el alta del equipo con el nombre y la IP), o descargue el **PDF para llenar**, que trae un campo para escribir la IP de cada uno desde la PC (o imprimirlo y escribirla a mano).
 
 ## Puertos sin uso
 
