@@ -1,13 +1,37 @@
 ---
 title: "Novedades de la versión"
-description: "Lo nuevo de OpenNCCM 2.30.0 y las versiones anteriores."
+description: "Lo nuevo de OpenNCCM 2.31.0 y las versiones anteriores."
 resumen:
-  - "2.30.0 trae 758 recetas: todos los tipos de equipo con línea de comandos (131 de 133) tienen al menos 10."
-  - "Recetas y Configlets se ordenan en tres columnas, por equipo o por tarea, y piden revisar los comandos antes de crear la solicitud."
-  - "Después de actualizar el firmware, OpenNCCM espera a que el equipo vuelva y confirma si quedó en la versión nueva."
+  - "2.31.0 deja buscar un texto o una IP dentro de una versión, con las líneas resaltadas y saltos con Intro."
+  - "«Respaldar todos» ya no termina en «Internal Server Error», y la entrada por SSH reintenta los fallos pasajeros."
+  - "Arreglos para MikroTik RouterOS 6 y 7 y Extreme EXOS, con 25 recetas y 8 correcciones verificadas en el laboratorio."
 ---
 
 Las 6 últimas versiones. El historial completo está en [opennccm.com/novedades](https://opennccm.com/novedades.html) y cada versión se descarga desde [GitHub](https://github.com/Gaaraalex/opennccm/releases).
+
+## Versión 2.31.0
+- **Respaldar todos sin «Internal Server Error»:** Con varios respaldos a la vez, uno podía terminar en error
+  («database is locked») y su versión no se guardaba. Ahora cada respaldo espera su turno para escribir.
+- **Buscar dentro de una versión:** Al ver una copia, «Buscar en esta versión» resalta las líneas que tienen el texto o
+  la IP y salta entre ellas con Intro.
+- **Puertos de los MikroTik con muchos SFP:** El frente del CRS326-24S+2Q+ (y de los CRS con muchos SFP) muestra los
+  SFP+ en dos filas y cada QSFP+ dividido en sus 4 interfaces («1-1» a «2-4») en su propio grupo.
+- **Número de serie de los MikroTik:** Se lee del RouterBOARD («/system routerboard print») o de la cabecera del
+  /export; antes salía vacío.
+- **Comprobar ahora, aunque otro equipo se esté comprobando:** La comprobación de firmware de un equipo ya no se
+  rechaza con «Ya hay una comprobación en curso».
+- **Reintento al entrar por SSH:** Un fallo pasajero de un equipo ocupado («No existing session») se reintenta; una
+  contraseña mala no.
+- **MikroTik RouterOS:** «Volver a esta versión» restaura los elementos que el /export de RouterOS 7 parte en dos
+  líneas; restaurar en otro equipo e igualar a la referencia ya no fallan por el «keymat-provider» que RouterOS 7 crea solo; en
+  RouterOS 6, un comando que muestra su avance («/certificate sign») ya no hace perder el siguiente.
+- **Recetas de RouterOS:** «Aplicar como solicitud» ya no quita pasos que cambian algo, «Limitar SSH y Winbox» sirve
+  en RouterOS 6 y 7, y hay una receta de NTP para RouterOS 6.
+- **Extreme EXOS:** El syslog detecta los cambios hechos por fuera; restaurar una copia funciona (las líneas de punto
+  de partida de EXOS y las cuentas que ya existen); igualar a la referencia ya no copia el nombre ni la contraseña del switch;
+  buscar una MAC encuentra los puertos de EXOS; y las recetas de contraseña y SNMP usan la sintaxis de EXOS 33.
+- **Recetas y correcciones verificadas en el laboratorio:** 25 recetas (MikroTik RouterOS 6.49.23 y 7.24.5, Extreme
+  EXOS 33.6.1.14) y 8 correcciones de cumplimiento de MikroTik llevan el sello «Verificada», tras 3 rondas seguidas sin fallos.
 
 ## Versión 2.30.0
 - **Recetas para todos los equipos:** 758 recetas, con al menos 10 para cada tipo de equipo con línea de comandos (131 de
@@ -107,20 +131,3 @@ Las 6 últimas versiones. El historial completo está en [opennccm.com/novedades
 - **La «ñ» de los nombres MikroTik:** Los nombres como «Cabañas» ya no salen como «CabaF1as», ni en el mapa ni por
   RoMON.
 - **«Compartir» en Operar › Consola:** Es un ícono, igual que en la consola de la ficha del equipo.
-
-## Versión 2.25.0
-- **MikroTik por RoMON en el mapa:** Con «Buscar también los MikroTik por RoMON» (Ajustes › Mapa de la red,
-  desactivado de fábrica), el respaldo de cada MikroTik con RoMON activado encuentra los que están a varios saltos o sin
-  dirección IP, y el mapa los une con una línea punteada. RoMON no dice por qué puerto se conectan, así que no cuentan para el
-  análisis de impacto ni para Puertos sin uso.
-- **«Reconocer todas» con cientos de alarmas:** Con muchas alarmas aparecía «OpenNCCM se está reiniciando» y después
-  «Method Not Allowed». Ahora responde enseguida, «Deshacer» funciona con miles y una recarga vuelve a la lista. Las alarmas
-  críticas de CVE se reconocen sin pedir un caso de la Base de conocimiento: se resuelven al actualizar el firmware.
-- **Mapa del documento de la red ordenado:** Cada grupo de equipos enlazados se arma por niveles, los grupos van uno
-  al lado del otro y los equipos sin enlaces al final, en una grilla: ya no se apilan ni se encima nada.
-- **Documento de la red más prolijo:** Cada título va en la misma página que su tabla, todas las tablas tienen el
-  mismo ancho, la columna «Sitio» solo sale si hay más de uno y Cumplimiento avisa si todavía no se auditó. El logo se sube con
-  un botón propio, se ve en la portada de la vista previa y se puede quitar.
-- **Impacto y puertos más claros:** La frase dice «quedan aislados 3 equipos y otros 2 de otras ubicaciones pierden la
-  conexión», «Aprobar» se ve claramente desactivado hasta marcar «Leí el impacto», Puertos sin uso nunca muestra más días de
-  los que hay datos y los textos usan el singular cuando es uno.

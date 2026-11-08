@@ -20,6 +20,8 @@ Cada versión registra su **origen**: `manual` (botón), `scheduled` (tarea), `s
 
 En la ficha del equipo, pestaña **Versiones**, la flecha **›** de cada versión la abre en un panel lateral. Desde allí puede **descargar**, **comparar con la anterior**, **etiquetar** (por ejemplo «antes de migración»), **marcar como línea base** o **revertir el equipo a esa versión**.
 
+Para encontrar algo dentro de la versión, escriba en **Buscar en esta versión** (un texto o una IP): las líneas que lo tienen se resaltan y **Intro** / **Mayús+Intro** (o las flechas) saltan entre ellas. El campo **Etiqueta** no busca: le pone un nombre a la versión. Para buscar en las copias de todos los equipos use **Buscar en configs** del menú.
+
 En un **MikroTik RouterOS**, el menú **…** de la ficha ofrece además **Descargar .rsc (último respaldo)**, el `/export` guardado listo para `/import`, y **Descargar .backup del equipo…**. Este último lo crea el router en el momento (`/system backup save`), OpenNCCM lo trae por SFTP y lo borra del equipo. Se le puede poner una contraseña para cifrarlo. El .backup incluye usuarios y contraseñas y solo se restaura en el mismo modelo; para pasar la configuración a otro equipo, use el .rsc. El usuario de la credencial necesita la política *ftp* (SFTP).
 
 ![Vista de una versión con sus acciones.](../../../assets/manual/06-version.png)

@@ -20,6 +20,8 @@ Each version records its **source**: `manual` (button), `scheduled` (task), `sys
 
 On the device page, **Versions** tab, the **›** arrow on each version opens it in a side panel. From there you can **download**, **compare with the previous one**, **tag** it (for example "before migration"), **mark it as baseline** or **roll the device back to that version**.
 
+To find something inside the version, type in **Search in this version** (text or an IP): the lines that contain it are highlighted and **Enter** / **Shift+Enter** (or the arrows) jump between them. The **Tag** field does not search: it gives the version a name. To search the backups of every device, use **Search configs** in the menu.
+
 On a **MikroTik RouterOS** device, the page's **…** menu also offers **Download .rsc (latest backup)**, the saved `/export` ready for `/import`, and **Download the device's .backup…**. The router creates the latter on the spot (`/system backup save`), OpenNCCM fetches it over SFTP and deletes it from the device. You can set a password to encrypt it. The .backup includes users and passwords and can only be restored on the same model; to move the configuration to another device, use the .rsc. The credential's user needs the *ftp* policy (SFTP).
 
 ![A version with its actions.](../../../../assets/manual/06-version.png)
