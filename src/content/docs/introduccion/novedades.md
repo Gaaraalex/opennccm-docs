@@ -1,13 +1,37 @@
 ---
 title: "Novedades de la versión"
-description: "Lo nuevo de OpenNCCM 2.32.0 y las versiones anteriores."
+description: "Lo nuevo de OpenNCCM 2.33.0 y las versiones anteriores."
 resumen:
-  - "2.32.0 muestra el progreso de «Respaldar todos»: porcentaje, correctos, con error y en cola, con Cancelar y Reintentar los que fallaron."
-  - "Se acabaron los errores falsos de SSH con muchos respaldos a la vez, y los fallos pasajeros se reintentan solos."
-  - "El informe nuevo «Equipos del mapa» dice qué equipos del mapa faltan en Dispositivos, con un PDF para escribir sus IP."
+  - "2.33.0 deja los botones que ejecutan o aplican comandos desactivados hasta marcar la casilla del aviso; una vez basta por página."
+  - "WatchGuard vuelve a crear la imagen .fxi y ya no deja sesiones de administración abiertas en el Firebox."
+  - "Ubiquiti EdgeSwitch: VLAN por solicitud, syslog de cambios, «Volver a esta versión», recetas y cumplimiento corregidos, y 26 recetas más verificadas."
 ---
 
 Las 6 últimas versiones. El historial completo está en [opennccm.com/novedades](https://opennccm.com/novedades.html) y cada versión se descarga desde [GitHub](https://github.com/Gaaraalex/opennccm/releases).
+
+## Versión 2.33.0
+- **«Ejecutar» espera la casilla del aviso:** En Configlets, Recetas y el asistente, los botones que ejecutan o aplican
+  comandos quedan desactivados hasta marcar «Leí el aviso…». Con marcarla una vez basta para toda la página.
+- **Configlets:** El panel de la derecha muestra los comandos completos; antes quedaban en una franja de una línea con
+  su propia barra y no se veía qué se iba a ejecutar.
+- **WatchGuard: imagen .fxi:** Crear la imagen y «Probar» fallaban siempre («SimpleNamespace is not mapped»). Ahora
+  la imagen se crea, se recibe cifrada, se guarda con su clave y se borra del Firebox.
+- **WatchGuard: sesiones de administración:** Los respaldos, las solicitudes y la consola web cierran su sesión de
+  Fireware. Antes se acumulaban en el Firebox y una solicitud que fallaba dejaba el modo de edición tomado: el Firebox
+  rechazaba la imagen .fxi y los cambios de otros administradores.
+- **Ubiquiti EdgeSwitch (FastPath):** Las solicitudes crean VLAN («vlan database»); el nombre, el SSH y la web van en
+  el modo privilegiado; «Volver a esta versión» quita el syslog, la comunidad SNMP y devuelve los puertos a la VLAN 1; el
+  syslog del switch avisa de cada cambio; y las recetas de nombre, SSH/HTTPS, SNMP, SNTP y syslog funcionan en 1.9.3.
+- **Cumplimiento de Ubiquiti EdgeSwitch:** «SSH habilitado», «Sin HTTP sin cifrar» y «SNTP» daban el resultado al
+  revés (el switch no muestra lo que viene de fábrica). Se corrigen solas en las instalaciones que ya las tienen.
+- **Solicitudes de cambio:** Un rechazo del equipo que llegaba tarde ya no se pierde (la solicitud terminaba «bien»
+  sin aplicarse); un fallo pasajero del saludo SSH se reintenta.
+- **Extreme VOSS, Juniper, Cisco y OPNsense:** VOSS restaura el RADIUS y el banner que sobran; Junos lee la serie de
+  «show chassis hardware», ignora el aviso de «commit confirmed» en LLDP y nunca toca fxp0 al restaurar; Cisco no copia el
+  certificado, la licencia ni el client-id de otro equipo y lee los puertos de los routers IOS-XE; OPNsense 26.7 conecta bien;
+  y un equipo que se ve a sí mismo por un lazo ya no cuenta como vecino.
+- **Recetas verificadas en el laboratorio:** 26 recetas más llevan el sello «Verificada» tras 3 rondas seguidas sin
+  fallos: Extreme VOSS 9.3, Juniper Junos 14.1 (vMX) y Ubiquiti EdgeSwitch 1.9.3 (equipo físico).
 
 ## Versión 2.32.0
 - **Errores falsos de SSH:** Equipos en línea quedaban con error («QueuePool limit of size 5 overflow 10 reached») y
@@ -105,24 +129,3 @@ Las 6 últimas versiones. El historial completo está en [opennccm.com/novedades
   inalámbricos, y el administrador puede corregir el tipo de un equipo a mano.
 - **Filtro de nodos del mapa:** Con un nodo elegido, los equipos de otros nodos salían como vecinos «que no están en
   OpenNCCM».
-
-## Versión 2.27.0
-- **Distribución del mapa:** Un menú sobre el mapa con 10 formas de ordenar los equipos: libre, escalonada hacia abajo o
-  hacia la derecha, radial, por sitio, por función, circular, árbol plegable, sobre un plano y «Mi distribución», que se guarda
-  arrastrando equipos, solo para ti o para todo el equipo.
-- **Nodos:** Agrupa los equipos por lugar (sucursal, torre, edificio). Se crean en Administración › Nodos o al crear o
-  editar un equipo, como las credenciales, y el filtro «Nodo» del mapa muestra solo los equipos de ese nodo, o todos.
-- **IP de los MikroTik encontrados por RoMON:** El mapa toma su IP de los vecinos MNDP/LLDP o de las tablas ARP, así ya no
-  salen solo con la MAC.
-- **Receta VOSS para cambiar el usuario y la contraseña:** En Recetas, «Cambiar el usuario y la contraseña de la CLI» de
-  Extreme VOSS / Fabric Engine, con admin por defecto, y guarda la configuración al terminar.
-- **Puertos y parte de atrás en Extreme VOSS:** La ficha de los VSP / Fabric Engine muestra qué puertos tienen enlace y
-  las fuentes y los ventiladores.
-- **Extreme VOSS en el mapa y en syslog:** El mapa lee sus vecinos LLDP, y syslog detecta sus cambios de configuración y
-  cada «save config».
-- **Cambios que renombran el equipo:** Una solicitud que cambiaba el nombre del equipo (y su prompt) se quedaba esperando
-  y no guardaba la configuración. Ahora se relee el prompt antes de salir y guardar.
-- **Referencia y tabla MAC en VOSS:** La configuración de referencia respeta los bloques que terminan en «exit», y la
-  búsqueda de MAC reconoce los puertos «Port-1/2».
-- **Equipos del mapa marcados como perdidos:** Un equipo de OpenNCCM ya no se pinta entero como nuevo o perdido: el enlace
-  perdido se dibuja aparte, en su puerto.
