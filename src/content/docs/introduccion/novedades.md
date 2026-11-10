@@ -1,13 +1,28 @@
 ---
 title: "Novedades de la versión"
-description: "Lo nuevo de OpenNCCM 2.33.0 y las versiones anteriores."
+description: "Lo nuevo de OpenNCCM 2.34.0 y las versiones anteriores."
 resumen:
-  - "2.33.0 deja los botones que ejecutan o aplican comandos desactivados hasta marcar la casilla del aviso; una vez basta por página."
-  - "WatchGuard vuelve a crear la imagen .fxi y ya no deja sesiones de administración abiertas en el Firebox."
-  - "Ubiquiti EdgeSwitch: VLAN por solicitud, syslog de cambios, «Volver a esta versión», recetas y cumplimiento corregidos, y 26 recetas más verificadas."
+  - "2.34.0 separa pfSense y OPNsense: cada uno es su propia plataforma en la consola, en Recetas y en Configlets."
+  - "Trae 50 configlets y scripts nuevos, diez para MikroTik RouterOS, Extreme EXOS, Extreme VOSS, Ubiquiti EdgeSwitch y WatchGuard."
+  - "23 recetas más con el sello «Verificada» (OPNsense 26.7 y WatchGuard Fireware 12.8.1), y las de WatchGuard corregidas en un Firebox real."
 ---
 
 Las 6 últimas versiones. El historial completo está en [opennccm.com/novedades](https://opennccm.com/novedades.html) y cada versión se descarga desde [GitHub](https://github.com/Gaaraalex/opennccm/releases).
+
+## Versión 2.34.0
+- **pfSense y OPNsense por separado:** Cada uno es su propia plataforma en la consola, en Recetas y en Configlets,
+  con sus recetas y sus rutas (config.xml, versión y registro). Los favoritos de consola que ya tenía se copian a los dos.
+- **Consola de pfSense y OPNsense:** `ifconfig`, `sockstat`, `tail`, `ls`, `arp -an` y otros comandos de consulta se
+  bloqueaban como si cambiaran la configuración (en Multi-equipo y en solo lectura). Ahora son consultas; reiniciar, apagar
+  pf o borrar archivos se avisan como cortes de servicio.
+- **Recetas de WatchGuard Fireware:** Probadas en un Firebox T40 real. El nombre del equipo usaba un submodo que no
+  existe, «show log» y «show connection» daban error, «show system usage» no existe y el ping no terminaba nunca. La receta de
+  NTP avisa del máximo de 3 servidores.
+- **Recetas verificadas:** 23 recetas más con el sello «Verificada» tras 3 rondas seguidas sin fallos: OPNsense 26.7
+  (11) y WatchGuard Fireware 12.8.1 en un equipo físico (12).
+- **50 configlets y scripts nuevos:** Diez para cada una de estas plataformas: MikroTik RouterOS, Extreme EXOS, Extreme
+  VOSS / Fabric Engine, Ubiquiti EdgeSwitch y WatchGuard Fireware. Llegan también a las instalaciones que ya existen, una sola
+  vez: si borra uno, no vuelve. Salen «Sin verificar» hasta que se prueben.
 
 ## Versión 2.33.0
 - **«Ejecutar» espera la casilla del aviso:** En Configlets, Recetas y el asistente, los botones que ejecutan o aplican
@@ -113,19 +128,3 @@ Las 6 últimas versiones. El historial completo está en [opennccm.com/novedades
   derecha, como en Credenciales; cada fila tiene Editar y Borrar.
 - **Cambios de vecinos del mapa:** El panel ya no se abre cada vez que se entra al mapa; solo cuando hay cambios
   nuevos, y se puede abrir con el botón «Cambios de vecinos».
-
-## Versión 2.28.0
-- **Logos de marca:** Cada equipo muestra el logo de su marca (73 marcas, los 131 tipos de equipo) en Dispositivos, la
-  ficha, el mapa, la consola, la búsqueda Ctrl K y las demás pantallas. Dispositivos tiene un filtro «Marca» y una fila de chips
-  con cuántos equipos hay de cada una.
-- **Distribuciones del mapa más legibles:** Cada distribución usa todo el mapa y los nombres nunca quedan por debajo de
-  11 px. Ninguna línea cruza los nombres. Por sitio pone el equipo central al medio, Por función parte las columnas largas, el
-  árbol plegable encuadra la rama que se abre y la bandeja «Sin ubicación» baja con la rueda. Debajo del mapa, una franja explica
-  la distribución elegida y la leyenda se pliega.
-- **Nodos más fáciles de usar:** Filtro «Nodo» y «Asignar al nodo» en Dispositivos, enlace a los equipos de cada nodo,
-  Editar y Borrar a la vista, y un aviso propio para el nodo sin equipos. En el mapa, los vecinos de otros nodos salen
-  atenuados con el nombre de su nodo.
-- **Tipo de equipo en el mapa:** Las antenas MikroTik (RB911, SXT, LHG…) y los MikroTik con Wi-Fi activo salen como
-  inalámbricos, y el administrador puede corregir el tipo de un equipo a mano.
-- **Filtro de nodos del mapa:** Con un nodo elegido, los equipos de otros nodos salían como vecinos «que no están en
-  OpenNCCM».
