@@ -29,7 +29,7 @@ If the devices are already in Zabbix (6.0 or later), **\+ Add › Import from Za
 3.  **Remove devices:** the list shows the hosts in the ticked groups with their name, address (IP of the main interface, or its DNS name), description, Zabbix groups and the **platform** deduced from the Zabbix templates and inventory (for example "Mikrotik by SNMP" → MikroTik RouterOS). Those not recognized stay as "Generic" with a *review* mark; each one can be changed. Untick those you do not want to bring in; you can filter by text. Devices that already exist in OpenNCCM (same name or address), those without an address and those disabled in Zabbix are not ticked.
 4.  **Import:** the name, address (SSH, port 22) and description (in *Notes*) are saved and, if Zabbix has inventory, the model, serial number and location. Optionally, one credential and one group for all of them.
 
-SSH credentials are not in Zabbix. If you do not choose one for all, the devices are created **disabled** (they are not backed up and raise no errors) until you edit each one, assign its credential and group, and enable it. Importing again later only adds the new hosts.
+SSH credentials are not in Zabbix. If you do not choose one for all, the devices are created **disabled** (they are not backed up and raise no errors) until you edit each one, assign its credential and group, and enable it. To enable several at once, tick them in the Devices list and click **Enable**. Importing again later only adds the new hosts.
 
 ## Adding a device
 
@@ -44,7 +44,7 @@ SSH credentials are not in Zabbix. If you do not choose one for all, the devices
 | Type on the map | (Administrators) Router, switch, antenna / AP or firewall, if the map puts it in the wrong column. **Automatic** works it out from the model; MikroTik antennas (RB911, SXT, LHG…) and a MikroTik with an active wlan or wifi count as wireless. |
 | Does it have a web interface? | **Yes** (default) shows the device's **Web interface** button; you can give its address if it is not `https://IP/`. **No** hides the button for devices without an admin page (many access switches, Linux servers…). It can be changed later in **Edit**. |
 | Custom backup command | Optional: replaces the profile's command (useful with the "Generic SSH" profile or versions with a different syntax). |
-| Enabled | If unticked, the device is left out of scheduled tasks and bulk backups. |
+| Enabled | If unticked, the device is **isolated**: OpenNCCM does not connect to it in any way (backups, console, Multi-device, recipes, change requests, firmware, .fxi image or the API) until it is enabled again. Its backups and history are kept. |
 | Revert automatically | Undoes unauthorized changes when they are detected (see [Rollback](/en/cambios/reversion/)). |
 
 ![Add device form.](../../../../assets/manual/04-dispositivo-nuevo.png)
@@ -52,6 +52,20 @@ SSH credentials are not in Zabbix. If you do not choose one for all, the devices
 ## Device page
 
 It brings together everything about a device in tabs: **Summary** (inventory, baseline, lifecycle and latest versions), **Versions**, **Compliance**, **Vulnerabilities**, **Firmware** and **Events**. At the top are **Console**, **Web interface** and **Back up now**; the **⋯** menu groups audit, look up CVEs, upgrade firmware, edit, compare with another device, see the differences with the baseline, go back to it (if the device has no baseline yet, it lets you mark the latest version) and delete. To delete a device you have to type its name, because it is removed with its whole history.
+
+**Disabled device.** Instead of "Online" it says **Disabled** and does not offer Console, Web interface or Back up now: the device is isolated and OpenNCCM does not connect to it. An administrator enables it again with **Enable**, on the device page itself. In the Devices list, when you tick several devices, **Enable** and **Disable** act on all of them at once (administrators only; it is logged in Audit).
+
+### Retired devices (damaged or replaced)
+
+When a device is damaged, replaced by another that will do the same job or decommissioned, there is no need to delete it: on its page, **⋯ → Retire or replace…** menu (administrators only). You choose the reason (damaged, replaced, returned or other) and, if you like, a note.
+
+-   The device is renamed with a sequence number per name: the first one retired from `SW-CORE-01` becomes `SW-CORE-01 (1)`, the next `SW-CORE-01 (2)`, and so on.
+-   It is left **without an address**: the name and IP become free for the new device. The original name and IP are kept and you can search by them (in Devices, in Retired and with Ctrl K).
+-   It is **disabled and isolated** (OpenNCCM does not connect to it) and out of everything active: dashboard, map, alarms, reports, tasks and the API. Its open alarms are closed and its versions are not purged.
+-   It keeps **all its history** for auditing: versions and backups, compliance, vulnerabilities, events and ports.
+-   With **Add the replacement device** (on by default), the new device is created in the same step with the retired one's name, IP, type, credential, group, node and location, and its first backup starts. Its page says which device it replaces and offers **Compare** its backup with the retired one's last, to check it was configured the same way.
+
+Retired devices are listed in **Devices › Retired**, with their original name and IP, the reason, who retired them and when, and which device replaced them. A retired device cannot be edited: **Reinstate** brings it back into service with the name and IP you give (by default the original ones, if free) and, if ticked, enabled.
 
 ![Device page for R1, Summary tab.](../../../../assets/manual/05-dispositivo.png)
 

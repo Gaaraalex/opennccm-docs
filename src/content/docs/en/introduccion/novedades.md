@@ -1,15 +1,30 @@
 ---
 title: "What's new"
-description: "What's new in OpenNCCM 2.34.0 and earlier versions."
+description: "What's new in OpenNCCM 2.35.0 and earlier versions."
 resumen:
-  - "2.34.0 splits pfSense and OPNsense: each one is its own platform in the console, Recipes and Configlets."
-  - "It ships 50 new configlets and scripts, ten each for MikroTik RouterOS, Extreme EXOS, Extreme VOSS, Ubiquiti EdgeSwitch and WatchGuard."
-  - "23 more recipes carry the “Verified” badge (OPNsense 26.7 and WatchGuard Fireware 12.8.1), and the WatchGuard ones were fixed on a real Firebox."
+  - "2.35.0 retires damaged or replaced devices instead of deleting them: they stay isolated, with all their history, and the replacement is added in the same step."
+  - "A disabled device is isolated: OpenNCCM does not connect to it in any way. Devices are enabled and disabled in bulk from Devices."
+  - "ArubaOS (S2500 and controllers) reads model, serial and ports, and gains 10 configlets and a compliance pack."
 ---
 
 The latest 6 versions. The release notes are written in Spanish; the full history is at [opennccm.com/en/changelog](https://opennccm.com/en/changelog.html) and every version can be downloaded from [GitHub](https://github.com/Gaaraalex/opennccm/releases).
 
 <div lang="es">
+
+## Versión 2.35.0
+- **Equipos retirados:** Un equipo dañado, reemplazado o dado de baja se retira en lugar de borrarlo (ficha › ⋯ ›
+  Retirar o reemplazar). Se renombra «NOMBRE (n)», queda sin IP, aislado y fuera de todo lo activo, con todo su historial para
+  auditarlo, y se busca por su nombre e IP originales. En el mismo paso se puede dar de alta el reemplazo con sus datos y
+  comparar sus respaldos. Se ven en Dispositivos › Retirados y se pueden reincorporar.
+- **Equipo desactivado = aislado:** OpenNCCM ya no se conecta con un equipo desactivado por ninguna vía (respaldos,
+  consola, SFTP, Multi-equipo, recetas, solicitudes, firmware, imagen .fxi, API). La ficha lo dice y ofrece «Activar».
+- **Activar y desactivar en lote:** En Dispositivos, al marcar varios equipos (solo administradores).
+- **Credenciales:** «Guardar» al editar una credencial no hacía nada; tampoco al editar un grupo, una política o
+  una ficha de ciclo de vida en el panel lateral. Había que borrarla y crearla de nuevo.
+- **ArubaOS (S2500 y controladoras):** Sin contraseña de enable prueba la de ingreso y, si no sirve, lo explica en
+  lugar de «Pattern not detected». Lee el modelo, la serie y todos los puertos (en el S2500-48P, 48 de cobre y 4 SFP+) y
+  muestra su parte trasera.
+- **ArubaOS: configlets y cumplimiento:** 10 configlets y scripts y el paquete «Aruba ArubaOS · Seguridad básica».
 
 ## Versión 2.34.0
 - **pfSense y OPNsense por separado:** Cada uno es su propia plataforma en la consola, en Recetas y en Configlets,
@@ -109,26 +124,5 @@ The latest 6 versions. The release notes are written in Spanish; the full histor
   en la nueva; si no, guarda en Eventos y en la solicitud el final del registro del equipo con el motivo.
 - **Serie de los Ubiquiti:** Los airMAX, airFiber y AP UniFi muestran su número de serie (la MAC, como hace Ubiquiti), y
   se reconoce la serie escrita como «S/N».
-
-## Versión 2.29.0
-- **Equipos ZTE:** OLT ZXA10 C300, C320, C350 y C220, OLT TITAN C600, C610, C620, C650 y C680, y switches y routers
-  ZXR10 (ZXROS), con respaldo, versión, modelo y serie.
-- **Recetas para casi todos los equipos:** 422 recetas, con al menos 10 para 95 de los 133 tipos de equipo: Ubiquiti,
-  ZTE, Huawei, H3C/HPE Comware, Juniper, Arista, Cisco NX-OS, IOS-XR y ASA, FortiGate, PAN-OS, Aruba, Dell, Nokia, F5, Citrix,
-  pfSense, OPNsense, Linux y los equipos con CLI tipo Cisco, entre otros.
-- **Sello «Verificada» en las recetas:** Las recetas probadas completas llevan el sello con la versión del sistema en
-  la que se probaron, por ejemplo «Verificada · VOSS 9.3.0.0»; las demás dicen «Sin verificar». Hay un filtro «Solo
-  verificadas» y un administrador puede poner o quitar el sello.
-- **Aviso en las recetas:** Arriba de la lista, un aviso pide revisar cada receta antes de usarla en producción, porque
-  OpenNCCM no tiene todas las plataformas para probarlas. Al aplicar una receta hay que confirmar que se revisaron los comandos, se
-  avisa si el equipo tiene otra versión que la del sello, y cada receta se puede reportar en el foro o en GitHub.
-- **Firmware y CVE de Ubiquiti:** airMAX, airFiber, los AP UniFi, el USG y el EdgeSwitch X muestran el firmware
-  disponible y sus vulnerabilidades. La búsqueda de CVE usa además el modelo del equipo y cubre 70 tipos de equipo.
-- **Copia de airOS como system.cfg:** En airMAX, airFiber y los AP UniFi, la copia de seguridad se descarga como
-  system.cfg, lista para restaurar en el equipo.
-- **Grupos y Nodos con panel lateral:** «Crear grupo» y «Crear nodo» están siempre arriba y abren un panel a la
-  derecha, como en Credenciales; cada fila tiene Editar y Borrar.
-- **Cambios de vecinos del mapa:** El panel ya no se abre cada vez que se entra al mapa; solo cuando hay cambios
-  nuevos, y se puede abrir con el botón «Cambios de vecinos».
 
 </div>

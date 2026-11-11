@@ -20,4 +20,6 @@ La configuración se obtiene mostrando el resultado del comando dentro de la mis
 
 **MikroTik SwitchOS** (SwOS y SwOS Lite) no tiene SSH: OpenNCCM descarga por HTTP (puerto 80) el mismo respaldo `backup.swb` que su interfaz web, y lee de él el modelo, la versión y la serie. No admite cambios por comandos ni consola; para restaurar, *Restore Backup* en SwitchOS con el archivo descargado.
 
+**ArubaOS** (controladoras y Mobility Access Switch como el S2500): al conectar, OpenNCCM pasa al modo privilegiado con la contraseña de **Enable / secret** de la credencial; si no tiene, prueba la de ingreso y, si tampoco sirve, lo dice. El modelo sale de `show version`, la serie de `show inventory` y los puertos de `show port status` (en el S2500-48P, los 48 de cobre y los 4 SFP+), y la ficha muestra su parte trasera.
+
 ![Plataformas soportadas con buscador y la columna «Comprobado en su red».](../../../assets/manual/30-plataformas.png)

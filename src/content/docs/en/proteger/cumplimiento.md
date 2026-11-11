@@ -25,6 +25,7 @@ curso: ["6.1","6.2"]
 | Juniper Junos · Basic security | 13 | No Telnet, FTP or J-Web HTTP; root without SSH; lockout after failed attempts; idle session; RADIUS/TACACS+; SNMP; syslog; NTP; banner |
 | Ubuntu / Debian · Basic security | 8 | SSH without root password login or empty passwords; only root with UID 0; passwordless sudo only for specific commands; firewall active; automatic security updates; NTP; no Telnet, rsh or TFTP |
 | WatchGuard Fireware · Basic security | 10 | Web UI and management (WSM and CLI) not open to the Internet; account lockout; idle session ≤ 15 min; SNMP without default communities, and v3; NTP; log forwarding; spoofed-packet blocking; pre-login notice. No automatic remediation: fix it in the Web UI or Policy Manager |
+| Aruba ArubaOS · Basic security | 6 | No Telnet; SNMP without default communities; enable password; NTP; remote syslog; login banner (controllers and Mobility Access Switch) |
 | FortiGate · Basic security | 11 | No Telnet or HTTP on interfaces; session ≤ 15 min; trusted hosts; password policy; strong crypto; SNMP; syslog/FortiAnalyzer; NTP |
 | Basic hardening (Cisco, Huawei, Juniper, FortiGate) | 3 – 9 | Essential controls per vendor |
 
