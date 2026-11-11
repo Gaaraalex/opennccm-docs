@@ -29,7 +29,7 @@ Si los equipos ya están en Zabbix (6.0 o posterior), **\+ Agregar › Importar 
 3.  **Quitar equipos:** la lista muestra los hosts de los grupos marcados con su nombre, dirección (IP de la interfaz principal, o su nombre DNS), descripción, grupos de Zabbix y la **plataforma** deducida de las plantillas y el inventario de Zabbix (por ejemplo «Mikrotik by SNMP» → MikroTik RouterOS). Las que no se reconocen quedan como «Genérico» con la marca *revisar*; cada una se puede cambiar. Desmarque los que no quiera traer; se puede filtrar por texto. No se marcan los que ya existen en OpenNCCM (mismo nombre o dirección), los que no tienen dirección ni los desactivados en Zabbix.
 4.  **Importar:** se guardan el nombre, la dirección (SSH, puerto 22), la descripción en *Notas* y, si Zabbix tiene inventario, el modelo, el n.º de serie y la ubicación. Opcionalmente, una credencial y un grupo para todos.
 
-Las credenciales SSH no están en Zabbix. Si no elige una para todos, los equipos se crean **desactivados** (no se respaldan ni generan errores) hasta que edite cada uno, le asigne su credencial y su grupo, y lo active. Volver a importar más adelante solo añade los hosts nuevos.
+Las credenciales SSH no están en Zabbix. Si no elige una para todos, los equipos se crean **desactivados** (no se respaldan ni generan errores) hasta que edite cada uno, le asigne su credencial y su grupo, y lo active. Para activar varios a la vez, márquelos en la lista de Dispositivos y pulse **Activar**. Volver a importar más adelante solo añade los hosts nuevos.
 
 ## Alta de un dispositivo
 
@@ -44,7 +44,7 @@ Las credenciales SSH no están en Zabbix. Si no elige una para todos, los equipo
 | Tipo en el mapa | (Administradores) Router, switch, antena / AP o firewall, si el mapa lo pone en la columna equivocada. **Automático** lo deduce del modelo; las antenas MikroTik (RB911, SXT, LHG…) y un MikroTik con una wlan o wifi activa cuentan como inalámbricos. |
 | ¿Tiene interfaz web? | **Sí** (por omisión) muestra el botón **Interfaz web** del equipo; se puede indicar su dirección si no es `https://IP/`. **No** oculta el botón para los equipos sin página de administración (muchos switches de acceso, servidores Linux…). Se puede cambiar después en **Editar**. |
 | Comando de respaldo personalizado | Opcional: sustituye al comando del perfil (útil con el perfil «Genérico SSH» o versiones con otra sintaxis). |
-| Habilitado | Si se desmarca, el equipo no entra en tareas programadas ni respaldos masivos. |
+| Habilitado | Si se desmarca, el equipo queda **aislado**: OpenNCCM no se conecta con él por ninguna vía (respaldos, consola, Multi-equipo, recetas, solicitudes de cambio, firmware, imagen .fxi ni la API) hasta que se vuelva a activar. Sus respaldos y su historial se conservan. |
 | Revertir automáticamente | Deshace los cambios no autorizados que se detecten (ver [Reversión](/cambios/reversion/)). |
 
 ![Formulario de alta.](../../../assets/manual/04-dispositivo-nuevo.png)
@@ -52,6 +52,20 @@ Las credenciales SSH no están en Zabbix. Si no elige una para todos, los equipo
 ## Ficha del dispositivo
 
 Reúne todo sobre un equipo en pestañas: **Resumen** (inventario, línea base, ciclo de vida y últimas versiones), **Versiones**, **Cumplimiento**, **Vulnerabilidades**, **Firmware** y **Eventos**. Arriba están **Consola**, **Interfaz web** y **Respaldar ahora**; el menú **⋯** agrupa auditar, buscar CVE, actualizar firmware, editar, comparar con otro equipo, ver las diferencias con la línea base, volver a ella (si el equipo aún no tiene línea base, permite marcar la última versión) y eliminar. Para eliminar un equipo hay que escribir su nombre, porque se borra con todo su historial.
+
+**Equipo desactivado.** En lugar de «En línea» dice **Desactivado** y no ofrece Consola, Interfaz web ni Respaldar ahora: el equipo está aislado y OpenNCCM no se conecta con él. Un administrador lo vuelve a activar con **Activar**, en la propia ficha. En la lista de Dispositivos, al marcar varios equipos, **Activar** y **Desactivar** lo hacen con todos a la vez (solo administradores; queda en Auditoría).
+
+### Equipos retirados (dañados o reemplazados)
+
+Cuando un equipo se daña, se reemplaza por otro que hará su misma función o se da de baja, no hace falta borrarlo: en su ficha, menú **⋯ → Retirar o reemplazar…** (solo administradores). Se elige el motivo (dañado, reemplazado, devuelto u otro) y, si se quiere, una nota.
+
+-   El equipo se renombra con un número de secuencia por nombre: el primero que se retira de `SW-CORE-01` queda como `SW-CORE-01 (1)`, el siguiente como `SW-CORE-01 (2)`, y así.
+-   Queda **sin dirección**: el nombre y la IP quedan libres para el equipo nuevo. El nombre y la IP originales se guardan y se puede buscar por ellos (en Dispositivos, en Retirados y con Ctrl K).
+-   Queda **desactivado y aislado** (OpenNCCM no se conecta con él) y fuera de todo lo activo: panel, mapa, alarmas, informes, tareas y la API. Sus alarmas abiertas se cierran y sus versiones no se purgan.
+-   Conserva **todo su historial** para auditarlo: versiones y respaldos, cumplimiento, vulnerabilidades, eventos y puertos.
+-   Con **Dar de alta el equipo que lo reemplaza** (activado por omisión), en el mismo paso se crea el equipo nuevo con el nombre, la IP, el tipo, la credencial, el grupo, el nodo y la ubicación del retirado, y se lanza su primer respaldo. Su ficha dice a quién reemplaza y ofrece **Comparar** su respaldo con el último del retirado, para ver si quedó configurado igual.
+
+Los retirados se ven en **Dispositivos › Retirados**, con su nombre e IP originales, el motivo, quién y cuándo lo retiró y qué equipo lo reemplazó. Un retirado no se edita: con **Reincorporar** vuelve al servicio con el nombre y la IP que se indiquen (por omisión, los originales, si están libres) y, si se marca, activado.
 
 ![Ficha del dispositivo R1, pestaña Resumen.](../../../assets/manual/05-dispositivo.png)
 
