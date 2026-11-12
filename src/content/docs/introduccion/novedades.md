@@ -1,13 +1,48 @@
 ---
 title: "Novedades de la versión"
-description: "Lo nuevo de OpenNCCM 2.36.0 y las versiones anteriores."
+description: "Lo nuevo de OpenNCCM 2.37.0 y las versiones anteriores."
 resumen:
-  - "2.36.0 guarda en cada copia de seguridad la versión de firmware que tenía el equipo, y avisa cuando cambió entre dos copias."
-  - "Al comparar dos copias de firmware distinto, las diferencias que trajo la actualización salen en ámbar; revertir a otro firmware avisa antes."
-  - "Opcional: logos abreviados en tamaño chico para las marcas cuyo logo es su nombre escrito, y el menú «Marca» con buscador."
+  - "2.37.0 es más rápido con miles de equipos: con 2000, el panel carga en 0,4 s, IP y VLAN en 0,07 s y las páginas van comprimidas."
+  - "FortiGate vuelve a aplicar los cambios de recetas, Multi-equipo y el asistente; Junos descarta un commit fallido y restaura bien con DHCP."
+  - "Las 12 recetas de FortiOS 7.4.2 quedan verificadas, y hay una Guía del desarrollador nueva para continuar el proyecto."
 ---
 
 Las 6 últimas versiones. El historial completo está en [opennccm.com/novedades](https://opennccm.com/novedades.html) y cada versión se descarga desde [GitHub](https://github.com/Gaaraalex/opennccm/releases).
+
+## Versión 2.37.0
+- **Más rápido con muchos equipos:** Con 2000 equipos, el panel pasa de 1,4 s a 0,4 s, IP y VLAN de 1,7 s a 0,07 s,
+  Analítica de 1 s a 0,08 s, Cumplimiento de 1,1 s a 0,35 s y la búsqueda en las configuraciones de 0,8 s a 0,2 s. Los
+  indicadores se cuentan en la base de datos, se leen solo los datos que cada página usa y hay índices nuevos (se crean
+  solos al actualizar).
+- **Páginas más livianas:** Las respuestas van comprimidas (la lista de 2000 equipos pasa de 4 MB a 200 KB) y el
+  navegador guarda los estilos y los scripts hasta la versión siguiente, en lugar de volver a pedirlos en cada página.
+- **Firmware en un respaldo sin cambios:** Si la configuración es la misma y la última copia es de antes de registrar
+  el firmware, esa copia recibe la versión leída en la misma conexión (las copias más viejas siguen «sin registrar»).
+- **FortiGate: los cambios no se aplicaban:** Las recetas, Multi-equipo y el asistente quitaban el «end» de los
+  bloques «config … end», que en FortiOS es lo que aplica el bloque: el cambio no quedaba hecho aunque la solicitud terminaba
+  «bien» (por ejemplo, cambiar el nombre). Visto en un FortiGate-VM 7.4.2.
+- **FortiGate: comprobación de las recetas:** «diagnose sys ntp status», «diagnose sniffer packet» y los demás
+  diagnose y execute que solo consultan ya cuentan como consulta (la comprobación de «Configurar NTP» y «Ver el tráfico de una
+  IP» no se podía ejecutar). «execute reboot», «execute factory-reset» y similares se marcan como corte del servicio.
+- **FortiGate: configuración de referencia:** Ya no prepara comandos al estilo Cisco («no set …», bloques sin «end»)
+  que el equipo rechazaba a mitad. La comparación se muestra igual; las diferencias se igualan a mano.
+- **Junos: un commit fallido dejaba cambios pendientes:** Si el equipo rechazaba el commit de una solicitud, lo
+  aplicado quedaba en la configuración candidata (que en Junos es la misma para todas las sesiones) y el siguiente cambio,
+  de cualquiera, lo arrastraba y fallaba igual. Ahora se descarta («rollback 0») y la solicitud lo dice.
+- **Junos: volver a una versión con DHCP en un puerto:** «family inet dhcp vendor-id …» (de fábrica en los puertos
+  del QFX) se borra entero; antes se quitaba solo «vendor-id» y restaurar una copia con IP fija fallaba en el commit
+  («Incompatible with interface assigned with address»). Visto en un vQFX 19.4R1.10.
+- **Recetas verificadas en FortiGate:** Las 12 recetas de FortiOS quedan con el sello «Verificada · FortiOS 7.4.2»
+  (3 rondas seguidas sin fallos en un FortiGate-VM 7.4.2: todos sus pasos y su comprobación).
+- **Recetas verificadas en switches Juniper:** Las 10 recetas de Junos pasaron 3 rondas seguidas sin fallos en un
+  vQFX 19.4R1.10 (las 9 que ya estaban verificadas en Junos 14.1 suman esa versión; «Crear una VLAN y poner un puerto de
+  acceso» queda verificada por primera vez).
+- **Consola: el aviso «cambio detectado» en su lugar:** Si un cambio se escribía justo después de un comando
+  bloqueado (modo solo lectura), el aviso verde podía salir antes del comando, en el prompt anterior. Ahora espera a que el
+  equipo repita el comando.
+- **Guía del desarrollador:** docs/desarrollo (y en PDF, docs/OpenNCCM-Guia-del-desarrollador.pdf): arquitectura,
+  mapa del código, datos y migraciones, cómo agregar una plataforma, interfaz, API, pruebas, laboratorio, publicación y
+  rendimiento, para continuar el proyecto.
 
 ## Versión 2.36.0
 - **Firmware de cada copia de seguridad:** Cada copia guarda la versión de software que tenía el equipo cuando se hizo,
@@ -91,27 +126,3 @@ Las 6 últimas versiones. El historial completo está en [opennccm.com/novedades
 - **El aviso completo en todos lados:** Recetas, Configlets, Cumplimiento, Multi-equipo, la ficha y el asistente
   muestran el aviso entero con el Foro, GitHub y la casilla, y cada aceptación queda en Auditoría.
 - **Configlets:** Las plataformas sin equipos ya no se ven apagadas: se ven igual que en Recetas.
-
-## Versión 2.31.0
-- **Respaldar todos sin «Internal Server Error»:** Con varios respaldos a la vez, uno podía terminar en error
-  («database is locked») y su versión no se guardaba. Ahora cada respaldo espera su turno para escribir.
-- **Buscar dentro de una versión:** Al ver una copia, «Buscar en esta versión» resalta las líneas que tienen el texto o
-  la IP y salta entre ellas con Intro.
-- **Puertos de los MikroTik con muchos SFP:** El frente del CRS326-24S+2Q+ (y de los CRS con muchos SFP) muestra los
-  SFP+ en dos filas y cada QSFP+ dividido en sus 4 interfaces («1-1» a «2-4») en su propio grupo.
-- **Número de serie de los MikroTik:** Se lee del RouterBOARD («/system routerboard print») o de la cabecera del
-  /export; antes salía vacío.
-- **Comprobar ahora, aunque otro equipo se esté comprobando:** La comprobación de firmware de un equipo ya no se
-  rechaza con «Ya hay una comprobación en curso».
-- **Reintento al entrar por SSH:** Un fallo pasajero de un equipo ocupado («No existing session») se reintenta; una
-  contraseña mala no.
-- **MikroTik RouterOS:** «Volver a esta versión» restaura los elementos que el /export de RouterOS 7 parte en dos
-  líneas; restaurar en otro equipo e igualar a la referencia ya no fallan por el «keymat-provider» que RouterOS 7 crea solo; en
-  RouterOS 6, un comando que muestra su avance («/certificate sign») ya no hace perder el siguiente.
-- **Recetas de RouterOS:** «Aplicar como solicitud» ya no quita pasos que cambian algo, «Limitar SSH y Winbox» sirve
-  en RouterOS 6 y 7, y hay una receta de NTP para RouterOS 6.
-- **Extreme EXOS:** El syslog detecta los cambios hechos por fuera; restaurar una copia funciona (las líneas de punto
-  de partida de EXOS y las cuentas que ya existen); igualar a la referencia ya no copia el nombre ni la contraseña del switch;
-  buscar una MAC encuentra los puertos de EXOS; y las recetas de contraseña y SNMP usan la sintaxis de EXOS 33.
-- **Recetas y correcciones verificadas en el laboratorio:** 25 recetas (MikroTik RouterOS 6.49.23 y 7.24.5, Extreme
-  EXOS 33.6.1.14) y 8 correcciones de cumplimiento de MikroTik llevan el sello «Verificada», tras 3 rondas seguidas sin fallos.
