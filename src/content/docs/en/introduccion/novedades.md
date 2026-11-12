@@ -1,15 +1,29 @@
 ---
 title: "What's new"
-description: "What's new in OpenNCCM 2.35.0 and earlier versions."
+description: "What's new in OpenNCCM 2.36.0 and earlier versions."
 resumen:
-  - "2.35.0 retires damaged or replaced devices instead of deleting them: they stay isolated, with all their history, and the replacement is added in the same step."
-  - "A disabled device is isolated: OpenNCCM does not connect to it in any way. Devices are enabled and disabled in bulk from Devices."
-  - "ArubaOS (S2500 and controllers) reads model, serial and ports, and gains 10 configlets and a compliance pack."
+  - "2.36.0 stores in every backup the firmware version the device had, and flags when it changed between two backups."
+  - "When comparing backups from different firmware, the differences the upgrade brought show in amber; rolling back to another firmware warns first."
+  - "Optional: short brand logos at small sizes for brands whose logo is their written name, and the “Brand” menu with a search box."
 ---
 
 The latest 6 versions. The release notes are written in Spanish; the full history is at [opennccm.com/en/changelog](https://opennccm.com/en/changelog.html) and every version can be downloaded from [GitHub](https://github.com/Gaaraalex/opennccm/releases).
 
 <div lang="es">
+
+## Versión 2.36.0
+- **Firmware de cada copia de seguridad:** Cada copia guarda la versión de software que tenía el equipo cuando se hizo,
+  leída en el mismo respaldo. Se ve en la línea de tiempo (azul la de hoy, ámbar otra, «sin registrar» en las copias viejas),
+  con un aviso «Firmware actualizado» entre dos copias de firmware distinto, en el inventario, en la versión abierta (con la
+  línea de la que sale y un aviso antes de revertir a una versión de otro firmware) y al comparar, donde las diferencias que
+  trajo la actualización salen en ámbar. El archivo descargado lleva la versión en el nombre.
+- **Logos abreviados en tamaño chico (opcional):** Administración › Ajustes › Organización. Las 10 marcas cuyo logo es
+  su nombre escrito (Cisco, Juniper, Nokia, NEC, Netgear, Hitachi, Siemens, Supermicro, Dell y Zyxel) usan su símbolo o sus
+  iniciales donde el logo se ve muy pequeño. Apagado por omisión: el logo normal en todos los tamaños.
+- **Menú «Marca» de Dispositivos:** Con buscador y barra para bajar; ya no se alarga hasta el final de la página.
+- **Menús desplegables:** Junto al borde derecho de la pantalla se cortaban («Todas las mar…»); ahora se abren hacia
+  el lado en que entran.
+- **Plurales:** «13 equipos en 1 grupo», «1 regla cumple», «1 línea distinta»… en lugar de «1 grupos».
 
 ## Versión 2.35.0
 - **Equipos retirados:** Un equipo dañado, reemplazado o dado de baja se retira en lugar de borrarlo (ficha › ⋯ ›
@@ -103,26 +117,5 @@ The latest 6 versions. The release notes are written in Spanish; the full histor
   buscar una MAC encuentra los puertos de EXOS; y las recetas de contraseña y SNMP usan la sintaxis de EXOS 33.
 - **Recetas y correcciones verificadas en el laboratorio:** 25 recetas (MikroTik RouterOS 6.49.23 y 7.24.5, Extreme
   EXOS 33.6.1.14) y 8 correcciones de cumplimiento de MikroTik llevan el sello «Verificada», tras 3 rondas seguidas sin fallos.
-
-## Versión 2.30.0
-- **Recetas para todos los equipos:** 758 recetas, con al menos 10 para cada tipo de equipo con línea de comandos (131 de
-  133), entre ellos Sophos, Cisco SD-WAN, Brocade FC, Ciena, Calix, Ericsson, Nokia ISAM, D-Link, Hirschmann, Yamaha, Eltex,
-  Teldat, AudioCodes, ScreenOS, Hillstone, WatchGuard y Prisma SD-WAN.
-- **Recetas por equipo y por tarea:** La pestaña Recetas tiene tres columnas: tus plataformas y todas las marcas, sus
-  recetas agrupadas por categoría y el detalle. «Por tarea» muestra en qué plataformas hay receta para lo que quieres hacer, y la
-  búsqueda agrupa por plataforma y dice dónde está la palabra.
-- **Configlets y scripts en columnas:** Primero lo que puedes ejecutar en tus equipos, con la plataforma en palabras,
-  el sello «Verificada», el aviso con el foro y GitHub y la casilla obligatoria antes de crear la solicitud.
-- **Vista previa de «Ejecutar» un configlet:** Mostraba trozos de código en lugar de los comandos; ahora muestra los
-  valores escritos y no deja enviar con una variable vacía.
-- **Aviso al aplicar comandos:** Las correcciones de Cumplimiento, Multi-equipo y el asistente IA llevan el aviso
-  «Revisa los comandos antes de usarlos en producción», y las correcciones y Multi-equipo piden marcar la casilla antes de crear
-  la solicitud. «Corregir N» deja elegir qué correcciones aplicar.
-- **Comprobar ahora lee la versión del equipo:** En la pestaña Firmware, «Comprobar ahora» le pregunta al equipo su
-  versión instalada antes de buscar la nueva, sin tener que respaldarlo.
-- **Comprobación después de actualizar el firmware:** Cuando el equipo vuelve, OpenNCCM lee su versión y avisa si quedó
-  en la nueva; si no, guarda en Eventos y en la solicitud el final del registro del equipo con el motivo.
-- **Serie de los Ubiquiti:** Los airMAX, airFiber y AP UniFi muestran su número de serie (la MAC, como hace Ubiquiti), y
-  se reconoce la serie escrita como «S/N».
 
 </div>

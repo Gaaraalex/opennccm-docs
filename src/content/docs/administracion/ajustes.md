@@ -32,6 +32,8 @@ En **Ajustes → Inicio de sesión** se puede permitir que las personas entren c
 
 ## Datos de la organización
 
+**Logos de marca abreviados en tamaño chico** (apagado por omisión): donde el logo se ve muy pequeño (listas, chips, mapa), las marcas cuyo logo es su nombre escrito (Cisco, Juniper, Nokia, NEC, Netgear, Hitachi, Siemens, Supermicro, Dell y Zyxel) usan una versión abreviada: su símbolo o sus iniciales. Apagado, se ve el logo normal en todos los tamaños.
+
 Nombre, correo de contacto y dirección de quien administra esta instalación. Se muestran en la página **Privacidad, cookies y licencias** (enlace al pie de cada página y en el inicio de sesión), que explica qué datos guarda OpenNCCM, sus conexiones externas, la única cookie que usa (técnica, sin necesidad de consentimiento), las condiciones de uso y las licencias.
 
 En la misma sección, **Mostrar el botón de soporte profesional** controla el botón de la barra superior que lleva a la [página de soporte de pago](https://comunidad.opennccm.com/soporte) (en otra pestaña). Si lo desmarca, se oculta para todos. El botón no cambia ninguna función del sistema.
