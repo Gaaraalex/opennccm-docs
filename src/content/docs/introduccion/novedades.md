@@ -1,13 +1,41 @@
 ---
 title: "Novedades de la versión"
-description: "Lo nuevo de OpenNCCM 2.37.0 y las versiones anteriores."
+description: "Lo nuevo de OpenNCCM 2.38.0 y las versiones anteriores."
 resumen:
-  - "2.37.0 es más rápido con miles de equipos: con 2000, el panel carga en 0,4 s, IP y VLAN en 0,07 s y las páginas van comprimidas."
-  - "FortiGate vuelve a aplicar los cambios de recetas, Multi-equipo y el asistente; Junos descarta un commit fallido y restaura bien con DHCP."
-  - "Las 12 recetas de FortiOS 7.4.2 quedan verificadas, y hay una Guía del desarrollador nueva para continuar el proyecto."
+  - "2.38.0 arregla Cisco IOS: restaurar con SNMP ya no se detiene, y guardar después de cambiar de imagen ya no queda esperando."
+  - "Cisco ASA restaura bien una copia, iguala bien la configuración de referencia y en la consola distingue las consultas de los comandos que cortan el servicio."
+  - "Las recetas de Cisco IOS / IOS-XE (de 12.2 a 17.6) y las 11 de Cisco ASA 9.9.2 quedan verificadas; «Activar SSH» en IOS usa una clave de 2048 bits."
 ---
 
 Las 6 últimas versiones. El historial completo está en [opennccm.com/novedades](https://opennccm.com/novedades.html) y cada versión se descarga desde [GitHub](https://github.com/Gaaraalex/opennccm/releases).
+
+## Versión 2.38.0
+- **Cisco IOS: restaurar con SNMP:** La reversión ya no escribe «snmp-server chassis-id» sin valor (IOS lo muestra en
+  cuanto hay otra línea de SNMP y no se puede escribir así): la restauración se detenía en «% Incomplete command». Visto en
+  un IOSv 15.6(2)T.
+- **Cisco IOS: guardar tras cambiar de imagen:** El primer «write memory» después de cargar otra versión pregunta
+  «Overwrite the previous NVRAM configuration?[confirm]»; ahora se contesta, en lugar de esperar hasta fallar (cambios,
+  recetas y actualización de firmware quedaban sin guardar). Visto en un 7200 y un 3745.
+- **Cisco ASA: restaurar una copia:** No se mandan los comentarios «: Serial Number…», «: Hardware…» ni
+  «ASA Version …», y el «no snmp-server location» de fábrica no se niega cuando la copia trae la línea con valor. Visto en
+  un ASAv 9.9.2.
+- **Cisco ASA: configuración de referencia:** Los bloques («interface», «object network») van primero, cada uno
+  con su «exit», y después las líneas sueltas que dependen de ellos («mtu puesto …», «route puesto …»); lo que sobra se quita
+  antes de poner lo nuevo (el ASA no acepta un segundo «inspect dns …» sin quitar el que tiene) y la marca
+  «call-home reporting anonymous prompt N» queda como propia del equipo.
+- **Bloques de tres niveles:** Restaurar e igualar a la referencia escriben las líneas de tercer nivel entrando en
+  su sub-bloque («policy-map › class › inspect», «router bgp › address-family › network»); antes se escribían en el bloque
+  de arriba y el equipo las rechazaba.
+- **Cisco ASA en la consola:** «packet-tracer» cuenta como consulta, y «write erase», «reload», «format» y
+  «configure factory-default» se marcan como corte del servicio.
+- **Receta «Activar SSH» en IOS:** Usa una clave RSA de 2048 bits («general-keys modulus 2048»), que existe en
+  todas las versiones; la de 4096 no existe en IOS 12.x y la receta fallaba.
+- **Recetas verificadas en Cisco IOS / IOS-XE:** Las 10 recetas de IOS quedan con el sello «Verificada» y las
+  versiones en las que pasaron 3 rondas seguidas sin fallos: IOSv 15.6(2)T, Catalyst 8000v 17.6.1a, 7200 15.3(3)XB12,
+  3745 12.4(25d) (todas menos RADIUS, cuya sintaxis «radius server» no existe en 12.4) y 3620 12.2(26c) (las que no
+  necesitan SSH, HTTPS ni «secret»).
+- **Recetas verificadas en Cisco ASA:** Las 11 recetas del ASA quedan con el sello «Verificada · ASA 9.9.2»
+  (3 rondas seguidas sin fallos en un ASAv 9.9.2).
 
 ## Versión 2.37.0
 - **Más rápido con muchos equipos:** Con 2000 equipos, el panel pasa de 1,4 s a 0,4 s, IP y VLAN de 1,7 s a 0,07 s,
@@ -111,18 +139,3 @@ Las 6 últimas versiones. El historial completo está en [opennccm.com/novedades
   y un equipo que se ve a sí mismo por un lazo ya no cuenta como vecino.
 - **Recetas verificadas en el laboratorio:** 26 recetas más llevan el sello «Verificada» tras 3 rondas seguidas sin
   fallos: Extreme VOSS 9.3, Juniper Junos 14.1 (vMX) y Ubiquiti EdgeSwitch 1.9.3 (equipo físico).
-
-## Versión 2.32.0
-- **Errores falsos de SSH:** Equipos en línea quedaban con error («QueuePool limit of size 5 overflow 10 reached») y
-  había que respaldarlos a mano: con muchos respaldos a la vez OpenNCCM se quedaba sin conexiones a su base. Ahora cada respaldo
-  la suelta mientras habla con el equipo, y la página de Dispositivos ya no se queda en negro durante «Respaldar todos».
-- **Respaldar todos con su progreso:** Un panel con el porcentaje, la barra, los correctos, con error, en curso y en
-  cola, y cada fila de la lista que se actualiza sola con su paso. Se puede salir de la página, cancelar y, al terminar,
-  reintentar solo los que fallaron.
-- **Los respaldos que fallan se comprueban solos:** Si la falla fue pasajera (sesión cortada con el puerto respondiendo,
-  base ocupada) se reintenta; si el equipo no responde o rechaza la contraseña, se avisa con lo que se comprobó.
-- **Informe «Equipos del mapa»:** Los equipos del mapa de la red cruzados con Dispositivos: cuáles ya están agregados y
-  respaldados y cuáles no, sin IP ni MAC, con dónde escribir la IP de los que faltan (en la página o en un PDF para llenar).
-- **El aviso completo en todos lados:** Recetas, Configlets, Cumplimiento, Multi-equipo, la ficha y el asistente
-  muestran el aviso entero con el Foro, GitHub y la casilla, y cada aceptación queda en Auditoría.
-- **Configlets:** Las plataformas sin equipos ya no se ven apagadas: se ven igual que en Recetas.
