@@ -32,6 +32,8 @@ In **Settings → Sign-in** you can let people sign in with their organization a
 
 ## Organization details
 
+**Short brand logos at small sizes** (off by default): where the logo looks very small (lists, chips, map), the brands whose logo is their written name (Cisco, Juniper, Nokia, NEC, Netgear, Hitachi, Siemens, Supermicro, Dell and Zyxel) use a short version: their symbol or their initials. When off, the normal logo shows at every size.
+
 Name, contact email and address of whoever runs this installation. They are shown on the **Privacy, cookies and licenses** page (link at the bottom of every page and on the sign-in screen), which explains what data OpenNCCM keeps, its external connections, the only cookie it uses (technical, no consent needed), the terms of use and the licenses.
 
 In the same section, **Show the professional support button** controls the top-bar button that opens the [paid support page](https://comunidad.opennccm.com/soporte?lang=en) (in a new tab). Untick it to hide it for everyone. The button doesn’t change any feature of the system.
