@@ -19,7 +19,7 @@ resumen:
 
 | Protección | Qué hace |
 | --- | --- |
-| Comandos que cortan el servicio | reload, reboot, borrar la configuración (write erase, reset-configuration…): antes de enviarlos aparece «Este comando puede cortar el servicio», con **Cancelar** o **Ejecutar de todos modos**. |
+| Comandos que cortan el servicio | reload, reboot, borrar la configuración (write erase, reset-configuration…): antes de enviarlos aparece «Este comando puede cortar el servicio», con **Cancelar** o **Ejecutar de todos modos**. En Cisco ASA también «format» y «configure factory-default»; «packet-tracer» cuenta como consulta. |
 | Solo lectura | El interruptor del pie bloquea los comandos que cambian la configuración y lo avisa en la salida. Si el rol del usuario solo permite lectura, queda fijo; el servidor lo aplica aunque el navegador no lo pida. |
 | Comandos prohibidos del grupo | Lo que el administrador prohibió en el grupo del equipo no se envía. |
 | Cambio detectado | Si un comando cambia la configuración, aparece en verde «# OpenNCCM: cambio detectado · respaldo vN en cola · se puede revertir» y a los 20 segundos se respalda el equipo (con origen «Consola»). |

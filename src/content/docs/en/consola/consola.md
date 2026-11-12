@@ -19,7 +19,7 @@ resumen:
 
 | Protection | What it does |
 | --- | --- |
-| Commands that cut service | reload, reboot, erasing the configuration (write erase, reset-configuration…): before sending them, "This command may cut service" appears, with **Cancel** or **Run anyway**. |
+| Commands that cut service | reload, reboot, erasing the configuration (write erase, reset-configuration…): before sending them, "This command may cut service" appears, with **Cancel** or **Run anyway**. On Cisco ASA also "format" and "configure factory-default"; "packet-tracer" counts as a query. |
 | Read-only | The switch at the bottom blocks commands that change the configuration and says so in the output. If the user's role only allows reading, it is locked; the server enforces it even if the browser does not ask. |
 | Group's forbidden commands | Whatever the administrator forbade in the device's group is not sent. |
 | Change detected | If a command changes the configuration, "# OpenNCCM: change detected · backup vN queued · can be reverted" appears in green and 20 seconds later the device is backed up (with source "Console"). |
