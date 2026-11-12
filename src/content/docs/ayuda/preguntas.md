@@ -31,6 +31,10 @@ Sin `/etc/opennccm/secret.key` no se pueden leer los respaldos ni las credencial
 
 Desde **Sistema → Actualizar** o con el aviso de versión nueva. Antes se guarda una copia y, si la versión nueva no responde, vuelve sola a la anterior. Ver [Actualizar y volver atrás](/instalacion/actualizar/).
 
+## ¿Cómo está hecho por dentro? ¿Puedo continuar el proyecto?
+
+La [Guía del desarrollador](https://github.com/Gaaraalex/opennccm/tree/main/docs/desarrollo) (también en [PDF](https://github.com/Gaaraalex/opennccm/raw/main/docs/OpenNCCM-Guia-del-desarrollador.pdf)) explica la arquitectura, el mapa del código, los datos y las migraciones, cómo agregar una plataforma, la interfaz, la API, las pruebas, el laboratorio, la publicación y el rendimiento.
+
 ## ¿Dónde pido ayuda?
 
 En [Comunidad y soporte](/ayuda/soporte/).

@@ -31,6 +31,10 @@ Without `/etc/opennccm/secret.key` the backups and stored credentials cannot be 
 
 From **System → Update** or the new-version notice. A backup is taken first and, if the new version does not respond, it goes back to the previous one by itself. See [Upgrade and roll back](/en/instalacion/actualizar/).
 
+## How is it built inside? Can I carry the project on?
+
+The [Developer guide](https://github.com/Gaaraalex/opennccm/tree/main/docs/desarrollo) (also as [PDF](https://github.com/Gaaraalex/opennccm/raw/main/docs/OpenNCCM-Guia-del-desarrollador.pdf), in Spanish) explains the architecture, the code map, data and migrations, how to add a platform, the interface, the API, tests, the lab, publishing and performance.
+
 ## Where can I get help?
 
 In [Community and support](/en/ayuda/soporte/).

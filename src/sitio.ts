@@ -1,8 +1,8 @@
 // Datos del sitio: versión documentada, textos de la interfaz en los dos idiomas y el curso en video.
 
-export const VERSION = '2.36';
-export const VERSIONES = [{ v: '2.36', actual: true }];
-export const FECHA = { es: '11 nov 2026', en: 'Nov 11, 2026' };
+export const VERSION = '2.37';
+export const VERSIONES = [{ v: '2.37', actual: true }];
+export const FECHA = { es: '12 nov 2026', en: 'Nov 12, 2026' };
 
 export const WEB = 'https://opennccm.com';
 export const REPO = 'https://github.com/Gaaraalex/opennccm';
