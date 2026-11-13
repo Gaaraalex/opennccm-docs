@@ -93,6 +93,7 @@ La configuración solo dice si un puerto está apagado; el enlace se lee en la m
 | HPE ProCurve / Aruba OS-Switch · Aruba AOS-CX | `show interfaces brief` · `show interface brief` |
 | Cisco NX-OS · ASA/FTD · WLC | `show interface status` · `show interface ip brief` · `show port summary` |
 | Juniper · Extreme EXOS · Nokia SR OS | `show interfaces terse` · `show ports no-refresh` · `show port` |
+| OLT ZTE ZXA10 (C300, C320…) | PON: `show gpon onu state` (activo si tiene al menos una ONU en línea; dice «12 de 14 ONU en línea» y cuántas en LOS, DyingGasp u OffLine) · uplinks: `show interface gei_…/xgei_…`. Solo se guarda la cuenta por PON, no los datos de los clientes. |
 | Extreme VOSS / Fabric Engine (VSP) | `show interfaces gigabitEthernet` (columna OPERATE de STATUS) |
 | EdgeRouter, USG, VyOS | `show interfaces` (columna S/L) |
 | FortiGate · Palo Alto · Check Point | `get system interface physical` · `show interface all` · `show interfaces all` |

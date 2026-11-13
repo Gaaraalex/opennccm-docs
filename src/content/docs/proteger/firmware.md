@@ -20,10 +20,17 @@ En MikroTik, airOS, airFiber y EdgeRouter, OpenNCCM **respalda el equipo antes**
 
 ## Cómo usarlo
 
-1.  (admin) **Firmware y ciclo de vida → Imágenes → Cargar imagen**: arrastre el archivo, indique la versión y para qué device\_type es. La tabla muestra el MD5, el tamaño y los equipos compatibles.
-2.  Pestaña **Actualizar equipos** (o **Usar** en la imagen): elija la imagen; se marcan solos los equipos compatibles que tienen otra versión. Si corresponde, marque **Reiniciar cada equipo al terminar** y pulse **Crear solicitud de actualización**. También puede hacerlo desde la ficha de cada equipo.
-3.  Un administrador revisa los pasos previstos y aprueba. El resultado muestra si el archivo ya existía, si se transfirió y si el MD5 coincidió.
+1.  (admin) **Firmware y ciclo de vida → Imágenes → Cargar imagen**: arrastre el archivo, indique la versión y para qué device\_type es. Si pega la suma del fabricante (MD5 o SHA-256 de su página de descarga, en **Suma del fabricante**), OpenNCCM la compara con el archivo y no lo guarda si no coincide (ni reemplaza la imagen que hubiera con ese nombre). La tabla muestra la suma, el tamaño y los equipos compatibles.
+2.  Pestaña **Actualizar equipos** (o **Usar** en la imagen): elija la imagen; se marcan solos los equipos compatibles que tienen otra versión. Si corresponde, marque **Reiniciar cada equipo al terminar** y pulse **Crear solicitud de actualización**. Con varios equipos, elija cuántos a la vez (**Equipos a la vez**). También puede hacerlo desde la ficha de cada equipo.
+3.  Un administrador revisa los pasos previstos y aprueba. Antes de aprobar, **Comprobar los equipos** se conecta a cada uno sin copiar ni cambiar nada y dice si responde, qué versión tiene y si hay espacio para la imagen («Se puede» / «No se puede»). El resultado muestra si el archivo ya existía, si se transfirió y si la suma coincidió.
 4.  Después, OpenNCCM comprueba la versión: espera a que el equipo vuelva del reinicio (hasta 20 minutos), le pregunta su versión, lo respalda y vuelve a buscar actualizaciones. En Eventos y en la solicitud de cambio dice «quedó en la versión X»; si sigue en la anterior, avisa «la actualización no se aplicó» con el final del registro del equipo, que suele decir el motivo. Si no vuelve a responder, también lo avisa.
+
+### Muchos equipos a la vez
+
+-   **Espacio libre:** antes de copiar se mira cuánto lugar hay donde va la imagen (`dir flash:` en Cisco y Arista, `free-hdd-space` en MikroTik, `df -k` en airOS y EdgeRouter). Si no alcanza (la imagen más un margen de 1 MB o el 2 %), ese equipo no se toca y dice cuánto falta.
+-   **Suma en el equipo:** después de copiar, el propio equipo calcula la suma del archivo y se compara con la de la imagen: MD5 en Cisco, Arista y Junos; SHA-256 (o MD5 si no lo tiene) en airOS y EdgeRouter. Si no coincide, no se instala. RouterOS no calcula sumas de archivos: se compara el tamaño.
+-   **Tandas:** **Equipos a la vez** (de a 1, 2, 5, 10, 20 o todos). Con reinicio, cada tanda espera a que los equipos de la anterior vuelvan con la versión nueva, y si uno falla las siguientes no empiezan (se puede desmarcar). Además se sigue el orden del análisis de impacto: nunca dos equipos que juntos dejarían a otros sin servicio. Los equipos que ya tienen la versión de la imagen no se tocan («Sin cambios»).
+-   **Avance por equipo:** la solicitud muestra al vivo, por equipo, su tanda y su paso (respaldando, mirando el espacio, copiando con su porcentaje, comprobando la suma, instalando, reiniciando, comprobando la versión) y cómo terminó.
 
 **Varios equipos con reinicio:** la solicitud muestra el orden sugerido (primero los que no aíslan a nadie, juntos; después, de a uno, los que sí) y se ejecuta en ese orden, esperando que termine cada paso. Nunca reinicia a la vez dos equipos que juntos dejan sin servicio más que cada uno por separado, y avisa cuáles son. Ver el [análisis de impacto](/cambios/solicitudes/#análisis-de-impacto-qué-se-cae-si-toco-este-equipo).
 

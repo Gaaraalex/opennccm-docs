@@ -93,6 +93,7 @@ The configuration only says whether a port is disabled; the link is read in the 
 | HPE ProCurve / Aruba OS-Switch · Aruba AOS-CX | `show interfaces brief` · `show interface brief` |
 | Cisco NX-OS · ASA/FTD · WLC | `show interface status` · `show interface ip brief` · `show port summary` |
 | Juniper · Extreme EXOS · Nokia SR OS | `show interfaces terse` · `show ports no-refresh` · `show port` |
+| ZTE ZXA10 OLT (C300, C320…) | PON: `show gpon onu state` (active if it has at least one ONU online; says "12 of 14 ONUs online" and how many are in LOS, DyingGasp or OffLine) · uplinks: `show interface gei_…/xgei_…`. Only the count per PON is stored, not customer data. |
 | Extreme VOSS / Fabric Engine (VSP) | `show interfaces gigabitEthernet` (OPERATE column of STATUS) |
 | EdgeRouter, USG, VyOS | `show interfaces` (S/L column) |
 | FortiGate · Palo Alto · Check Point | `get system interface physical` · `show interface all` · `show interfaces all` |

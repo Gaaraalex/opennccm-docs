@@ -50,6 +50,8 @@ A policy can fix on its own the devices that fail some of its rules, without any
 -   **History.** Each attempt is kept with its result (Applied, Rolled back, Blocked, Failed), the reason, the device output and links to the versions before and after; also in Events and Audit.
 -   **Pause all** stops automatic remediation across the whole system instantly; **Check now** does not wait for the next check (every 5 minutes and after each audit).
 -   Enabling, configuring or pausing it is the critical function **Automatic remediation** (for administrators; the master administrator grants or removes it). Every user can see the history of their devices.
+-   **In the name of whoever enables it.** Each activation is recorded in the name of the user who saved it ("enabled by …") and only fixes the devices that user can see: if they are limited to some groups, only those groups. This is checked on every fix: if that user is deleted, disabled or loses the function, the policy stops fixing on its own until someone else saves it again (and the page says so). Policies enabled in 2.40.0 have no owner: they stop fixing until someone saves them again.
+-   **Per device.** In **Edit device**, **Allow automatic remediation** (on by default): when off, no policy fixes that device on its own; it is still fixed by hand with **Fix**.
 
 :::note[Approval]
 Automatic remediations do not go through the change-request approval flow: enabling them on a policy is that approval, and it is logged in Audit with the chosen rules and the window.

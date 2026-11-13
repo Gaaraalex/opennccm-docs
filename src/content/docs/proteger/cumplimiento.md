@@ -50,6 +50,8 @@ Una política puede corregir sola los equipos que incumplen algunas de sus regla
 -   **Historial.** Cada intento queda con su resultado (Aplicada, Revertida, Bloqueada, Fallida), el motivo, la salida del equipo y enlaces a las versiones de antes y después; también en Eventos y en Auditoría.
 -   **Pausar todo** detiene la corrección automática en todo el sistema al instante; **Revisar ahora** no espera a la próxima revisión (cada 5 minutos y después de cada auditoría).
 -   Activarla, configurarla o pausarla es la función crítica **Corrección automática** (de los administradores; el administrador maestro la da o la quita). Todos los usuarios pueden ver el historial de sus equipos.
+-   **A nombre de quien la activa.** Cada activación queda a nombre del usuario que la guardó («la activó …») y solo corrige los equipos que ese usuario puede ver: si está limitado a algunos grupos, solo los de esos grupos. Se comprueba en cada corrección: si ese usuario se borra, se desactiva o pierde la función, la política deja de corregir sola hasta que otro la vuelva a guardar (y la página lo avisa). Las políticas activadas en la 2.40.0 no tienen dueño: dejan de corregir hasta que alguien las vuelva a guardar.
+-   **Por equipo.** En **Editar equipo**, **Permitir corrección automática** (encendido por defecto): apagado, ninguna política corrige sola ese equipo; se sigue corrigiendo a mano con **Corregir**.
 
 :::note[Aprobación]
 Las correcciones automáticas no pasan por el flujo de aprobación de solicitudes: activarlas en una política es esa aprobación, y queda en Auditoría con las reglas elegidas y la ventana.
