@@ -29,7 +29,8 @@ description: "Checklist and common problems."
 | "The account is temporarily locked" | 5 wrong passwords in a row: wait 15 minutes or ask an administrator to set a new password (that unlocks it). |
 | The web SSH console disconnects when opened | It only works with devices reached over SSH and for users who have permission (Settings → Security and access). Behind another proxy, that proxy must allow WebSocket. |
 | Backup: "Authentication failed" | Wrong user/password in the assigned credential. |
-| Backup: "Pattern not detected" | The prompt or privileged mode is not the expected one: the *enable* password is missing, or the `device_type` does not match the device. |
+| Backup: "Pattern not detected" | The prompt or privileged mode is not the expected one: the *enable* password is missing, or the `device_type` does not match the device. On Junos, since 2.39 the prompt is awaited for up to 90 s, for devices that are slow to open the CLI. |
+| Junos: backup fails for lack of permission | The user's login class lacks "view-configuration" (the device answers "/* ACCESS-DENIED */"). Since 2.39 the backup fails and says which permission to grant, instead of saving it as a version that could not be restored. |
 | Backup: "invalid output" | The backup command does not exist in that version. Set a **custom backup command** on the device. |
 | Changes are not detected in real time | The device does not send syslog, sends it from another IP, or a firewall blocks UDP 514. Check with `sudo tcpdump -ni any udp port 514`. |
 | Telnet "not supported" | That platform has no Telnet variant in Netmiko: use SSH. |

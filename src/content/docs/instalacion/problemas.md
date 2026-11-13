@@ -29,7 +29,8 @@ description: "Lista de verificación y problemas frecuentes."
 | «La cuenta está bloqueada temporalmente» | 5 contraseñas incorrectas seguidas: espere 15 minutos o pida a un administrador que le fije una contraseña nueva (eso la desbloquea). |
 | La consola SSH web se desconecta al abrirla | Solo funciona con equipos por SSH y para quien tenga permiso (Ajustes → Seguridad y acceso). Detrás de otro proxy, éste debe permitir WebSocket. |
 | Respaldo: «Authentication failed» | Usuario/contraseña incorrectos en la credencial asignada. |
-| Respaldo: «Pattern not detected» | El prompt o el modo privilegiado no son los esperados: falta la contraseña de *enable*, o el `device_type` no corresponde al equipo. |
+| Respaldo: «Pattern not detected» | El prompt o el modo privilegiado no son los esperados: falta la contraseña de *enable*, o el `device_type` no corresponde al equipo. En Junos, desde la 2.39 se espera el prompt hasta 90 s, para los equipos que tardan en abrir la CLI. |
+| Junos: el respaldo falla por falta de permiso | La clase de login del usuario no tiene «view-configuration» (el equipo responde «/* ACCESS-DENIED */»). Desde la 2.39 el respaldo falla y dice qué permiso darle, en lugar de guardarlo como una versión que no se podía restaurar. |
 | Respaldo: «salida inválida» | El comando de respaldo no existe en esa versión. Defina un **comando de respaldo personalizado** en el dispositivo. |
 | Los cambios no se detectan en tiempo real | El equipo no envía syslog, lo envía desde otra IP, o un cortafuegos bloquea UDP 514. Verifique con `sudo tcpdump -ni any udp port 514`. |
 | Telnet «no soportado» | Esa plataforma no tiene variante Telnet en Netmiko: use SSH. |

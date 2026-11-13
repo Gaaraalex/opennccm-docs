@@ -1,15 +1,41 @@
 ---
 title: "What's new"
-description: "What's new in OpenNCCM 2.38.0 and earlier versions."
+description: "What's new in OpenNCCM 2.39.0 and earlier versions."
 resumen:
-  - "2.38.0 fixes Cisco IOS: restoring with SNMP no longer stops, and saving after changing the image no longer hangs waiting."
-  - "Cisco ASA restores a backup correctly, matches the reference configuration correctly and, in the console, tells queries apart from commands that cut service."
-  - "The Cisco IOS / IOS-XE recipes (12.2 to 17.6) and the 11 Cisco ASA 9.9.2 recipes are now verified; “Enable SSH” on IOS uses a 2048-bit key."
+  - "2.39.0 brings per-user permissions: the role is a template and functions are removed or added one by one (for example, an operator who does not send configurations)."
+  - "The master administrator cannot be deleted or locked, and is the only one who grants or removes critical functions; in the user list, a switch instantly cuts off sending configurations."
+  - "Junos: a backup without read permission now fails and says which permission is missing, and it waits up to 90 s for the CLI; the QFX5100 front shows two rows with every port."
 ---
 
 The latest 6 versions. The release notes are written in Spanish; the full history is at [opennccm.com/en/changelog](https://opennccm.com/en/changelog.html) and every version can be downloaded from [GitHub](https://github.com/Gaaraalex/opennccm/releases).
 
 <div lang="es">
+
+## Versión 2.39.0
+- **Permisos por usuario:** Al crear o editar un usuario, el rol (Lector, Operador, Administrador) es una
+  plantilla y debajo está la lista de funciones del sistema por secciones (operación, cambios en los equipos,
+  administración): se quitan o se agregan a gusto, por ejemplo un operador que no envía configuraciones o un lector que
+  respalda. Cada ruta y cada botón obedecen a la función, no al rol. Al actualizar nada cambia: cada usuario sigue con
+  las funciones de su rol.
+- **Administrador maestro:** El primer administrador (al actualizar, el administrador activo más antiguo) es
+  el maestro: nadie lo puede eliminar, bloquear, editar ni quitarle la verificación en dos pasos, y es el único que crea
+  administradores y da o quita las funciones críticas (enviar configuraciones, revertir, restaurar, consola con cambios,
+  firmware, aprobar, credenciales, usuarios y ajustes). Puede pasar el rol a otro usuario; si se pierde el acceso, en el
+  servidor: «opennccm set-master USUARIO».
+- **Interruptor «Enviar configuraciones»:** En la lista de usuarios, el maestro da o corta al instante a cada
+  usuario el envío de configuraciones a los equipos (solicitudes, recetas, configlets, multi-equipo y correcciones).
+- **Junos: respaldo sin permiso de lectura:** Si la clase de login del usuario no tiene «view-configuration», el
+  equipo responde «/* ACCESS-DENIED */» en cada sección; antes se guardaba como una versión (que no se podía restaurar).
+  Ahora el respaldo falla y dice qué permiso darle. Visto en un QFX5100 con 13.2X51-D25.3.
+- **Junos: equipos que tardan en abrir la CLI:** Algunos muestran «--- JUNOS … built …» un rato antes del
+  prompt y el respaldo fallaba con «Pattern not detected» aunque el usuario y la contraseña eran correctos. Ahora espera
+  el prompt hasta 90 s. Visto en un switch con Junos 21.4R3-S5.4.
+- **Alarma de respaldo fallido:** Un respaldo que fallaba por algo que no se reintenta (contraseña rechazada,
+  sin permiso…) quedaba como «Respaldo reintentado» informativo en lugar de la alarma «Respaldo fallido».
+- **Frente de los switches Juniper QFX:** Los puertos salen en el orden del equipo (antes los de 1 G iban
+  primero, como cobre), en dos filas como el frente real (pares arriba, impares abajo, en bloques de 12), con los
+  QSFP+ en su bloque y los puertos sin módulo «sin módulo» (antes no aparecían: del 19 se pasaba al 43). Para verlo,
+  «Respaldar ahora» en cada QFX.
 
 ## Versión 2.38.0
 - **Cisco IOS: restaurar con SNMP:** La reversión ya no escribe «snmp-server chassis-id» sin valor (IOS lo muestra en
@@ -117,29 +143,5 @@ The latest 6 versions. The release notes are written in Spanish; the full histor
 - **50 configlets y scripts nuevos:** Diez para cada una de estas plataformas: MikroTik RouterOS, Extreme EXOS, Extreme
   VOSS / Fabric Engine, Ubiquiti EdgeSwitch y WatchGuard Fireware. Llegan también a las instalaciones que ya existen, una sola
   vez: si borra uno, no vuelve. Salen «Sin verificar» hasta que se prueben.
-
-## Versión 2.33.0
-- **«Ejecutar» espera la casilla del aviso:** En Configlets, Recetas y el asistente, los botones que ejecutan o aplican
-  comandos quedan desactivados hasta marcar «Leí el aviso…». Con marcarla una vez basta para toda la página.
-- **Configlets:** El panel de la derecha muestra los comandos completos; antes quedaban en una franja de una línea con
-  su propia barra y no se veía qué se iba a ejecutar.
-- **WatchGuard: imagen .fxi:** Crear la imagen y «Probar» fallaban siempre («SimpleNamespace is not mapped»). Ahora
-  la imagen se crea, se recibe cifrada, se guarda con su clave y se borra del Firebox.
-- **WatchGuard: sesiones de administración:** Los respaldos, las solicitudes y la consola web cierran su sesión de
-  Fireware. Antes se acumulaban en el Firebox y una solicitud que fallaba dejaba el modo de edición tomado: el Firebox
-  rechazaba la imagen .fxi y los cambios de otros administradores.
-- **Ubiquiti EdgeSwitch (FastPath):** Las solicitudes crean VLAN («vlan database»); el nombre, el SSH y la web van en
-  el modo privilegiado; «Volver a esta versión» quita el syslog, la comunidad SNMP y devuelve los puertos a la VLAN 1; el
-  syslog del switch avisa de cada cambio; y las recetas de nombre, SSH/HTTPS, SNMP, SNTP y syslog funcionan en 1.9.3.
-- **Cumplimiento de Ubiquiti EdgeSwitch:** «SSH habilitado», «Sin HTTP sin cifrar» y «SNTP» daban el resultado al
-  revés (el switch no muestra lo que viene de fábrica). Se corrigen solas en las instalaciones que ya las tienen.
-- **Solicitudes de cambio:** Un rechazo del equipo que llegaba tarde ya no se pierde (la solicitud terminaba «bien»
-  sin aplicarse); un fallo pasajero del saludo SSH se reintenta.
-- **Extreme VOSS, Juniper, Cisco y OPNsense:** VOSS restaura el RADIUS y el banner que sobran; Junos lee la serie de
-  «show chassis hardware», ignora el aviso de «commit confirmed» en LLDP y nunca toca fxp0 al restaurar; Cisco no copia el
-  certificado, la licencia ni el client-id de otro equipo y lee los puertos de los routers IOS-XE; OPNsense 26.7 conecta bien;
-  y un equipo que se ve a sí mismo por un lazo ya no cuenta como vecino.
-- **Recetas verificadas en el laboratorio:** 26 recetas más llevan el sello «Verificada» tras 3 rondas seguidas sin
-  fallos: Extreme VOSS 9.3, Juniper Junos 14.1 (vMX) y Ubiquiti EdgeSwitch 1.9.3 (equipo físico).
 
 </div>
