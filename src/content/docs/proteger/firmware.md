@@ -45,7 +45,7 @@ OpenNCCM comprueba una vez al día si hay una versión más nueva del firmware d
 -   Para los fabricantes que piden cuenta, OpenNCCM avisa de la versión nueva y lo que mejora; el archivo se descarga del portal del fabricante y se sube con **Cargar imagen**.
 -   **Comprobar ahora** (en la ficha del equipo) primero le pregunta al equipo su versión instalada (solo comandos de consulta, sin respaldar) y después busca la versión nueva; **Comprobar todos ahora** usa la versión del último respaldo. Ambos corren en segundo plano. Un administrador puede desactivar la comprobación diaria con **Comprobar a diario**. Solo se consultan los sitios de MikroTik, Ubiquiti y NVD, sin enviar datos de los equipos.
 
-La versión de NVD es la más reciente que NVD conoce, no un anuncio oficial: confírmela con el fabricante. Si NVD no conoce ninguna versión igual o posterior a la instalada, OpenNCCM indica que no puede saber si hay una más nueva.
+La versión de NVD es la más reciente que NVD conoce, no un anuncio oficial: confírmela con el fabricante. Si NVD no conoce ninguna versión igual o posterior a la instalada, OpenNCCM indica que no puede saber si hay una más nueva. Cuando el fabricante no publica sus versiones (como ZTE), el aviso dice además que las fechas de fin de venta y de soporte de su modelo se pueden cargar a mano (pestaña **Fin de vida (EOL/EOS)**).
 
 :::caution[Antes de actualizar en producción]
 Lea las notas del fabricante (espacio libre, rutas de actualización, modo *install* en IOS-XE) y pruebe en un equipo de laboratorio. En Cisco, habilite `ip scp server enable`.

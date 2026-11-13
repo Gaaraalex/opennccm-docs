@@ -1,15 +1,38 @@
 ---
 title: "What's new"
-description: "What's new in OpenNCCM 2.39.0 and earlier versions."
+description: "What's new in OpenNCCM 2.40.0 and earlier versions."
 resumen:
-  - "2.39.0 brings per-user permissions: the role is a template and functions are removed or added one by one (for example, an operator who does not send configurations)."
-  - "The master administrator cannot be deleted or locked, and is the only one who grants or removes critical functions; in the user list, a switch instantly cuts off sending configurations."
-  - "Junos: a backup without read permission now fails and says which permission is missing, and it waits up to 90 s for the CLI; the QFX5100 front shows two rows with every port."
+  - "2.40.0 brings automatic compliance remediation (optional, off): each policy fixes on its own the verified rules you choose, within a window, and rolls back if something goes wrong."
+  - "ZTE OLTs (C300, C320…) show their front by slot, with the PON ports and how many ONUs each has, plus the uplinks, and read the serial number from the control card."
+  - "For ZTE OLTs, the Vulnerabilities tab warns that NVD barely records them and links to ZTE's bulletins; end of life can be entered by hand."
 ---
 
 The latest 6 versions. The release notes are written in Spanish; the full history is at [opennccm.com/en/changelog](https://opennccm.com/en/changelog.html) and every version can be downloaded from [GitHub](https://github.com/Gaaraalex/opennccm/releases).
 
 <div lang="es">
+
+## Versión 2.40.0
+- **Corrección automática de cumplimiento (opcional):** En Cumplimiento › Corrección automática, cada política
+  puede corregir sola los equipos que incumplen las reglas elegidas, dentro de una ventana de días y horas. Solo entran
+  reglas con el sello «Verificada», y si alguien cambia su patrón o sus comandos dejan de aplicarse hasta volver a
+  elegirlas. En cada equipo y regla respalda antes, hace las mismas comprobaciones que una solicitud de cambio
+  (direcciones de ejemplo, quedarse sin acceso, reinicios y puertos apagados: si hay algo, no aplica nada y queda
+  «Bloqueada»), aplica, vuelve a respaldar y audita; si el equipo rechaza un comando o la regla sigue sin cumplirse,
+  vuelve a la versión de antes. Historial con el resultado, el motivo, la salida y las versiones de antes y después,
+  además de Eventos y Auditoría; no insiste más de una vez en 24 h por regla y equipo («Reintentar» lo libera), y
+  «Pausar todo» la detiene al instante. Viene apagada en todas las políticas, y activarla es la nueva función crítica
+  «Corrección automática» (de los administradores; el maestro la da o la quita).
+- **OLT ZTE: frente con sus puertos:** La ficha de las OLT ZXA10 (C300, C320…) ahora dibuja el frente por
+  ranuras desde la configuración, cada tarjeta con su número y su tipo («Ranura 2 · GTGH»): los puertos PON con cuántas
+  ONU tienen y los uplinks de 1 G y 10 G. Antes no mostraba ningún puerto. No se guardan datos de los clientes (nombres
+  ni descripciones de las ONU).
+- **OLT ZTE: número de serie:** La serie no está en «show system-group» ni en «show card»: ahora se busca la
+  tarjeta de control (SMXA, SCXN…) en «show card» y se lee su «Serial-Number» con «show card slotno N». Sirve para la C320
+  (ranura 3 o 4) y la C300 (ranura 10 u 11). Para verla, «Respaldar ahora» en cada OLT. Visto en una C320 con V2.1.0.
+- **OLT ZTE: vulnerabilidades:** NVD casi no registra las OLT ZTE (de la C320, ninguna), así que el «0» de la
+  pestaña Vulnerabilidades no significa que no tenga: ahora lo avisa y enlaza a los boletines de seguridad de ZTE.
+- **Firmware sin fuente pública:** Cuando el fabricante no publica sus versiones (como ZTE), el aviso dice además
+  que las fechas de fin de venta y de soporte se pueden cargar a mano en Firmware y ciclo de vida.
 
 ## Versión 2.39.0
 - **Permisos por usuario:** Al crear o editar un usuario, el rol (Lector, Operador, Administrador) es una
@@ -128,20 +151,5 @@ The latest 6 versions. The release notes are written in Spanish; the full histor
   lugar de «Pattern not detected». Lee el modelo, la serie y todos los puertos (en el S2500-48P, 48 de cobre y 4 SFP+) y
   muestra su parte trasera.
 - **ArubaOS: configlets y cumplimiento:** 10 configlets y scripts y el paquete «Aruba ArubaOS · Seguridad básica».
-
-## Versión 2.34.0
-- **pfSense y OPNsense por separado:** Cada uno es su propia plataforma en la consola, en Recetas y en Configlets,
-  con sus recetas y sus rutas (config.xml, versión y registro). Los favoritos de consola que ya tenía se copian a los dos.
-- **Consola de pfSense y OPNsense:** `ifconfig`, `sockstat`, `tail`, `ls`, `arp -an` y otros comandos de consulta se
-  bloqueaban como si cambiaran la configuración (en Multi-equipo y en solo lectura). Ahora son consultas; reiniciar, apagar
-  pf o borrar archivos se avisan como cortes de servicio.
-- **Recetas de WatchGuard Fireware:** Probadas en un Firebox T40 real. El nombre del equipo usaba un submodo que no
-  existe, «show log» y «show connection» daban error, «show system usage» no existe y el ping no terminaba nunca. La receta de
-  NTP avisa del máximo de 3 servidores.
-- **Recetas verificadas:** 23 recetas más con el sello «Verificada» tras 3 rondas seguidas sin fallos: OPNsense 26.7
-  (11) y WatchGuard Fireware 12.8.1 en un equipo físico (12).
-- **50 configlets y scripts nuevos:** Diez para cada una de estas plataformas: MikroTik RouterOS, Extreme EXOS, Extreme
-  VOSS / Fabric Engine, Ubiquiti EdgeSwitch y WatchGuard Fireware. Llegan también a las instalaciones que ya existen, una sola
-  vez: si borra uno, no vuelve. Salen «Sin verificar» hasta que se prueben.
 
 </div>

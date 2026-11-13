@@ -27,10 +27,10 @@ Since 2.39, the role is a **template**: choosing it ticks its functions in the *
 Functions are grouped in sections:
 
 -   **Operations:** back up, audit, tag versions, acknowledge alarms.
--   **Changes to devices:** send configurations, go back to a version, restore, console, firmware, approve.
+-   **Changes to devices:** send configurations, go back to a version, restore, console, firmware, approve, automatic compliance remediation.
 -   **Administration:** devices, credentials, configlets and policies, tasks, firmware images, knowledge base, users, settings.
 
-Every user can view devices, configurations and reports. If the list matches the role's, it says "the role's"; otherwise, "custom". **Critical** functions (those that change devices or grant access: send configurations, roll back, restore, console with changes, firmware, approve, credentials, users and settings) can only be granted or removed by the master administrator.
+Every user can view devices, configurations and reports. If the list matches the role's, it says "the role's"; otherwise, "custom". **Critical** functions (those that change devices or grant access: send configurations, roll back, restore, console with changes, firmware, approve, automatic remediation, credentials, users and settings) can only be granted or removed by the master administrator.
 
 ## Master administrator
 
