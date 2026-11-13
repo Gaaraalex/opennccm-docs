@@ -1,13 +1,39 @@
 ---
 title: "Novedades de la versión"
-description: "Lo nuevo de OpenNCCM 2.40.0 y las versiones anteriores."
+description: "Lo nuevo de OpenNCCM 2.41.0 y las versiones anteriores."
 resumen:
-  - "2.40.0 trae la corrección automática de cumplimiento (opcional, apagada): cada política corrige sola las reglas verificadas que se elijan, dentro de una ventana, y vuelve atrás si algo sale mal."
-  - "Las OLT ZTE (C300, C320…) muestran su frente por ranuras, con los puertos PON y cuántas ONU tienen y los uplinks, y leen el número de serie de la tarjeta de control."
-  - "Para las OLT ZTE, la pestaña Vulnerabilidades avisa que NVD casi no las registra y enlaza a los boletines de ZTE; el fin de vida se puede cargar a mano."
+  - "2.41.0 actualiza el firmware de muchos equipos en tandas: mira el espacio libre antes de copiar, el propio equipo comprueba la suma y, si uno falla, las tandas siguientes no empiezan."
+  - "«Comprobar los equipos» revisa conexión, versión y espacio antes de aprobar, sin copiar nada; al cargar una imagen se puede pegar la suma del fabricante."
+  - "Las OLT ZTE muestran qué puertos están activos (ONU en línea por PON, enlace de los uplinks), y la corrección automática queda a nombre de quien la activa, con un interruptor por equipo."
 ---
 
 Las 6 últimas versiones. El historial completo está en [opennccm.com/novedades](https://opennccm.com/novedades.html) y cada versión se descarga desde [GitHub](https://github.com/Gaaraalex/opennccm/releases).
+
+## Versión 2.41.0
+- **Firmware en muchos equipos a la vez:** Las solicitudes de firmware con varios equipos van en tandas («Equipos
+  a la vez»: de a 1, 2, 5, 10, 20 o todos). Con reinicio, cada tanda espera a que los equipos de la anterior vuelvan con
+  la versión nueva, y si uno falla las siguientes no empiezan (se puede desmarcar). Antes de copiar se mira el espacio
+  libre donde va la imagen (`dir flash:`, `free-hdd-space`, `df -k`) y, si no alcanza, ese equipo no se toca. Después de
+  copiar, el propio equipo calcula la suma del archivo (MD5 en Cisco, Arista y Junos; SHA-256 o MD5 en airOS y
+  EdgeRouter; en RouterOS, que no calcula sumas, se compara el tamaño) y si no coincide no se instala. Los equipos que ya
+  tienen esa versión no se tocan. La solicitud muestra al vivo el avance de cada equipo: su tanda, el paso (respaldando,
+  copiando con su porcentaje, comprobando la suma, instalando, reiniciando, comprobando la versión) y cómo terminó.
+- **Comprobar los equipos antes de aprobar:** En una solicitud de firmware pendiente, «Comprobar los equipos» se
+  conecta a cada uno sin copiar ni cambiar nada y dice si responde, qué versión tiene y si hay espacio para la imagen.
+- **Suma del fabricante al cargar una imagen:** Al cargar una imagen de firmware se puede pegar el MD5 o el
+  SHA-256 que publica el fabricante: si el archivo no coincide no se guarda (ni reemplaza la imagen que hubiera con ese
+  nombre). Además de su MD5, ahora se calcula su SHA-256.
+- **OLT ZTE: estado de cada puerto:** El frente de las OLT ZXA10 (C300, C320…) ahora muestra qué puertos están
+  activos. Un PON está activo si tiene al menos una ONU en línea, y dice «12 de 14 ONU en línea» y cuántas están en LOS,
+  DyingGasp u OffLine (`show gpon onu state`). Los uplinks muestran su enlace y su velocidad (`show interface`). Se lee en
+  el respaldo: «Respaldar ahora» en cada OLT para verlo. Solo se guarda la cuenta por PON, no los datos de los clientes.
+- **Corrección automática a nombre de quien la activa:** Cada política con corrección automática queda a
+  nombre de quien la activó y solo corrige los equipos que esa persona puede ver (se comprueba en cada vuelta). Si esa
+  persona se elimina, se desactiva o pierde la función «Corrección automática», la política deja de corregir y la página
+  lo avisa. Las políticas activadas en 2.40.0 no tienen dueño: dejan de corregir hasta que alguien las vuelva a guardar.
+- **«Permitir corrección automática» por equipo:** En Editar equipo, un interruptor (encendido por defecto) deja
+  fuera de la corrección automática a un equipo concreto, sin tocar las políticas.
+- **Inglés:** La corrección automática nombraba «Remediate» al botón que en la interfaz se llama «Fix».
 
 ## Versión 2.40.0
 - **Corrección automática de cumplimiento (opcional):** En Cumplimiento › Corrección automática, cada política
@@ -134,18 +160,3 @@ Las 6 últimas versiones. El historial completo está en [opennccm.com/novedades
 - **Menús desplegables:** Junto al borde derecho de la pantalla se cortaban («Todas las mar…»); ahora se abren hacia
   el lado en que entran.
 - **Plurales:** «13 equipos en 1 grupo», «1 regla cumple», «1 línea distinta»… en lugar de «1 grupos».
-
-## Versión 2.35.0
-- **Equipos retirados:** Un equipo dañado, reemplazado o dado de baja se retira en lugar de borrarlo (ficha › ⋯ ›
-  Retirar o reemplazar). Se renombra «NOMBRE (n)», queda sin IP, aislado y fuera de todo lo activo, con todo su historial para
-  auditarlo, y se busca por su nombre e IP originales. En el mismo paso se puede dar de alta el reemplazo con sus datos y
-  comparar sus respaldos. Se ven en Dispositivos › Retirados y se pueden reincorporar.
-- **Equipo desactivado = aislado:** OpenNCCM ya no se conecta con un equipo desactivado por ninguna vía (respaldos,
-  consola, SFTP, Multi-equipo, recetas, solicitudes, firmware, imagen .fxi, API). La ficha lo dice y ofrece «Activar».
-- **Activar y desactivar en lote:** En Dispositivos, al marcar varios equipos (solo administradores).
-- **Credenciales:** «Guardar» al editar una credencial no hacía nada; tampoco al editar un grupo, una política o
-  una ficha de ciclo de vida en el panel lateral. Había que borrarla y crearla de nuevo.
-- **ArubaOS (S2500 y controladoras):** Sin contraseña de enable prueba la de ingreso y, si no sirve, lo explica en
-  lugar de «Pattern not detected». Lee el modelo, la serie y todos los puertos (en el S2500-48P, 48 de cobre y 4 SFP+) y
-  muestra su parte trasera.
-- **ArubaOS: configlets y cumplimiento:** 10 configlets y scripts y el paquete «Aruba ArubaOS · Seguridad básica».

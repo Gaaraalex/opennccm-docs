@@ -20,10 +20,17 @@ On MikroTik, airOS, airFiber and EdgeRouter, OpenNCCM **backs up the device firs
 
 ## How to use it
 
-1.  (admin) **Firmware and lifecycle → Images → Upload image**: drag the file, enter the version and which device\_type it is for. The table shows the MD5, size and compatible devices.
-2.  **Upgrade devices** tab (or **Use** on the image): choose the image; compatible devices with a different version are ticked automatically. If appropriate, tick **Reboot each device when done** and click **Create upgrade request**. You can also do it from each device's page.
-3.  An administrator reviews the planned steps and approves. The result shows whether the file already existed, whether it was transferred and whether the MD5 matched.
+1.  (admin) **Firmware and lifecycle → Images → Upload image**: drag the file, enter the version and which device\_type it is for. If you paste the vendor checksum (MD5 or SHA-256 from its download page, in **Vendor checksum**), OpenNCCM compares it with the file and does not save it if it does not match (nor does it replace any image with that name). The table shows the checksum, size and compatible devices.
+2.  **Upgrade devices** tab (or **Use** on the image): choose the image; compatible devices with a different version are ticked automatically. If appropriate, tick **Reboot each device when done** and click **Create upgrade request**. With several devices, choose how many at a time (**Devices at a time**). You can also do it from each device's page.
+3.  An administrator reviews the planned steps and approves. Before approving, **Check the devices** connects to each one without copying or changing anything and says whether it responds, which version it has and whether there is room for the image ("Ready" / "Not possible"). The result shows whether the file already existed, whether it was transferred and whether the checksum matched.
 4.  Then OpenNCCM checks the version: it waits for the device to come back from the reboot (up to 20 minutes), asks it for its version, backs it up and looks for updates again. Events and the change request say "now on version X"; if it is still on the old one, it warns "the upgrade was not applied" with the end of the device's log, which usually gives the reason. If it does not respond again, it says so too.
+
+### Many devices at once
+
+-   **Free space:** before copying, it checks how much room there is where the image goes (`dir flash:` on Cisco and Arista, `free-hdd-space` on MikroTik, `df -k` on airOS and EdgeRouter). If it is not enough (the image plus a margin of 1 MB or 2 %), that device is left alone and it says how much is missing.
+-   **Checksum on the device:** after copying, the device itself computes the file's checksum and it is compared with the image's: MD5 on Cisco, Arista and Junos; SHA-256 (or MD5 if it lacks it) on airOS and EdgeRouter. If it does not match, it is not installed. RouterOS does not compute file checksums: the size is compared.
+-   **Batches:** **Devices at a time** (1, 2, 5, 10, 20 or all). With a reboot, each batch waits for the devices of the previous one to come back on the new version, and if one fails the next batches do not start (this can be unticked). The impact-analysis order is also followed: never two devices that together would leave others without service. Devices already on the image's version are left alone ("Unchanged").
+-   **Progress per device:** the request shows live, per device, its batch and its step (backing up, checking space, copying with its percentage, verifying the checksum, installing, rebooting, checking the version) and how it ended.
 
 **Several devices with reboot:** the request shows the suggested order (first those that isolate nobody, together; then, one at a time, those that do) and runs in that order, waiting for each step to finish. It never reboots at the same time two devices that together leave more without service than each one separately, and it says which ones. See the [impact analysis](/en/cambios/solicitudes/#impact-analysis-what-goes-down-if-i-touch-this-device).
 
