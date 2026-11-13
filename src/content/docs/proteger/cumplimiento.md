@@ -29,7 +29,7 @@ curso: ["6.1","6.2"]
 | Aruba ArubaOS · Seguridad básica | 6 | Sin Telnet; SNMP sin comunidades por defecto; contraseña de enable; NTP; syslog remoto; aviso de inicio de sesión (controladoras y Mobility Access Switch) |
 | Hardening básico (Cisco, Huawei, Juniper, FortiGate) | 3 – 9 | Controles esenciales por fabricante |
 
-Las reglas son controles técnicos de referencia. El cumplimiento normativo completo requiere además procesos y evidencias que no dependen del equipo. Los paquetes nuevos de cada versión se cargan solos al actualizar; si se borra uno, no vuelve a aparecer. Las reglas que dependen de direcciones de cada red (servidores de syslog o NTP, redes de gestión) no tienen corrección automática: indican qué falta y el comando se escribe con las direcciones reales. Una solicitud de cambio con direcciones de ejemplo (192.0.2.x, 198.51.100.x, 203.0.113.x) no se puede aprobar.
+Las reglas son controles técnicos de referencia. El cumplimiento normativo completo requiere además procesos y evidencias que no dependen del equipo. Los paquetes nuevos de cada versión se cargan solos al actualizar; si se borra uno, no vuelve a aparecer. Las reglas que dependen de direcciones de cada red (servidores de syslog o NTP, redes de gestión) no traen comandos de corrección: indican qué falta y el comando se escribe con las direcciones reales. Una solicitud de cambio con direcciones de ejemplo (192.0.2.x, 198.51.100.x, 203.0.113.x) no se puede aprobar.
 
 ![Cumplimiento: mapa equipo × política y políticas con sus infracciones.](../../../assets/manual/15-cumplimiento.png)
 
@@ -38,5 +38,21 @@ Las reglas son controles técnicos de referencia. El cumplimiento normativo comp
 1.  El **mapa equipo × política** muestra el porcentaje de reglas que cumple cada equipo en cada política (verde, ámbar o rojo); un clic lleva al equipo. Debajo, cada política muestra una barra por gravedad y, al desplegarla, las reglas que fallan y en qué equipos. La severidad se distingue también por la forma (rombo crítica, triángulo mayor, círculo menor). Cada regla con corrección muestra su sello («Sin verificar» o «Verificada · versión») y **Corregir** (o **Corregir en N equipos…**), que abre un diálogo con los comandos, los equipos para marcar (una solicitud por equipo), el aviso con el foro y un reporte de GitHub ya escrito, y la casilla obligatoria «Revisé los comandos…». En la ficha del equipo, **Corregir N** («Las correcciones son comandos que cambian la configuración») abre «Corregir N infracciones en EQUIPO»: cada corrección con su casilla, su sello y sus comandos, y **Crear solicitud (N correcciones)** crea una sola solicitud con las marcadas. **Corregir** en una regla abre el mismo diálogo con esa sola corrección.
 2.  Para crear o cambiar una política: **Nueva política** o **Editar** abren el editor en un panel lateral. Cada regla tiene nombre, condición (debe o no debe contener), severidad, patrón y corrección opcional, y se **prueba en vivo** contra la configuración del equipo elegido mientras se escribe («cumple» / «incumple»). **Guardar** guarda la política y todas sus reglas a la vez.
 3.  Use **Auditar todos ahora** después de cambiar reglas.
+
+## Corrección automática (opcional)
+
+Una política puede corregir sola los equipos que incumplen algunas de sus reglas, sin que nadie pulse **Corregir**. Viene **apagada** en todas las políticas: mientras no se active, nada cambia. Se abre con **Cumplimiento → Corrección automática**, que muestra el estado de cada política, lo que se aplicaría ahora mismo y el historial.
+
+-   **Solo reglas verificadas.** Solo se pueden elegir las reglas con comandos de corrección y el sello **Verificada** (sus comandos se probaron enteros en un equipo real). Si después alguien cambia el patrón o los comandos de una regla elegida, deja de aplicarse sola hasta que se revise y se vuelva a marcar («cambiaron: volver a elegir»).
+-   **Ventana.** Días de la semana y, si se quiere, horas (por ejemplo de 22:00 a 06:00: una ventana que cruza la medianoche cuenta desde el día en que empieza). Sin horas, a cualquier hora de los días marcados.
+-   **En cada equipo y regla:** respalda el equipo (la versión a la que se vuelve) y comprueba que la regla sigue sin cumplirse; revisa lo mismo que una solicitud de cambio (direcciones de ejemplo, que no deje a OpenNCCM sin acceso, reinicios y puertos que se apagan) y, si hay algo, no aplica nada y queda **Bloqueada**; aplica los comandos, vuelve a respaldar y audita. Si el equipo rechaza un comando o la regla sigue sin cumplirse, vuelve a la versión de antes (**Revertida**).
+-   **Sin insistir.** Tras un intento, esa regla no se vuelve a intentar en ese equipo durante 24 horas, salvo que se pulse **Reintentar** en el historial. Tampoco toca un equipo desactivado, retirado o al que se le está aplicando otro cambio.
+-   **Historial.** Cada intento queda con su resultado (Aplicada, Revertida, Bloqueada, Fallida), el motivo, la salida del equipo y enlaces a las versiones de antes y después; también en Eventos y en Auditoría.
+-   **Pausar todo** detiene la corrección automática en todo el sistema al instante; **Revisar ahora** no espera a la próxima revisión (cada 5 minutos y después de cada auditoría).
+-   Activarla, configurarla o pausarla es la función crítica **Corrección automática** (de los administradores; el administrador maestro la da o la quita). Todos los usuarios pueden ver el historial de sus equipos.
+
+:::note[Aprobación]
+Las correcciones automáticas no pasan por el flujo de aprobación de solicitudes: activarlas en una política es esa aprobación, y queda en Auditoría con las reglas elegidas y la ventana.
+:::
 
 ![Editor de la política PCI DSS 4.0: cada regla con su patrón, severidad, corrección y prueba en vivo.](../../../assets/manual/16-politica-pci.png)

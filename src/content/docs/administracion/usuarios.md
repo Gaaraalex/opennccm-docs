@@ -27,10 +27,10 @@ Desde la 2.39, el rol es una **plantilla**: al elegirlo se marcan sus funciones 
 Las funciones van por secciones:
 
 -   **Operación:** respaldar, auditar, etiquetar versiones, reconocer alarmas.
--   **Cambios en los equipos:** enviar configuraciones, volver a una versión, restaurar, consola, firmware, aprobar.
+-   **Cambios en los equipos:** enviar configuraciones, volver a una versión, restaurar, consola, firmware, aprobar, corrección automática de cumplimiento.
 -   **Administración:** equipos, credenciales, configlets y políticas, tareas, imágenes de firmware, base de conocimiento, usuarios, ajustes.
 
-Ver equipos, configuraciones e informes lo puede todo usuario. Si la lista coincide con la del rol se indica «los del rol»; si no, «personalizados». Las funciones **críticas** (las que cambian los equipos o dan acceso: enviar configuraciones, revertir, restaurar, consola con cambios, firmware, aprobar, credenciales, usuarios y ajustes) solo las da o quita el administrador maestro.
+Ver equipos, configuraciones e informes lo puede todo usuario. Si la lista coincide con la del rol se indica «los del rol»; si no, «personalizados». Las funciones **críticas** (las que cambian los equipos o dan acceso: enviar configuraciones, revertir, restaurar, consola con cambios, firmware, aprobar, corrección automática, credenciales, usuarios y ajustes) solo las da o quita el administrador maestro.
 
 ## Administrador maestro
 
