@@ -20,6 +20,27 @@ Cada usuario tiene un rol. Además, a los operadores y lectores se les puede res
 Un administrador siempre ve todo. Un usuario sin grupos asignados también ve todo. Si se le asignan grupos, la restricción se aplica en todas las páginas, la búsqueda, los informes, la API y las acciones (un intento sobre un equipo ajeno responde «403 — No tiene permisos»).
 :::
 
+## Permisos de cada usuario
+
+Desde la 2.39, el rol es una **plantilla**: al elegirlo se marcan sus funciones en la lista **Permisos** y después se pueden quitar o agregar las que se quiera (por ejemplo, un lector que también respalda, o un operador que no envía configuraciones). Cada página y cada botón obedecen a la función, no al rol. Al actualizar nada cambia: cada usuario sigue con las funciones de su rol.
+
+Las funciones van por secciones:
+
+-   **Operación:** respaldar, auditar, etiquetar versiones, reconocer alarmas.
+-   **Cambios en los equipos:** enviar configuraciones, volver a una versión, restaurar, consola, firmware, aprobar.
+-   **Administración:** equipos, credenciales, configlets y políticas, tareas, imágenes de firmware, base de conocimiento, usuarios, ajustes.
+
+Ver equipos, configuraciones e informes lo puede todo usuario. Si la lista coincide con la del rol se indica «los del rol»; si no, «personalizados». Las funciones **críticas** (las que cambian los equipos o dan acceso: enviar configuraciones, revertir, restaurar, consola con cambios, firmware, aprobar, credenciales, usuarios y ajustes) solo las da o quita el administrador maestro.
+
+## Administrador maestro
+
+-   Es el primer administrador de la instalación (al actualizar, el administrador activo más antiguo). En la lista lleva la marca **Maestro**.
+-   Tiene todas las funciones y nadie lo puede eliminar, bloquear, editar ni quitarle la verificación en dos pasos.
+-   Es el único que crea administradores, da o quita el rol de administrador y las funciones críticas. Los demás administradores con la función «usuarios» gestionan el resto.
+-   Puede pasar el rol a otro usuario con **Hacerlo administrador maestro** al editarlo; él pasa a ser un administrador normal.
+-   En la lista de usuarios, la columna **Enviar configuraciones** tiene un interruptor para dar o cortar al instante el envío de configuraciones a los equipos (solicitudes, recetas, configlets, multi-equipo y correcciones).
+-   Si se pierde el acceso del maestro, en el servidor: `sudo opennccm set-master USUARIO`.
+
 ## Crear un usuario (administradores)
 
 1.  **Administración → Usuarios → Crear usuario** (se abre un panel lateral).

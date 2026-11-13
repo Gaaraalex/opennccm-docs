@@ -20,6 +20,27 @@ Every user has a role. In addition, operators and viewers can be restricted to o
 An administrator always sees everything. A user with no groups assigned also sees everything. If groups are assigned, the restriction applies on every page, in search, reports, the API and actions (an attempt on someone else's device answers "403 — You do not have permission").
 :::
 
+## Permissions of each user
+
+Since 2.39, the role is a **template**: choosing it ticks its functions in the **Permissions** list, and you can then remove or add any you like (for example, a viewer who can also back up, or an operator who does not send configurations). Every page and every button follows the function, not the role. Upgrading changes nothing: each user keeps their role's functions.
+
+Functions are grouped in sections:
+
+-   **Operations:** back up, audit, tag versions, acknowledge alarms.
+-   **Changes to devices:** send configurations, go back to a version, restore, console, firmware, approve.
+-   **Administration:** devices, credentials, configlets and policies, tasks, firmware images, knowledge base, users, settings.
+
+Every user can view devices, configurations and reports. If the list matches the role's, it says "the role's"; otherwise, "custom". **Critical** functions (those that change devices or grant access: send configurations, roll back, restore, console with changes, firmware, approve, credentials, users and settings) can only be granted or removed by the master administrator.
+
+## Master administrator
+
+-   It is the installation's first administrator (on upgrade, the oldest active administrator). In the list it carries the **Master** tag.
+-   It has every function, and nobody can delete, lock or edit it or remove its two-step verification.
+-   It is the only one who creates administrators, grants or removes the administrator role and the critical functions. Other administrators with the "users" function manage everyone else.
+-   It can hand the role to another user with **Make master administrator** when editing them; it then becomes a regular administrator.
+-   In the user list, the **Send configurations** column has a switch to instantly allow or cut off sending configurations to devices (requests, recipes, configlets, multi-device and fixes).
+-   If the master's access is lost, on the server: `sudo opennccm set-master USER`.
+
 ## Create a user (administrators)
 
 1.  **Administration → Users → Create user** (a side panel opens).
