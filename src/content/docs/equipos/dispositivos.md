@@ -102,6 +102,12 @@ La configuración solo dice si un puerto está apagado; el enlace se lee en la m
 
 Si el equipo no responde a ninguna, los puertos salen de la configuración en gris (apagado o habilitado) con el aviso «sin estado de enlace».
 
+### OLT ZTE C300 y C320: el chasis entero
+
+En las OLT ZXA10 C300 y C320 la cabecera muestra el chasis completo, sin barra de desplazamiento: la C300 con las tarjetas de pie (ranuras 2 a 20, cada una con su número, sus puertos y su tipo: GTGH, SCXN, HUVQ, GUFQ…) y la C320 acostada, en filas, con la fuente abajo. Las controladoras (SCXN, SMXA) llevan una luz: **verde** si está activa y **ámbar** si está en espera (de `show card`); las ranuras vacías salen con borde punteado. El número de una ranura va en **rojo** cuando las ONU sin señal pasan del 10 % de las dadas de alta en ella (las de un PON apagado no cuentan).
+
+Al tocar una ranura, a la derecha salen sus puertos con las ONU en línea / dadas de alta de cada uno, y debajo el puerto elegido («15 de 22 ONU en línea · 7 sin señal»). **Ver las N ONU de este puerto** abre la pestaña **Puertos** con ese puerto, cuya tarjeta lista sus ONU del respaldo (número, tipo y serie). **Ver todos los puertos** abre **Puertos** filtrada por la ranura elegida; la ✕ del filtro la quita. Las demás OLT ZTE (C220, C350…) siguen con la franja de puertos.
+
 ### Parte de atrás: fuentes y ventiladores
 
 El botón **Atrás** de la franja muestra las **fuentes de alimentación** y los **ventiladores** del equipo: en verde los que funcionan (fuente con corriente, ventilador girando) y en rojo los que fallan o están sin corriente; con borde discontinuo, los que no están instalados. Así se ve de un vistazo si un equipo con dos fuentes tiene las dos conectadas. Si alguna falla, la franja lo avisa también desde el frente («Sin corriente o con fallo: PSU 2», «Ventilador parado: Fan 3») y el botón Atrás lleva un punto rojo. Se lee en el respaldo con la orden de cada fabricante: MikroTik `/system health print`, Cisco `show environment all`, Juniper `show chassis environment`, Huawei `display power` y `display fan`, HPE `show system fans/power-supply`, Aruba AOS-CX y Arista `show environment …`, FastPath `show environment`, Extreme EXOS `show fans/power`, Extreme VOSS / Fabric Engine `show sys-info` (secciones «Power Supply Info» y «Fan Info») y FortiGate `execute sensor list`. Los equipos que no informan de ello por SSH (por ejemplo, los routers pequeños sin ventiladores) lo indican en la vista Atrás.

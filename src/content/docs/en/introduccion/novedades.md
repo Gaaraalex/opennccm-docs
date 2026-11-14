@@ -1,15 +1,28 @@
 ---
 title: "What's new"
-description: "What's new in OpenNCCM 2.41.0 and earlier versions."
+description: "What's new in OpenNCCM 2.42.0 and earlier versions."
 resumen:
-  - "2.41.0 upgrades the firmware of many devices in batches: it checks free space before copying, the device itself verifies the checksum and, if one fails, the next batches do not start."
-  - "“Check the devices” reviews connection, version and space before approving, without copying anything; when uploading an image you can paste the vendor checksum."
-  - "ZTE OLTs show which ports are active (online ONUs per PON, uplink link), and automatic remediation runs in the name of whoever enabled it, with a per-device switch."
+  - "2.42.0 shows the whole chassis of ZTE C300 and C320 OLTs on the device page: each slot with its card, the controllers active or on standby, and in red the slots with many ONUs without signal."
+  - "Tapping a slot shows its ports with the online ONUs on each, and from there the port's ONU list or every port in that slot."
+  - "The page of an OLT with thousands of ONUs opens in under a second (it used to take almost a minute), and backing it up is faster too."
 ---
 
 The latest 6 versions. The release notes are written in Spanish; the full history is at [opennccm.com/en/changelog](https://opennccm.com/en/changelog.html) and every version can be downloaded from [GitHub](https://github.com/Gaaraalex/opennccm/releases).
 
 <div lang="es">
+
+## Versión 2.42.0
+- **OLT ZTE C300 y C320: el chasis entero en la ficha:** En lugar de la franja de puertos con barra de desplazamiento,
+  la cabecera muestra el chasis completo: la C300 con las tarjetas de pie (ranuras 2 a 20) y la C320 acostada, con la fuente
+  abajo. Las controladoras dicen si están activas o en espera, las ranuras vacías salen punteadas y el número de una ranura va
+  en rojo si más del 10 % de sus ONU están sin señal. Al tocar una ranura se ven sus puertos con las ONU en línea de cada uno;
+  «Ver todos los puertos» abre Puertos filtrada por esa ranura y «Ver las N ONU» abre el puerto con sus ONU del respaldo.
+- **La ficha de una OLT grande abre al instante:** En una OLT C300 con miles de ONU (configuración de 40.000 líneas)
+  la ficha tardaba casi un minuto en abrir, porque comparaba las copias grandes línea por línea varias veces. Ahora abre en
+  menos de un segundo, con la misma comparación. Respaldar esos equipos también es más rápido.
+- **Firmware de cada copia:** En la ventana de una versión, la marca «de aquí sale el firmware» va en la misma línea
+  de la que sale la versión, a la derecha. En el historial, una copia programada sin usuario dice «Programado» (antes
+  «scheduled»).
 
 ## Versión 2.41.0
 - **Firmware en muchos equipos a la vez:** Las solicitudes de firmware con varios equipos van en tandas («Equipos
@@ -148,19 +161,5 @@ The latest 6 versions. The release notes are written in Spanish; the full histor
 - **Guía del desarrollador:** docs/desarrollo (y en PDF, docs/OpenNCCM-Guia-del-desarrollador.pdf): arquitectura,
   mapa del código, datos y migraciones, cómo agregar una plataforma, interfaz, API, pruebas, laboratorio, publicación y
   rendimiento, para continuar el proyecto.
-
-## Versión 2.36.0
-- **Firmware de cada copia de seguridad:** Cada copia guarda la versión de software que tenía el equipo cuando se hizo,
-  leída en el mismo respaldo. Se ve en la línea de tiempo (azul la de hoy, ámbar otra, «sin registrar» en las copias viejas),
-  con un aviso «Firmware actualizado» entre dos copias de firmware distinto, en el inventario, en la versión abierta (con la
-  línea de la que sale y un aviso antes de revertir a una versión de otro firmware) y al comparar, donde las diferencias que
-  trajo la actualización salen en ámbar. El archivo descargado lleva la versión en el nombre.
-- **Logos abreviados en tamaño chico (opcional):** Administración › Ajustes › Organización. Las 10 marcas cuyo logo es
-  su nombre escrito (Cisco, Juniper, Nokia, NEC, Netgear, Hitachi, Siemens, Supermicro, Dell y Zyxel) usan su símbolo o sus
-  iniciales donde el logo se ve muy pequeño. Apagado por omisión: el logo normal en todos los tamaños.
-- **Menú «Marca» de Dispositivos:** Con buscador y barra para bajar; ya no se alarga hasta el final de la página.
-- **Menús desplegables:** Junto al borde derecho de la pantalla se cortaban («Todas las mar…»); ahora se abren hacia
-  el lado en que entran.
-- **Plurales:** «13 equipos en 1 grupo», «1 regla cumple», «1 línea distinta»… en lugar de «1 grupos».
 
 </div>

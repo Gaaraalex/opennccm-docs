@@ -102,6 +102,12 @@ The configuration only says whether a port is disabled; the link is read in the 
 
 If the device answers none of them, the ports come from the configuration in gray (disabled or enabled) with the notice "no link status".
 
+### ZTE C300 and C320 OLTs: the whole chassis
+
+On ZXA10 C300 and C320 OLTs the header shows the complete chassis, with no scroll bar: the C300 with its cards standing up (slots 2 to 20, each with its number, its ports and its type: GTGH, SCXN, HUVQ, GUFQ…) and the C320 lying down, in rows, with the power supply at the bottom. The controllers (SCXN, SMXA) carry a light: **green** if active and **amber** if on standby (from `show card`); empty slots have a dotted border. A slot's number turns **red** when the ONUs without signal exceed 10 % of those registered in it (those on a disabled PON do not count).
+
+Tapping a slot shows, on the right, its ports with the online / registered ONUs on each, and below, the chosen port ("15 of 22 ONUs online · 7 without signal"). **See the N ONUs on this port** opens the **Ports** tab on that port, whose card lists its ONUs from the backup (number, type and serial). **See all ports** opens **Ports** filtered by the chosen slot; the filter's ✕ clears it. Other ZTE OLTs (C220, C350…) keep the strip of ports.
+
 ### Back view: power supplies and fans
 
 The strip's **Back** button shows the device's **power supplies** and **fans**: in green those working (supply with power, fan spinning) and in red those failing or without power; with a dashed border, those not installed. So you can see at a glance whether a device with two supplies has both connected. If one fails, the strip also warns from the front ("No power or failed: PSU 2", "Fan stopped: Fan 3") and the Back button gets a red dot. It is read in the backup with each vendor's command: MikroTik `/system health print`, Cisco `show environment all`, Juniper `show chassis environment`, Huawei `display power` and `display fan`, HPE `show system fans/power-supply`, Aruba AOS-CX and Arista `show environment …`, FastPath `show environment`, Extreme EXOS `show fans/power`, Extreme VOSS / Fabric Engine `show sys-info` ("Power Supply Info" and "Fan Info" sections) and FortiGate `execute sensor list`. Devices that do not report it over SSH (for example small fanless routers) say so in the Back view.
