@@ -53,7 +53,9 @@ Las credenciales SSH no están en Zabbix. Si no elige una para todos, los equipo
 
 Reúne todo sobre un equipo en pestañas: **Resumen** (inventario, línea base, ciclo de vida y últimas versiones), **Versiones**, **Cumplimiento**, **Vulnerabilidades**, **Firmware** y **Eventos**. Arriba están **Consola**, **Interfaz web** y **Respaldar ahora**; el menú **⋯** agrupa auditar, buscar CVE, actualizar firmware, editar, comparar con otro equipo, ver las diferencias con la línea base, volver a ella (si el equipo aún no tiene línea base, permite marcar la última versión) y eliminar. Para eliminar un equipo hay que escribir su nombre, porque se borra con todo su historial.
 
-**Equipo desactivado.** En lugar de «En línea» dice **Desactivado** y no ofrece Consola, Interfaz web ni Respaldar ahora: el equipo está aislado y OpenNCCM no se conecta con él. Un administrador lo vuelve a activar con **Activar**, en la propia ficha. En la lista de Dispositivos, al marcar varios equipos, **Activar** y **Desactivar** lo hacen con todos a la vez (solo administradores; queda en Auditoría).
+**Equipo desactivado.** En lugar de «En línea» dice **Desactivado** y no ofrece Consola, Interfaz web ni Respaldar ahora: el equipo está aislado y OpenNCCM no se conecta con él. Un administrador lo vuelve a activar con **Activar**, en la propia ficha. En la lista de Dispositivos, al marcar varios equipos, **Activar** y **Desactivar** lo hacen con todos a la vez (solo administradores; queda en Auditoría). **Eliminar…**, en la misma barra, borra los equipos marcados (uno o varios) con sus versiones, resultados y eventos: hay que escribir ELIMINAR para confirmar y no se puede deshacer.
+
+**Ping desde la lista.** Al pasar el puntero sobre un equipo, junto a Consola, Interfaz web y Respaldar ahora está **Ping**: el servidor de OpenNCCM le envía tres paquetes y una ventanita dice si **Responde** o **No responde**, con la pérdida y el tiempo medio. Está también cuando el equipo tiene error de respaldo, para ver de un clic si sigue en la red.
 
 ### Equipos retirados (dañados o reemplazados)
 

@@ -33,6 +33,6 @@ With **Push each new version to Git**, every backup with changes is pushed as a 
 
 ## Support OpenNCCM
 
-OpenNCCM is free and open-source software. Administrators see the **Support OpenNCCM** button in the top bar, and the System and About pages show a card with the ways to donate (GitHub Sponsors and Ko-fi). After upgrading to a new version, the first administrator who signs in sees a notice once with **Donate** and **Not now**. The links only open if clicked, in a new tab, and no server data is sent.
+OpenNCCM is free and open-source software. Every user sees the **Professional support** and **Support OpenNCCM** buttons in the top bar (they cannot be hidden), and the System and About pages show a card with the ways to donate (GitHub Sponsors and Ko-fi). After upgrading to a new version, the first administrator who signs in sees a notice once with **Donate** and **Not now**. The links only open if clicked, in a new tab, and no server data is sent.
 
 The full procedure for backing up, restoring on another server, upgrading and rolling back is in [Backups and moving servers](/en/instalacion/migrar/) and [Upgrade and roll back](/en/instalacion/actualizar/).

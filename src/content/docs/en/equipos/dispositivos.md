@@ -53,7 +53,9 @@ SSH credentials are not in Zabbix. If you do not choose one for all, the devices
 
 It brings together everything about a device in tabs: **Summary** (inventory, baseline, lifecycle and latest versions), **Versions**, **Compliance**, **Vulnerabilities**, **Firmware** and **Events**. At the top are **Console**, **Web interface** and **Back up now**; the **⋯** menu groups audit, look up CVEs, upgrade firmware, edit, compare with another device, see the differences with the baseline, go back to it (if the device has no baseline yet, it lets you mark the latest version) and delete. To delete a device you have to type its name, because it is removed with its whole history.
 
-**Disabled device.** Instead of "Online" it says **Disabled** and does not offer Console, Web interface or Back up now: the device is isolated and OpenNCCM does not connect to it. An administrator enables it again with **Enable**, on the device page itself. In the Devices list, when you tick several devices, **Enable** and **Disable** act on all of them at once (administrators only; it is logged in Audit).
+**Disabled device.** Instead of "Online" it says **Disabled** and does not offer Console, Web interface or Back up now: the device is isolated and OpenNCCM does not connect to it. An administrator enables it again with **Enable**, on the device page itself. In the Devices list, when you tick several devices, **Enable** and **Disable** act on all of them at once (administrators only; it is logged in Audit). **Delete…**, in the same bar, deletes the ticked devices (one or several) with their versions, results and events: you have to type DELETE to confirm, and it cannot be undone.
+
+**Ping from the list.** When you hover over a device, next to Console, Web interface and Back up now there is **Ping**: the OpenNCCM server sends it three packets and a small window says whether it **Replies** or gives **No reply**, with the loss and the average time. It is also there when the device has a backup error, to see with one click whether it is still on the network.
 
 ### Retired devices (damaged or replaced)
 
