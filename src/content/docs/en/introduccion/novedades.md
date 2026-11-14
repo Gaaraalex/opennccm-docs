@@ -1,15 +1,34 @@
 ---
 title: "What's new"
-description: "What's new in OpenNCCM 2.42.0 and earlier versions."
+description: "What's new in OpenNCCM 2.43.0 and earlier versions."
 resumen:
-  - "2.42.0 shows the whole chassis of ZTE C300 and C320 OLTs on the device page: each slot with its card, the controllers active or on standby, and in red the slots with many ONUs without signal."
-  - "Tapping a slot shows its ports with the online ONUs on each, and from there the port's ONU list or every port in that slot."
-  - "The page of an OLT with thousands of ONUs opens in under a second (it used to take almost a minute), and backing it up is faster too."
+  - "2.43.0 keeps passwords out of console recordings: what is typed when the device asks for a password shows as ******** (in earlier recordings too)."
+  - "In Devices, “Delete…” removes several devices at once, and each device in the list has Ping from the server."
+  - "“Copy all” in a backup's version, very large backups that open instantly, and one button per option in the console Tools."
 ---
 
 The latest 6 versions. The release notes are written in Spanish; the full history is at [opennccm.com/en/changelog](https://opennccm.com/en/changelog.html) and every version can be downloaded from [GitHub](https://github.com/Gaaraalex/opennccm/releases).
 
 <div lang="es">
+
+## Versión 2.43.0
+- **Consola: las contraseñas ya no quedan en las grabaciones:** Lo que se escribe cuando el equipo pide una
+  contraseña («Password:» de enable, «Contraseña:»…) va al equipo pero no a la grabación: queda `********` al reproducirla,
+  al exportarla y al buscar. Las grabaciones anteriores, que la guardaban tal cual, también se muestran ocultas. En la consola
+  ese texto se escribe oculto y no entra en el historial de comandos.
+- **Eliminar varios equipos a la vez:** En Dispositivos, al marcar uno o varios equipos, la barra de abajo tiene
+  «Eliminar…». Pide escribir ELIMINAR y borra los equipos con sus versiones, resultados y eventos.
+- **Ping desde la lista de equipos:** Al pasar el puntero sobre un equipo, junto a Consola, Interfaz web y Respaldar
+  ahora, está Ping: el servidor envía tres paquetes y dice si responde, con la pérdida y el tiempo medio. Aparece también
+  cuando el equipo tiene error de respaldo.
+- **Copiar todo en la versión de una copia:** Un botón copia la configuración entera al portapapeles, sin los
+  números de línea.
+- **Las copias muy grandes se abren al instante:** La versión de una OLT C300 (40.000 líneas) tardaba unos
+  segundos en verse; ahora la página solo dibuja lo que está a la vista y pesa menos de la mitad.
+- **Herramientas de la consola con botones de parámetros:** Debajo de la casilla, un botón por cada parámetro de
+  Ping, Traceroute, Puerto TCP y DNS: se escribe la IP o el nombre y se tocan los que se quieran (otra vez, se quitan).
+- **Soporte profesional y Apoya OpenNCCM siempre visibles:** Los dos botones de la barra superior se ven para todos
+  los usuarios y ya no se pueden ocultar (Ajustes › Organización ya no tiene la casilla).
 
 ## Versión 2.42.0
 - **OLT ZTE C300 y C320: el chasis entero en la ficha:** En lugar de la franja de puertos con barra de desplazamiento,
@@ -126,40 +145,5 @@ The latest 6 versions. The release notes are written in Spanish; the full histor
   necesitan SSH, HTTPS ni «secret»).
 - **Recetas verificadas en Cisco ASA:** Las 11 recetas del ASA quedan con el sello «Verificada · ASA 9.9.2»
   (3 rondas seguidas sin fallos en un ASAv 9.9.2).
-
-## Versión 2.37.0
-- **Más rápido con muchos equipos:** Con 2000 equipos, el panel pasa de 1,4 s a 0,4 s, IP y VLAN de 1,7 s a 0,07 s,
-  Analítica de 1 s a 0,08 s, Cumplimiento de 1,1 s a 0,35 s y la búsqueda en las configuraciones de 0,8 s a 0,2 s. Los
-  indicadores se cuentan en la base de datos, se leen solo los datos que cada página usa y hay índices nuevos (se crean
-  solos al actualizar).
-- **Páginas más livianas:** Las respuestas van comprimidas (la lista de 2000 equipos pasa de 4 MB a 200 KB) y el
-  navegador guarda los estilos y los scripts hasta la versión siguiente, en lugar de volver a pedirlos en cada página.
-- **Firmware en un respaldo sin cambios:** Si la configuración es la misma y la última copia es de antes de registrar
-  el firmware, esa copia recibe la versión leída en la misma conexión (las copias más viejas siguen «sin registrar»).
-- **FortiGate: los cambios no se aplicaban:** Las recetas, Multi-equipo y el asistente quitaban el «end» de los
-  bloques «config … end», que en FortiOS es lo que aplica el bloque: el cambio no quedaba hecho aunque la solicitud terminaba
-  «bien» (por ejemplo, cambiar el nombre). Visto en un FortiGate-VM 7.4.2.
-- **FortiGate: comprobación de las recetas:** «diagnose sys ntp status», «diagnose sniffer packet» y los demás
-  diagnose y execute que solo consultan ya cuentan como consulta (la comprobación de «Configurar NTP» y «Ver el tráfico de una
-  IP» no se podía ejecutar). «execute reboot», «execute factory-reset» y similares se marcan como corte del servicio.
-- **FortiGate: configuración de referencia:** Ya no prepara comandos al estilo Cisco («no set …», bloques sin «end»)
-  que el equipo rechazaba a mitad. La comparación se muestra igual; las diferencias se igualan a mano.
-- **Junos: un commit fallido dejaba cambios pendientes:** Si el equipo rechazaba el commit de una solicitud, lo
-  aplicado quedaba en la configuración candidata (que en Junos es la misma para todas las sesiones) y el siguiente cambio,
-  de cualquiera, lo arrastraba y fallaba igual. Ahora se descarta («rollback 0») y la solicitud lo dice.
-- **Junos: volver a una versión con DHCP en un puerto:** «family inet dhcp vendor-id …» (de fábrica en los puertos
-  del QFX) se borra entero; antes se quitaba solo «vendor-id» y restaurar una copia con IP fija fallaba en el commit
-  («Incompatible with interface assigned with address»). Visto en un vQFX 19.4R1.10.
-- **Recetas verificadas en FortiGate:** Las 12 recetas de FortiOS quedan con el sello «Verificada · FortiOS 7.4.2»
-  (3 rondas seguidas sin fallos en un FortiGate-VM 7.4.2: todos sus pasos y su comprobación).
-- **Recetas verificadas en switches Juniper:** Las 10 recetas de Junos pasaron 3 rondas seguidas sin fallos en un
-  vQFX 19.4R1.10 (las 9 que ya estaban verificadas en Junos 14.1 suman esa versión; «Crear una VLAN y poner un puerto de
-  acceso» queda verificada por primera vez).
-- **Consola: el aviso «cambio detectado» en su lugar:** Si un cambio se escribía justo después de un comando
-  bloqueado (modo solo lectura), el aviso verde podía salir antes del comando, en el prompt anterior. Ahora espera a que el
-  equipo repita el comando.
-- **Guía del desarrollador:** docs/desarrollo (y en PDF, docs/OpenNCCM-Guia-del-desarrollador.pdf): arquitectura,
-  mapa del código, datos y migraciones, cómo agregar una plataforma, interfaz, API, pruebas, laboratorio, publicación y
-  rendimiento, para continuar el proyecto.
 
 </div>

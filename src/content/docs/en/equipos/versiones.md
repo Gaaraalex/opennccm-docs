@@ -24,6 +24,8 @@ On the device page, **Versions** tab, the **›** arrow on each version opens it
 
 To find something inside the version, type in **Search in this version** (text or an IP): the lines that contain it are highlighted and **Enter** / **Shift+Enter** (or the arrows) jump between them. The **Tag** field does not search: it gives the version a name. To search the backups of every device, use **Search configs** in the menu.
 
+**Copy all** copies the whole version to the clipboard, without line numbers. Very large backups (a C300 OLT goes over 40,000 lines) open instantly: the page only draws the part in view.
+
 On a **MikroTik RouterOS** device, the page's **…** menu also offers **Download .rsc (latest backup)**, the saved `/export` ready for `/import`, and **Download the device's .backup…**. The router creates the latter on the spot (`/system backup save`), OpenNCCM fetches it over SFTP and deletes it from the device. You can set a password to encrypt it. The .backup includes users and passwords and can only be restored on the same model; to move the configuration to another device, use the .rsc. The credential's user needs the *ftp* policy (SFTP).
 
 ![A version with its actions.](../../../../assets/manual/06-version.png)

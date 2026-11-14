@@ -36,7 +36,7 @@ En **Ajustes → Inicio de sesión** se puede permitir que las personas entren c
 
 Nombre, correo de contacto y dirección de quien administra esta instalación. Se muestran en la página **Privacidad, cookies y licencias** (enlace al pie de cada página y en el inicio de sesión), que explica qué datos guarda OpenNCCM, sus conexiones externas, la única cookie que usa (técnica, sin necesidad de consentimiento), las condiciones de uso y las licencias.
 
-En la misma sección, **Mostrar el botón de soporte profesional** controla el botón de la barra superior que lleva a la [página de soporte de pago](https://comunidad.opennccm.com/soporte) (en otra pestaña). Si lo desmarca, se oculta para todos. El botón no cambia ninguna función del sistema.
+El botón **Soporte profesional** de la barra superior lleva a la [página de soporte de pago](https://comunidad.opennccm.com/soporte) (en otra pestaña). Desde la 2.43 lo ven todos los usuarios, junto a **Apoya OpenNCCM**, y ya no se puede ocultar (esta sección ya no tiene la casilla). El botón no cambia ninguna función del sistema.
 
 ![Página pública «Privacidad, cookies y licencias».](../../../assets/manual/35-acerca.png)
 
