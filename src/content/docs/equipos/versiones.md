@@ -34,6 +34,19 @@ En un **MikroTik RouterOS**, el menú **…** de la ficha ofrece además **Desca
 En Ajustes puede limitar cuántas versiones guardar por equipo. Las versiones etiquetadas (incluida la línea base) nunca se borran.
 :::
 
+## Cambios y problemas en Zabbix
+
+Si la red se vigila con Zabbix, la pestaña **Versiones** de cada equipo muestra, en una sola franja de tiempo, sus cambios de configuración (líneas vN), los problemas de Zabbix (barras por gravedad: desastre, alta, media, aviso, información) y una métrica (latencia y pérdida del ping, CPU o memoria, la que tenga el host). Así se ve de un vistazo si un problema empezó justo después de que alguien cambiara algo.
+
+-   Se elige el periodo: **24 h**, **7 días** o **30 días**. Al pasar el puntero sobre la métrica se ven el valor y los problemas abiertos en ese momento; un clic en una línea vN abre esa versión.
+-   Debajo, la tabla de problemas: gravedad, nombre (abre el evento en Zabbix), cuándo empezó, cuánto duró (o «Sigue abierto») y el **cambio justo antes**: la última versión con diferencias guardada hasta 2 horas antes de que empezara el problema, con un enlace que compara esa versión con la anterior.
+-   En la línea de tiempo de versiones, las que tuvieron problemas poco después llevan la etiqueta «N problemas en Zabbix».
+-   El equipo se busca en Zabbix por su dirección (una interfaz con esa IP o nombre DNS) y, si no, por su nombre. Si no está, la tarjeta lo dice con lo que buscó. Si Zabbix no responde, la ficha abre igual y solo esa tarjeta avisa.
+
+Se activa en **Administración › Ajustes › Zabbix** con la dirección de la interfaz web y un **token de API** (basta un usuario de solo lectura que vea los hosts; el token se guarda cifrado). **Probar conexión** dice la versión de Zabbix y cuántos hosts ve el token. Funciona con Zabbix 6.0 a 7.4 y solo lee: OpenNCCM no cambia nada en Zabbix.
+
+![Cambios y problemas en Zabbix: el problema «Link down» empezó 15 minutos después del cambio v4.](../../../assets/manual/05d-zabbix-cambios.png)
+
 ## Comparación de configuraciones
 
 ### Cómo usarlo

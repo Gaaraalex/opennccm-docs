@@ -31,6 +31,18 @@ El servicio no tiene privilegios de administrador: el instalador le concede, med
 
 Con **Subir cada versión nueva a Git**, cada respaldo con cambios se sube como un commit a un repositorio Git (GitHub, GitLab, Gitea…), con un mensaje como «R1: +3/-1 líneas \[scheduled\]». Cada equipo es un archivo `<grupo>/<equipo>.cfg` con su última configuración. El repositorio se indica por HTTPS con usuario y **token** (se guarda cifrado y nunca se escribe en la URL ni en el disco) o por SSH con la clave del usuario del servicio. **Ocultar contraseñas y claves** (activado por omisión) sustituye por `<oculto>` los secretos, contraseñas, comunidades SNMP y claves que reconoce; aun así, use un repositorio privado. **Probar y subir todo ahora** exporta todos los equipos de una vez. Si la subida falla, se registra una alarma «Copia en Git fallida» y el respaldo no se ve afectado.
 
+## Capacidad
+
+La pestaña **Capacidad** (Administración) dice cuánto aguanta este servidor con la red de hoy y qué conviene ampliar:
+
+-   **Qué conviene hacer:** recomendaciones concretas, de la más urgente a la menos. Por ejemplo, que el respaldo programado no termina antes del siguiente, que «Respaldar todos» tarda mucho (con un botón para usar más respaldos a la vez), que el disco se llenará en N días al ritmo actual, que conviene PostgreSQL por el número de equipos o que falta memoria o CPU. Si todo va bien, lo dice.
+-   **Indicadores:** equipos y versiones guardadas, cuánto tarda «Respaldar todos», para cuántos días alcanza el disco y la base de datos con su tamaño.
+-   **Respaldos de muchos equipos:** los últimos «Respaldar todos» y respaldos programados, con su duración, el tiempo por equipo y los fallos. Las estimaciones usan lo medido en esta red. Aquí se elige cuántos respaldos hace a la vez «Respaldar todos» (de 1 a 16; 4 de fábrica).
+-   **Este servidor:** núcleos, RAM, disco, lo que ocupa OpenNCCM y cuántas versiones nuevas hubo en 30 días.
+-   **Medido en la prueba de carga:** cada versión de OpenNCCM se prueba en GitHub con equipos simulados por SSH, de 100 a 5.000, con «Respaldar todos» de verdad, cada página y varios usuarios a la vez. La tabla muestra lo medido; la fila resaltada es la más parecida a esta instalación.
+
+![Capacidad: recomendaciones, indicadores y lo medido en la prueba de carga.](../../../assets/manual/28b-capacidad.png)
+
 ## Apoya OpenNCCM
 
 OpenNCCM es software libre y gratis. Todos los usuarios ven en la barra superior los botones **Soporte profesional** y **Apoya OpenNCCM** (no se pueden ocultar), y las páginas Sistema y Acerca de muestran una tarjeta con las formas de donar (GitHub Sponsors y Ko-fi). Tras actualizar a una versión nueva, el primer administrador que entra ve una vez un aviso con **Donar** y **Ahora no**. Los enlaces solo se abren si se pulsan, en una pestaña nueva, y no se envía ningún dato del servidor.

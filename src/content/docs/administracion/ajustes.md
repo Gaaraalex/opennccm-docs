@@ -3,7 +3,7 @@ title: "Ajustes"
 curso: ["9.3"]
 ---
 
-Los ajustes están en **Administración → Ajustes**, separados en secciones que se eligen a la izquierda: Seguridad y acceso, Organización, Flujo de cambios, Notificaciones, Fin de vida (Cisco EoX), Vulnerabilidades (NVD), Mapa de la red, Copia en Git, Recuperación ante desastres y Actualizaciones. Al modificar cualquier campo aparece abajo la barra **Tienes cambios sin guardar** con **Descartar** y **Guardar ajustes**; si intenta salir de la página sin guardar, el navegador lo advierte.
+Los ajustes están en **Administración → Ajustes**, separados en secciones que se eligen a la izquierda: Seguridad y acceso, Organización, Flujo de cambios, Notificaciones, Fin de vida (Cisco EoX), Vulnerabilidades (NVD), Mapa de la red, Copia en Git, Zabbix (problemas y métricas junto a los cambios de cada equipo, ver [Cambios y problemas en Zabbix](/equipos/versiones/#cambios-y-problemas-en-zabbix)), Recuperación ante desastres y Actualizaciones. Al modificar cualquier campo aparece abajo la barra **Tienes cambios sin guardar** con **Descartar** y **Guardar ajustes**; si intenta salir de la página sin guardar, el navegador lo advierte.
 
 ## Seguridad y acceso
 
