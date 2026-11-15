@@ -1,13 +1,28 @@
 ---
 title: "Novedades de la versión"
-description: "Lo nuevo de OpenNCCM 2.43.0 y las versiones anteriores."
+description: "Lo nuevo de OpenNCCM 2.44.0 y las versiones anteriores."
 resumen:
-  - "2.43.0 deja las contraseñas fuera de las grabaciones de la consola: lo que se escribe cuando el equipo pide una contraseña queda ******** (también en las grabaciones anteriores)."
-  - "En Dispositivos, «Eliminar…» borra varios equipos a la vez, y cada equipo de la lista tiene Ping desde el servidor."
-  - "«Copiar todo» en la versión de una copia, copias muy grandes que abren al instante y un botón por cada parámetro en las Herramientas de la consola."
+  - "2.44.0 muestra los problemas de Zabbix junto a los cambios de configuración de cada equipo: se ve de un vistazo si un problema empezó justo después de un cambio."
+  - "Administración › Capacidad dice cuánto aguanta el servidor con la red de hoy y qué conviene ampliar, y permite hacer de 1 a 16 respaldos a la vez en «Respaldar todos»."
+  - "Redes grandes más rápidas: medido en la prueba de carga con 5.000 equipos simulados, «Respaldar todos» tardó 27 minutos y el Panel abrió en 0,35 s."
 ---
 
 Las 6 últimas versiones. El historial completo está en [opennccm.com/novedades](https://opennccm.com/novedades.html) y cada versión se descarga desde [GitHub](https://github.com/Gaaraalex/opennccm/releases).
+
+## Versión 2.44.0
+- **Problemas de Zabbix junto a los cambios:** En la pestaña Versiones de cada equipo, una franja de 24 h, 7 o 30
+  días muestra juntos los cambios de configuración (v1, v2…), los problemas de Zabbix por gravedad y una métrica (latencia,
+  pérdida, CPU o memoria). La tabla de problemas dice qué cambio hubo justo antes de cada uno, con un enlace para
+  compararlo, y la línea de tiempo marca las versiones que tuvieron problemas poco después. Se activa en Ajustes › Zabbix
+  con un token de API (se guarda cifrado); funciona con Zabbix 6.0 a 7.4 y solo lee.
+- **Administración › Capacidad:** Dice cuánto aguanta el servidor con la red de hoy y qué conviene ampliar:
+  respaldos programados que no terminan a tiempo, días de disco que quedan, cuándo pasar a PostgreSQL, memoria y CPU. Muestra
+  la duración real de los últimos respaldos de muchos equipos y lo medido en la prueba de carga de cada versión.
+- **Respaldos a la vez en «Respaldar todos»:** Se elige en Capacidad, de 1 a 16 (antes eran 4 fijos).
+- **Redes grandes más rápidas:** Probado con hasta 5.000 equipos simulados. Con más de 400 equipos, Dispositivos y
+  el mapa de Cumplimiento llegan por páginas desde el servidor; el Panel, Dispositivos y Cumplimiento cargan varias veces
+  más rápido y pesan mucho menos; Buscar en configs muestra los 100 primeros equipos y cuenta el resto, y el progreso de
+  «Respaldar todos» ya no envía la lista entera cada 2 segundos.
 
 ## Versión 2.43.0
 - **Consola: las contraseñas ya no quedan en las grabaciones:** Lo que se escribe cuando el equipo pide una
@@ -115,31 +130,3 @@ Las 6 últimas versiones. El historial completo está en [opennccm.com/novedades
   primero, como cobre), en dos filas como el frente real (pares arriba, impares abajo, en bloques de 12), con los
   QSFP+ en su bloque y los puertos sin módulo «sin módulo» (antes no aparecían: del 19 se pasaba al 43). Para verlo,
   «Respaldar ahora» en cada QFX.
-
-## Versión 2.38.0
-- **Cisco IOS: restaurar con SNMP:** La reversión ya no escribe «snmp-server chassis-id» sin valor (IOS lo muestra en
-  cuanto hay otra línea de SNMP y no se puede escribir así): la restauración se detenía en «% Incomplete command». Visto en
-  un IOSv 15.6(2)T.
-- **Cisco IOS: guardar tras cambiar de imagen:** El primer «write memory» después de cargar otra versión pregunta
-  «Overwrite the previous NVRAM configuration?[confirm]»; ahora se contesta, en lugar de esperar hasta fallar (cambios,
-  recetas y actualización de firmware quedaban sin guardar). Visto en un 7200 y un 3745.
-- **Cisco ASA: restaurar una copia:** No se mandan los comentarios «: Serial Number…», «: Hardware…» ni
-  «ASA Version …», y el «no snmp-server location» de fábrica no se niega cuando la copia trae la línea con valor. Visto en
-  un ASAv 9.9.2.
-- **Cisco ASA: configuración de referencia:** Los bloques («interface», «object network») van primero, cada uno
-  con su «exit», y después las líneas sueltas que dependen de ellos («mtu puesto …», «route puesto …»); lo que sobra se quita
-  antes de poner lo nuevo (el ASA no acepta un segundo «inspect dns …» sin quitar el que tiene) y la marca
-  «call-home reporting anonymous prompt N» queda como propia del equipo.
-- **Bloques de tres niveles:** Restaurar e igualar a la referencia escriben las líneas de tercer nivel entrando en
-  su sub-bloque («policy-map › class › inspect», «router bgp › address-family › network»); antes se escribían en el bloque
-  de arriba y el equipo las rechazaba.
-- **Cisco ASA en la consola:** «packet-tracer» cuenta como consulta, y «write erase», «reload», «format» y
-  «configure factory-default» se marcan como corte del servicio.
-- **Receta «Activar SSH» en IOS:** Usa una clave RSA de 2048 bits («general-keys modulus 2048»), que existe en
-  todas las versiones; la de 4096 no existe en IOS 12.x y la receta fallaba.
-- **Recetas verificadas en Cisco IOS / IOS-XE:** Las 10 recetas de IOS quedan con el sello «Verificada» y las
-  versiones en las que pasaron 3 rondas seguidas sin fallos: IOSv 15.6(2)T, Catalyst 8000v 17.6.1a, 7200 15.3(3)XB12,
-  3745 12.4(25d) (todas menos RADIUS, cuya sintaxis «radius server» no existe en 12.4) y 3620 12.2(26c) (las que no
-  necesitan SSH, HTTPS ni «secret»).
-- **Recetas verificadas en Cisco ASA:** Las 11 recetas del ASA quedan con el sello «Verificada · ASA 9.9.2»
-  (3 rondas seguidas sin fallos en un ASAv 9.9.2).

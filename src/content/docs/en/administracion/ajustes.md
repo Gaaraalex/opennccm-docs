@@ -3,7 +3,7 @@ title: "Settings"
 curso: ["9.3"]
 ---
 
-Settings are in **Administration → Settings**, split into sections chosen on the left: Security and access, Organization, Change workflow, Notifications, End of life (Cisco EoX), Vulnerabilities (NVD), Network map, Git copy, Disaster recovery and Updates. When you change any field, the **You have unsaved changes** bar appears at the bottom with **Discard** and **Save settings**; if you try to leave the page without saving, the browser warns you.
+Settings are in **Administration → Settings**, split into sections chosen on the left: Security and access, Organization, Change workflow, Notifications, End of life (Cisco EoX), Vulnerabilities (NVD), Network map, Git copy, Zabbix (problems and metrics next to each device's changes, see [Changes and problems in Zabbix](/en/equipos/versiones/#changes-and-problems-in-zabbix)), Disaster recovery and Updates. When you change any field, the **You have unsaved changes** bar appears at the bottom with **Discard** and **Save settings**; if you try to leave the page without saving, the browser warns you.
 
 ## Security and access
 

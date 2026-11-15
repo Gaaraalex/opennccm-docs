@@ -31,6 +31,18 @@ The service has no administrator privileges: through a polkit rule, the installe
 
 With **Push each new version to Git**, every backup with changes is pushed as a commit to a Git repository (GitHub, GitLab, Gitea…), with a message such as "R1: +3/-1 lines \[scheduled\]". Each device is a file `<group>/<device>.cfg` with its latest configuration. The repository is given over HTTPS with a user and **token** (stored encrypted and never written in the URL or to disk) or over SSH with the service user's key. **Mask passwords and keys** (on by default) replaces the secrets, passwords, SNMP communities and keys it recognizes with `<oculto>`; even so, use a private repository. **Test and push everything now** exports every device at once. If the push fails, a "Git copy failed" alarm is recorded and the backup is not affected.
 
+## Capacity
+
+The **Capacity** tab (Administration) says how much this server can handle with today's network and what is worth expanding:
+
+-   **What to do:** specific recommendations, from most to least urgent. For example, that the scheduled backup does not finish before the next one, that "Back up all" takes too long (with a button to run more backups at once), that the disk will fill up in N days at the current pace, that PostgreSQL is advisable for the number of devices, or that memory or CPU is short. If all is well, it says so.
+-   **Indicators:** devices and stored versions, how long "Back up all" takes, how many days the disk will last, and the database with its size.
+-   **Backups of many devices:** the latest "Back up all" runs and scheduled backups, with their duration, time per device and failures. Estimates use what was measured on this network. This is where you choose how many backups "Back up all" runs at once (1 to 16; 4 by default).
+-   **This server:** cores, RAM, disk, the space OpenNCCM uses and how many new versions there were in 30 days.
+-   **Measured in the load test:** each OpenNCCM version is tested on GitHub with devices simulated over SSH, from 100 to 5,000, with a real "Back up all", every page and several users at once. The table shows what was measured; the highlighted row is the closest to this installation.
+
+![Capacity: recommendations, indicators and what was measured in the load test.](../../../../assets/manual/28b-capacidad.png)
+
 ## Support OpenNCCM
 
 OpenNCCM is free and open-source software. Every user sees the **Professional support** and **Support OpenNCCM** buttons in the top bar (they cannot be hidden), and the System and About pages show a card with the ways to donate (GitHub Sponsors and Ko-fi). After upgrading to a new version, the first administrator who signs in sees a notice once with **Donate** and **Not now**. The links only open if clicked, in a new tab, and no server data is sent.

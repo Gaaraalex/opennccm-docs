@@ -34,6 +34,19 @@ On a **MikroTik RouterOS** device, the page's **…** menu also offers **Downloa
 In Settings you can limit how many versions are kept per device. Tagged versions (including the baseline) are never deleted.
 :::
 
+## Changes and problems in Zabbix
+
+If the network is monitored with Zabbix, each device's **Versions** tab shows, in a single time strip, its configuration changes (vN lines), the Zabbix problems (bars by severity: disaster, high, average, warning, information) and a metric (ping latency and loss, CPU or memory, whichever the host has). That way you can see at a glance whether a problem started right after someone changed something.
+
+-   Choose the period: **24 h**, **7 days** or **30 days**. Hovering over the metric shows the value and the problems open at that moment; clicking a vN line opens that version.
+-   Below, the problems table: severity, name (opens the event in Zabbix), when it started, how long it lasted (or "Still open") and the **change just before**: the latest version with differences saved up to 2 hours before the problem started, with a link that compares that version with the previous one.
+-   In the version timeline, the versions that had problems shortly after carry the tag "N problems in Zabbix".
+-   The device is looked up in Zabbix by its address (an interface with that IP or DNS name) and, failing that, by its name. If it is not there, the card says so along with what it searched for. If Zabbix does not respond, the page opens anyway and only that card warns.
+
+It is enabled in **Administration › Settings › Zabbix** with the web interface address and an **API token** (a read-only user that sees the hosts is enough; the token is stored encrypted). **Test connection** shows the Zabbix version and how many hosts the token sees. It works with Zabbix 6.0 to 7.4 and only reads: OpenNCCM changes nothing in Zabbix.
+
+![Changes and problems in Zabbix: the "Link down" problem started 15 minutes after change v4.](../../../../assets/manual/05d-zabbix-cambios.png)
+
 ## Configuration comparison
 
 ### How to use it
