@@ -32,6 +32,8 @@ Once a day, at a random time, OpenNCCM tells comunidad.opennccm.com that it is i
 
 The **Usage statistics** card in the **System** tab shows the **Last notice** and **See exactly what is sent**, with the real text.
 
+![The Usage statistics card.](../../../../assets/manual/sistema-uso.png)
+
 ## License and Pro modules
 
 **Administration › License and modules** activates the optional paid modules. See [License and modules](/en/pro/licencia/).

@@ -32,6 +32,8 @@ Una vez al día, a una hora al azar, OpenNCCM avisa a comunidad.opennccm.com que
 
 La tarjeta **Estadística de uso** de la pestaña **Sistema** muestra el **Último aviso** y **Ver exactamente qué se envía**, con el texto real.
 
+![La tarjeta Estadística de uso.](../../../assets/manual/sistema-uso.png)
+
 ## Licencia y módulos Pro
 
 **Administración › Licencia y módulos** activa los módulos opcionales de pago. Ver [Licencia y módulos](/pro/licencia/).

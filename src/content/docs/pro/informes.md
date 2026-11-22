@@ -14,6 +14,8 @@ description: "Módulo Pro: informe ejecutivo, auditoría firmada, Documento de l
 
 Cada tarjeta tiene su **Vista previa**, **Descargar PDF** y **Programar envío**.
 
+![Informes profesionales: las tarjetas y la vista previa del informe ejecutivo.](../../../assets/manual/pro-informes.png)
+
 ## Informe ejecutivo
 
 Elige el **Mes del informe** y, si quieres, **Comparar con** otro mes o dos fechas. Muestra los cambios por semana, el cumplimiento de los últimos 6 meses, los CVE críticos, los equipos sin soporte y los respaldos fallidos. Si no hay nada urgente, lo dice.

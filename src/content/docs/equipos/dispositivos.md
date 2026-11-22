@@ -138,13 +138,17 @@ La ficha de un MikroTik tiene la pestaña **Respaldos** con las tres formas de r
 -   **Qué hace en el equipo:** crea los dos archivos, espera a que terminen de escribirse, los trae por SFTP (dentro de SSH: no abre puertos), los borra del equipo y comprueba que no quedó nada. Solo borra sus propios archivos. Un equipo gestionado por Telnet necesita pasar a SSH.
 -   **Cuántos:** se guardan los últimos N, el .backup cifrado con su clave; los más viejos se borran solos.
 
-En la lista de respaldos, cada copia tiene **Cómo restaurar**, **Comparar** y **Descargar**. **Cómo restaurar** explica los pasos: subir el .backup al equipo (en WinBox, arrastrarlo a Files, o por SFTP) y cargarlo con su clave (**Mostrar la clave**; queda en [Auditoría](/administracion/auditoria/) quién la vio, y la clave nunca va dentro de ningún archivo descargado), o aplicar el .rsc sobre una configuración vacía o encima de lo que tiene.
+En la lista de respaldos, cada copia se descarga (**.backup** y **.rsc**) y tiene **Cómo restaurar**; las versiones de texto, **Ver**, **Comparar** y **Descargar**. **Cómo restaurar** explica los pasos: subir el .backup al equipo (en WinBox, arrastrarlo a Files, o por SFTP) y cargarlo con su clave (**Mostrar la clave**; queda en [Auditoría](/administracion/auditoria/) quién la vio, y la clave nunca va dentro de ningún archivo descargado), o aplicar el .rsc sobre una configuración vacía o encima de lo que tiene.
 
 :::caution[El .backup trae la identidad del equipo]
 Trae también las direcciones MAC, usuarios y certificados del equipo original: no lo use en otro equipo que siga en la misma red.
 :::
 
 Probado con RouterOS 6.49 y 7.24, restaurando el .backup en el equipo.
+
+![Pestaña Respaldos de un MikroTik: configuración en texto, .backup y .rsc.](../../../assets/manual/mikrotik-respaldos.png)
+
+![Cómo restaurar un .backup o un .rsc.](../../../assets/manual/mikrotik-restaurar.png)
 
 ## WatchGuard: configuración (XML) e imagen completa (.fxi)
 

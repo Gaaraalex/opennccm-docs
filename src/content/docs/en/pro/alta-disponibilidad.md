@@ -34,6 +34,8 @@ Not copied: each server's license, console recordings, the Git export repository
 
 It is a complete OpenNCCM, but it does not back up or run tasks. When you open it, it shows "This server is on standby" with **Go to** (the active one). Only administrators can **Sign in to this server**, to check the pair or force the switchover if the active one does not answer.
 
+![The standby server page.](../../../../assets/manual/pro-ha-espera.png)
+
 ## Switchover
 
 | When | What happens |
@@ -65,6 +67,8 @@ Without a virtual IP, users can sign in to either server: the one on standby sen
 -   **History:** each switchover and change, with **Reviewed**.
 -   Alerts go to the bell and by email: the other server does not answer, the pair switched over, server isolated. The Dashboard shows the pair's status.
 -   **Remove the pair:** this server is left alone and active, and stops copying or receiving copies. No data is deleted. It has to be removed on the other server too.
+
+![High availability: protected pair, witness and history.](../../../../assets/manual/pro-ha.png)
 
 ## With site collectors
 
