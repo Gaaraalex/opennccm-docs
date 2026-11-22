@@ -45,6 +45,10 @@ Tras editar el archivo: `sudo systemctl restart opennccm`.
 | `opennccm logs [-f]` | Registro del servicio |
 | `sudo opennccm start|stop|restart` | Controlar el servicio |
 | `sudo opennccm uninstall [--purge]` | Desinstalar |
+| `sudo opennccm recolector estado` | En un [recolector](/pro/recolectores/): sede, central y cola |
+| `sudo opennccm recolector alta URL CLAVE` | En un recolector: alta con otra clave |
+
+Instalar un [recolector](/pro/recolectores/): `install.sh --recolector https://CENTRAL --clave ra_…`. Instalar el servidor en espera de [Alta disponibilidad](/pro/alta-disponibilidad/): `install.sh --espera https://ACTIVO --clave ha_…`. Las dos claves las da la pantalla del módulo.
 
 Registro de la instalación: `/var/log/opennccm-install.log`. Opciones elegidas al instalar: `/etc/opennccm/install.conf` (las reutilizan las actualizaciones).
 

@@ -7,9 +7,13 @@ description: Respuestas rápidas sobre OpenNCCM.
 
 Sí. OpenNCCM es software libre con licencia GPL-3.0: se puede usar, estudiar, modificar y compartir sin pagar. El [soporte profesional](/ayuda/planes/) es un servicio aparte y opcional que no limita ninguna función.
 
+## ¿Qué es OpenNCCM Pro?
+
+Tres módulos opcionales de pago: [Informes profesionales](/pro/informes/), [Recolectores por sede](/pro/recolectores/) y [Alta disponibilidad](/pro/alta-disponibilidad/). Lo gratis sigue igual, sin límites de equipos ni de tiempo, y nunca se quita. Cada módulo tiene una prueba gratis. Ver [Licencia y módulos](/pro/licencia/).
+
 ## ¿Dónde quedan mis configuraciones?
 
-En su propio servidor. OpenNCCM se instala en un Ubuntu suyo y guarda las configuraciones cifradas con AES-256 en su base de datos. Solo sale a internet lo que usted active: consultas de CVE a NVD, avisos por correo, Teams, Slack o Telegram, el proveedor del [asistente IA](/consola/asistente/) o la [copia en Git](/administracion/sistema/).
+En su propio servidor. OpenNCCM se instala en un Ubuntu suyo y guarda las configuraciones cifradas con AES-256 en su base de datos. Solo sale a internet lo que usted active: consultas de CVE a NVD, avisos por correo, Teams, Slack o Telegram, el proveedor del [asistente IA](/consola/asistente/) o la [copia en Git](/administracion/sistema/). Además, una vez al día, la [estadística de uso](/administracion/sistema/#estadística-de-uso) (un número al azar y la versión) y, si usa [OpenNCCM Pro](/pro/licencia/#qué-se-envía), la comprobación de la licencia.
 
 ## ¿Qué sistema necesito?
 

@@ -9,9 +9,9 @@ curso: ["3.2","3.3","3.4"]
 ## Cómo usarlo
 
 -   **Buscar y filtrar:** por nombre, IP, modelo, serie, versión o ubicación; por grupo, [nodo](/observar/analisis/#nodos) y marca; y por estado (ok, error, pendiente, startup ≠ running, fuera de línea base). Cada equipo lleva el logo de su marca (también en la ficha, el mapa, la consola y Ctrl K); la fila **MARCA** muestra cuántos hay de cada una y filtra con un toque. El menú **Marca** muestra unas 12 a la vista, con barra para bajar y un buscador arriba («Buscar marca»).
--   **Respaldar todos:** respalda todos los equipos (o los del grupo filtrado, o los marcados), 4 a la vez (se cambia en [Administración › Capacidad](/administracion/sistema/#capacidad), hasta 16). Se ve el progreso con su porcentaje: un panel con la barra, cuántos van correctos, con error, respaldándose y en cola, y quién se respalda ahora; cada fila de la lista dice su paso («Conectando…», «Leyendo la configuración…», «Guardando…») y se actualiza sola al terminar. El respaldo corre en el servidor: se puede salir de la página (la píldora con el porcentaje queda junto a «Dispositivos» en el menú) y al terminar avisa. **Cancelar** no lanza los que faltan; al terminar, los que dieron error salen con su motivo y **Reintentar** respalda solo esos. Un respaldo que falla por algo pasajero (el equipo cortó la sesión con el puerto respondiendo, la base de OpenNCCM ocupada) se comprueba y se reintenta solo; si el equipo no responde o rechaza la contraseña, se avisa sin reintentar.
--   **Acciones de la fila:** al pasar el ratón aparecen respaldar, consola e interfaz web del equipo.
--   **Acciones masivas:** marque varias filas y use la barra inferior para respaldarlas, auditarlas, moverlas a un grupo o asignarlas a un nodo (**Asignar al nodo**, administradores).
+-   **Respaldar todos:** respalda todos los equipos (o los del grupo filtrado, o los marcados), 4 a la vez (se cambia en [Administración › Capacidad](/administracion/sistema/#capacidad), hasta 16). Se ve el progreso con su porcentaje: un panel con la barra, cuántos van correctos, con error, respaldándose y en cola, y quién se respalda ahora; cada fila de la lista dice su paso («Conectando…», «Leyendo la configuración…», «Guardando…») y se actualiza sola al terminar. El respaldo corre en el servidor: se puede salir de la página (la píldora con el porcentaje queda junto a «Dispositivos» en el menú) y al terminar avisa. **Cancelar** no lanza los que faltan; al terminar, los que dieron error salen con su motivo y **Reintentar** respalda solo esos. Un respaldo que falla por algo pasajero (el equipo cortó la sesión con el puerto respondiendo, la base de OpenNCCM ocupada) se comprueba y se reintenta solo; si el equipo rechaza la contraseña, se avisa sin reintentar. **Respaldo al volver a responder:** si un respaldo falló porque el equipo no respondía (o aceptaba la conexión y la cortaba enseguida), cada hora OpenNCCM mira si ya responde y, cuando vuelve, lo respalda solo; queda el evento «Respaldo al volver a responder». No se aplica a equipos desactivados, en mantenimiento, de un [recolector](/pro/recolectores/) ni con errores de credenciales.
+-   **Acciones de la fila:** al pasar el ratón aparecen respaldar, consola, interfaz web y ping del equipo.
+-   **Acciones masivas:** marque varias filas y use la barra inferior para respaldarlas, auditarlas, moverlas a un grupo, asignarlas a un nodo (**Asignar al nodo**), activarlas, desactivarlas o eliminarlas (administradores). Con [Recolectores por sede](/pro/recolectores/), **Asignar a una sede…** elige desde qué sede se respaldan.
 -   **\+ Agregar** (admin): **Agregar un equipo** abre el formulario de alta en un panel lateral; **Importar CSV** abre la importación masiva; **Importar desde Zabbix** trae los hosts de Zabbix.
 
 **Redes grandes:** con más de 400 equipos, la lista llega por páginas desde el servidor (15, 25, 50 o 100 por página), para que abra al instante aunque haya miles. El buscador busca entonces en todos los equipos al pulsar Intro.
@@ -53,7 +53,7 @@ Las credenciales SSH no están en Zabbix. Si no elige una para todos, los equipo
 
 ## Ficha del dispositivo
 
-Reúne todo sobre un equipo en pestañas: **Resumen** (inventario, línea base, ciclo de vida y últimas versiones), **Versiones**, **Cumplimiento**, **Vulnerabilidades**, **Firmware** y **Eventos**. Arriba están **Consola**, **Interfaz web** y **Respaldar ahora**; el menú **⋯** agrupa auditar, buscar CVE, actualizar firmware, editar, comparar con otro equipo, ver las diferencias con la línea base, volver a ella (si el equipo aún no tiene línea base, permite marcar la última versión) y eliminar. Para eliminar un equipo hay que escribir su nombre, porque se borra con todo su historial.
+Reúne todo sobre un equipo en pestañas: **Resumen** (inventario, línea base, ciclo de vida y últimas versiones), **Versiones**, **Cumplimiento**, **Vulnerabilidades**, **Firmware** y **Eventos**, y **Respaldos** en los [MikroTik](#mikrotik-backup-y-rsc) y [WatchGuard](#watchguard-configuración-xml-e-imagen-completa-fxi). Arriba están **Consola**, **Interfaz web** y **Respaldar ahora**; el menú **⋯** agrupa auditar, buscar CVE, actualizar firmware, editar, comparar con otro equipo, ver las diferencias con la línea base, volver a ella (si el equipo aún no tiene línea base, permite marcar la última versión) y eliminar. Para eliminar un equipo hay que escribir su nombre, porque se borra con todo su historial.
 
 **Equipo desactivado.** En lugar de «En línea» dice **Desactivado** y no ofrece Consola, Interfaz web ni Respaldar ahora: el equipo está aislado y OpenNCCM no se conecta con él. Un administrador lo vuelve a activar con **Activar**, en la propia ficha. En la lista de Dispositivos, al marcar varios equipos, **Activar** y **Desactivar** lo hacen con todos a la vez (solo administradores; queda en Auditoría). **Eliminar…**, en la misma barra, borra los equipos marcados (uno o varios) con sus versiones, resultados y eventos: hay que escribir ELIMINAR para confirmar y no se puede deshacer.
 
@@ -119,6 +119,32 @@ El botón **Atrás** de la franja muestra las **fuentes de alimentación** y los
 En los equipos que tienen los puertos detrás, como el **WatchGuard Firebox T40**, la ficha se abre por **Atrás** y muestra el equipo como es: consola serie, los dos USB, los puertos con su rótulo (0/WAN, 1/LAN, 2, 3, 4-PoE), Reset, el interruptor y la entrada de corriente. **Frente** muestra sus luces (Failover, las de cada puerto, Status, Mode, Attn y encendido); pulsar las luces de un puerto lo elige. En WatchGuard el nombre de la interfaz, si está habilitada y su IP o las VLAN que pasan por el puerto salen de la configuración; el enlace y la velocidad, de `show status-report`. Atrás, el puerto con enlace sale en verde; delante se enciende la luz de su velocidad: la de 1000 en amarillo y la de 10/100 en verde, como en el equipo. **Mode** se ve verde si alguna interfaz externa tiene enlace y parpadea si ninguna lo tiene; **Status** queda apagada, porque en el Firebox solo se enciende 30 segundos cuando alguien entra por la Web UI o la CLI. Cada luz explica su estado al pasar el ratón.
 
 ![Pestaña Cumplimiento: reglas agrupadas por política, con «Corregir N».](../../../assets/manual/05c-dispositivo-cumplimiento.png)
+
+## MikroTik: .backup y .rsc
+
+La ficha de un MikroTik tiene la pestaña **Respaldos** con las tres formas de respaldo de RouterOS, y OpenNCCM guarda las tres:
+
+| | Configuración (texto) | .backup | .rsc |
+| --- | --- | --- | --- |
+| **Qué es** | `/export terse` en cada respaldo: se compara versión a versión y avisa de cada cambio | Copia binaria y cifrada de todo el equipo, con usuarios, contraseñas y certificados | El script de `/export file=`. Se lee como texto |
+| **Sirve para** | Ver qué cambió, cumplimiento, configlets | Solo este mismo equipo o uno idéntico | Este equipo u otro (revise los nombres de las interfaces) |
+| **Credencial** | Basta una de solo lectura | Con permisos para crearlo | Con permisos para crearlo |
+
+**Archivos del equipo (.backup y .rsc):**
+
+-   **Cuándo:** **Semanal** (de fábrica), **Diario** o **Solo manual**, con **Crear ahora** para hacerlo en el momento. Los automáticos se crean a las 03:30, de a tres equipos a la vez.
+-   **Credencial:** la del equipo u otra solo para esto. Antes de crear nada, OpenNCCM lee los permisos (policy) del grupo de la cuenta en el equipo y el espacio libre: con una cuenta de solo lectura no toca el equipo y lo avisa; si solo puede el .rsc, trae ese. **Comprobar permisos** lo revisa sin crear nada.
+-   **Clave del .backup:** RouterOS cifra el .backup con ella (8 a 32 letras, números, `.` `_` `-`); vacía, OpenNCCM genera una. Se guarda cifrada junto a cada .backup. Sin ella no se puede restaurar.
+-   **Qué hace en el equipo:** crea los dos archivos, espera a que terminen de escribirse, los trae por SFTP (dentro de SSH: no abre puertos), los borra del equipo y comprueba que no quedó nada. Solo borra sus propios archivos. Un equipo gestionado por Telnet necesita pasar a SSH.
+-   **Cuántos:** se guardan los últimos N, el .backup cifrado con su clave; los más viejos se borran solos.
+
+En la lista de respaldos, cada copia tiene **Cómo restaurar**, **Comparar** y **Descargar**. **Cómo restaurar** explica los pasos: subir el .backup al equipo (en WinBox, arrastrarlo a Files, o por SFTP) y cargarlo con su clave (**Mostrar la clave**; queda en [Auditoría](/administracion/auditoria/) quién la vio, y la clave nunca va dentro de ningún archivo descargado), o aplicar el .rsc sobre una configuración vacía o encima de lo que tiene.
+
+:::caution[El .backup trae la identidad del equipo]
+Trae también las direcciones MAC, usuarios y certificados del equipo original: no lo use en otro equipo que siga en la misma red.
+:::
+
+Probado con RouterOS 6.49 y 7.24, restaurando el .backup en el equipo.
 
 ## WatchGuard: configuración (XML) e imagen completa (.fxi)
 
