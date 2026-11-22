@@ -17,6 +17,25 @@ If you tick "Include the encryption key", the whole file is encrypted (AES-256-G
 
 The **System** tab also shows the server's performance, **disk space**, the **server date and time**, the database and key in use, and the **recovery backups**: **Create backup now** (with or without the encryption key), download, delete and **Restore…** (explains the console command that restores it). 4 are shown at a time; the rest with the scroll bar on the edge.
 
+## Usage statistics
+
+Once a day, at a random time, OpenNCCM tells comunidad.opennccm.com that it is in use. It sends only this:
+
+```json
+{ "instalacion": "u_…", "version": "2.45.4" }
+```
+
+-   `instalacion` is a random number used only for the statistics, different from the license ID. It is generated once and stored in the database.
+-   Configurations, devices, addresses of your network, users and names are never sent. The website does not store the IP the notice comes from.
+-   It is on by default and cannot be turned off. That information helps us keep improving the system.
+-   If the server has no internet access, nothing happens: no error is shown, it does not affect how OpenNCCM works and it tries again the next day.
+
+The **Usage statistics** card in the **System** tab shows the **Last notice** and **See exactly what is sent**, with the real text.
+
+## License and Pro modules
+
+**Administration › License and modules** activates the optional paid modules. See [License and modules](/en/pro/licencia/).
+
 ## Date, time and time zone
 
 -   **Time zone:** choose it from the list (grouped by region) and click **Change zone**. OpenNCCM restarts for a few seconds so the history and scheduled tasks use the new time.

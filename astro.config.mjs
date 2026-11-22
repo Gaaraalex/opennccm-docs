@@ -97,6 +97,12 @@ export default defineConfig({
 					p('administracion/sistema', 'Sistema y copias de recuperación', 'System and recovery backups'),
 					p('administracion/auditoria', 'Auditoría', 'Audit log'),
 				]),
+				g('OpenNCCM Pro', 'OpenNCCM Pro', [
+					p('pro/licencia', 'Licencia y módulos', 'License and modules'),
+					p('pro/informes', 'Informes profesionales', 'Professional reports'),
+					p('pro/recolectores', 'Recolectores por sede', 'Site collectors'),
+					p('pro/alta-disponibilidad', 'Alta disponibilidad', 'High availability'),
+				]),
 				g('Referencia', 'Reference', [
 					p('referencia/api', 'API', 'API'),
 					p('referencia/plataformas', 'Plataformas soportadas', 'Supported platforms'),

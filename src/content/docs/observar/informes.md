@@ -16,7 +16,7 @@ Cada informe es una tarjeta con **Ver** (en pantalla, con el periodo de 7, 30, 9
 | Vulnerabilidades | CVE por equipo |
 | Licencias por vencer | Servicios de la licencia de cada equipo (hoy, la feature key de WatchGuard) que vencen en los próximos 90 días o ya vencieron, lo más urgente primero |
 | Puertos sin uso | Puertos de acceso de los switches sin enlace hace más de 30, 60 o 90 días ([ver abajo](#puertos-sin-uso)) |
-| Documento de la red | PDF o Word con lo que OpenNCCM sabe de la red ([ver abajo](#documento-de-la-red)) |
+| Documento de la red | PDF o Word con lo que OpenNCCM sabe de la red. Desde la 2.45 es parte de [Informes profesionales](/pro/informes/) ([ver abajo](#documento-de-la-red)) |
 | Equipos del mapa | Los equipos que se ven en el mapa (vecinos LLDP/CDP/MNDP y RoMON) cruzados con Dispositivos: cuáles ya están agregados y respaldados y cuáles no ([ver abajo](#equipos-del-mapa)) |
 | Solicitudes de cambio | Quién pidió, quién aprobó y el resultado |
 | Auditoría de usuarios | Inicios de sesión y acciones (solo administradores) |
@@ -41,6 +41,10 @@ Apagar los puertos sin uso también es una mejora de seguridad: nadie puede cone
 
 ## Documento de la red
 
-**Informes → Documento de la red** genera un PDF o un Word (.docx) de un sitio, un grupo o toda la red, con las secciones que se elijan: inventario (modelo, serie y firmware), mapa de la red, VLAN y direcciones IP, enlaces entre equipos, cumplimiento y vulnerabilidades y el último respaldo de cada equipo. Opcionalmente lleva una portada con el logo (PNG o JPEG, se sube con su propio botón, se ve en la vista previa y se puede **Quitar**) y el nombre del cliente, y puede ocultar las IP públicas. En el mapa, cada grupo de equipos enlazados se arma por niveles, los grupos van uno al lado del otro y los equipos sin enlaces al final, en una grilla. Cada título va en la misma página que su tabla, las tablas tienen el mismo ancho, la columna «Sitio» solo sale si hay más de uno y Cumplimiento avisa si todavía no se auditó. Las contraseñas, comunidades SNMP y claves nunca salen: el documento no lleva configuraciones.
+Desde la versión 2.45, el Documento de la red es parte de [Informes profesionales](/pro/informes/#documento-de-la-red), un módulo de [OpenNCCM Pro](/pro/licencia/). Con ese módulo, la tarjeta dice **Ver en Profesionales**.
 
-Los documentos generados quedan en la lista con **Ver** (el PDF en el navegador), **Descargar** y, si la red cambió desde entonces («La red cambió: 3 equipos nuevos, 1 VLAN y 2 firmwares»), **Regenerar**. Cada documento generado y descargado queda en Auditoría.
+Los documentos que ya generaste antes se siguen viendo y descargando sin licencia: **Informes › Mis documentos**.
+
+## Informes profesionales
+
+Con [Informes profesionales](/pro/informes/) la pestaña **Informes › Profesionales** suma el informe ejecutivo mensual, la auditoría de cumplimiento firmada, el inventario para gerencia con el costo de renovación, los envíos programados con enlace y la plantilla de marca.

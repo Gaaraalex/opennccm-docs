@@ -4,23 +4,25 @@ description: "Move to a new version and, if something fails, go back to the prev
 curso: ["9.2"]
 ---
 
-New versions are published in the GitHub repository. When one is available, OpenNCCM tells administrators with a pop-up message. You can upgrade **from the web interface** (**Administration → System → Updates → Update now**, since 1.6.0) or with a command on the server; both do exactly the same:
+New versions are published in the GitHub repository. When one is available, OpenNCCM tells administrators with a pop-up message. You can upgrade **from the web interface** (**Administration → System → Updates → Update now**, since 1.6.0) or with a command on the server; both do exactly the same and always offer the latest published version (never an unpublished one):
 
 ```bash
 sudo opennccm update
 ==> Buscando actualizaciones (stable)…
 
-Actualización disponible: 1.2.0 → 1.3.0
-## 1.3.0
+Actualización disponible: 2.45.3 → 2.45.4
+## 2.45.4
 - …novedades de la versión…
 
 ¿Actualizar ahora? [s/N] s
 ==> Creando copia previa
-✓ Copia previa: /var/lib/opennccm/pre-update/AAAAMMDD-HHMMSS_v1.2.0
-==> Instalando 1.3.0
+✓ Copia previa: /var/lib/opennccm/pre-update/AAAAMMDD-HHMMSS_v2.45.3
+==> Instalando 2.45.4
 ==> Iniciando y verificando
-✓ OpenNCCM actualizado: 1.2.0 → 1.3.0
+✓ OpenNCCM actualizado: 2.45.3 → 2.45.4
 ```
+
+Installed [Pro](/en/pro/licencia/) modules update by themselves, separately.
 
 ## Options
 
@@ -28,7 +30,7 @@ Actualización disponible: 1.2.0 → 1.3.0
 | --- | --- |
 | `sudo opennccm update --check` | Only shows whether there is a new version and what is new |
 | `sudo opennccm update --yes` | Upgrades without asking (for automated tasks) |
-| `sudo opennccm update --version v1.2.0` | Installs a specific version (also used to downgrade) |
+| `sudo opennccm update --version v2.45.3` | Installs a specific version (also used to downgrade) |
 | `opennccm status` | Says whether an update is available |
 
 The installed version appears at the bottom of every page. The pre-update backups are kept in `/var/lib/opennccm/pre-update/` (the 5 most recent).

@@ -16,7 +16,7 @@ Each report is a card with **View** (on screen, with a period of 7, 30, 90 days 
 | Vulnerabilities | CVEs per device |
 | Licenses about to expire | Each device's license services (today, the WatchGuard feature key) that expire in the next 90 days or already expired, most urgent first |
 | Unused ports | Switch access ports without link for more than 30, 60 or 90 days ([see below](#unused-ports)) |
-| Network document | PDF or Word with what OpenNCCM knows about the network ([see below](#network-document)) |
+| Network document | PDF or Word with what OpenNCCM knows about the network. Since 2.45 it is part of [Professional reports](/en/pro/informes/) ([see below](#network-document)) |
 | Map devices | The devices seen on the map (LLDP/CDP/MNDP and RoMON neighbors) checked against Devices: which ones are already added and backed up and which are not ([see below](#map-devices)) |
 | Change requests | Who asked, who approved and the result |
 | User audit | Sign-ins and actions (administrators only) |
@@ -43,6 +43,10 @@ Shutting unused ports is also a security improvement: nobody can plug a device i
 
 ## Network document
 
-**Reports → Network document** generates a PDF or a Word file (.docx) for a site, a group or the whole network, with the sections you choose: inventory (model, serial and firmware), network map, VLANs and IP addresses, links between devices, compliance and vulnerabilities, and each device's latest backup. Optionally it has a cover with the customer's logo (PNG or JPEG, uploaded with its own button, shown in the preview and removable with **Remove**) and name, and it can hide public IPs. On the map, each group of linked devices is laid out by levels, the groups go side by side and devices without links go at the end, in a grid. Each heading stays on the same page as its table, tables have the same width, the "Site" column only appears when there is more than one and Compliance warns if it has not been audited yet. Passwords, SNMP communities and keys never appear: the document contains no configurations.
+Since version 2.45, the Network document is part of [Professional reports](/en/pro/informes/#network-document), an [OpenNCCM Pro](/en/pro/licencia/) module. With that module, the card says **See in Professional**.
 
-Generated documents stay in the list with **View** (the PDF in the browser), **Download** and, if the network changed since then ("The network changed: 3 new devices, 1 VLAN and 2 firmwares"), **Regenerate**. Every document generated and downloaded is recorded in the Audit log.
+Documents you generated before can still be viewed and downloaded without a license: **Reports › My documents**.
+
+## Professional reports
+
+With [Professional reports](/en/pro/informes/), the **Reports › Professional** tab adds the monthly executive report, the signed compliance audit, the management inventory with the renewal cost, scheduled deliveries with a link and the brand template.

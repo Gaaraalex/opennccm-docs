@@ -9,9 +9,9 @@ curso: ["3.2","3.3","3.4"]
 ## How to use it
 
 -   **Search and filter:** by name, IP, model, serial, version or location; by group, [node](/en/observar/analisis/#nodes) and brand; and by status (ok, error, pending, startup ≠ running, off baseline). Each device carries its brand logo (also on the device page, the map, the console and Ctrl K); the **BRAND** row shows how many there are of each and filters with one tap. The **Brand** menu shows about 12 at a time, with a scroll bar and a search box at the top ("Search brand").
--   **Back up all:** backs up every device (or those of the filtered group, or the ticked ones), 4 at a time (changed in [Administration › Capacity](/en/administracion/sistema/#capacity), up to 16). You see the progress with its percentage: a panel with the bar, how many succeeded, failed, are being backed up and are queued, and which one is being backed up now; each row of the list shows its step ("Connecting…", "Reading the configuration…", "Saving…") and updates by itself when done. The backup runs on the server: you can leave the page (the pill with the percentage stays next to "Devices" in the menu) and it lets you know when it finishes. **Cancel** does not start the remaining ones; at the end, the failed ones are listed with their reason and **Retry** backs up only those. A backup that fails for something transient (the device cut the session while the port answers, OpenNCCM's database busy) is checked and retried by itself; if the device does not answer or rejects the password, you are told without a retry.
--   **Row actions:** hovering a row shows back up, console and the device's web interface.
--   **Bulk actions:** select several rows and use the bottom bar to back them up, audit them, move them to a group or assign them to a node (**Assign to node**, administrators).
+-   **Back up all:** backs up every device (or those of the filtered group, or the ticked ones), 4 at a time (changed in [Administration › Capacity](/en/administracion/sistema/#capacity), up to 16). You see the progress with its percentage: a panel with the bar, how many succeeded, failed, are being backed up and are queued, and which one is being backed up now; each row of the list shows its step ("Connecting…", "Reading the configuration…", "Saving…") and updates by itself when done. The backup runs on the server: you can leave the page (the pill with the percentage stays next to "Devices" in the menu) and it lets you know when it finishes. **Cancel** does not start the remaining ones; at the end, the failed ones are listed with their reason and **Retry** backs up only those. A backup that fails for something transient (the device cut the session while the port answers, OpenNCCM's database busy) is checked and retried by itself; if the device rejects the password, you are told without a retry. **Backup after coming back online:** if a backup failed because the device did not answer (or accepted the connection and cut it right away), every hour OpenNCCM checks whether it answers again and, when it does, backs it up by itself; the event "Backup after coming back online" is recorded. It does not apply to disabled devices, devices in maintenance, devices of a [collector](/en/pro/recolectores/) or devices with credential errors.
+-   **Row actions:** hovering a row shows back up, console, web interface and ping for the device.
+-   **Bulk actions:** select several rows and use the bottom bar to back them up, audit them, move them to a group, assign them to a node (**Assign to node**), enable, disable or delete them (administrators). With [Site collectors](/en/pro/recolectores/), **Assign to a site…** chooses which site backs them up.
 -   **\+ Add** (admin): **Add a device** opens the form in a side panel; **Import CSV** opens the bulk import; **Import from Zabbix** brings in the Zabbix hosts.
 
 **Large networks:** with more than 400 devices, the list arrives in pages from the server (15, 25, 50 or 100 per page), so it opens instantly even with thousands. The search box then searches every device when you press Enter.
@@ -53,7 +53,7 @@ SSH credentials are not in Zabbix. If you do not choose one for all, the devices
 
 ## Device page
 
-It brings together everything about a device in tabs: **Summary** (inventory, baseline, lifecycle and latest versions), **Versions**, **Compliance**, **Vulnerabilities**, **Firmware** and **Events**. At the top are **Console**, **Web interface** and **Back up now**; the **⋯** menu groups audit, look up CVEs, upgrade firmware, edit, compare with another device, see the differences with the baseline, go back to it (if the device has no baseline yet, it lets you mark the latest version) and delete. To delete a device you have to type its name, because it is removed with its whole history.
+It brings together everything about a device in tabs: **Summary** (inventory, baseline, lifecycle and latest versions), **Versions**, **Compliance**, **Vulnerabilities**, **Firmware** and **Events**, plus **Backups** on [MikroTik](#mikrotik-backup-and-rsc) and [WatchGuard](#watchguard-configuration-xml-and-full-image-fxi) devices. At the top are **Console**, **Web interface** and **Back up now**; the **⋯** menu groups audit, look up CVEs, upgrade firmware, edit, compare with another device, see the differences with the baseline, go back to it (if the device has no baseline yet, it lets you mark the latest version) and delete. To delete a device you have to type its name, because it is removed with its whole history.
 
 **Disabled device.** Instead of "Online" it says **Disabled** and does not offer Console, Web interface or Back up now: the device is isolated and OpenNCCM does not connect to it. An administrator enables it again with **Enable**, on the device page itself. In the Devices list, when you tick several devices, **Enable** and **Disable** act on all of them at once (administrators only; it is logged in Audit). **Delete…**, in the same bar, deletes the ticked devices (one or several) with their versions, results and events: you have to type DELETE to confirm, and it cannot be undone.
 
@@ -119,6 +119,32 @@ The strip's **Back** button shows the device's **power supplies** and **fans**: 
 On devices with their ports at the back, such as the **WatchGuard Firebox T40**, the device page opens on **Back** and shows the device as it is: serial console, the two USB ports, the ports with their labels (0/WAN, 1/LAN, 2, 3, 4-PoE), Reset, the power switch and the power input. **Front** shows its lights (Failover, each port's lights, Status, Mode, Attn and power); clicking a port's lights selects it. On WatchGuard the interface name, whether it is enabled and its IP or the VLANs that pass through the port come from the configuration; the link and speed come from `show status-report`. At the back, a port with link shows in green; at the front its speed light comes on: the 1000 one in yellow and the 10/100 one in green, as on the device. **Mode** shows green if any external interface has link and blinks if none does; **Status** stays off, because on the Firebox it only lights for 30 seconds when someone logs in through the Web UI or the CLI. Each light explains its state on hover.
 
 ![Compliance tab: rules grouped by policy, with "Fix N".](../../../../assets/manual/05c-dispositivo-cumplimiento.png)
+
+## MikroTik: .backup and .rsc
+
+A MikroTik's device page has the **Backups** tab with RouterOS's three kinds of backup, and OpenNCCM keeps all three:
+
+| | Configuration (text) | .backup | .rsc |
+| --- | --- | --- | --- |
+| **What it is** | `/export terse` on every backup: compared version by version, with an alert for each change | Binary, encrypted copy of the whole device, with users, passwords and certificates | The script from `/export file=`. It reads as text |
+| **Use it for** | Seeing what changed, compliance, configlets | Only this same device or an identical one | This device or another one (check the interface names) |
+| **Credential** | A read-only one is enough | With permission to create it | With permission to create it |
+
+**Device files (.backup and .rsc):**
+
+-   **When:** **Weekly** (default), **Daily** or **Manual only**, with **Create now** to make them right away. Automatic ones are created at 03:30, three devices at a time.
+-   **Credential:** the device's own or another one just for this. Before creating anything, OpenNCCM reads the permissions (policy) of the account's group on the device and the free space: with a read-only account it does not touch the device and says so; if it can only make the .rsc, it brings that one. **Check permissions** checks this without creating anything.
+-   **.backup key:** RouterOS encrypts the .backup with it (8 to 32 letters, numbers, `.` `_` `-`); if left empty, OpenNCCM generates one. It is stored encrypted with each .backup. Without it the backup cannot be restored.
+-   **What it does on the device:** creates both files, waits until they are fully written, brings them over SFTP (inside SSH: it opens no ports), deletes them from the device and checks that nothing was left. It only deletes its own files. A device managed over Telnet needs to move to SSH.
+-   **How many:** the latest N are kept, the .backup encrypted with its key; older ones are deleted by themselves.
+
+In the backup list, each copy has **How to restore**, **Compare** and **Download**. **How to restore** explains the steps: upload the .backup to the device (in WinBox, drag it to Files, or over SFTP) and load it with its key (**Show the key**; [Audit](/en/administracion/auditoria/) records who viewed it, and the key never goes inside any downloaded file), or apply the .rsc on an empty configuration or on top of the current one.
+
+:::caution[The .backup carries the device's identity]
+It also brings the original device's MAC addresses, users and certificates: do not use it on another device that is still on the same network.
+:::
+
+Tested with RouterOS 6.49 and 7.24, restoring the .backup on the device.
 
 ## WatchGuard: configuration (XML) and full image (.fxi)
 

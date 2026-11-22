@@ -17,6 +17,25 @@ Si marca «Incluir la clave de cifrado», el archivo completo se cifra (AES-256-
 
 La pestaña **Sistema** muestra además el rendimiento del servidor, el **espacio**, la **fecha y hora del servidor**, la base de datos y la clave en uso, y las **copias de recuperación**: **Crear copia ahora** (con o sin la clave de cifrado), descargar, eliminar y **Restaurar…** (explica el comando de consola que la restaura). Se ven 4 a la vez; las demás, con la barra del borde (subir y bajar).
 
+## Estadística de uso
+
+Una vez al día, a una hora al azar, OpenNCCM avisa a comunidad.opennccm.com que está en uso. Envía solo esto:
+
+```json
+{ "instalacion": "u_…", "version": "2.45.4" }
+```
+
+-   `instalacion` es un número al azar propio de la estadística, distinto del id de la licencia. Se genera una vez y se guarda en la base.
+-   Nunca se envían configuraciones, equipos, direcciones de tu red, usuarios ni nombres. La web no guarda la IP desde la que llega el aviso.
+-   Viene activada y no se puede desactivar. Esa información nos ayuda a seguir mejorando el sistema.
+-   Si el servidor no tiene salida a internet, no pasa nada: no se muestra ningún error, no afecta el funcionamiento y se vuelve a intentar al día siguiente.
+
+La tarjeta **Estadística de uso** de la pestaña **Sistema** muestra el **Último aviso** y **Ver exactamente qué se envía**, con el texto real.
+
+## Licencia y módulos Pro
+
+**Administración › Licencia y módulos** activa los módulos opcionales de pago. Ver [Licencia y módulos](/pro/licencia/).
+
 ## Fecha, hora y zona horaria
 
 -   **Zona horaria:** elíjala de la lista (agrupada por región) y pulse **Cambiar zona**. OpenNCCM se reinicia unos segundos para que el historial y las tareas programadas usen la nueva hora.

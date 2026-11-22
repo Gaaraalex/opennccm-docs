@@ -45,6 +45,10 @@ After editing the file: `sudo systemctl restart opennccm`.
 | `opennccm logs [-f]` | Service log |
 | `sudo opennccm start|stop|restart` | Control the service |
 | `sudo opennccm uninstall [--purge]` | Uninstall |
+| `sudo opennccm recolector estado` | On a [collector](/en/pro/recolectores/): site, central server and queue |
+| `sudo opennccm recolector alta URL CLAVE` | On a collector: enroll with another key |
+
+Install a [collector](/en/pro/recolectores/): `install.sh --recolector https://CENTRAL --clave ra_…`. Install the [High availability](/en/pro/alta-disponibilidad/) standby server: `install.sh --espera https://ACTIVO --clave ha_…`. The module's screen gives both keys.
 
 Installation log: `/var/log/opennccm-install.log`. Options chosen at installation: `/etc/opennccm/install.conf` (reused by upgrades).
 

@@ -110,6 +110,8 @@ curl -fsSL https://raw.githubusercontent.com/Gaaraalex/opennccm/main/install.sh 
 | `--no-upgrade` | No actualizar Ubuntu |
 | `--version vX.Y.Z` / `--channel main` | Versión concreta / rama de desarrollo |
 | `--reinstall` | Repetir la instalación sobre una existente (conserva los datos) |
+| `--recolector URL --clave ra_…` | Instalar un [recolector por sede](/pro/recolectores/) (Pro) |
+| `--espera URL --clave ha_…` | Instalar el servidor en espera de [Alta disponibilidad](/pro/alta-disponibilidad/) (Pro) |
 
 Ayuda completa: `curl -fsSL …/install.sh | sudo bash -s -- --help`.
 
