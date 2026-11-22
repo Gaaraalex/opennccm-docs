@@ -138,13 +138,17 @@ A MikroTik's device page has the **Backups** tab with RouterOS's three kinds of 
 -   **What it does on the device:** creates both files, waits until they are fully written, brings them over SFTP (inside SSH: it opens no ports), deletes them from the device and checks that nothing was left. It only deletes its own files. A device managed over Telnet needs to move to SSH.
 -   **How many:** the latest N are kept, the .backup encrypted with its key; older ones are deleted by themselves.
 
-In the backup list, each copy has **How to restore**, **Compare** and **Download**. **How to restore** explains the steps: upload the .backup to the device (in WinBox, drag it to Files, or over SFTP) and load it with its key (**Show the key**; [Audit](/en/administracion/auditoria/) records who viewed it, and the key never goes inside any downloaded file), or apply the .rsc on an empty configuration or on top of the current one.
+In the backup list, each copy can be downloaded (**.backup** and **.rsc**) and has **How to restore**; text versions have **View**, **Compare** and **Download**. **How to restore** explains the steps: upload the .backup to the device (in WinBox, drag it to Files, or over SFTP) and load it with its key (**Show the key**; [Audit](/en/administracion/auditoria/) records who viewed it, and the key never goes inside any downloaded file), or apply the .rsc on an empty configuration or on top of the current one.
 
 :::caution[The .backup carries the device's identity]
 It also brings the original device's MAC addresses, users and certificates: do not use it on another device that is still on the same network.
 :::
 
 Tested with RouterOS 6.49 and 7.24, restoring the .backup on the device.
+
+![Backups tab of a MikroTik: text configuration, .backup and .rsc.](../../../../assets/manual/mikrotik-respaldos.png)
+
+![How to restore a .backup or an .rsc.](../../../../assets/manual/mikrotik-restaurar.png)
 
 ## WatchGuard: configuration (XML) and full image (.fxi)
 

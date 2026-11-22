@@ -23,6 +23,8 @@ La tarjeta muestra la clave enmascarada, **Cambiar clave**, **Actualizar** (vuel
 
 **Versiones nuevas de un módulo:** se bajan solas una vez al día. Si el módulo está en uso, se aplican al reiniciar el servicio o con **Reiniciar ahora** («Hay versiones nuevas de los módulos Pro»).
 
+![Licencia y módulos con los tres módulos activos.](../../../assets/manual/pro-licencia.png)
+
 ## Prueba gratis
 
 **Pide una prueba gratis** (en la misma pantalla o en cada módulo con **Probar gratis**) abre un formulario con los módulos, tu correo, la organización y para qué lo usarás. No pide tarjeta.

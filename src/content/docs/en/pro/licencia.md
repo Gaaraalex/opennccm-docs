@@ -23,6 +23,8 @@ The card shows the masked key, **Change key**, **Update** (checks the license ag
 
 **New versions of a module:** they are downloaded by themselves once a day. If the module is in use, they are applied when the service restarts or with **Restart now** ("New versions of the Pro modules are available").
 
+![License and modules with the three modules active.](../../../../assets/manual/pro-licencia.png)
+
 ## Free trial
 
 **Request a free trial** (on the same screen, or in each module with **Try for free**) opens a form with the modules, your email, the organization and what you will use it for. It does not ask for a card.

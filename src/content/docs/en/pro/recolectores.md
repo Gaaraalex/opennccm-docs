@@ -23,6 +23,8 @@ A **collector** at each site backs up the devices on its network and sends the c
 4.  Check **This server's address from the site**: the site must be able to reach it over HTTPS. The collector saves the certificate fingerprint of that address and only connects back to it.
 5.  Copy the command to the site machine (below). The window says "Waiting for the first connection…" and changes by itself to **Connected**.
 
+![The enrollment window: key, central address and Linux command.](../../../../assets/manual/pro-recolector-alta.png)
+
 ### On Linux
 
 Ubuntu 22.04 or 24.04, with sudo. The command carries the key, there is no need to type it:
@@ -64,6 +66,10 @@ The list shows each site with its status (**Online**, **Not reporting for N min*
 -   **Actions:** **Pause** / **Resume**, **Revoke** (the collector can no longer connect), **New enrollment key** and **Remove site** (its devices go back to being backed up from the central server). None of them deletes backups.
 
 A paused or revoked collector gets no tasks, and its devices are **not** backed up from the central server (it cannot reach them).
+
+![Site collectors: three sites, two online.](../../../../assets/manual/pro-recolectores.png)
+
+![One site: its collector, connections and devices.](../../../../assets/manual/pro-recolector-sede.png)
 
 ## Alerts
 

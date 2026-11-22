@@ -23,6 +23,8 @@ Un **recolector** en cada sede respalda los equipos de su red y manda las copias
 4.  Revisa la **Dirección de este servidor desde la sede**: la sede tiene que poder llegar a ella por HTTPS. El recolector guarda la huella del certificado de esa dirección y solo vuelve a conectarse a ella.
 5.  Copia el comando en la máquina de la sede (abajo). La ventana dice «Esperando la primera conexión…» y cambia sola a **Conectado**.
 
+![La ventana de alta: clave, dirección del central y comando para Linux.](../../../assets/manual/pro-recolector-alta.png)
+
 ### En Linux
 
 Ubuntu 22.04 o 24.04, con sudo. El comando lleva la clave, no hay que escribirla:
@@ -64,6 +66,10 @@ La lista muestra cada sede con su estado (**En línea**, **Sin reportar hace N m
 -   **Acciones:** **Pausar** / **Reanudar**, **Revocar** (el recolector ya no puede conectarse), **Nueva clave de alta** y **Quitar sede** (sus equipos vuelven a respaldarse desde el central). Ninguna borra respaldos.
 
 Un recolector en pausa o revocado no recibe tareas, y sus equipos **no** se respaldan desde el central (no se llega a ellos).
+
+![Recolectores por sede: tres sedes, dos en línea.](../../../assets/manual/pro-recolectores.png)
+
+![Una sede: su recolector, conexiones y equipos.](../../../assets/manual/pro-recolector-sede.png)
 
 ## Avisos
 

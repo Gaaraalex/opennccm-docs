@@ -14,6 +14,8 @@ description: "Pro module: executive report, signed audit, Network document, mana
 
 Each card has its **Preview**, **Download PDF** and **Schedule delivery**.
 
+![Professional reports: the report cards and the executive report preview.](../../../../assets/manual/pro-informes.png)
+
 ## Executive report
 
 Choose the **Report month** and, if you like, **Compare with** another month or two dates. It shows the changes per week, compliance over the last 6 months, critical CVEs, unsupported devices and failed backups. If there is nothing urgent, it says so.

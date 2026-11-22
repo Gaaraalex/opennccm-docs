@@ -34,6 +34,8 @@ No se copian: la licencia de cada servidor, las grabaciones de consola, el repos
 
 Es un OpenNCCM completo, pero no respalda ni corre tareas. Al entrar, muestra «Este servidor está en espera» con **Ir a** (el activo). Solo los administradores pueden **Entrar a este servidor**, para revisar el par o forzar el cambio si el activo no responde.
 
+![La página del servidor en espera.](../../../assets/manual/pro-ha-espera.png)
+
 ## Conmutación
 
 | Cuándo | Qué pasa |
@@ -65,6 +67,8 @@ Sin IP virtual, los usuarios pueden entrar a cualquiera de los dos: el que está
 -   **Historial:** cada conmutación y cambio, con **Revisado**.
 -   Los avisos van a la campana y por correo: el otro no responde, el par conmutó, servidor aislado. El Panel muestra el estado del par.
 -   **Quitar el par:** este servidor queda solo y activo, y deja de copiar o recibir copias. No se borra ningún dato. En el otro servidor hay que quitarlo también.
+
+![Alta disponibilidad: par protegido, testigo e historial.](../../../assets/manual/pro-ha.png)
 
 ## Con recolectores por sede
 
