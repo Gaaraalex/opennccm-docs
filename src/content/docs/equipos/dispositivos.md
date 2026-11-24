@@ -81,6 +81,8 @@ La ficha es la del lugar (nombre, IP, ubicación) y conserva todo su historial; 
 -   No se hereda lo del aparato anterior: la línea base (si ese aparato vuelve, vuelve la suya), los puertos vistos, la licencia y los permisos comprobados. Se hace enseguida una copia completa del aparato nuevo.
 -   En una OLT ZTE C300/C320 la serie es la de la tarjeta de control: si la mayoría de las demás tarjetas sigue igual, avisa «Tarjeta de control cambiada» y la trata como la misma OLT.
 
+![Aviso en la ficha cuando cambia el aparato: serie anterior y nueva.](../../../assets/manual/equipo-reemplazado.png)
+
 Para dar de baja un equipo y dar de alta otro con otra ficha, use [Retirar o reemplazar](#equipos-retirados-dañados-o-reemplazados).
 
 ![Ficha del dispositivo R1, pestaña Resumen.](../../../assets/manual/05-dispositivo.png)
@@ -150,7 +152,7 @@ La ficha de un MikroTik tiene la pestaña **Respaldos** con las tres formas de r
 -   **Qué hace en el equipo:** crea los dos archivos, espera a que terminen de escribirse, los trae por SFTP (dentro de SSH: no abre puertos), los borra del equipo y comprueba que no quedó nada. Solo borra sus propios archivos. Un equipo gestionado por Telnet necesita pasar a SSH.
 -   **Cuántos:** se guardan los últimos N, el .backup cifrado con su clave; los más viejos se borran solos, salvo los protegidos (candado).
 
-En la lista de respaldos, cada copia se descarga (**.backup** y **.rsc**) y tiene **Cómo restaurar**; las versiones de texto, **Ver**, **Comparar** y **Descargar**. **Cómo restaurar** explica los pasos: subir el .backup al equipo (en WinBox, arrastrarlo a Files, o por SFTP) y cargarlo con su clave (**Mostrar la clave**; queda en [Auditoría](/administracion/auditoria/) quién la vio, y la clave nunca va dentro de ningún archivo descargado), o aplicar el .rsc sobre una configuración vacía o encima de lo que tiene.
+En la lista de respaldos, cada copia se descarga (**.backup** y **.rsc**) y tiene **Cómo restaurar**; los administradores además la pueden **Proteger** (o quitarle la protección) y **Borrar**. Las versiones de texto tienen **Ver**, **Comparar** y **Descargar**. **Cómo restaurar** explica los pasos: subir el .backup al equipo (en WinBox, arrastrarlo a Files, o por SFTP) y cargarlo con su clave (**Mostrar la clave**; queda en [Auditoría](/administracion/auditoria/) quién la vio, y la clave nunca va dentro de ningún archivo descargado), o aplicar el .rsc sobre una configuración vacía o encima de lo que tiene. Use la copia de la misma versión de firmware que tenga el equipo donde va a restaurar (la columna Versión la dice): entre versiones distintas, RouterOS puede no cargarla entera.
 
 :::caution[El .backup trae la identidad del equipo]
 Trae también las direcciones MAC, usuarios y certificados del equipo original: no lo use en otro equipo que siga en la misma red.

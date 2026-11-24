@@ -83,6 +83,10 @@ The device page belongs to the place (name, IP, location) and keeps its whole hi
 -   Nothing is inherited from the previous unit: the baseline (if that unit comes back, so does its baseline), the ports seen, the license and the checked permissions. A full copy of the new unit is made right away.
 -   On a ZTE C300/C320 OLT the serial is the control card's: if most of the other cards are unchanged, it warns "Control card changed" and treats it as the same OLT.
 
+![Notice on the device page when the unit changes: previous and new serial.](../../../../assets/manual/equipo-reemplazado.png)
+
+To retire a device and add another one with a new device page, use [Retire or replace](#retired-devices-damaged-or-replaced).
+
 ### Device ports
 
 Between the header and the tabs, a **port strip** draws the front of the device with one icon per port in its physical order: RJ45 for copper and an SFP cage for fiber (empty if it has no module). On large devices they go in two rows, odd ones on top and even ones below. Tapping a port shows its status, type, description, speed, address and neighbor; "See all ports" opens the **Ports** tab, with the *Interfaces* table (filters All, Up, Down, Fiber and, on large devices, Disabled and Copper; **Export CSV**) and a port card with **What the backup says**: the configuration line and the status line that explain its color.
@@ -148,7 +152,7 @@ A MikroTik's device page has the **Backups** tab with RouterOS's three kinds of 
 -   **What it does on the device:** creates both files, waits until they are fully written, brings them over SFTP (inside SSH: it opens no ports), deletes them from the device and checks that nothing was left. It only deletes its own files. A device managed over Telnet needs to move to SSH.
 -   **How many:** the latest N are kept, the .backup encrypted with its key; older ones are deleted by themselves, except protected ones (padlock).
 
-In the backup list, each copy can be downloaded (**.backup** and **.rsc**) and has **How to restore**; text versions have **View**, **Compare** and **Download**. **How to restore** explains the steps: upload the .backup to the device (in WinBox, drag it to Files, or over SFTP) and load it with its key (**Show the key**; [Audit](/en/administracion/auditoria/) records who viewed it, and the key never goes inside any downloaded file), or apply the .rsc on an empty configuration or on top of the current one.
+In the backup list, each copy can be downloaded (**.backup** and **.rsc**) and has **How to restore**; administrators can also **Protect** it (or remove the protection) and **Delete** it. Text versions have **View**, **Compare** and **Download**. **How to restore** explains the steps: upload the .backup to the device (in WinBox, drag it to Files, or over SFTP) and load it with its key (**Show the key**; [Audit](/en/administracion/auditoria/) records who viewed it, and the key never goes inside any downloaded file), or apply the .rsc on an empty configuration or on top of the current one. Use the copy from the same firmware version as the device you restore to (the Version column shows it): between different versions, RouterOS may not load all of it.
 
 :::caution[The .backup carries the device's identity]
 It also brings the original device's MAC addresses, users and certificates: do not use it on another device that is still on the same network.
