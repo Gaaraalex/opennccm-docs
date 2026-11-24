@@ -10,16 +10,16 @@ New versions are published in the GitHub repository. When one is available, Open
 sudo opennccm update
 ==> Buscando actualizaciones (stable)…
 
-Actualización disponible: 2.45.3 → 2.45.4
-## 2.45.4
+Actualización disponible: 2.45.4 → 2.45.5
+## 2.45.5
 - …novedades de la versión…
 
 ¿Actualizar ahora? [s/N] s
 ==> Creando copia previa
-✓ Copia previa: /var/lib/opennccm/pre-update/AAAAMMDD-HHMMSS_v2.45.3
-==> Instalando 2.45.4
+✓ Copia previa: /var/lib/opennccm/pre-update/AAAAMMDD-HHMMSS_v2.45.4
+==> Instalando 2.45.5
 ==> Iniciando y verificando
-✓ OpenNCCM actualizado: 2.45.3 → 2.45.4
+✓ OpenNCCM actualizado: 2.45.4 → 2.45.5
 ```
 
 Installed [Pro](/en/pro/licencia/) modules update by themselves, separately.
@@ -30,7 +30,7 @@ Installed [Pro](/en/pro/licencia/) modules update by themselves, separately.
 | --- | --- |
 | `sudo opennccm update --check` | Only shows whether there is a new version and what is new |
 | `sudo opennccm update --yes` | Upgrades without asking (for automated tasks) |
-| `sudo opennccm update --version v2.45.3` | Installs a specific version (also used to downgrade) |
+| `sudo opennccm update --version v2.45.4` | Installs a specific version (also used to downgrade) |
 | `opennccm status` | Says whether an update is available |
 
 The installed version appears at the bottom of every page. The pre-update backups are kept in `/var/lib/opennccm/pre-update/` (the 5 most recent).

@@ -53,7 +53,7 @@ SSH credentials are not in Zabbix. If you do not choose one for all, the devices
 
 ## Device page
 
-It brings together everything about a device in tabs: **Summary** (inventory, baseline, lifecycle and latest versions), **Versions**, **Compliance**, **Vulnerabilities**, **Firmware** and **Events**, plus **Backups** on [MikroTik](#mikrotik-backup-and-rsc) and [WatchGuard](#watchguard-configuration-xml-and-full-image-fxi) devices. At the top are **Console**, **Web interface** and **Back up now**; the **⋯** menu groups audit, look up CVEs, upgrade firmware, edit, compare with another device, see the differences with the baseline, go back to it (if the device has no baseline yet, it lets you mark the latest version) and delete. To delete a device you have to type its name, because it is removed with its whole history.
+It brings together everything about a device in tabs: **Summary** (inventory, baseline, lifecycle and latest versions), **Versions**, **Compliance**, **Vulnerabilities**, **Firmware** and **Events**, plus **Backups** on [MikroTik](#mikrotik-backup-and-rsc) and [WatchGuard](#watchguard-configuration-xml-and-full-image-fxi) devices. At the top are **Console**, **Web interface** and **Back up now**; the **⋯** menu groups audit, look up CVEs, upgrade firmware, edit, compare with another device, see the differences with the baseline, go back to it or **remove it** (if the device has no baseline yet, it lets you mark the latest version) and delete. **Remove baseline…** (also in the "Differs from baseline" notice) turns it off the same way it was turned on, by hand: the device stops warning until another one is marked, no version is deleted, nothing is changed on the device, and it is recorded in Audit. To delete a device you have to type its name, because it is removed with its whole history.
 
 **Disabled device.** Instead of "Online" it says **Disabled** and does not offer Console, Web interface or Back up now: the device is isolated and OpenNCCM does not connect to it. An administrator enables it again with **Enable**, on the device page itself. In the Devices list, when you tick several devices, **Enable** and **Disable** act on all of them at once (administrators only; it is logged in Audit). **Delete…**, in the same bar, deletes the ticked devices (one or several) with their versions, results and events: you have to type DELETE to confirm, and it cannot be undone.
 
@@ -72,6 +72,16 @@ When a device is damaged, replaced by another that will do the same job or decom
 Retired devices are listed in **Devices › Retired**, with their original name and IP, the reason, who retired them and when, and which device replaced them. A retired device cannot be edited: **Reinstate** brings it back into service with the name and IP you give (by default the original ones, if free) and, if ticked, enabled.
 
 ![Device page for R1, Summary tab.](../../../../assets/manual/05-dispositivo.png)
+
+### Swapped or replaced unit on the same device page
+
+The device page belongs to the place (name, IP, location) and keeps its whole history; the unit is recognised by its **serial number**, stored with every copy (versions, .fxi, .backup/.rsc). If the serial changes in a backup (an RMA, or two devices that swapped places):
+
+-   The new version is saved even if the configuration is the same, marked "new unit · serial …", and the **Device replaced** notice appears. If that serial was on another device page, it says **where it comes from**; when the other one is backed up, both say **swapped with**. The timeline shows where the unit changed.
+-   The latest text copy and the latest full copy of the previous unit are **protected**.
+-   **You cannot roll back to a copy from another unit**: not when requesting it, not when approving a request, not automatically. Before sending a rollback OpenNCCM reads the serial again; if another unit answers, nothing is sent. The previous unit's copies can still be viewed, downloaded and compared.
+-   Nothing is inherited from the previous unit: the baseline (if that unit comes back, so does its baseline), the ports seen, the license and the checked permissions. A full copy of the new unit is made right away.
+-   On a ZTE C300/C320 OLT the serial is the control card's: if most of the other cards are unchanged, it warns "Control card changed" and treats it as the same OLT.
 
 ### Device ports
 
@@ -132,11 +142,11 @@ A MikroTik's device page has the **Backups** tab with RouterOS's three kinds of 
 
 **Device files (.backup and .rsc):**
 
--   **When:** **Weekly** (default), **Daily** or **Manual only**, with **Create now** to make them right away. Automatic ones are created at 03:30, three devices at a time.
+-   **When:** **On change** (default, see [Full copies "On change"](#full-copies-on-change-and-protected-copies)), **Weekly**, **Daily** or **Manual only**, with **Create now** to make them right away. Weekly and daily ones are created at 03:30, three devices at a time.
 -   **Credential:** the device's own or another one just for this. Before creating anything, OpenNCCM reads the permissions (policy) of the account's group on the device and the free space: with a read-only account it does not touch the device and says so; if it can only make the .rsc, it brings that one. **Check permissions** checks this without creating anything.
 -   **.backup key:** RouterOS encrypts the .backup with it (8 to 32 letters, numbers, `.` `_` `-`); if left empty, OpenNCCM generates one. It is stored encrypted with each .backup. Without it the backup cannot be restored.
 -   **What it does on the device:** creates both files, waits until they are fully written, brings them over SFTP (inside SSH: it opens no ports), deletes them from the device and checks that nothing was left. It only deletes its own files. A device managed over Telnet needs to move to SSH.
--   **How many:** the latest N are kept, the .backup encrypted with its key; older ones are deleted by themselves.
+-   **How many:** the latest N are kept, the .backup encrypted with its key; older ones are deleted by themselves, except protected ones (padlock).
 
 In the backup list, each copy can be downloaded (**.backup** and **.rsc**) and has **How to restore**; text versions have **View**, **Compare** and **Download**. **How to restore** explains the steps: upload the .backup to the device (in WinBox, drag it to Files, or over SFTP) and load it with its key (**Show the key**; [Audit](/en/administracion/auditoria/) records who viewed it, and the key never goes inside any downloaded file), or apply the .rsc on an empty configuration or on top of the current one.
 
@@ -158,7 +168,7 @@ A Firebox's device page has the **Backups** tab with WatchGuard's two kinds of b
 | --- | --- | --- |
 | **What it stores** | Policies, interfaces, VLANs, NAT, VPN, aliases, users and settings | All of the above, plus the certificates with their private keys, the feature key, the passwords and that Firebox's own information. Not the operating system: since Fireware 12.2.1 the image does not include it, which is why it is about 1 MB; to restore it, the Firebox needs a compatible Fireware version |
 | **What it does not store** | The feature key (OpenNCCM stores it separately), the certificates with their keys, the device's own passwords and Fireware OS | — |
-| **When** | On every backup; it changes nothing on the Firebox | Weekly, daily (at 03:00) or manually only |
+| **When** | On every backup; it changes nothing on the Firebox | On change (default), weekly, daily (at 03:00) or manually only |
 | **Credential** | A read-only one (Device Monitor) is enough | Administrator (Device Administrator) |
 | **Use it to** | See what changed, audit compliance and move the configuration to another Firebox (a replacement or another model) with Policy Manager | Recover the same Firebox after a failure, a factory reset or an upgrade that went wrong. It does not work for another device: WatchGuard treats it as unique to each Firebox |
 
@@ -173,6 +183,12 @@ If there is a firewall between the Firebox and OpenNCCM, allow port 2121 and pas
 If the image fails, the screen shows the Firebox's exact message and what to check (firewall, address, Firebox policy or a credential without permission). If it fails twice in a row the **".fxi image not created"** alarm opens; the XML backup is not affected.
 
 Each file downloads in its own format (`DEVICE_v48.xml`, `DEVICE_img-12.fxi`), never as a .zip; **Download .xml and .fxi** gets both. The key never goes inside a file: only administrators see it, in **How to restore**, and [Audit](/en/administracion/auditoria/) records who viewed it. To restore the image: Fireware Web UI › **System › Backup and Restore Image**, import the .fxi and enter its key.
+
+## Full copies "On change" and protected copies
+
+Since 2.45.5, the WatchGuard .fxi and the MikroTik .backup/.rsc are made **On change** by default: after every configuration backup that finds changes (or the first one, or with another firmware or another unit). With no changes they are not made, except the first one and a safety copy every 30 days (these files hold passwords, certificates and the feature key, which the text backup does not see change). Two are never made less than 10 minutes apart. Devices set to "Weekly" were moved once to "On change"; "Daily" and "Manual only" are kept.
+
+When a backup brings **another firmware version**, the latest text copy of the previous version is labelled ("Before firmware …") and protected, and so is its latest full copy. Protected copies carry a padlock, do not count towards "Keep the latest N" and are not deleted by retention: a replacement device may come with another version and it is best to restore the copy from the same one. Only an administrator protects, unprotects or deletes them (recorded in [Audit](/en/administracion/auditoria/)). This also applies when firmware is upgraded from OpenNCCM.
 
 ## Device web interface
 
