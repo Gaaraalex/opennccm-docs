@@ -53,7 +53,7 @@ Las credenciales SSH no están en Zabbix. Si no elige una para todos, los equipo
 
 ## Ficha del dispositivo
 
-Reúne todo sobre un equipo en pestañas: **Resumen** (inventario, línea base, ciclo de vida y últimas versiones), **Versiones**, **Cumplimiento**, **Vulnerabilidades**, **Firmware** y **Eventos**, y **Respaldos** en los [MikroTik](#mikrotik-backup-y-rsc) y [WatchGuard](#watchguard-configuración-xml-e-imagen-completa-fxi). Arriba están **Consola**, **Interfaz web** y **Respaldar ahora**; el menú **⋯** agrupa auditar, buscar CVE, actualizar firmware, editar, comparar con otro equipo, ver las diferencias con la línea base, volver a ella (si el equipo aún no tiene línea base, permite marcar la última versión) y eliminar. Para eliminar un equipo hay que escribir su nombre, porque se borra con todo su historial.
+Reúne todo sobre un equipo en pestañas: **Resumen** (inventario, línea base, ciclo de vida y últimas versiones), **Versiones**, **Cumplimiento**, **Vulnerabilidades**, **Firmware** y **Eventos**, y **Respaldos** en los [MikroTik](#mikrotik-backup-y-rsc) y [WatchGuard](#watchguard-configuración-xml-e-imagen-completa-fxi). Arriba están **Consola**, **Interfaz web** y **Respaldar ahora**; el menú **⋯** agrupa auditar, buscar CVE, actualizar firmware, editar, comparar con otro equipo, ver las diferencias con la línea base, volver a ella o **quitarla** (si el equipo aún no tiene línea base, permite marcar la última versión) y eliminar. **Quitar línea base…** (también en el aviso «Difiere de la base») la desactiva igual que se activó, a mano: el equipo deja de avisar hasta que se marque otra, no se borra ninguna versión ni se toca el equipo, y queda en Auditoría. Para eliminar un equipo hay que escribir su nombre, porque se borra con todo su historial.
 
 **Equipo desactivado.** En lugar de «En línea» dice **Desactivado** y no ofrece Consola, Interfaz web ni Respaldar ahora: el equipo está aislado y OpenNCCM no se conecta con él. Un administrador lo vuelve a activar con **Activar**, en la propia ficha. En la lista de Dispositivos, al marcar varios equipos, **Activar** y **Desactivar** lo hacen con todos a la vez (solo administradores; queda en Auditoría). **Eliminar…**, en la misma barra, borra los equipos marcados (uno o varios) con sus versiones, resultados y eventos: hay que escribir ELIMINAR para confirmar y no se puede deshacer.
 
@@ -70,6 +70,18 @@ Cuando un equipo se daña, se reemplaza por otro que hará su misma función o s
 -   Con **Dar de alta el equipo que lo reemplaza** (activado por omisión), en el mismo paso se crea el equipo nuevo con el nombre, la IP, el tipo, la credencial, el grupo, el nodo y la ubicación del retirado, y se lanza su primer respaldo. Su ficha dice a quién reemplaza y ofrece **Comparar** su respaldo con el último del retirado, para ver si quedó configurado igual.
 
 Los retirados se ven en **Dispositivos › Retirados**, con su nombre e IP originales, el motivo, quién y cuándo lo retiró y qué equipo lo reemplazó. Un retirado no se edita: con **Reincorporar** vuelve al servicio con el nombre y la IP que se indiquen (por omisión, los originales, si están libres) y, si se marca, activado.
+
+### Intercambio o reemplazo del aparato en la misma ficha
+
+La ficha es la del lugar (nombre, IP, ubicación) y conserva todo su historial; el aparato se reconoce por su **número de serie**, que se guarda en cada copia (versiones, .fxi, .backup/.rsc). Si en un respaldo cambia la serie (un RMA, o dos equipos que se cambiaron de lugar):
+
+-   La versión nueva se guarda aunque la configuración sea igual, marcada «equipo nuevo · serie …», y sale el aviso **Equipo reemplazado**. Si esa serie estuvo en otra ficha, dice **de dónde viene**; cuando se respalda la otra, las dos dicen **intercambiado con**. En la línea de tiempo se ve dónde cambió el aparato.
+-   La última copia de texto y la última copia completa del aparato anterior quedan **protegidas**.
+-   **No se puede revertir a una copia de otro aparato**: ni al pedirlo, ni al aprobar una solicitud, ni automáticamente. Antes de enviar una reversión OpenNCCM vuelve a leer la serie; si contesta otro aparato, no envía nada. Las copias del anterior se pueden ver, descargar y comparar.
+-   No se hereda lo del aparato anterior: la línea base (si ese aparato vuelve, vuelve la suya), los puertos vistos, la licencia y los permisos comprobados. Se hace enseguida una copia completa del aparato nuevo.
+-   En una OLT ZTE C300/C320 la serie es la de la tarjeta de control: si la mayoría de las demás tarjetas sigue igual, avisa «Tarjeta de control cambiada» y la trata como la misma OLT.
+
+Para dar de baja un equipo y dar de alta otro con otra ficha, use [Retirar o reemplazar](#equipos-retirados-dañados-o-reemplazados).
 
 ![Ficha del dispositivo R1, pestaña Resumen.](../../../assets/manual/05-dispositivo.png)
 
@@ -132,11 +144,11 @@ La ficha de un MikroTik tiene la pestaña **Respaldos** con las tres formas de r
 
 **Archivos del equipo (.backup y .rsc):**
 
--   **Cuándo:** **Semanal** (de fábrica), **Diario** o **Solo manual**, con **Crear ahora** para hacerlo en el momento. Los automáticos se crean a las 03:30, de a tres equipos a la vez.
+-   **Cuándo:** **Al cambiar** (de fábrica, ver [Copias completas «Al cambiar»](#copias-completas-al-cambiar-y-copias-protegidas)), **Semanal**, **Diario** o **Solo manual**, con **Crear ahora** para hacerlo en el momento. Los semanales y diarios se crean a las 03:30, de a tres equipos a la vez.
 -   **Credencial:** la del equipo u otra solo para esto. Antes de crear nada, OpenNCCM lee los permisos (policy) del grupo de la cuenta en el equipo y el espacio libre: con una cuenta de solo lectura no toca el equipo y lo avisa; si solo puede el .rsc, trae ese. **Comprobar permisos** lo revisa sin crear nada.
 -   **Clave del .backup:** RouterOS cifra el .backup con ella (8 a 32 letras, números, `.` `_` `-`); vacía, OpenNCCM genera una. Se guarda cifrada junto a cada .backup. Sin ella no se puede restaurar.
 -   **Qué hace en el equipo:** crea los dos archivos, espera a que terminen de escribirse, los trae por SFTP (dentro de SSH: no abre puertos), los borra del equipo y comprueba que no quedó nada. Solo borra sus propios archivos. Un equipo gestionado por Telnet necesita pasar a SSH.
--   **Cuántos:** se guardan los últimos N, el .backup cifrado con su clave; los más viejos se borran solos.
+-   **Cuántos:** se guardan los últimos N, el .backup cifrado con su clave; los más viejos se borran solos, salvo los protegidos (candado).
 
 En la lista de respaldos, cada copia se descarga (**.backup** y **.rsc**) y tiene **Cómo restaurar**; las versiones de texto, **Ver**, **Comparar** y **Descargar**. **Cómo restaurar** explica los pasos: subir el .backup al equipo (en WinBox, arrastrarlo a Files, o por SFTP) y cargarlo con su clave (**Mostrar la clave**; queda en [Auditoría](/administracion/auditoria/) quién la vio, y la clave nunca va dentro de ningún archivo descargado), o aplicar el .rsc sobre una configuración vacía o encima de lo que tiene.
 
@@ -158,7 +170,7 @@ La ficha de un Firebox tiene la pestaña **Respaldos** con los dos tipos de resp
 | --- | --- | --- |
 | **Qué guarda** | Políticas, interfaces, VLAN, NAT, VPN, alias, usuarios y ajustes | Todo lo anterior, más los certificados con sus claves privadas, la feature key, las contraseñas y la información propia de ese Firebox. No el sistema operativo: desde Fireware 12.2.1 la imagen no lo incluye, y por eso pesa alrededor de 1 MB; para restaurarla, el Firebox debe tener una versión de Fireware compatible |
 | **Qué no guarda** | La feature key (OpenNCCM la guarda aparte), los certificados con sus claves, las contraseñas propias del equipo y el Fireware OS | — |
-| **Cuándo** | En cada respaldo; no cambia nada en el Firebox | Semanal, diaria (a las 03:00) o solo a mano |
+| **Cuándo** | En cada respaldo; no cambia nada en el Firebox | Al cambiar (de fábrica), semanal, diaria (a las 03:00) o solo a mano |
 | **Credencial** | Basta una de solo lectura (Device Monitor) | De administrador (Device Administrator) |
 | **Úsela para** | Ver qué cambió, auditar el cumplimiento y llevar la configuración a otro Firebox (de reemplazo o de otro modelo) con Policy Manager | Recuperar el mismo Firebox tras un fallo, un restablecimiento de fábrica o una actualización que salió mal. No sirve para otro equipo: WatchGuard la considera única de cada Firebox |
 
@@ -173,6 +185,12 @@ Si hay un cortafuegos entre el Firebox y OpenNCCM, permita el puerto 2121 y los 
 Si la imagen falla, la pantalla muestra el mensaje exacto del Firebox y qué revisar (cortafuegos, dirección, política del Firebox o credencial sin permiso). Si falla dos veces seguidas se abre la alarma **«Imagen .fxi sin crear»**; el respaldo XML no se ve afectado.
 
 Cada archivo se descarga en su formato (`EQUIPO_v48.xml`, `EQUIPO_img-12.fxi`), nunca en .zip; **Descargar .xml y .fxi** baja los dos. La clave no va dentro de ningún archivo: solo los administradores la ven, en **Cómo restaurar**, y queda en [Auditoría](/administracion/auditoria/) quién la vio. Para restaurar la imagen: Fireware Web UI › **Sistema › Backup and Restore Image**, importar el .fxi y escribir su clave.
+
+## Copias completas «Al cambiar» y copias protegidas
+
+Desde la 2.45.5, el .fxi de WatchGuard y el .backup/.rsc de MikroTik se hacen por omisión **Al cambiar**: después de cada respaldo de configuración que encuentra cambios (o el primero, o con otro firmware u otro aparato). Si no hubo cambios no se hacen, salvo la primera y una de seguridad cada 30 días (estos archivos guardan contraseñas, certificados y la feature key, que el respaldo de texto no ve cambiar). Nunca se hacen dos en menos de 10 minutos. Los equipos que tenían «Semanal» pasaron una sola vez a «Al cambiar»; «Diario» y «Solo manual» se respetan.
+
+Cuando un respaldo trae **otra versión de firmware**, la última copia de texto de la versión anterior queda etiquetada («Antes de firmware …») y protegida, y su última copia completa también. Las protegidas llevan un candado, no cuentan para «Guardar los N últimos» ni se borran con la retención: un equipo de reemplazo puede venir con otra versión y conviene restaurar la copia de la misma. Solo un administrador las protege, les quita la protección o las borra (queda en [Auditoría](/administracion/auditoria/)). Vale también cuando el firmware se actualiza desde OpenNCCM.
 
 ## Interfaz web del equipo
 

@@ -22,7 +22,7 @@ La pestaña **Sistema** muestra además el rendimiento del servidor, el **espaci
 Una vez al día, a una hora al azar, OpenNCCM avisa a comunidad.opennccm.com que está en uso. Envía solo esto:
 
 ```json
-{ "instalacion": "u_…", "version": "2.45.4" }
+{ "instalacion": "u_…", "version": "2.45.5" }
 ```
 
 -   `instalacion` es un número al azar propio de la estadística, distinto del id de la licencia. Se genera una vez y se guarda en la base.
