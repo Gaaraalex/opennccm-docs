@@ -2,7 +2,7 @@
 
 export const VERSION = '2.45';
 export const VERSIONES = [{ v: '2.45', actual: true }];
-export const FECHA = { es: '21 nov 2026', en: 'Nov 21, 2026' };
+export const FECHA = { es: '24 nov 2026', en: 'Nov 24, 2026' };
 
 export const WEB = 'https://opennccm.com';
 export const REPO = 'https://github.com/Gaaraalex/opennccm';
