@@ -64,7 +64,7 @@ Defina el nombre del usuario administrador y elija entre **generar una contrase�
 
 ### Resumen, instalación y resultado
 
-Revise el resumen y confirme. Una barra de progreso muestra cada paso; todo queda registrado en `/var/log/opennccm-install.log`. Al terminar se muestran la dirección de acceso y las credenciales, que también se guardan en `/root/opennccm-credenciales.txt` (bórrelo después de cambiar la contraseña).
+Revise el resumen y confirme. Una barra de progreso muestra cada paso; todo queda registrado en `/var/log/opennccm-install.log`. Al terminar se muestran la dirección de acceso y el usuario. Si dejó la contraseña en blanco y la generó el instalador, también la muestra y la guarda en `/root/opennccm-credenciales.txt` (bórrelo después de cambiarla); si la escribió usted, no se muestra ni se guarda en ningún archivo (desde la 2.45.6).
 
 ![Resumen antes de instalar.](../../../assets/manual/tui-13-resumen.png)
 
@@ -127,7 +127,7 @@ Si vuelve a ejecutar el comando en un servidor donde OpenNCCM ya está instalado
 
 1.  En su PC abra el navegador y vaya a `https://IP_DEL_SERVIDOR/`.
 2.  La primera vez el navegador avisará que la conexión «no es privada»: OpenNCCM usa un certificado de su propia autoridad certificadora, que su PC todavía no conoce. Pulse **Configuración avanzada → Continuar** y luego instale esa autoridad (ver [HTTPS y cortafuegos](/instalacion/https-cortafuegos/)): desaparece el aviso y el navegador ofrece **guardar el usuario y la contraseña**.
-3.  Ingrese con el usuario y la contraseña que mostró el instalador (también están en `/root/opennccm-credenciales.txt`).
+3.  Ingrese con el usuario que mostró el instalador y la contraseña que eligió (si la generó el instalador, también está en `/root/opennccm-credenciales.txt`).
 
 ![Pantalla de ingreso. Debajo del formulario se elige el idioma (español o inglés); el botón 👁 muestra la contraseña escrita y aparece un aviso si Bloq Mayús está activado.](../../../assets/manual/01-login.png)
 

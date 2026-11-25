@@ -22,7 +22,7 @@ The **System** tab also shows the server's performance, **disk space**, the **se
 Once a day, at a random time, OpenNCCM tells comunidad.opennccm.com that it is in use. It sends only this:
 
 ```json
-{ "instalacion": "u_…", "version": "2.45.5" }
+{ "instalacion": "u_…", "version": "2.45.6" }
 ```
 
 -   `instalacion` is a random number used only for the statistics, different from the license ID. It is generated once and stored in the database.
