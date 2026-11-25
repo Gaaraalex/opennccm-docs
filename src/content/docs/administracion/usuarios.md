@@ -1,6 +1,6 @@
 ---
 title: "Usuarios y roles"
-curso: ["9.1"]
+curso: ["11.1"]
 ---
 
 Cada usuario tiene un rol. Además, a los operadores y lectores se les puede restringir a uno o más **grupos de dispositivos**: solo verán y podrán actuar sobre esos equipos.

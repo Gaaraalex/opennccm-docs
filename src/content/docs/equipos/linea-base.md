@@ -1,7 +1,7 @@
 ---
 title: "Línea base"
 description: "Fijar la configuración aprobada de cada equipo como referencia, detectar cualquier desviación y poder volver a ella en un paso (por ejemplo, tras un incidente)."
-curso: ["4.3"]
+curso: ["4.4"]
 ---
 
 ## Cómo funciona

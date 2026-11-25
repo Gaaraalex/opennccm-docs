@@ -1,7 +1,7 @@
 ---
 title: "Análisis, IP y mapa de red"
 description: "Identificar patrones: qué equipos cambian más, quién cambia, por qué vía, qué versiones de firmware predominan y cómo está el cumplimiento y el ciclo de vida."
-curso: ["8.2"]
+curso: ["10.3"]
 ---
 
 Elija el período (7, 30 o 90 días). La página muestra:

@@ -1,7 +1,7 @@
 ---
 title: "Cumplimiento"
 description: "Verificar continuamente que las configuraciones cumplan sus estándares de seguridad y normativas, y corregir las infracciones."
-curso: ["6.1","6.2"]
+curso: ["8.1","8.2"]
 ---
 
 ## Cómo funciona

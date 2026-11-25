@@ -1,7 +1,7 @@
 ---
 title: "Recommended tasks"
 description: "The scheduled tasks worth creating when you start."
-curso: ["5.3"]
+curso: ["7.2"]
 ---
 
 **Tasks** menu. Expressions use the 5-field cron format: minute, hour, day, month and day of week.

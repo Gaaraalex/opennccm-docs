@@ -1,7 +1,7 @@
 ---
 title: "Compliance"
 description: "Continuously check that configurations meet your security standards and regulations, and fix violations."
-curso: ["6.1","6.2"]
+curso: ["8.1","8.2"]
 ---
 
 ## How it works

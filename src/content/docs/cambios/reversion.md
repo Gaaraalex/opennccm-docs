@@ -1,7 +1,7 @@
 ---
 title: "Reversión"
 description: "Devolver un equipo a una configuración anterior que funcionaba."
-curso: ["4.5"]
+curso: ["5.3"]
 resumen:
   - "OpenNCCM compara la configuración actual con la versión elegida y genera los comandos para volver a ella, con la sintaxis de cada fabricante."
   - "La reversión manual crea una solicitud de cambio con esos comandos: revíselos antes de aprobar."

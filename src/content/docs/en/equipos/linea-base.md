@@ -1,7 +1,7 @@
 ---
 title: "Baseline"
 description: "Set each device's approved configuration as the reference, detect any drift and be able to return to it in one step (for example, after an incident)."
-curso: ["4.3"]
+curso: ["4.4"]
 ---
 
 ## How it works

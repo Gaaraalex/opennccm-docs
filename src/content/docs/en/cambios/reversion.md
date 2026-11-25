@@ -1,7 +1,7 @@
 ---
 title: "Rollback"
 description: "Return a device to an earlier configuration that worked."
-curso: ["4.5"]
+curso: ["5.3"]
 resumen:
   - "OpenNCCM compares the current configuration with the chosen version and generates the commands to go back to it, in each vendor’s syntax."
   - "A manual rollback creates a change request with those commands: review them before approving."

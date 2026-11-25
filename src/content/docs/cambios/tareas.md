@@ -1,7 +1,7 @@
 ---
 title: "Tareas programadas"
 description: "Automatizar operaciones periódicas, para todos los equipos o para un grupo."
-curso: ["5.3"]
+curso: ["7.2"]
 ---
 
 | Acción | Qué hace |

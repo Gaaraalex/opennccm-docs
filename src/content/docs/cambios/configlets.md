@@ -1,7 +1,7 @@
 ---
 title: "Configlets"
 description: "Plantillas de comandos reutilizables para hacer cambios masivos o diagnósticos en muchos equipos a la vez."
-curso: ["5.1"]
+curso: ["7.1"]
 ---
 
 | Tipo | Qué hace | Aprobación |

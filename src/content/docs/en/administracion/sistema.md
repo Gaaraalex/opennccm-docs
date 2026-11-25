@@ -1,6 +1,6 @@
 ---
 title: "System and recovery backups"
-curso: ["9.2"]
+curso: ["11.3"]
 ---
 
 ## Updates

@@ -1,6 +1,6 @@
 ---
 title: "Users and roles"
-curso: ["9.1"]
+curso: ["11.1"]
 ---
 
 Every user has a role. In addition, operators and viewers can be restricted to one or more **device groups**: they only see and act on those devices.

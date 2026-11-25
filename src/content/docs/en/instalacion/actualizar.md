@@ -1,7 +1,7 @@
 ---
 title: "Upgrade and roll back"
 description: "Move to a new version and, if something fails, go back to the previous one."
-curso: ["9.2"]
+curso: ["11.3"]
 ---
 
 New versions are published in the GitHub repository. When one is available, OpenNCCM tells administrators with a pop-up message. You can upgrade **from the web interface** (**Administration → System → Updates → Update now**, since 1.6.0) or with a command on the server; both do exactly the same and always offer the latest published version (never an unpublished one):

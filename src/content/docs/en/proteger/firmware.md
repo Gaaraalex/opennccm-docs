@@ -1,7 +1,7 @@
 ---
 title: "Firmware and end of life"
 description: "Upgrade the devices' operating system remotely, in a controlled and verified way."
-curso: ["7.2"]
+curso: ["9.2"]
 ---
 
 | Platform | Target | Boot configuration |

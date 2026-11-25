@@ -1,7 +1,7 @@
 ---
 title: "Backups and moving servers"
 description: "OpenNCCM backups and how to restore them on the same server or a new one."
-curso: ["9.2"]
+curso: ["11.3"]
 ---
 
 OpenNCCM keeps everything important in two places:

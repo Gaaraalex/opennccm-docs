@@ -1,6 +1,6 @@
 ---
 // Tarjeta «Curso en video» de una página: la lección principal se reproduce aquí mismo (youtube-nocookie.com, solo al pulsar).
-import { T, lang, base, LECCIONES, moduloDe } from '../sitio';
+import { T, lang, LECCIONES, moduloDe, UDEMY } from '../sitio';
 interface Props { lecciones: string[] }
 const [n, ...mas] = Astro.props.lecciones;
 const l = lang(Astro.currentLocale);
@@ -21,7 +21,7 @@ const modulo = `${l === 'en' ? 'Module' : 'Módulo'} ${mod.m} · ${mod[l]}`;
 	<div class="info">
 		<p class="sup">{t.curso}</p>
 		<p class="nom">{titulo}</p>
-		<p class="pos">{t.leccion} {n} {t.de30} · {modulo}</p>
+		<p class="pos">{t.leccion} {n} · {modulo}</p>
 		{mas.length > 0 && (
 			<ul role="list">
 				{mas.map((m) => (
@@ -29,7 +29,7 @@ const modulo = `${l === 'en' ? 'Module' : 'Módulo'} ${mod.m} · ${mod[l]}`;
 				))}
 			</ul>
 		)}
-		<a class="todo" href={base(l) + 'ayuda/curso/'}>{t.verCurso}</a>
+		<a class="todo" href={UDEMY} target="_blank" rel="noopener">{t.verCurso}</a>
 	</div>
 </div>
 

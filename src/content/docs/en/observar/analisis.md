@@ -1,7 +1,7 @@
 ---
 title: "Analytics, IP and network map"
 description: "Spot patterns: which devices change most, who changes them, through which channel, which firmware versions dominate and how compliance and lifecycle look."
-curso: ["8.2"]
+curso: ["10.3"]
 ---
 
 Choose the period (7, 30 or 90 days). The page shows:
