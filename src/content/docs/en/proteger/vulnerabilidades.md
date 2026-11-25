@@ -1,7 +1,7 @@
 ---
 title: "Vulnerabilities"
 description: "Know which devices run firmware versions with published vulnerabilities."
-curso: ["7.1"]
+curso: ["9.1"]
 ---
 
 ## How it works

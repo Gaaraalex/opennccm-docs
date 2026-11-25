@@ -1,7 +1,7 @@
 ---
 title: "Tareas recomendadas"
 description: "Las tareas programadas que conviene crear al empezar."
-curso: ["5.3"]
+curso: ["7.2"]
 ---
 
 Menú **Tareas**. Las expresiones usan el formato cron de 5 campos: minuto, hora, día, mes y día de la semana.

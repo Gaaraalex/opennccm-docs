@@ -1,6 +1,6 @@
 ---
 title: "Alarmas y notificaciones"
-curso: ["8.1"]
+curso: ["10.1"]
 ---
 
 Todo lo relevante genera un **evento** con severidad por color:

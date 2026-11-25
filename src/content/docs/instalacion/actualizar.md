@@ -1,7 +1,7 @@
 ---
 title: "Actualizar y volver atrás"
 description: "Pasar a una versión nueva y, si algo falla, volver a la anterior."
-curso: ["9.2"]
+curso: ["11.3"]
 ---
 
 Las versiones nuevas se publican en el repositorio de GitHub. Cuando hay una, OpenNCCM avisa a los administradores con un mensaje emergente. Se puede actualizar **desde la web** (**Administración → Sistema → Actualizaciones → Actualizar ahora**, desde la 1.6.0) o con un comando en el servidor; ambos hacen exactamente lo mismo y ofrecen siempre la última versión publicada (nunca una sin publicar):

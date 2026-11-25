@@ -1,6 +1,6 @@
 ---
 title: "Sistema y copias de recuperación"
-curso: ["9.2"]
+curso: ["11.3"]
 ---
 
 ## Actualizaciones

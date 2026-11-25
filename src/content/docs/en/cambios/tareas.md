@@ -1,7 +1,7 @@
 ---
 title: "Scheduled tasks"
 description: "Automate periodic operations, for all devices or for a group."
-curso: ["5.3"]
+curso: ["7.2"]
 ---
 
 | Action | What it does |

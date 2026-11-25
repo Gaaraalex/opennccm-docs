@@ -1,6 +1,6 @@
 ---
 title: "Informes"
-curso: ["8.3"]
+curso: ["10.5"]
 ---
 
 Cada informe es una tarjeta con **Ver** (en pantalla, con el periodo de 7, 30, 90 días o un año cuando aplica) y **CSV** (UTF-8, se abre directamente en Excel). Los administradores pueden **enviarlos por correo ahora** o **programar el envío**.

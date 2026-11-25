@@ -1,7 +1,7 @@
 ---
 title: "Configlets"
 description: "Reusable command templates to make bulk changes or run diagnostics on many devices at once."
-curso: ["5.1"]
+curso: ["7.1"]
 ---
 
 | Type | What it does | Approval |

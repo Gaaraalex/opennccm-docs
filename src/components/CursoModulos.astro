@@ -1,10 +1,11 @@
 ---
-// Página «Curso en video»: los 10 módulos con sus lecciones; cada una se reproduce en el reproductor de arriba.
-import { T, lang, LECCIONES, MODULOS, LISTA_YT } from '../sitio';
+// Página «Curso en video»: los módulos con sus lecciones gratis; cada una se reproduce en el reproductor de arriba.
+import { T, lang, LECCIONES, MODULOS, LISTA_YT, UDEMY } from '../sitio';
 const l = lang(Astro.currentLocale);
 const t = T[l];
 const yt = l === 'en' ? 'Watch the full playlist on YouTube' : 'Ver la lista completa en YouTube';
 const nota = l === 'en' ? 'The lessons are in Spanish.' : '';
+const udemy = l === 'en' ? 'Full course on Udemy: 54 lessons, quizzes and OpenNCCM Pro' : 'Curso completo en Udemy: 54 lecciones, cuestionarios y OpenNCCM Pro';
 ---
 
 <div class="reproductor" id="reproductor" hidden></div>
@@ -21,7 +22,10 @@ const nota = l === 'en' ? 'The lessons are in Spanish.' : '';
 		</section>
 	))}
 </div>
-<a class="yt not-content" href={LISTA_YT} target="_blank" rel="noopener">{yt}</a>
+<div class="enlaces not-content">
+	<a class="udemy" href={UDEMY} target="_blank" rel="noopener">{udemy}</a>
+	<a class="yt" href={LISTA_YT} target="_blank" rel="noopener">{yt}</a>
+</div>
 <span hidden>{t.curso}</span>
 
 <script>
@@ -53,7 +57,10 @@ const nota = l === 'en' ? 'The lessons are in Spanish.' : '';
 	button:hover { background: var(--sl-color-accent-low); color: var(--sl-color-white); }
 	.tri { color: #ff4d6d; font-size: 11px; }
 	.num { color: var(--sl-color-gray-3); width: 28px; flex: none; }
-	.yt { display: inline-flex; align-items: center; height: 38px; margin-top: 16px; padding: 0 14px; border-radius: 9px; background: #ff0033; color: #fff; font: 600 14px var(--sl-font); text-decoration: none; }
+	.enlaces { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+	.udemy { display: inline-flex; align-items: center; height: 38px; padding: 0 14px; border-radius: 9px; background: #a435f0; color: #fff; font: 600 14px var(--sl-font); text-decoration: none; }
+	.udemy:hover { background: #8710d8; color: #fff; }
+	.yt { display: inline-flex; align-items: center; height: 38px; padding: 0 14px; border-radius: 9px; background: #ff0033; color: #fff; font: 600 14px var(--sl-font); text-decoration: none; }
 	.yt:hover { background: #e0002d; color: #fff; }
 	@media (max-width: 40rem) { .modulos { grid-template-columns: 1fr; } }
 </style>

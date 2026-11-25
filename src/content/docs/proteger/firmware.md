@@ -1,7 +1,7 @@
 ---
 title: "Firmware y fin de vida"
 description: "Actualizar el sistema operativo de los equipos de forma remota, controlada y verificada."
-curso: ["7.2"]
+curso: ["9.2"]
 ---
 
 | Plataforma | Destino | Configuración de arranque |

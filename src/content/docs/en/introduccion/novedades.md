@@ -1,6 +1,6 @@
 ---
 title: "What's new"
-description: "What's new in OpenNCCM 2.44.0 and earlier versions."
+description: "What's new in OpenNCCM 2.45.5 and earlier versions."
 resumen:
   - "2.44.0 shows Zabbix problems next to each device's configuration changes: you can see at a glance whether a problem started right after a change."
   - "Administration › Capacity says how much the server can handle with today's network and what is worth expanding, and lets “Back up all” run 1 to 16 backups at once."
@@ -10,6 +10,80 @@ resumen:
 The latest 6 versions. The release notes are written in Spanish; the full history is at [opennccm.com/en/changelog](https://opennccm.com/en/changelog.html) and every version can be downloaded from [GitHub](https://github.com/Gaaraalex/opennccm/releases).
 
 <div lang="es">
+
+## Versión 2.45.5
+- **Intercambio o reemplazo de equipos.** Cada copia guarda la serie del aparato. Si en un respaldo cambia, la ficha
+  dice de dónde viene el aparato (o que se intercambió con otra ficha), protege las últimas copias del anterior y **no deja
+  revertir a la configuración de otro aparato** (ni al pedirlo, ni al aprobarlo, ni sola; antes de enviar una reversión vuelve
+  a leer la serie). No se heredan la línea base, los puertos vistos ni la licencia. En las OLT ZTE C300/C320 distingue un
+  cambio de la tarjeta de control.
+- **Copias completas «Al cambiar»** (.fxi de WatchGuard, .backup/.rsc de MikroTik), por omisión: después de cada
+  respaldo con cambios; sin cambios, solo la primera y una de seguridad cada 30 días. Los que tenían «Semanal» pasan a esto.
+- **Copias protegidas por cambio de firmware:** la última copia de la versión anterior no se borra sola; solo un
+  administrador decide.
+- **Quitar línea base…** en la ficha: se desactiva como se activa, a mano.
+
+## Versión 2.45.4
+- **MikroTik: .backup y .rsc guardados en OpenNCCM.** La ficha de cada MikroTik tiene la pestaña **Respaldos**: además
+  de la configuración en texto, OpenNCCM trae una vez por semana (o a diario, o a mano) el **.backup** cifrado y el **.rsc** del
+  equipo por SFTP, los borra del equipo y los guarda, el .backup junto a su clave (se ve en **Cómo restaurar**, queda en
+  Auditoría). Antes de crear nada lee los permisos de la cuenta en el equipo: con una de solo lectura no toca el equipo y lo
+  avisa; si solo puede el .rsc, trae ese. Se puede elegir otra credencial solo para esto y **Comprobar permisos** sin crear
+  nada. Probado con RouterOS 6.49 y 7.24, restaurando el .backup en el equipo.
+- **MikroTik, «Descargar .backup del equipo…»:** en RouterOS 6 podía bajar un .backup incompleto (el equipo
+  contesta «saved» antes de terminar); ahora espera a que termine y comprueba los permisos antes de crearlo.
+- **Respaldo al volver a responder:** también reintenta cada hora los equipos que aceptan la conexión y la cortan
+  enseguida («Connection reset», visto en una OLT ZTE C300 por Telnet), que antes quedaban sin respaldo hasta respaldarlos a mano.
+
+## Versión 2.45.3
+- [cambio] **Pro: todo se instala solo.** Desde que la licencia es válida (al activar la clave o una prueba, o al
+  renovar), los módulos que incluye se bajan, se instalan y quedan funcionando al momento, sin reiniciar. Las versiones
+  nuevas de un módulo también se bajan solas una vez al día; si el módulo está en uso, se aplican al reiniciar o con
+  **Reiniciar ahora** en Licencia y módulos.
+- **Respaldo al volver a responder:** Si un respaldo falló porque el equipo no respondía, cada hora OpenNCCM mira si
+  ya responde y, cuando vuelve, lo respalda solo. Queda el evento «Respaldo al volver a responder». No se aplica a equipos
+  desactivados, en mantenimiento, de un recolector ni con errores de credenciales.
+- **Estadística de uso:** Los avisos diarios no llegaban a comunidad.opennccm.com (la web rechazaba el formato
+  del número de instalación). Ahora llegan; el número de cada servidor se conserva.
+- **Licencia:** Si a un servidor le falta el dato que lo identifica ante comunidad.opennccm.com, Licencia y
+  módulos lo explica y muestra **Activar aquí**, en lugar de «respondió 400».
+- [cambio] **Actualizar:** `opennccm update`, el aviso de `opennccm status` y el instalador ofrecen la última versión
+  publicada (como el aviso de la web), nunca una sin publicar.
+- **Avisos en tu idioma:** Los avisos de la campana y el historial de Alta disponibilidad se ven en el idioma
+  de quien los lee, también los que ya estaban guardados.
+- Instalado con `--no-nginx`, las pantallas que se actualizan solas ya no pierden la conexión entre consultas.
+
+## Versión 2.45.2
+- **OpenNCCM Pro: módulos opcionales de pago.** OpenNCCM sigue siendo gratis y de código abierto, y todo lo demás que
+  ya usabas sigue igual, sin límites de equipos ni de tiempo (salvo el Documento de la red, ver abajo). Pro suma tres módulos para quien los necesite:
+  - **Informes profesionales:** el Documento de la red, un informe ejecutivo y uno de auditoría, el inventario para
+    gerencia con el costo de renovación, comparar periodos, envíos programados por correo y tu marca en los informes.
+  - **Recolectores por sede:** un recolector en cada sede respalda los equipos de su red y manda las copias a este
+    servidor, aunque la sede no tenga acceso directo. Se instala con un comando en Linux o en Windows.
+  - **Alta disponibilidad:** un segundo servidor en espera copia los datos cada minuto y toma el control solo si el
+    principal cae.
+
+  Se activan en Administración › Licencia y módulos con una clave de comunidad.opennccm.com. Necesitan conexión a internet
+  para activar y comprobar la licencia, y solo se envían la clave, el id de esta instalación, la huella y el nombre del
+  servidor (la huella es un código que no identifica tu red). Planes y precios: comunidad.opennccm.com/pro
+- **Prueba gratis:** Desde Licencia y módulos puedes pedir una prueba de cada módulo, una vez por servidor. Se
+  aprueba en comunidad.opennccm.com y, cuando está lista, la activas con un clic.
+- [cambio] **El Documento de la red pasa a Informes profesionales.** Los documentos que ya generaste se siguen viendo y
+  descargando sin licencia, en Informes › «Mis documentos».
+- **Estadística de uso:** Una vez al día, OpenNCCM avisa a comunidad.opennccm.com que está en uso. Envía solo un
+  número de instalación al azar y la versión: nunca configuraciones, equipos, direcciones de tu red ni usuarios. Viene activada
+  y no se puede desactivar. Esa información nos ayuda a seguir mejorando el sistema. Lo que se envía se ve en
+  Administración › Sistema › «Estadística de uso».
+- **Excepción de módulos:** OpenNCCM sigue bajo la GPL-3.0. Una excepción (archivo LICENSE-EXCEPTION, según la
+  sección 7 de la GPL) permite usar módulos que no son libres a través de la Interfaz de Módulos, sin cambiar la licencia
+  del resto del código.
+- **Respaldos cortados al final:** Si un equipo entrega la configuración incompleta (visto en un switch Juniper
+  con Junos 21.4), ya no se guarda como versión nueva: en Junos se cuentan las líneas y, si faltan, el respaldo se repite
+  solo.
+- **«Respaldar todos»:** El icono ya no se queda girando al terminar.
+- **Correo con informes adjuntos:** Los PDF y Word adjuntos llegan con su tipo correcto y se abren bien en todos
+  los programas de correo.
+- El cuadro final del instalador deja ver su título en terminales de 24 líneas y se cierra con Enter.
 
 ## Versión 2.44.0
 - **Problemas de Zabbix junto a los cambios:** En la pestaña Versiones de cada equipo, una franja de 24 h, 7 o 30
@@ -44,93 +118,5 @@ The latest 6 versions. The release notes are written in Spanish; the full histor
   Ping, Traceroute, Puerto TCP y DNS: se escribe la IP o el nombre y se tocan los que se quieran (otra vez, se quitan).
 - **Soporte profesional y Apoya OpenNCCM siempre visibles:** Los dos botones de la barra superior se ven para todos
   los usuarios y ya no se pueden ocultar (Ajustes › Organización ya no tiene la casilla).
-
-## Versión 2.42.0
-- **OLT ZTE C300 y C320: el chasis entero en la ficha:** En lugar de la franja de puertos con barra de desplazamiento,
-  la cabecera muestra el chasis completo: la C300 con las tarjetas de pie (ranuras 2 a 20) y la C320 acostada, con la fuente
-  abajo. Las controladoras dicen si están activas o en espera, las ranuras vacías salen punteadas y el número de una ranura va
-  en rojo si más del 10 % de sus ONU están sin señal. Al tocar una ranura se ven sus puertos con las ONU en línea de cada uno;
-  «Ver todos los puertos» abre Puertos filtrada por esa ranura y «Ver las N ONU» abre el puerto con sus ONU del respaldo.
-- **La ficha de una OLT grande abre al instante:** En una OLT C300 con miles de ONU (configuración de 40.000 líneas)
-  la ficha tardaba casi un minuto en abrir, porque comparaba las copias grandes línea por línea varias veces. Ahora abre en
-  menos de un segundo, con la misma comparación. Respaldar esos equipos también es más rápido.
-- **Firmware de cada copia:** En la ventana de una versión, la marca «de aquí sale el firmware» va en la misma línea
-  de la que sale la versión, a la derecha. En el historial, una copia programada sin usuario dice «Programado» (antes
-  «scheduled»).
-
-## Versión 2.41.0
-- **Firmware en muchos equipos a la vez:** Las solicitudes de firmware con varios equipos van en tandas («Equipos
-  a la vez»: de a 1, 2, 5, 10, 20 o todos). Con reinicio, cada tanda espera a que los equipos de la anterior vuelvan con
-  la versión nueva, y si uno falla las siguientes no empiezan (se puede desmarcar). Antes de copiar se mira el espacio
-  libre donde va la imagen (`dir flash:`, `free-hdd-space`, `df -k`) y, si no alcanza, ese equipo no se toca. Después de
-  copiar, el propio equipo calcula la suma del archivo (MD5 en Cisco, Arista y Junos; SHA-256 o MD5 en airOS y
-  EdgeRouter; en RouterOS, que no calcula sumas, se compara el tamaño) y si no coincide no se instala. Los equipos que ya
-  tienen esa versión no se tocan. La solicitud muestra al vivo el avance de cada equipo: su tanda, el paso (respaldando,
-  copiando con su porcentaje, comprobando la suma, instalando, reiniciando, comprobando la versión) y cómo terminó.
-- **Comprobar los equipos antes de aprobar:** En una solicitud de firmware pendiente, «Comprobar los equipos» se
-  conecta a cada uno sin copiar ni cambiar nada y dice si responde, qué versión tiene y si hay espacio para la imagen.
-- **Suma del fabricante al cargar una imagen:** Al cargar una imagen de firmware se puede pegar el MD5 o el
-  SHA-256 que publica el fabricante: si el archivo no coincide no se guarda (ni reemplaza la imagen que hubiera con ese
-  nombre). Además de su MD5, ahora se calcula su SHA-256.
-- **OLT ZTE: estado de cada puerto:** El frente de las OLT ZXA10 (C300, C320…) ahora muestra qué puertos están
-  activos. Un PON está activo si tiene al menos una ONU en línea, y dice «12 de 14 ONU en línea» y cuántas están en LOS,
-  DyingGasp u OffLine (`show gpon onu state`). Los uplinks muestran su enlace y su velocidad (`show interface`). Se lee en
-  el respaldo: «Respaldar ahora» en cada OLT para verlo. Solo se guarda la cuenta por PON, no los datos de los clientes.
-- **Corrección automática a nombre de quien la activa:** Cada política con corrección automática queda a
-  nombre de quien la activó y solo corrige los equipos que esa persona puede ver (se comprueba en cada vuelta). Si esa
-  persona se elimina, se desactiva o pierde la función «Corrección automática», la política deja de corregir y la página
-  lo avisa. Las políticas activadas en 2.40.0 no tienen dueño: dejan de corregir hasta que alguien las vuelva a guardar.
-- **«Permitir corrección automática» por equipo:** En Editar equipo, un interruptor (encendido por defecto) deja
-  fuera de la corrección automática a un equipo concreto, sin tocar las políticas.
-- **Inglés:** La corrección automática nombraba «Remediate» al botón que en la interfaz se llama «Fix».
-
-## Versión 2.40.0
-- **Corrección automática de cumplimiento (opcional):** En Cumplimiento › Corrección automática, cada política
-  puede corregir sola los equipos que incumplen las reglas elegidas, dentro de una ventana de días y horas. Solo entran
-  reglas con el sello «Verificada», y si alguien cambia su patrón o sus comandos dejan de aplicarse hasta volver a
-  elegirlas. En cada equipo y regla respalda antes, hace las mismas comprobaciones que una solicitud de cambio
-  (direcciones de ejemplo, quedarse sin acceso, reinicios y puertos apagados: si hay algo, no aplica nada y queda
-  «Bloqueada»), aplica, vuelve a respaldar y audita; si el equipo rechaza un comando o la regla sigue sin cumplirse,
-  vuelve a la versión de antes. Historial con el resultado, el motivo, la salida y las versiones de antes y después,
-  además de Eventos y Auditoría; no insiste más de una vez en 24 h por regla y equipo («Reintentar» lo libera), y
-  «Pausar todo» la detiene al instante. Viene apagada en todas las políticas, y activarla es la nueva función crítica
-  «Corrección automática» (de los administradores; el maestro la da o la quita).
-- **OLT ZTE: frente con sus puertos:** La ficha de las OLT ZXA10 (C300, C320…) ahora dibuja el frente por
-  ranuras desde la configuración, cada tarjeta con su número y su tipo («Ranura 2 · GTGH»): los puertos PON con cuántas
-  ONU tienen y los uplinks de 1 G y 10 G. Antes no mostraba ningún puerto. No se guardan datos de los clientes (nombres
-  ni descripciones de las ONU).
-- **OLT ZTE: número de serie:** La serie no está en «show system-group» ni en «show card»: ahora se busca la
-  tarjeta de control (SMXA, SCXN…) en «show card» y se lee su «Serial-Number» con «show card slotno N». Sirve para la C320
-  (ranura 3 o 4) y la C300 (ranura 10 u 11). Para verla, «Respaldar ahora» en cada OLT. Visto en una C320 con V2.1.0.
-- **OLT ZTE: vulnerabilidades:** NVD casi no registra las OLT ZTE (de la C320, ninguna), así que el «0» de la
-  pestaña Vulnerabilidades no significa que no tenga: ahora lo avisa y enlaza a los boletines de seguridad de ZTE.
-- **Firmware sin fuente pública:** Cuando el fabricante no publica sus versiones (como ZTE), el aviso dice además
-  que las fechas de fin de venta y de soporte se pueden cargar a mano en Firmware y ciclo de vida.
-
-## Versión 2.39.0
-- **Permisos por usuario:** Al crear o editar un usuario, el rol (Lector, Operador, Administrador) es una
-  plantilla y debajo está la lista de funciones del sistema por secciones (operación, cambios en los equipos,
-  administración): se quitan o se agregan a gusto, por ejemplo un operador que no envía configuraciones o un lector que
-  respalda. Cada ruta y cada botón obedecen a la función, no al rol. Al actualizar nada cambia: cada usuario sigue con
-  las funciones de su rol.
-- **Administrador maestro:** El primer administrador (al actualizar, el administrador activo más antiguo) es
-  el maestro: nadie lo puede eliminar, bloquear, editar ni quitarle la verificación en dos pasos, y es el único que crea
-  administradores y da o quita las funciones críticas (enviar configuraciones, revertir, restaurar, consola con cambios,
-  firmware, aprobar, credenciales, usuarios y ajustes). Puede pasar el rol a otro usuario; si se pierde el acceso, en el
-  servidor: «opennccm set-master USUARIO».
-- **Interruptor «Enviar configuraciones»:** En la lista de usuarios, el maestro da o corta al instante a cada
-  usuario el envío de configuraciones a los equipos (solicitudes, recetas, configlets, multi-equipo y correcciones).
-- **Junos: respaldo sin permiso de lectura:** Si la clase de login del usuario no tiene «view-configuration», el
-  equipo responde «/* ACCESS-DENIED */» en cada sección; antes se guardaba como una versión (que no se podía restaurar).
-  Ahora el respaldo falla y dice qué permiso darle. Visto en un QFX5100 con 13.2X51-D25.3.
-- **Junos: equipos que tardan en abrir la CLI:** Algunos muestran «--- JUNOS … built …» un rato antes del
-  prompt y el respaldo fallaba con «Pattern not detected» aunque el usuario y la contraseña eran correctos. Ahora espera
-  el prompt hasta 90 s. Visto en un switch con Junos 21.4R3-S5.4.
-- **Alarma de respaldo fallido:** Un respaldo que fallaba por algo que no se reintenta (contraseña rechazada,
-  sin permiso…) quedaba como «Respaldo reintentado» informativo en lugar de la alarma «Respaldo fallido».
-- **Frente de los switches Juniper QFX:** Los puertos salen en el orden del equipo (antes los de 1 G iban
-  primero, como cobre), en dos filas como el frente real (pares arriba, impares abajo, en bloques de 12), con los
-  QSFP+ en su bloque y los puertos sin módulo «sin módulo» (antes no aparecían: del 19 se pasaba al 43). Para verlo,
-  «Respaldar ahora» en cada QFX.
 
 </div>

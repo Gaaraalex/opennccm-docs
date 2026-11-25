@@ -1,6 +1,6 @@
 ---
 title: "Reports"
-curso: ["8.3"]
+curso: ["10.5"]
 ---
 
 Each report is a card with **View** (on screen, with a period of 7, 30, 90 days or a year where it applies) and **CSV** (UTF-8, opens directly in Excel). Administrators can **email them now** or **schedule the sending**.

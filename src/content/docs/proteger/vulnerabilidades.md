@@ -1,7 +1,7 @@
 ---
 title: "Vulnerabilidades"
 description: "Saber qué equipos tienen versiones de firmware con vulnerabilidades publicadas."
-curso: ["7.1"]
+curso: ["9.1"]
 ---
 
 ## Cómo funciona

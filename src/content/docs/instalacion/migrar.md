@@ -1,7 +1,7 @@
 ---
 title: "Copias y migrar a otro servidor"
 description: "Copias de seguridad de OpenNCCM y cómo restaurarlas en el mismo servidor o en uno nuevo."
-curso: ["9.2"]
+curso: ["11.3"]
 ---
 
 OpenNCCM guarda todo lo importante en dos lugares:
