@@ -1,7 +1,9 @@
 // Genera «Novedades de la versión» (es y en) desde el CHANGELOG del repositorio del sistema: las últimas versiones.
 import fs from 'node:fs';
 
-// Solo lo publicado: el CHANGELOG de la última versión liberada, no el de main.
+// Solo lo publicado: las versiones hasta la última liberada. El texto sale de main, donde se corrigen las notas ya
+// publicadas (la etiqueta no se mueve); lo más nuevo que main tenga todavía no salió y se salta. Si main no tiene esa
+// versión, se usa el CHANGELOG de la etiqueta.
 const API = 'https://api.github.com/repos/Gaaraalex/opennccm/releases/latest';
 const N = 6;
 
@@ -10,9 +12,15 @@ try {
 	const cab = { Accept: 'application/vnd.github+json', ...(process.env.GITHUB_TOKEN ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` } : {}) };
 	const tag = (await (await fetch(API, { headers: cab })).json()).tag_name;
 	if (!tag) throw new Error('sin versión publicada');
-	const r = await fetch(`https://raw.githubusercontent.com/Gaaraalex/opennccm/${tag}/CHANGELOG.md`);
-	if (!r.ok) throw new Error(r.status);
-	md = await r.text();
+	const leer = async (ref) => {
+		const r = await fetch(`https://raw.githubusercontent.com/Gaaraalex/opennccm/${ref}/CHANGELOG.md`);
+		if (!r.ok) throw new Error(r.status);
+		return r.text();
+	};
+	const v = tag.replace(/^v/, '');
+	const main = (await leer('main').catch(() => '')).replace(/\r\n/g, '\n');
+	const i = main.split('\n').findIndex((l) => l.trim() === '## ' + v);
+	md = i >= 0 ? '# Historial\n\n' + main.split('\n').slice(i).join('\n') : await leer(tag);
 } catch (e) {
 	const previo = 'src/content/docs/introduccion/novedades.md';
 	if (fs.existsSync(previo)) { console.warn('novedades: sin conexión, se deja la página anterior'); process.exit(0); }
