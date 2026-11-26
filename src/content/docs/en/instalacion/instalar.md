@@ -64,7 +64,7 @@ Set the administrator's user name and choose between **generating a strong passw
 
 ### Summary, installation and result
 
-Review the summary and confirm. A progress bar shows each step; everything is logged to `/var/log/opennccm-install.log`. When it finishes it shows the access address and the credentials, which are also saved in `/root/opennccm-credenciales.txt` (delete it after changing the password).
+Review the summary and confirm. A progress bar shows each step; everything is logged to `/var/log/opennccm-install.log`. When it finishes it shows the access address and the user name. If you left the password blank and the installer generated it, it also shows it and saves it in `/root/opennccm-credenciales.txt` (delete it after changing it); if you typed it yourself, it is neither shown nor saved to any file (since 2.45.6).
 
 ![Summary before installing.](../../../../assets/manual/tui-13-resumen.png)
 
@@ -127,7 +127,7 @@ If you run the command again on a server where OpenNCCM is already installed, th
 
 1.  On your PC open the browser and go to `https://SERVER_IP/`.
 2.  The first time, the browser warns that the connection "is not private": OpenNCCM uses a certificate from its own certificate authority, which your PC does not know yet. Click **Advanced → Continue** and then install that authority (see [HTTPS and firewall](/en/instalacion/https-cortafuegos/)): the warning disappears and the browser offers to **save the user name and password**.
-3.  Sign in with the user name and password shown by the installer (they are also in `/root/opennccm-credenciales.txt`).
+3.  Sign in with the user name shown by the installer and the password you chose (if the installer generated it, it is also in `/root/opennccm-credenciales.txt`).
 
 ![Sign-in screen. Below the form you choose the language (Spanish or English); the 👁 button shows the typed password and a warning appears if Caps Lock is on.](../../../../assets/manual/01-login.png)
 

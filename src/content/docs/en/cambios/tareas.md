@@ -9,7 +9,7 @@ curso: ["7.2"]
 | Configuration backup | Backs up the enabled devices (in parallel). |
 | Compliance audit | Re-evaluates every policy. |
 | Vulnerability scan | Queries NVD for each device. |
-| Run configlet | Applies a configlet (it counts as approved by the administrator who creates the task). |
+| Run configlet | Applies a configuration configlet (it counts as approved by the administrator who creates the task). Only those without their own variables: a task has nowhere to store their values, so those appear disabled; use a change request for them. |
 | Send reports by email | Sends inventory, changes, compliance, conflicts, baseline and EOL as CSV. |
 | Recovery backup | Creates a backup of the OpenNCCM database (and sends it over SFTP if configured). |
 

@@ -10,16 +10,16 @@ New versions are published in the GitHub repository. When one is available, Open
 sudo opennccm update
 ==> Buscando actualizaciones (stable)…
 
-Actualización disponible: 2.45.4 → 2.45.5
-## 2.45.5
+Actualización disponible: 2.45.5 → 2.45.6
+## 2.45.6
 - …novedades de la versión…
 
 ¿Actualizar ahora? [s/N] s
 ==> Creando copia previa
-✓ Copia previa: /var/lib/opennccm/pre-update/AAAAMMDD-HHMMSS_v2.45.4
-==> Instalando 2.45.5
-==> Iniciando y verificando
-✓ OpenNCCM actualizado: 2.45.4 → 2.45.5
+✓ Copia previa: /var/lib/opennccm/pre-update/AAAAMMDD-HHMMSS_v2.45.5
+==> Instalando 2.45.6
+==> Iniciando y verificando (en servidores chicos puede tardar unos minutos)
+✓ OpenNCCM actualizado: 2.45.5 → 2.45.6
 ```
 
 Installed [Pro](/en/pro/licencia/) modules update by themselves, separately.

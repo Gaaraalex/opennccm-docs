@@ -9,7 +9,7 @@ curso: ["7.2"]
 | Respaldo de configuración | Respalda los equipos habilitados (en paralelo). |
 | Auditoría de cumplimiento | Re-evalúa todas las políticas. |
 | Escaneo de vulnerabilidades | Consulta NVD para cada equipo. |
-| Ejecutar configlet | Aplica un configlet (se considera aprobado por el administrador que crea la tarea). |
+| Ejecutar configlet | Aplica un configlet de configuración (se considera aprobado por el administrador que crea la tarea). Solo los que no tienen variables propias: una tarea no tiene dónde guardar sus valores, así que esos aparecen desactivados; para ellos use una solicitud de cambio. |
 | Enviar informes por correo | Envía inventario, cambios, cumplimiento, conflictos, línea base y EOL en CSV. |
 | Copia de recuperación | Crea una copia de la base de OpenNCCM (y la envía por SFTP si está configurado). |
 
